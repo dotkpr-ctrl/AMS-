@@ -51,11 +51,29 @@ function saveData() {
         localStorage.setItem(LS_KEY_METADATA, JSON.stringify(assessmentMetadata));
         localStorage.setItem(LS_KEY_ATTENDANCE, JSON.stringify(attendanceData));
         localStorage.setItem(LS_KEY_BATCH_META, JSON.stringify(batchMetadata));
+
+        // Trigger auto-sync to cloud if available
+        if (window.autoSyncToCloud) {
+            window.autoSyncToCloud();
+        }
     } catch (error) {
         console.error("Error saving:", error);
         showMessage('Storage Error', 'Browser storage full.', 'error');
     }
 }
+
+// Function to update local data from cloud download
+window.updateLocalDataFromCloud = (data) => {
+    if (!data) return;
+
+    students = data.students || [];
+    assessmentMetadata = data.assessmentMetadata || {};
+    attendanceData = data.attendanceData || {};
+    batchMetadata = data.batchMetadata || {};
+
+    saveData(); // Save to local storage cache
+    refreshDataAndUI();
+};
 
 function refreshDataAndUI() {
     loadData();

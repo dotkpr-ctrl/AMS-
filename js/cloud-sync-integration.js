@@ -16,11 +16,25 @@ function initializeCloudSync() {
     if (!githubSync.isConfigured() && EMBEDDED_TOKEN) {
         console.log('Using embedded GitHub token');
         githubSync.setToken(EMBEDDED_TOKEN);
-        // Auto-test connection silently
         githubSync.testConnection()
-            .then(result => {
+            .then(async (result) => {
                 console.log(`Auto-connected as ${result.username}`);
                 updateSyncUI();
+
+                // Auto-download on startup (Cloud is source of truth)
+                try {
+                    console.log('Fetching latest data from cloud...');
+                    const cloudResult = await githubSync.downloadData();
+
+                    // Update global data variables
+                    if (window.updateLocalDataFromCloud) {
+                        window.updateLocalDataFromCloud(cloudResult.data);
+                        console.log('Local data updated from cloud');
+                        showMessage('Cloud Sync', 'Data loaded from cloud', 'success');
+                    }
+                } catch (err) {
+                    console.log('No cloud data yet or download failed:', err.message);
+                }
             })
             .catch(err => console.error('Auto-connection failed:', err));
     }
@@ -133,6 +147,40 @@ window.downloadFromCloud = async () => {
     } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
+    }
+};
+
+// Automatic background sync
+window.autoSyncToCloud = async () => {
+    if (!githubSync || !githubSync.isConfigured()) return;
+
+    const menuSyncStatus = document.getElementById('menuSyncStatus');
+    if (menuSyncStatus) {
+        menuSyncStatus.textContent = 'Syncing...';
+        menuSyncStatus.className = 'text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-bold';
+    }
+
+    try {
+        await githubSync.uploadData(
+            students,
+            assessmentMetadata,
+            attendanceData,
+            batchMetadata
+        );
+        console.log('Auto-sync successful');
+        if (menuSyncStatus) {
+            menuSyncStatus.textContent = 'Saved';
+            menuSyncStatus.className = 'text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold';
+            setTimeout(() => {
+                menuSyncStatus.textContent = 'Active';
+            }, 2000);
+        }
+    } catch (error) {
+        console.error('Auto-sync failed:', error);
+        if (menuSyncStatus) {
+            menuSyncStatus.textContent = 'Error';
+            menuSyncStatus.className = 'text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-bold';
+        }
     }
 };
 
