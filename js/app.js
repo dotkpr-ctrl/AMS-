@@ -75,6 +75,14 @@ window.updateLocalDataFromCloud = (data) => {
     refreshDataAndUI();
 };
 
+// Expose data for cloud sync integration
+window.getAppData = () => ({
+    students,
+    assessmentMetadata,
+    attendanceData,
+    batchMetadata
+});
+
 function refreshDataAndUI() {
     loadData();
     updateBatchDropdowns();

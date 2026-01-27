@@ -40,8 +40,6 @@ function initializeCloudSync() {
     }
 
     updateSyncUI();
-
-    // No dedicated view listener needed anymore
 }
 
 // Update UI based on sync status
@@ -92,11 +90,19 @@ window.uploadToCloud = async () => {
     btn.disabled = true;
 
     try {
+        // Get data from app.js via global getter
+        let dataToSync = {};
+        if (window.getAppData) {
+            dataToSync = window.getAppData();
+        } else {
+            throw new Error('App data not accessible');
+        }
+
         const result = await githubSync.uploadData(
-            students,
-            assessmentMetadata,
-            attendanceData,
-            batchMetadata
+            dataToSync.students,
+            dataToSync.assessmentMetadata,
+            dataToSync.attendanceData,
+            dataToSync.batchMetadata
         );
 
         showMessage('Upload Complete', `Data synced successfully at ${new Date(result.timestamp).toLocaleTimeString()}`, 'success');
@@ -129,18 +135,13 @@ window.downloadFromCloud = async () => {
         const result = await githubSync.downloadData();
 
         // Update local data
-        students = result.data.students;
-        assessmentMetadata = result.data.assessmentMetadata;
-        attendanceData = result.data.attendanceData;
-        batchMetadata = result.data.batchMetadata;
+        if (window.updateLocalDataFromCloud) {
+            window.updateLocalDataFromCloud(result.data);
+            showMessage('Download Complete', `Data loaded successfully! Last updated: ${new Date(result.timestamp).toLocaleString()}`, 'success');
+        } else {
+            throw new Error('App update function not found');
+        }
 
-        // Save to localStorage
-        saveData();
-
-        // Refresh UI
-        refreshDataAndUI();
-
-        showMessage('Download Complete', `Data loaded successfully! Last updated: ${new Date(result.timestamp).toLocaleString()}`, 'success');
         updateSyncUI();
     } catch (error) {
         showMessage('Download Failed', error.message, 'error');
@@ -161,11 +162,21 @@ window.autoSyncToCloud = async () => {
     }
 
     try {
+        // Get data from app.js via global getter
+        let dataToSync = {};
+        if (window.getAppData) {
+            dataToSync = window.getAppData();
+        } else {
+            // Failsafe if getter not ready
+            console.error('getAppData not available');
+            return;
+        }
+
         await githubSync.uploadData(
-            students,
-            assessmentMetadata,
-            attendanceData,
-            batchMetadata
+            dataToSync.students,
+            dataToSync.assessmentMetadata,
+            dataToSync.attendanceData,
+            dataToSync.batchMetadata
         );
         console.log('Auto-sync successful');
         if (menuSyncStatus) {
