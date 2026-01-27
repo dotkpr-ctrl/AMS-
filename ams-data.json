@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T18:40:57.808Z",
+  "lastUpdated": "2026-01-27T18:41:30.277Z",
   "version": "4.2",
   "students": [
     {
@@ -2715,6 +2715,14 @@
           ]
         }
       }
+    },
+    {
+      "name": "AutoSync Test",
+      "admissionNo": "9999",
+      "batchId": "TEST-01",
+      "id": "bcc33724-ceee-4713-916e-136037588cbf",
+      "marks": {},
+      "subBatch": "None"
     }
   ],
   "assessmentMetadata": {
@@ -2763,6 +2771,11 @@
         "bb503f37-d4a9-456c-80bd-8ab238f9b9e5": "absent",
         "f1196415-0a77-4ff2-a4db-d81b2bb1f457": "absent",
         "97ab2e72-677f-4174-ac8c-a7c075aba72d": "present"
+      }
+    },
+    "TEST-01": {
+      "2026-01-27": {
+        "bcc33724-ceee-4713-916e-136037588cbf": "absent"
       }
     }
   },
