@@ -435,11 +435,29 @@ window.updateSubBatch = (id, val) => {
 };
 
 window.deleteStudent = (id) => {
-    if (confirm('Permanently delete student profile?')) {
-        students = students.filter(s => s.id !== id);
-        saveData();
-        renderStudentList();
-        updateBatchDropdowns();
+    try {
+        console.log('Attempting to delete student:', id);
+        if (confirm('Permanently delete student profile? This cannot be undone.')) {
+            const initialCount = students.length;
+            students = students.filter(s => s.id !== id);
+
+            if (students.length === initialCount) {
+                console.warn('Student ID not found in list:', id);
+                showMessage('Error', 'Student could not be found.', 'error');
+                return;
+            }
+
+            saveData();
+            renderStudentList();
+            updateBatchDropdowns();
+            console.log('Student deleted successfully. New count:', students.length);
+            showMessage('Success', 'Student profile deleted.', 'success');
+        } else {
+            console.log('Deletion cancelled by user.');
+        }
+    } catch (err) {
+        console.error('Delete failed:', err);
+        showMessage('Error', 'Could not delete student. Check console.', 'error');
     }
 };
 
