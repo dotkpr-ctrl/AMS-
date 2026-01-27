@@ -133,7 +133,16 @@ class GitHubDataSync {
                 headers: this.getHeaders()
             });
 
+            if (!mainRef.ok) {
+                throw new Error(`Failed to get main branch: ${mainRef.statusText}`);
+            }
+
             const mainData = await mainRef.json();
+
+            if (!mainData || !mainData.object || !mainData.object.sha) {
+                throw new Error('Invalid response from GitHub API');
+            }
+
             const sha = mainData.object.sha;
 
             // Create new branch
@@ -146,10 +155,15 @@ class GitHubDataSync {
                 })
             });
 
-            return createResponse.ok;
+            if (!createResponse.ok) {
+                const errorData = await createResponse.json();
+                throw new Error(`Failed to create branch: ${errorData.message || createResponse.statusText}`);
+            }
+
+            return true;
         } catch (error) {
             console.error('Error ensuring branch exists:', error);
-            return false;
+            throw error; // Propagate error instead of returning false
         }
     }
 
