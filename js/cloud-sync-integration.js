@@ -29,10 +29,13 @@ function initializeCloudSync() {
                 const hasLocalData = localStorage.getItem('academic_management_students_v3');
 
                 // Auto-download on startup (Cloud is source of truth)
-                // Always download if no local data, or optionally on every load
-                if (!hasLocalData) {
+                // If we have pending uploads, we should NOT download (to avoid overwriting local changes)
+                // Otherwise, always fetch latest from cloud to ensure cross-device sync
+                const isPending = localStorage.getItem('pending_upload') === 'true';
+
+                if (!isPending) {
                     try {
-                        console.log('No local data found. Fetching from cloud...');
+                        console.log('Fetching latest data from cloud...');
                         const cloudResult = await githubSync.downloadData();
 
                         // Update global data variables
@@ -43,6 +46,9 @@ function initializeCloudSync() {
                     } catch (err) {
                         console.log('No cloud data yet or download failed:', err.message);
                     }
+                } else {
+                    console.log('Pending upload detected. Skipping auto-download to preserve local changes.');
+                    // The initNetworkListeners in GitHubDataSync will handle the upload
                 }
             })
             .catch(err => console.error('Auto-connection failed:', err));
