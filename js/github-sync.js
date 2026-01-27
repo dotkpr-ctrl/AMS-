@@ -194,7 +194,7 @@ class GitHubDataSync {
             };
 
             // Get existing file SHA if it exists
-            const filePath = 'backups/ams-data.json';
+            const filePath = 'ams-data.json';
             const existing = await this.getFile(filePath);
             const sha = existing ? existing.sha : null;
 
@@ -226,7 +226,7 @@ class GitHubDataSync {
         this.syncInProgress = true;
 
         try {
-            const file = await this.getFile('backups/ams-data.json');
+            const file = await this.getFile('ams-data.json');
 
             if (!file) {
                 throw new Error('No data found in cloud. Please upload data first.');
