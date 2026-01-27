@@ -27,15 +27,7 @@ function initializeCloudSync() {
 
     updateSyncUI();
 
-    // Add event listener for cloudSync view
-    const existingRenderView = window.renderView;
-    window.renderView = function (viewName) {
-        existingRenderView(viewName);
-        if (viewName === 'cloudSync') {
-            updateSyncUI();
-            loadTokenInput();
-        }
-    };
+    // No dedicated view listener needed anymore
 }
 
 // Update UI based on sync status
@@ -43,99 +35,49 @@ function updateSyncUI() {
     if (!githubSync) return;
 
     const status = githubSync.getSyncStatus();
-    const statusCard = document.getElementById('syncStatusCard');
-    const statusText = document.getElementById('syncStatusText');
-    const statusIcon = document.getElementById('syncStatusIcon');
-    const lastSyncInfo = document.getElementById('lastSyncInfo');
-    const lastSyncTime = document.getElementById('lastSyncTime');
 
-    const uploadBtn = document.getElementById('uploadBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const disconnectBtn = document.getElementById('disconnectBtn');
+    const menuUploadBtn = document.getElementById('menuUploadBtn');
+    const menuDownloadBtn = document.getElementById('menuDownloadBtn');
+    const menuSyncStatus = document.getElementById('menuSyncStatus');
+
+    // If elements don't exist yet (e.g. during initial load), skip
+    if (!menuUploadBtn || !menuDownloadBtn || !menuSyncStatus) return;
 
     if (status.configured) {
-        statusCard.className = 'mb-6 p-4 rounded-lg border bg-green-50 border-green-200';
-        statusText.textContent = '✅ Connected to GitHub';
-        statusIcon.textContent = '✓';
+        menuSyncStatus.textContent = 'Active';
+        menuSyncStatus.className = 'text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold';
 
-        if (status.lastSync) {
-            lastSyncInfo.classList.remove('hidden');
-            const syncDate = new Date(status.lastSync);
-            lastSyncTime.textContent = syncDate.toLocaleString('en-GB');
-        }
+        menuUploadBtn.disabled = false;
+        menuDownloadBtn.disabled = false;
 
-        uploadBtn.disabled = false;
-        downloadBtn.disabled = false;
-        disconnectBtn.disabled = false;
+        menuUploadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        menuDownloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
     } else {
-        statusCard.className = 'mb-6 p-4 rounded-lg border bg-yellow-50 border-yellow-200';
-        statusText.textContent = 'Not configured - Enter token below';
-        statusIcon.textContent = '⚠️';
-        lastSyncInfo.classList.add('hidden');
+        menuSyncStatus.textContent = 'Offline';
+        menuSyncStatus.className = 'text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded';
 
-        uploadBtn.disabled = true;
-        downloadBtn.disabled = true;
-        disconnectBtn.disabled = true;
+        menuUploadBtn.disabled = true;
+        menuDownloadBtn.disabled = true;
+
+        menuUploadBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        menuDownloadBtn.classList.add('opacity-50', 'cursor-not-allowed');
     }
 }
-
-// Load token into input field
-function loadTokenInput() {
-    const tokenInput = document.getElementById('githubTokenInput');
-    if (tokenInput && githubSync) {
-        tokenInput.value = githubSync.token || '';
-    }
-}
-
-// Test GitHub connection
-window.testGitHubConnection = async () => {
-    const tokenInput = document.getElementById('githubTokenInput');
-    const token = tokenInput.value.trim();
-
-    if (!token) {
-        showMessage('Error', 'Please enter a GitHub token', 'error');
-        return;
-    }
-
-    githubSync.setToken(token);
-
-    try {
-        const result = await githubSync.testConnection();
-        showMessage('Success', `Connected as ${result.username}!`, 'success');
-        updateSyncUI();
-    } catch (error) {
-        showMessage('Connection Failed', error.message, 'error');
-    }
-};
-
-// Save GitHub token
-window.saveGitHubToken = () => {
-    const tokenInput = document.getElementById('githubTokenInput');
-    const token = tokenInput.value.trim();
-
-    if (!token) {
-        showMessage('Error', 'Please enter a GitHub token', 'error');
-        return;
-    }
-
-    githubSync.setToken(token);
-    showMessage('Success', 'Token saved successfully!', 'success');
-    updateSyncUI();
-};
 
 // Upload data to cloud
 window.uploadToCloud = async () => {
     if (!githubSync || !githubSync.isConfigured()) {
-        showMessage('Error', 'Please configure GitHub token first', 'error');
+        showMessage('Error', 'Cloud sync not configured', 'error');
         return;
     }
 
-    const confirmed = confirm(`This will upload all your data (students, attendance, assessments) to GitHub.\n\nContinue?`);
-    if (!confirmed) return;
+    // UI Feedback
+    const btn = document.getElementById('menuUploadBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span>⏳</span> Uploading...';
+    btn.disabled = true;
 
     try {
-        showMessage('Uploading...', 'Syncing data to cloud...', 'success');
-
         const result = await githubSync.uploadData(
             students,
             assessmentMetadata,
@@ -147,22 +89,29 @@ window.uploadToCloud = async () => {
         updateSyncUI();
     } catch (error) {
         showMessage('Upload Failed', error.message, 'error');
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
     }
 };
 
 // Download data from cloud
 window.downloadFromCloud = async () => {
     if (!githubSync || !githubSync.isConfigured()) {
-        showMessage('Error', 'Please configure GitHub token first', 'error');
+        showMessage('Error', 'Cloud sync not configured', 'error');
         return;
     }
 
     const confirmed = confirm(`This will replace all your local data with data from GitHub.\n\n⚠️ Make sure you've backed up any local changes!\n\nContinue?`);
     if (!confirmed) return;
 
-    try {
-        showMessage('Downloading...', 'Loading data from cloud...', 'success');
+    // UI Feedback
+    const btn = document.getElementById('menuDownloadBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span>⏳</span> Downloading...';
+    btn.disabled = true;
 
+    try {
         const result = await githubSync.downloadData();
 
         // Update local data
@@ -181,18 +130,10 @@ window.downloadFromCloud = async () => {
         updateSyncUI();
     } catch (error) {
         showMessage('Download Failed', error.message, 'error');
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
     }
-};
-
-// Disconnect from GitHub
-window.disconnectGitHub = () => {
-    const confirmed = confirm('Disconnect from GitHub?\n\nYour local data will remain safe, but cloud sync will be disabled.');
-    if (!confirmed) return;
-
-    githubSync.disconnect();
-    document.getElementById('githubTokenInput').value = '';
-    showMessage('Disconnected', 'GitHub sync disabled', 'success');
-    updateSyncUI();
 };
 
 // Initialize cloud sync when DOM is ready
