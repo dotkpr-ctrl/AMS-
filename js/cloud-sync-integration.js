@@ -39,7 +39,6 @@ function initializeCloudSync() {
                         if (window.updateLocalDataFromCloud) {
                             window.updateLocalDataFromCloud(cloudResult.data);
                             console.log('Local data updated from cloud');
-                            showMessage('Cloud Sync', 'Data loaded from cloud', 'success');
                         }
                     } catch (err) {
                         console.log('No cloud data yet or download failed:', err.message);
