@@ -26,7 +26,7 @@ function initializeCloudSync() {
                 updateSyncUI();
 
                 // Check if local storage is empty (new device scenario)
-                const hasLocalData = localStorage.getItem('ams_v4_2_students');
+                const hasLocalData = localStorage.getItem('academic_management_students_v3');
 
                 // Auto-download on startup (Cloud is source of truth)
                 // Always download if no local data, or optionally on every load
