@@ -10,6 +10,48 @@ class GitHubDataSync {
         this.apiBase = 'https://api.github.com';
         this.lastSync = localStorage.getItem('last_sync') || null;
         this.syncInProgress = false;
+
+        // Queue state
+        this.pendingUpload = localStorage.getItem('pending_upload') === 'true';
+        this.initNetworkListeners();
+    }
+
+    // Initialize network state listeners
+    initNetworkListeners() {
+        window.addEventListener('online', () => {
+            console.log('Network online. Checking for pending uploads...');
+            this.processQueue();
+        });
+
+        // Check periodically just in case
+        setInterval(() => {
+            if (navigator.onLine && this.pendingUpload) {
+                this.processQueue();
+            }
+        }, 60000); // Check every minute
+    }
+
+    // Process pending uploads
+    async processQueue() {
+        if (!this.pendingUpload || this.syncInProgress) return;
+
+        console.log('Processing offline queue...');
+
+        try {
+            // Use the data currently in localStorage as the source of truth
+            if (typeof window.saveData === 'function') {
+                // Trigger a sync using the global sync function if available
+                // This ensures we get the latest state from app memory
+                await window.autoSyncToCloud();
+            } else {
+                // Fallback: try to just mark as done if we can't trigger sync
+                // But usually autoSyncToCloud will call uploadData
+                this.pendingUpload = false;
+                localStorage.setItem('pending_upload', 'false');
+            }
+        } catch (e) {
+            console.log('Retry failed:', e.message);
+        }
     }
 
     // Set GitHub Personal Access Token
@@ -56,6 +98,7 @@ class GitHubDataSync {
 
     // Get file from repository
     async getFile(path) {
+        // ... (existing getFile logic)
         const url = `${this.apiBase}/repos/${this.owner}/${this.repo}/contents/${path}?ref=${this.branch}`;
 
         try {
@@ -79,6 +122,7 @@ class GitHubDataSync {
             };
         } catch (error) {
             console.error(`Error getting file ${path}:`, error);
+            // Don't throw here, just return null so app can work offline
             return null;
         }
     }
@@ -205,9 +249,24 @@ class GitHubDataSync {
             this.lastSync = new Date().toISOString();
             localStorage.setItem('last_sync', this.lastSync);
 
+            // Clear pending flag on success
+            this.pendingUpload = false;
+            localStorage.setItem('pending_upload', 'false');
+
             return { success: true, timestamp: this.lastSync };
         } catch (error) {
-            throw new Error(`Upload failed: ${error.message}`);
+            console.warn('Sync failed, queuing for retry:', error.message);
+
+            // Mark as pending upload so we retry later
+            this.pendingUpload = true;
+            localStorage.setItem('pending_upload', 'true');
+
+            // Return special status code for offline/queued
+            return {
+                success: false,
+                queued: true,
+                message: error.message
+            };
         } finally {
             this.syncInProgress = false;
         }

@@ -181,22 +181,42 @@ window.autoSyncToCloud = async () => {
             return;
         }
 
-        await githubSync.uploadData(
-            dataToSync.students,
-            dataToSync.assessmentMetadata,
-            dataToSync.attendanceData,
-            dataToSync.batchMetadata
-        );
-        console.log('Auto-sync successful');
-        if (menuSyncStatus) {
-            menuSyncStatus.textContent = 'Saved';
-            menuSyncStatus.className = 'text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold';
-            setTimeout(() => {
-                menuSyncStatus.textContent = 'Active';
-            }, 2000);
+        const statusEl = document.getElementById('menuSyncStatus'); // Use menuSyncStatus
+        if (statusEl) {
+            statusEl.innerHTML = '<span class="text-blue-600 animate-pulse">Syncing...</span>';
+        }
+
+        try {
+            const result = await githubSync.uploadData(
+                dataToSync.students,
+                dataToSync.assessmentMetadata,
+                dataToSync.attendanceData,
+                dataToSync.batchMetadata
+            );
+
+            if (result.success) {
+                console.log('Auto-sync successful');
+                if (statusEl) {
+                    statusEl.innerHTML = '<span class="text-green-600">Saved</span>';
+                    setTimeout(() => {
+                        statusEl.innerHTML = '<span class="text-green-600">Active</span>';
+                    }, 2000);
+                }
+            } else if (result.queued) {
+                console.log('Auto-sync queued (offline/error)');
+                if (statusEl) {
+                    statusEl.innerHTML = '<span class="text-orange-500" title="Changes saved locally, pending upload">Offline (Saved)</span>';
+                }
+            }
+        } catch (err) {
+            console.error('Auto-sync failed:', err);
+            // Since we handle queueing inside uploadData, this catch block handles unexpected crashes
+            if (statusEl) {
+                statusEl.innerHTML = '<span class="text-red-600">Sync Error</span>';
+            }
         }
     } catch (error) {
-        console.error('Auto-sync failed:', error);
+        console.error('Auto-sync failed (getAppData or initial status update):', error);
         if (menuSyncStatus) {
             menuSyncStatus.textContent = 'Error';
             menuSyncStatus.className = 'text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-bold';
