@@ -194,11 +194,12 @@ class GitHubDataSync {
             };
 
             // Get existing file SHA if it exists
-            const existing = await this.getFile('ams-data.json');
+            const filePath = 'backups/ams-data.json';
+            const existing = await this.getFile(filePath);
             const sha = existing ? existing.sha : null;
 
             // Upload to GitHub
-            await this.putFile('ams-data.json', data, sha);
+            await this.putFile(filePath, data, sha);
 
             // Update last sync timestamp
             this.lastSync = new Date().toISOString();
@@ -225,7 +226,7 @@ class GitHubDataSync {
         this.syncInProgress = true;
 
         try {
-            const file = await this.getFile('ams-data.json');
+            const file = await this.getFile('backups/ams-data.json');
 
             if (!file) {
                 throw new Error('No data found in cloud. Please upload data first.');
