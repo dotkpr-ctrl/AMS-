@@ -16,24 +16,34 @@ function initializeCloudSync() {
     if (!githubSync.isConfigured() && EMBEDDED_TOKEN) {
         console.log('Using embedded GitHub token');
         githubSync.setToken(EMBEDDED_TOKEN);
+    }
+
+    // Always try to download on startup if we have a token
+    if (githubSync.isConfigured()) {
         githubSync.testConnection()
             .then(async (result) => {
                 console.log(`Auto-connected as ${result.username}`);
                 updateSyncUI();
 
-                // Auto-download on startup (Cloud is source of truth)
-                try {
-                    console.log('Fetching latest data from cloud...');
-                    const cloudResult = await githubSync.downloadData();
+                // Check if local storage is empty (new device scenario)
+                const hasLocalData = localStorage.getItem('ams_v4_2_students');
 
-                    // Update global data variables
-                    if (window.updateLocalDataFromCloud) {
-                        window.updateLocalDataFromCloud(cloudResult.data);
-                        console.log('Local data updated from cloud');
-                        showMessage('Cloud Sync', 'Data loaded from cloud', 'success');
+                // Auto-download on startup (Cloud is source of truth)
+                // Always download if no local data, or optionally on every load
+                if (!hasLocalData) {
+                    try {
+                        console.log('No local data found. Fetching from cloud...');
+                        const cloudResult = await githubSync.downloadData();
+
+                        // Update global data variables
+                        if (window.updateLocalDataFromCloud) {
+                            window.updateLocalDataFromCloud(cloudResult.data);
+                            console.log('Local data updated from cloud');
+                            showMessage('Cloud Sync', 'Data loaded from cloud', 'success');
+                        }
+                    } catch (err) {
+                        console.log('No cloud data yet or download failed:', err.message);
                     }
-                } catch (err) {
-                    console.log('No cloud data yet or download failed:', err.message);
                 }
             })
             .catch(err => console.error('Auto-connection failed:', err));
