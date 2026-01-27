@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T18:46:58.578Z",
+  "lastUpdated": "2026-01-27T18:47:07.153Z",
   "version": "4.2",
   "students": [
     {
@@ -2717,11 +2717,24 @@
       }
     },
     {
-      "name": "AutoSync Test",
-      "admissionNo": "9999",
-      "batchId": "TEST-01",
-      "id": "bcc33724-ceee-4713-916e-136037588cbf",
-      "marks": {},
+      "name": "test",
+      "admissionNo": "001",
+      "batchId": "TEST",
+      "id": "bfd6b8b5-080e-4706-9897-340c39e2e57b",
+      "marks": {
+        "TEST-1st-mark-200": {
+          "marks": [
+            9,
+            10,
+            0,
+            0,
+            10,
+            10,
+            40,
+            90
+          ]
+        }
+      },
       "subBatch": "None"
     }
   ],
@@ -2771,20 +2784,6 @@
         "bb503f37-d4a9-456c-80bd-8ab238f9b9e5": "absent",
         "f1196415-0a77-4ff2-a4db-d81b2bb1f457": "absent",
         "97ab2e72-677f-4174-ac8c-a7c075aba72d": "present"
-      }
-    },
-    "TEST-01": {
-      "2026-01-27": {
-        "bcc33724-ceee-4713-916e-136037588cbf": "present"
-      },
-      "2026-01-15": {
-        "bcc33724-ceee-4713-916e-136037588cbf": "absent"
-      },
-      "2026-01-18": {
-        "bcc33724-ceee-4713-916e-136037588cbf": "absent"
-      },
-      "2026-01-16": {
-        "bcc33724-ceee-4713-916e-136037588cbf": "absent"
       }
     }
   },
