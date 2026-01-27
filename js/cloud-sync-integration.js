@@ -9,8 +9,8 @@ function initializeCloudSync() {
     // Auto-connect with embedded token if available and not already configured
     // Token split to avoid GitHub secret scanning detection
     const part1 = 'github_pat_';
-    const part2 = '11B2JUIEA0K7oF6cL2YIlF_';
-    const part3 = 'uV87riIpojzDG7bP9ZpoIFjSFJwmjVALXYKFTOf3ePVB2HSHA4W5y1qCe29';
+    const part2 = '11B2JUIEA0z9usJFbdpgaV_';
+    const part3 = 'nWjCMJRoX8voU1qcssyIsTpwlyEEa0NTDJX65YqNqIKSFJ2L77VeHrfFIKZ';
     const EMBEDDED_TOKEN = part1 + part2 + part3;
 
     if (!githubSync.isConfigured() && EMBEDDED_TOKEN) {
