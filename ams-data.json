@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T19:10:45.098Z",
+  "lastUpdated": "2026-01-27T19:10:51.974Z",
   "version": "4.2",
   "students": [
     {
@@ -1188,6 +1188,22 @@
       "name": "ARON K JOSLIN",
       "admissionNo": "AM/94/25/TA",
       "batchId": "AME 36",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "name": "JOYAL R",
+      "admissionNo": "AM/175/25/CA",
+      "batchId": "AME 37",
+      "id": "90fb2554-c57f-4524-a65d-20d3009ac344",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "name": "JOYAL R",
+      "admissionNo": "AM/175/25/CA",
+      "batchId": "AME 37",
+      "id": "3942b874-c131-4ddc-9a3a-df2fa5848072",
       "marks": {},
       "subBatch": "None"
     },
@@ -2735,22 +2751,6 @@
           ]
         }
       },
-      "subBatch": "None"
-    },
-    {
-      "name": "JOYAL R",
-      "admissionNo": "AM/175/25/CA",
-      "batchId": "AME 37",
-      "id": "90fb2554-c57f-4524-a65d-20d3009ac344",
-      "marks": {},
-      "subBatch": "None"
-    },
-    {
-      "name": "JOYAL R",
-      "admissionNo": "AM/175/25/CA",
-      "batchId": "AME 37",
-      "id": "3942b874-c131-4ddc-9a3a-df2fa5848072",
-      "marks": {},
       "subBatch": "None"
     }
   ],
