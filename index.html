@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Management System v4.2</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2563eb',
+                        'primary-dark': '#1d4ed8',
+                        'surface': '#ffffff',
+                        'background': '#f9fafb',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-900 pb-12">
+    <div id="app" class="max-w-4xl mx-auto p-4 md:p-6 bg-white shadow-lg min-h-screen md:mt-6 rounded-xl relative">
+
+        <nav class="no-print flex justify-between items-center border-b pb-4 mb-6">
+            <div class="font-bold text-xl tracking-tight">AMS <span class="text-primary text-sm">v4.2</span></div>
+            <button onclick="toggleMenu()"
+                class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none transition-colors">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Menu Drawer -->
+        <div id="mobileMenu" class="no-print fixed inset-0 bg-black/50 z-[100] hidden" onclick="toggleMenu()">
+            <div class="bg-white w-72 h-full p-6 shadow-2xl overflow-y-auto" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-center mb-6 border-b pb-2">
+                    <h2 class="text-2xl font-bold text-primary">Main Menu</h2>
+                    <button onclick="toggleMenu()" class="text-gray-400 hover:text-red-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="space-y-2">
+                    <button onclick="renderView('dashboard')"
+                        class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
+                        <span>🏠</span> Dashboard
+                    </button>
+                    <button onclick="renderView('studentManagement')"
+                        class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
+                        <span>👥</span> Student Profiles
+                    </button>
+                    <button onclick="renderView('attendanceMarking')"
+                        class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
+                        <span>✅</span> Daily Attendance
+                    </button>
+                    <button onclick="renderView('attendanceRegister')"
+                        class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
+                        <span>📅</span> Attendance Register
+                    </button>
+                    <button onclick="renderView('assessmentSetup')"
+                        class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
+                        <span>📝</span> Assessment Entry
+                    </button>
+                    <button onclick="renderView('printSetup')"
+                        class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
+                        <span>🖨️</span> Document Center
+                    </button>
+
+                    <div class="pt-6 border-t mt-6">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mb-2">Management</p>
+                        <button onclick="exportData()"
+                            class="w-full text-left px-4 py-2 text-sm text-green-600 font-bold hover:bg-green-50 rounded-lg">📥 Backup Data</button>
+                        <div class="mt-2">
+                            <label class="block text-sm text-red-600 font-bold px-4 py-2 hover:bg-red-50 rounded-lg cursor-pointer">
+                                📤 Restore Data
+                                <input type="file" onchange="importData(event)" class="hidden">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainView" data-current-view="dashboard">
+            <!-- Dashboard View -->
+            <div id="dashboard" class="app-view">
+                <div class="text-center mb-10">
+                    <img src="https://raw.githubusercontent.com/dotkpr-ctrl/-assets/87413e49245de21f59888203d550557d31c03cf6/Picture1.png"
+                        class="mx-auto max-w-sm mb-4">
+                    <h1 class="text-2xl font-bold text-gray-800">Academic Management System</h1>
+                    <p class="text-gray-500">Automobile Engineering Department</p>
+                </div>
+                <div id="dashboardStats"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div onclick="renderView('attendanceMarking')"
+                        class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                        <div class="text-3xl mb-2">📋</div>
+                        <h3 class="font-bold group-hover:text-primary">Mark Attendance</h3>
+                        <p class="text-xs text-gray-400">Record daily status & share summary</p>
+                    </div>
+                    <div onclick="renderView('attendanceRegister')"
+                        class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                        <div class="text-3xl mb-2">📅</div>
+                        <h3 class="font-bold group-hover:text-primary">Attendance Register</h3>
+                        <p class="text-xs text-gray-400">Monthly reports & printables</p>
+                    </div>
+                    <div onclick="renderView('assessmentSetup')"
+                        class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                        <div class="text-3xl mb-2">✒️</div>
+                        <h3 class="font-bold group-hover:text-primary">Assessments</h3>
+                        <p class="text-xs text-gray-400">Log Viva & Practical entries</p>
+                    </div>
+                    <div onclick="renderView('studentManagement')"
+                        class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                        <div class="text-3xl mb-2">👥</div>
+                        <h3 class="font-bold group-hover:text-primary">Student Profiles</h3>
+                        <p class="text-xs text-gray-400">Manage batches & bulk imports</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Profile View -->
+            <div id="studentManagement" class="app-view hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Student Profiles</h2>
+                    <button onclick="toggleBulkInputModal(true)"
+                        class="px-4 py-2 bg-gray-800 text-white text-sm font-bold rounded-lg shadow hover:bg-black transition-all">+ Bulk Import</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 block">Active Batch</label>
+                        <select id="batchSelector" class="w-full p-2.5 border rounded-lg bg-gray-50"></select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 block">Batch In Charge</label>
+                        <input id="batchInChargeInput" oninput="updateBatchInCharge(this.value)"
+                            placeholder="Enter name for this batch" class="w-full p-2.5 border rounded-lg">
+                    </div>
+                </div>
+                <div class="overflow-x-auto border rounded-xl mb-8">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-100 border-b text-[10px] uppercase text-gray-600 font-bold">
+                            <tr>
+                                <th class="p-3">Name</th>
+                                <th class="p-3">Adm No.</th>
+                                <th class="p-3">Batch</th>
+                                <th class="p-3 text-center">Sub</th>
+                                <th class="p-3 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentListBody"></tbody>
+                    </table>
+                </div>
+                <form id="studentForm" onsubmit="handleStudentFormSubmit(event)"
+                    class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                    <h3 class="font-bold mb-4 text-primary">Add Individual Student</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <input name="studentName" placeholder="Full Name" required class="p-2.5 border rounded-lg text-sm">
+                        <input name="admissionNo" placeholder="Admission Number" required class="p-2.5 border rounded-lg text-sm">
+                        <input name="batchId" placeholder="Batch ID" required class="p-2.5 border rounded-lg text-sm uppercase">
+                    </div>
+                    <button type="submit"
+                        class="mt-4 px-6 py-2.5 bg-primary text-white font-bold rounded-lg hover:bg-primary-dark shadow-md transition-all">Save Student</button>
+                </form>
+            </div>
+
+            <!-- Attendance Marking View -->
+            <div id="attendanceMarking" class="app-view hidden">
+                <h2 class="text-2xl font-bold mb-6">Daily Attendance</h2>
+                <div class="bg-white p-6 border rounded-2xl shadow-sm mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Select Batch</label><select
+                                id="attendanceBatchSelector" class="w-full p-2.5 border rounded-lg"></select></div>
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Sub-Batch</label><select
+                                id="attendanceSubBatchSelector" class="w-full p-2.5 border rounded-lg"></select></div>
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Select Date</label><input
+                                type="date" id="attendanceDate" class="w-full p-2.5 border rounded-lg"></div>
+                    </div>
+                    <div class="max-h-[400px] overflow-y-auto border rounded-lg">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b sticky top-0 text-[10px] uppercase font-bold text-gray-600">
+                                <tr>
+                                    <th class="p-3 text-left">Student Name</th>
+                                    <th class="p-3 text-left">Adm No.</th>
+                                    <th class="p-3 text-center">Present</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceListBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        <button onclick="saveAttendanceManual()"
+                            class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl hover:bg-blue-700 shadow-lg flex items-center justify-center gap-2 transition-all">
+                            <span>💾 Save to Register</span>
+                        </button>
+                        <button onclick="shareAttendanceWhatsApp()"
+                            class="w-full bg-green-600 text-white font-bold py-3.5 rounded-xl hover:bg-green-700 shadow-lg flex items-center justify-center gap-2 transition-all">
+                            <span>📱 Share Summary</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register View -->
+            <div id="attendanceRegister" class="app-view hidden">
+                <h2 class="text-2xl font-bold mb-6">Attendance Register</h2>
+                <div class="bg-white p-6 border rounded-2xl shadow-sm">
+                    <label class="text-[10px] font-bold text-gray-500 uppercase">Select Batch</label>
+                    <select id="registerBatchSelector" class="w-full md:w-64 p-2.5 border rounded-lg mb-4"></select>
+                    <div id="registerTableContainer"></div>
+                </div>
+            </div>
+
+            <!-- Setup View -->
+            <div id="assessmentSetup" class="app-view hidden">
+                <h2 class="text-2xl font-bold mb-6 text-primary text-center">Workshop Viva Entry</h2>
+                <div class="bg-white p-8 border rounded-2xl shadow-sm max-w-xl mx-auto space-y-4">
+                    <div><label class="text-[10px] font-bold text-gray-500 uppercase">Batch</label><select
+                            id="assessBatchSelector" class="w-full p-3 border rounded-xl bg-gray-50"></select></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Semester</label><select
+                                id="assessSemesterSelector" class="w-full p-3 border rounded-xl text-sm">
+                                <option value="1st">1st Sem</option>
+                                <option value="2nd">2nd Sem</option>
+                                <option value="3rd">3rd Sem</option>
+                                <option value="4th">4th Sem</option>
+                                <option value="5th">5th Sem</option>
+                                <option value="6th">6th Sem</option>
+                            </select></div>
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Sub-Batch</label><select
+                                id="assessSubBatchSelector" class="w-full p-3 border rounded-xl text-sm"></select></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Max Mark</label><input
+                                type="number" id="assessMaxMark" value="200" class="w-full p-3 border rounded-xl text-sm"></div>
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Exam Date</label><input
+                                type="date" id="assessExamDate" class="w-full p-3 border rounded-xl text-sm"></div>
+                    </div>
+                    <button onclick="handleGenerateRequest('assessment')"
+                        class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:scale-[1.01] transition-all">Begin Mark Entry</button>
+                </div>
+            </div>
+
+            <!-- Print Center -->
+            <div id="printSetup" class="app-view hidden">
+                <h2 class="text-2xl font-bold mb-6 text-indigo-700 text-center">Document Center</h2>
+                <div class="bg-white p-8 border rounded-2xl shadow-sm max-w-xl mx-auto space-y-4">
+                    <div><label class="text-[10px] font-bold text-gray-500 uppercase">Document Type</label><select
+                            id="printTypeSelector" class="w-full p-3 border rounded-xl text-sm">
+                            <option value="attendance-index">Attendance Index (Signature Sheet)</option>
+                            <option value="mark-sheet">Blank Mark Sheet</option>
+                            <option value="workshop-viva">Final Consolidated Mark Sheet</option>
+                            <option value="transcript">Single Student Transcript</option>
+                        </select></div>
+                    <div><label class="text-[10px] font-bold text-gray-500 uppercase">Batch</label><select
+                            id="printBatchSelector" class="w-full p-3 border rounded-xl text-sm"></select></div>
+                    <div id="transcriptSelectionContainer" class="hidden">
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Select Target Student</label>
+                        <select id="printStudentSelector" class="w-full p-3 border rounded-xl text-sm"></select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Semester</label><select
+                                id="printSemesterSelector" class="p-3 border rounded-xl w-full text-sm">
+                                <option value="1st">1st Sem</option>
+                                <option value="2nd">2nd Sem</option>
+                                <option value="3rd">3rd Sem</option>
+                                <option value="4th">4th Sem</option>
+                                <option value="5th">5th Sem</option>
+                                <option value="6th">6th Sem</option>
+                            </select></div>
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Sub-Batch</label><select
+                                id="printSubBatchSelector" class="p-3 border rounded-xl w-full text-sm"></select></div>
+                    </div>
+                    <input type="number" id="printMaxMark" value="200" class="w-full p-3 border rounded-xl text-sm"
+                        placeholder="Max Mark Calculation">
+                    <button onclick="handleGenerateRequest('print')"
+                        class="w-full bg-gray-800 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-black transition-all">Generate Printable Document</button>
+                </div>
+            </div>
+
+            <!-- Sheet Generator View -->
+            <div id="sheetGeneration" class="app-view hidden">
+                <div class="no-print flex justify-between items-center bg-yellow-50 p-4 rounded-xl border border-yellow-200 mb-6">
+                    <button onclick="renderView('dashboard')" class="text-gray-600 font-bold hover:underline">← Cancel & Back</button>
+                    <div id="markSheetControls" class="flex gap-2"><button onclick="saveMarks()"
+                            class="px-6 py-2 bg-green-600 text-white font-bold rounded-lg shadow hover:bg-green-700 transition-all">💾 Save Scores</button></div>
+                    <button onclick="window.print()"
+                        class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg shadow hover:bg-blue-700 transition-all">🖨️ Print to A4</button>
+                </div>
+
+                <div id="printable-content" class="bg-white p-6 md:p-10 border shadow-sm mx-auto">
+                    <header class="text-center">
+                        <img src="https://raw.githubusercontent.com/dotkpr-ctrl/-assets/87413e49245de21f59888203d550557d31c03cf6/Picture1.png"
+                            class="mx-auto max-w-md mb-2">
+                        <h2 class="text-lg md:text-xl font-bold uppercase tracking-wide">ADVANCED DIPLOMA IN AUTOMOBILE ENGINEERING</h2>
+                        <h3 class="text-md md:text-lg font-bold text-blue-700 uppercase">WORKSHOP VIVA</h3>
+                        <h4 id="sheetTitle"
+                            class="text-sm md:text-md font-semibold border-b-2 border-black inline-block px-8 pb-0.5 mt-1">ASSESSMENT SHEET</h4>
+                    </header>
+
+                    <div class="grid grid-cols-2 gap-y-1 text-[10px] md:text-xs font-semibold mt-4 mb-4 header-info-grid">
+                        <p>SEMESTER: <span id="sheetSemesterDisplay" class="font-normal underline"></span></p>
+                        <p class="text-right">DATE: <span id="sheetDate" class="font-normal underline"></span></p>
+                        <p>BATCH: <span id="sheetBatchDisplay" class="font-normal underline"></span></p>
+                        <p class="text-right" id="maxMarkHeaderContainer">MAX. MARK: <span id="displayMaxMark" class="font-normal underline"></span></p>
+                    </div>
+
+                    <div class="overflow-visible">
+                        <table class="w-full border-collapse border-2 border-black">
+                            <thead class="bg-gray-50">
+                                <tr id="generatedSheetHeader"></tr>
+                            </thead>
+                            <tbody id="generatedSheetBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-12 flex justify-between text-center px-12">
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 border-b border-black mb-1"></div>
+                            <p class="text-[9px] font-bold">Class Incharge</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-32 border-b border-black mb-1"></div>
+                            <p class="text-[9px] font-bold">HOD / Principal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Input Modal -->
+    <div id="bulkInputModal" class="no-print fixed inset-0 bg-black/60 z-[200] flex justify-center items-center hidden"
+        onclick="toggleBulkInputModal(false)">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-lg border" onclick="event.stopPropagation()">
+            <h3 class="text-xl font-bold mb-4 border-b pb-2">Bulk Import Students</h3>
+            <form onsubmit="handleBulkInput(event)" class="space-y-4">
+                <div><label class="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Batch ID</label><input type="text" id="bulkBatchId" required
+                        class="w-full p-2.5 border rounded-lg uppercase bg-gray-50 focus:ring-2 focus:ring-primary outline-none">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Data (Name, Admission No)</label>
+                    <textarea id="bulkStudentData" rows="8" required
+                        class="w-full p-3 border rounded-lg font-mono text-xs focus:ring-2 focus:ring-primary outline-none"
+                        placeholder="Format: John Doe, AM/101/25"></textarea>
+                </div>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="toggleBulkInputModal(false)"
+                        class="px-6 py-2 bg-gray-100 rounded-lg text-sm font-bold text-gray-600">Cancel</button>
+                    <button type="submit"
+                        class="px-6 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow transition-all">Import Batch</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="statusFooter"
+        class="no-print fixed bottom-0 left-0 right-0 bg-gray-800 text-white text-center py-1.5 text-[10px] uppercase tracking-widest font-bold border-t border-gray-700">
+        Local Database Secured • v4.2 Stable</div>
+
+    <!-- Main JavaScript Module -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
