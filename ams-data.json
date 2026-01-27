@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T19:11:17.724Z",
+  "lastUpdated": "2026-01-27T19:11:39.087Z",
   "version": "4.2",
   "students": [
     {
@@ -1188,14 +1188,6 @@
       "name": "ARON K JOSLIN",
       "admissionNo": "AM/94/25/TA",
       "batchId": "AME 36",
-      "marks": {},
-      "subBatch": "None"
-    },
-    {
-      "name": "JOYAL R",
-      "admissionNo": "AM/175/25/CA",
-      "batchId": "AME 37",
-      "id": "90fb2554-c57f-4524-a65d-20d3009ac344",
       "marks": {},
       "subBatch": "None"
     },
