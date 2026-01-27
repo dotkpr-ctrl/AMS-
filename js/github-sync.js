@@ -104,10 +104,7 @@ class GitHubDataSync {
 
         try {
             const response = await fetch(url, {
-                headers: {
-                    ...this.getHeaders(),
-                    'Cache-Control': 'no-cache'
-                }
+                headers: this.getHeaders()
             });
 
             if (response.status === 404) {
