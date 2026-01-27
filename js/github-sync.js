@@ -99,11 +99,15 @@ class GitHubDataSync {
     // Get file from repository
     async getFile(path) {
         // ... (existing getFile logic)
-        const url = `${this.apiBase}/repos/${this.owner}/${this.repo}/contents/${path}?ref=${this.branch}`;
+        // Add timestamp to prevent caching of SHA
+        const url = `${this.apiBase}/repos/${this.owner}/${this.repo}/contents/${path}?ref=${this.branch}&t=${Date.now()}`;
 
         try {
             const response = await fetch(url, {
-                headers: this.getHeaders()
+                headers: {
+                    ...this.getHeaders(),
+                    'Cache-Control': 'no-cache'
+                }
             });
 
             if (response.status === 404) {
