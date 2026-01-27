@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T18:27:06.754Z",
+  "lastUpdated": "2026-01-27T18:28:32.369Z",
   "version": "4.2",
   "students": [
     {
@@ -2735,14 +2735,6 @@
           ]
         }
       },
-      "subBatch": "None"
-    },
-    {
-      "name": "Test User",
-      "admissionNo": "9999",
-      "batchId": "TEST-01",
-      "id": "7011e370-079e-469a-9dc3-77df41f84292",
-      "marks": {},
       "subBatch": "None"
     }
   ],
