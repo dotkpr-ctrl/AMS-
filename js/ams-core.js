@@ -865,7 +865,8 @@ window.liveUpdateMark = (sid, idx, val, key, max, inputEl) => {
 
 window.saveMarks = () => {
     const config = window.activeSheetConfig;
-    const sheetKey = `${config.batchId}-${config.sem}-mark-${config.maxMark}`;
+    const keyType = config.type === 'workshop-viva' ? 'viva' : 'mark';
+    const sheetKey = `${config.batchId}-${config.sem}-${keyType}-${config.maxMark}`;
 
     assessmentMetadata[sheetKey] = {
         date: config.examDate,
