@@ -164,8 +164,8 @@ function updateBatchDropdowns() {
             } else if (id.includes('SubBatch')) {
                 selector.innerHTML = `
                     <option value="All">Full Batch</option>
-                    <option value="A">Sub-Batch A</option>
-                    <option value="B">Sub-Batch B</option>
+                    <option value="A">Batch A</option>
+                    <option value="B">Batch B</option>
                 `;
             } else {
                 selector.innerHTML = `<option value="" disabled selected>-- Select Batch --</option>`;
