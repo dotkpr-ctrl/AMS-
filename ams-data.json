@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T03:57:32.107Z",
+  "lastUpdated": "2026-01-28T03:58:28.056Z",
   "version": "4.2",
   "students": [
     {
@@ -2763,6 +2763,12 @@
         "bb503f37-d4a9-456c-80bd-8ab238f9b9e5": "absent",
         "f1196415-0a77-4ff2-a4db-d81b2bb1f457": "absent",
         "97ab2e72-677f-4174-ac8c-a7c075aba72d": "present"
+      },
+      "2026-01-28": {
+        "6ca5da1c-bb5b-4a5f-9bd1-d736beff83a1": "absent",
+        "c45220e4-b301-4758-95df-e342e83a4a71": "absent",
+        "0cb4ec9d-b4c7-4cf7-91f9-8b330c67f134": "absent",
+        "83115816-1bc1-47da-aa5a-14fa08d29cd8": "absent"
       }
     },
     "AME 31": {
