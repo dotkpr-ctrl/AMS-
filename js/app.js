@@ -527,7 +527,7 @@ window.handleGenerateRequest = (mode, forceType = null) => {
                 subBatch: document.getElementById('assessSubBatchSelector').value,
                 maxMark: document.getElementById('assessMaxMark').value,
                 examDate: document.getElementById('assessExamDate').value,
-                type: 'mark'
+                type: 'workshop-viva'
             };
         } else {
             config = {
