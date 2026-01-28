@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T04:15:05.340Z",
+  "lastUpdated": "2026-01-28T04:54:08.554Z",
   "version": "4.2",
   "students": [
     {
@@ -1196,7 +1196,20 @@
       "name": "AHMAD HASHIM T",
       "admissionNo": "AM/149/25/MTC",
       "batchId": "AME 38",
-      "marks": {},
+      "marks": {
+        "AME 38-1st-mark-200": {
+          "marks": [
+            9,
+            8,
+            6,
+            8,
+            9,
+            7,
+            38,
+            100
+          ]
+        }
+      },
       "subBatch": "None"
     },
     {
@@ -1204,7 +1217,20 @@
       "name": "HIMESH S",
       "admissionNo": "AM/181/25/AAP",
       "batchId": "AME 38",
-      "marks": {},
+      "marks": {
+        "AME 38-1st-mark-200": {
+          "marks": [
+            6,
+            7,
+            8,
+            6,
+            8,
+            9,
+            35,
+            95
+          ]
+        }
+      },
       "subBatch": "None"
     },
     {
@@ -1212,7 +1238,20 @@
       "name": "ATHUL KRISHNA S",
       "admissionNo": "AM/234/25/TY8",
       "batchId": "AME 38",
-      "marks": {},
+      "marks": {
+        "AME 38-1st-mark-200": {
+          "marks": [
+            9,
+            8,
+            7,
+            7,
+            8,
+            9,
+            38,
+            100
+          ]
+        }
+      },
       "subBatch": "None"
     },
     {
@@ -1220,7 +1259,20 @@
       "name": "ROSHAN AMEER",
       "admissionNo": "AM/238/25/TC34",
       "batchId": "AME 38",
-      "marks": {},
+      "marks": {
+        "AME 38-1st-mark-200": {
+          "marks": [
+            7,
+            8,
+            7,
+            6,
+            7,
+            8,
+            35,
+            98
+          ]
+        }
+      },
       "subBatch": "None"
     },
     {
@@ -1236,7 +1288,20 @@
       "name": "ARJUN A",
       "admissionNo": "AM/241/25/CA",
       "batchId": "AME 38",
-      "marks": {},
+      "marks": {
+        "AME 38-1st-mark-200": {
+          "marks": [
+            6,
+            7,
+            8,
+            7,
+            6,
+            0,
+            0,
+            0
+          ]
+        }
+      },
       "subBatch": "None"
     },
     {
@@ -2745,6 +2810,11 @@
     },
     "TEST-1st-mark-200": {
       "date": "",
+      "semester": "1st",
+      "maxMark": "200"
+    },
+    "AME 38-1st-mark-200": {
+      "date": "2025-11-12",
       "semester": "1st",
       "maxMark": "200"
     }
