@@ -556,7 +556,9 @@ function generateSheet(isReload = false, config) {
     currentBatch = config.batchId;
     currentSubBatch = config.subBatch;
 
-    const sheetKey = `${config.batchId}-${config.sem}-mark-${config.maxMark}`;
+    // Use type-specific key to segregate data (so Viva marks don't overwrite Assessment marks)
+    const keyType = config.type === 'workshop-viva' ? 'viva' : 'mark';
+    const sheetKey = `${config.batchId}-${config.sem}-${keyType}-${config.maxMark}`;
     const meta = assessmentMetadata[sheetKey] || {};
 
     renderView('sheetGeneration');
@@ -701,12 +703,19 @@ window.handleEnterKey = (e) => {
 
 function renderMarksEntry(filtered, type, maxMark, sheetKey) {
     const isEntry = type === 'mark';
-    document.getElementById('markSheetControls').classList.toggle('hidden', !isEntry);
+    const isViva = type === 'workshop-viva';
+    document.getElementById('markSheetControls').classList.toggle('hidden', !isEntry && !isViva);
 
-    const headers = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'PRAC', 'REC'];
+    // Dynamic headers based on type
+    let headers = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'PRAC', 'REC'];
+    if (isViva) headers = ['MARKS'];
+
     const markHeaders = headers.map(h =>
         `<th class="w-12 text-xs text-center border-r border-black bg-gray-50">${h}</th>`
     ).join('');
+
+    // Hide separate Total column for Viva (since the single input IS the total)
+    const totalHeaderStyle = isViva ? 'display:none' : '';
 
     document.getElementById('generatedSheetHeader').innerHTML = `
         <tr class="border-b-2 border-black text-center">
@@ -714,14 +723,20 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
             <th class="text-left pl-2 border-r border-black">NAME</th>
             <th class="w-24 text-center border-r border-black">ADM NO.</th>
             ${markHeaders}
-            <th class="w-12 border-r border-black">TOTAL</th>
+            <th class="w-12 border-r border-black" style="${totalHeaderStyle}">TOTAL</th>
             <th class="w-12 text-center">RANK</th>
         </tr>
     `;
 
     let processed = filtered.map(s => {
-        const mData = s.marks[sheetKey]?.marks || Array(8).fill(0);
-        const total = mData.reduce((a, b) => a + b, 0);
+        // Ensure mData has correct length for the current headers
+        let mData = s.marks[sheetKey]?.marks || [];
+        if (mData.length !== headers.length) {
+            mData = Array(headers.length).fill(0);
+        }
+
+        // For Viva, Total is just the first column. For others, sum of all.
+        const total = isViva ? (mData[0] || 0) : mData.reduce((a, b) => a + b, 0);
         return { ...s, mData, total };
     }).sort((a, b) => b.total - a.total);
 
@@ -748,7 +763,7 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
                 <td class="text-left pl-2 font-bold p-name border-r border-black text-sm uppercase">${s.name}</td>
                 <td class="text-center font-mono border-r border-black text-[11px] font-bold text-blue-800">${s.admissionNo}</td>
                 ${cells}
-                <td class="text-center font-bold border-r border-black total-cell text-sm">${s.total}</td>
+                <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
                 <td class="text-center font-bold rank-cell text-sm">${s.rank}</td>
             </tr>
         `;
