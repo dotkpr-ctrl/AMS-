@@ -14,6 +14,69 @@ const LS_KEY_ATTENDANCE = 'academic_management_attendance_v3';
 const LS_KEY_BATCH_META = 'academic_management_batch_metadata_v3';
 const INITIAL_BATCH_ID = 'AME 37';
 
+// Auth State
+let currentUserRole = null;
+
+// Auth Functions
+window.handleLogin = (e) => {
+    e.preventDefault();
+    const u = document.getElementById('loginUsername').value.trim().toLowerCase();
+    const p = document.getElementById('loginPassword').value.trim();
+    const err = document.getElementById('loginError');
+
+    // Hardcoded Credentials
+    if ((u === 'incharge' || u === 'admin') && (p === 'admin123' || p === 'incharge')) {
+        localStorage.setItem('user_role', 'admin');
+        startSession('admin');
+    } else if (u === 'staff' && p === 'staff123') {
+        localStorage.setItem('user_role', 'staff');
+        startSession('staff');
+    } else {
+        err.classList.remove('hidden');
+    }
+};
+
+window.handleLogout = () => {
+    localStorage.removeItem('user_role');
+    window.location.reload();
+};
+
+function startSession(role) {
+    currentUserRole = role;
+    document.getElementById('loginModal').classList.add('hidden');
+    applyPermissions(role);
+    refreshDataAndUI();
+}
+
+function checkSession() {
+    const role = localStorage.getItem('user_role');
+    if (role === 'admin' || role === 'staff') {
+        startSession(role);
+    } else {
+        document.getElementById('loginModal').classList.remove('hidden');
+    }
+}
+
+function applyPermissions(role) {
+    const navStudents = document.getElementById('nav-students');
+    const navDocs = document.getElementById('nav-docs');
+
+    // Default: Show all
+    if (navStudents) navStudents.classList.remove('hidden');
+    if (navDocs) navDocs.classList.remove('hidden');
+
+    if (role === 'staff') {
+        // Hide permissions for staff
+        if (navStudents) navStudents.classList.add('hidden');
+        if (navDocs) navDocs.classList.add('hidden');
+
+        // Also hide Student Management View if active
+        // Logic handled in renderView if needed, but menu hiding is main restriction
+    }
+
+    // Update Dashboard or other elements if needed based on role
+}
+
 // Data Management Functions
 function loadData() {
     try {
@@ -929,7 +992,9 @@ window.importData = (e) => {
 };
 
 // Initialize on DOM Load
+// Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
+    checkSession(); // Check login first
     loadData();
 
     // Setup event listeners
