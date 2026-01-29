@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T10:12:28.872Z",
+  "lastUpdated": "2026-01-29T10:12:34.052Z",
   "version": "4.2",
   "students": [
     {
@@ -1109,7 +1109,7 @@
       "admissionNo": "AM/210/25/KUC",
       "batchId": "AME 36",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "67f644c1-9d21-4535-ba3c-a737e17617fc",
