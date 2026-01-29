@@ -578,7 +578,7 @@ function generateSheet(isReload = false, config) {
     document.getElementById('maxMarkHeaderContainer').classList.toggle('hidden', !isMarkSheet);
 
     const titles = {
-        'workshop-viva': 'FINAL MARK SHEET',
+        'workshop-viva': 'FINAL MARK SHEET (v5)',
         'mark': 'ASSESSMENT MARK ENTRY',
         'mark-sheet': 'BLANK MARK SHEET',
         'attendance-index': 'ATTENDANCE INDEX',
@@ -703,7 +703,9 @@ window.handleEnterKey = (e) => {
 
 function renderMarksEntry(filtered, type, maxMark, sheetKey) {
     const isEntry = type === 'mark';
-    const isViva = type === 'workshop-viva';
+    // resilient check for viva
+    const isViva = type && type.toString().includes('workshop-viva');
+
     document.getElementById('markSheetControls').classList.toggle('hidden', !isEntry && !isViva);
 
     // Dynamic headers based on type
