@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T10:52:57.511Z",
+  "lastUpdated": "2026-01-29T10:53:05.921Z",
   "version": "4.2",
   "students": [
     {
@@ -2014,7 +2014,7 @@
       "admissionNo": "AM/273/25/TA",
       "batchId": "AME 39",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "5c0c25c3-e65a-4dcf-aae7-f9633f9f3b14",
@@ -2030,7 +2030,7 @@
       "admissionNo": "AM/276/25/KB",
       "batchId": "AME 39",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "e87bf662-e5b8-4fca-8082-122659300bc3",
