@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T10:16:09.830Z",
+  "lastUpdated": "2026-01-29T10:16:15.467Z",
   "version": "4.2",
   "students": [
     {
@@ -3034,7 +3034,9 @@
     "AME 36": {
       "2026-01-29": {
         "fab3b85c-fbb1-4ed1-9629-acca00cb9d85": "absent",
-        "099acb3a-e2b8-4de5-89ab-849bc4511d53": "absent"
+        "099acb3a-e2b8-4de5-89ab-849bc4511d53": "absent",
+        "f5c68b7b-0501-4c35-9d93-2ebd29f11842": "absent",
+        "7cb66241-efef-4e15-abc6-909b20a403c5": "absent"
       }
     }
   },
