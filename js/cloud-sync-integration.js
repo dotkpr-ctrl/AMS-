@@ -48,6 +48,18 @@ function initializeCloudSync() {
                     }
                 } else {
                     console.log('Pending upload detected. Skipping auto-download to preserve local changes.');
+                    // Notify user why they aren't seeing cloud updates
+                    const menuSyncStatus = document.getElementById('menuSyncStatus');
+                    if (menuSyncStatus) {
+                        menuSyncStatus.textContent = 'Unsynced';
+                        menuSyncStatus.className = 'text-[10px] bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded font-bold';
+                    }
+
+                    // Only show toast if we are online (otherwise it's obvious why we didn't sync)
+                    if (navigator.onLine) {
+                        showMessage('Sync Paused', 'Local changes pending. Auto-download skipped. Use "Download from Cloud" if you want to overwrite local data.', 'warning');
+                    }
+
                     // The initNetworkListeners in GitHubDataSync will handle the upload
                 }
             })
