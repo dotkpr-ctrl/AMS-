@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T10:52:51.040Z",
+  "lastUpdated": "2026-01-29T10:52:57.511Z",
   "version": "4.2",
   "students": [
     {
@@ -1990,7 +1990,7 @@
       "admissionNo": "AM/269/25/ITC4",
       "batchId": "AME 39",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "6907ba29-3779-4b96-9380-c37b64f1ab99",
@@ -1998,7 +1998,7 @@
       "admissionNo": "AM/270/25/ITC4",
       "batchId": "AME 39",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "413f667d-3ff4-47cf-a97e-0bd401ccf2d7",
@@ -2006,7 +2006,7 @@
       "admissionNo": "AM/272/25/PYP",
       "batchId": "AME 39",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "b4557456-e2df-439e-a501-146bc7fdacc4",
