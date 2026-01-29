@@ -116,7 +116,8 @@ class GitHubDataSync {
             }
 
             const data = await response.json();
-            const content = atob(data.content); // Decode base64
+            // Unicode-safe decoding
+            const content = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
             return {
                 content: JSON.parse(content),
                 sha: data.sha
@@ -134,7 +135,8 @@ class GitHubDataSync {
 
         const body = {
             message: `Update ${path} - ${new Date().toISOString()}`,
-            content: btoa(JSON.stringify(content, null, 2)), // Encode to base64
+            // Unicode-safe encoding (btoa fails on non-Latin1 chars)
+            content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
             branch: this.branch
         };
 
