@@ -528,7 +528,7 @@ window.handleGenerateRequest = (mode, forceType = null) => {
                 subBatch: document.getElementById('assessSubBatchSelector').value,
                 maxMark: document.getElementById('assessMaxMark').value,
                 examDate: document.getElementById('assessExamDate').value,
-                type: 'workshop-viva'
+                type: 'mark' // Reverted to standard entry
             };
         } else {
             config = {
@@ -557,8 +557,8 @@ function generateSheet(isReload = false, config) {
     currentBatch = config.batchId;
     currentSubBatch = config.subBatch;
 
-    // Use type-specific key to segregate data (so Viva marks don't overwrite Assessment marks)
-    const keyType = config.type === 'workshop-viva' ? 'viva' : 'mark';
+    // Unified storage key: Always use 'mark' so data is shared between Entry and Print views
+    const keyType = 'mark';
     const sheetKey = `${config.batchId}-${config.sem}-${keyType}-${config.maxMark}`;
     const meta = assessmentMetadata[sheetKey] || {};
 
@@ -704,21 +704,18 @@ window.handleEnterKey = (e) => {
 
 function renderMarksEntry(filtered, type, maxMark, sheetKey) {
     const isEntry = type === 'mark';
-    // resilient check for viva
-    const isViva = type && type.toString().includes('workshop-viva');
+    const isViva = type && type.toString().includes('workshop-viva'); // This is now the "Print Summary" mode
 
-    document.getElementById('markSheetControls').classList.toggle('hidden', !isEntry && !isViva);
+    document.getElementById('markSheetControls').classList.toggle('hidden', !isEntry);
 
-    // Dynamic headers based on type
     let headers = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'PRAC', 'REC'];
-    if (isViva) headers = ['MARKS'];
+    if (isViva) headers = ['TOTAL']; // Final Sheet only shows Total
 
     const markHeaders = headers.map(h =>
         `<th class="w-12 text-xs text-center border-r border-black bg-gray-50">${h}</th>`
     ).join('');
 
-    // Hide separate Total column for Viva (since the single input IS the total)
-    const totalHeaderStyle = isViva ? 'display:none' : '';
+    const totalHeaderStyle = isViva ? 'display:none' : ''; // Total is the ONLY column in Viva mode, so hide the redundant total
 
     document.getElementById('generatedSheetHeader').innerHTML = `
         <tr class="border-b-2 border-black text-center">
@@ -731,15 +728,10 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
         </tr>
     `;
 
+    // Calculate ranks first
     let processed = filtered.map(s => {
-        // Ensure mData has correct length for the current headers
-        let mData = s.marks[sheetKey]?.marks || [];
-        if (mData.length !== headers.length) {
-            mData = Array(headers.length).fill(0);
-        }
-
-        // For Viva, Total is just the first column. For others, sum of all.
-        const total = isViva ? (mData[0] || 0) : mData.reduce((a, b) => a + b, 0);
+        const mData = s.marks[sheetKey]?.marks || Array(8).fill(0);
+        const total = mData.reduce((a, b) => a + b, 0);
         return { ...s, mData, total };
     }).sort((a, b) => b.total - a.total);
 
@@ -750,15 +742,28 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
     });
 
     document.getElementById('generatedSheetBody').innerHTML = processed.map((s, i) => {
-        const cells = s.mData.map((m, idx) => `
-            <td class="border-r border-black p-0 h-10 text-center align-middle">
-                <input type="number" value="${m}" 
-                    class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold no-print" 
-                    onkeydown="handleEnterKey(event)" 
-                    oninput="liveUpdateMark('${s.id}', ${idx}, this.value, '${sheetKey}', ${maxMark}, this)">
-                <span class="print-only">${m}</span>
-            </td>
-        `).join('');
+        let cells = '';
+        if (isViva) {
+            // Read-Only Summary View
+            cells = `
+                <td class="p-0 border-r border-black h-10 text-center align-middle">
+                     <input type="number" value="${s.total}" disabled 
+                        class="w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold text-black no-print">
+                    <span class="print-only">${s.total}</span>
+                </td>
+            `;
+        } else {
+            // Standard Entry View
+            cells = s.mData.map((m, idx) => `
+                <td class="border-r border-black p-0 h-10 text-center align-middle">
+                    <input type="number" value="${m}"
+                        class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold no-print"
+                        onkeydown="handleEnterKey(event)"
+                        oninput="liveUpdateMark('${s.id}', ${idx}, this.value, '${sheetKey}', ${maxMark}, this)">
+                    <span class="print-only">${m}</span>
+                </td>
+            `).join('');
+        }
 
         return `
             <tr class="h-10 border-b border-black hover:bg-gray-50 transition-colors" data-sid="${s.id}">
@@ -872,7 +877,7 @@ window.liveUpdateMark = (sid, idx, val, key, max, inputEl) => {
 
 window.saveMarks = () => {
     const config = window.activeSheetConfig;
-    const keyType = config.type === 'workshop-viva' ? 'viva' : 'mark';
+    const keyType = 'mark'; // Unified storage
     const sheetKey = `${config.batchId}-${config.sem}-${keyType}-${config.maxMark}`;
 
     assessmentMetadata[sheetKey] = {
