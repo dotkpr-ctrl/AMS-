@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T05:43:02.440Z",
+  "lastUpdated": "2026-01-29T05:43:09.372Z",
   "version": "4.2",
   "students": [
     {
@@ -2845,7 +2845,8 @@
         "2cf97643-333a-4b7b-b253-c147a51b68f8": "present"
       },
       "2026-01-29": {
-        "a18e0c26-04a8-4a3d-b358-bb9053c233d1": "absent"
+        "a18e0c26-04a8-4a3d-b358-bb9053c233d1": "absent",
+        "d331b3f7-118a-4426-b4c5-6baf840006c2": "absent"
       }
     },
     "AME 31": {
