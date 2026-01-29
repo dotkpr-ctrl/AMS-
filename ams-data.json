@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T10:05:18.904Z",
+  "lastUpdated": "2026-01-29T10:06:51.837Z",
   "version": "4.2",
   "students": [
     {
@@ -2780,6 +2780,174 @@
           ]
         }
       }
+    },
+    {
+      "id": "7760a3d2-5e14-4707-a8a1-392fe7f7eefb",
+      "name": "ARJUN SUNILKUMAR",
+      "admissionNo": "AM/348/25/KUC",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "3666b26b-9c24-4148-a264-679d8fc2a26c",
+      "name": "JORWIN SHIBY",
+      "admissionNo": "AM/383/25/CA",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "8bb35f34-0a9f-4b6f-a5aa-2e2c78905b8a",
+      "name": "SREEKRISHNA RAVEENDRAN",
+      "admissionNo": "AM/385/25/TY4",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "03886396-c17e-46ca-973e-9d9ff7fdfddf",
+      "name": "NIKHIL KRISHNA P",
+      "admissionNo": "AM/386/25/MTC",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "0d1d7bb5-80ae-43de-9908-c8fa74a78bce",
+      "name": "SHALVIN BINU",
+      "admissionNo": "AM/384/25/KB",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "5fa01e80-b459-4ac8-ad6b-8767cf8c18ef",
+      "name": "ABHIMANU",
+      "admissionNo": "AM/387/25/TVM",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "90f8bc76-a83d-4d71-8ff3-9f6334517351",
+      "name": "ADWAITH J",
+      "admissionNo": "AM/397/25/AAC",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "fa9d7b60-e268-4ed8-a6e4-d51cb8dd5b1d",
+      "name": "GOVIND RAJ",
+      "admissionNo": "OTC/41/25/TA",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "25fbf24d-755e-4023-b971-fba79a48d63b",
+      "name": "ABIN ANISH",
+      "admissionNo": "AM/213/25/KB",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "3dac9310-449b-467e-b3ed-7abbb4e2ee41",
+      "name": "ASHIK TV",
+      "admissionNo": "AM/404/25/ITC4",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "b3dc45dc-9e26-42e6-909f-9d668ad74139",
+      "name": "FAWAS NIHAL",
+      "admissionNo": "AM/405/25/TY",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "ba8bc2df-8908-4c42-8204-668735074319",
+      "name": "JAKE JOHN VARGHESE",
+      "admissionNo": "AM/389/25/TC34",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "0fff6495-c919-4322-8ca2-3d3731c36c3e",
+      "name": "NIKHIL KRISHNA R",
+      "admissionNo": "AM/390/25/TA",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "b89fe93f-651b-4cd2-a6e3-246409db0819",
+      "name": "ADITHYAN A",
+      "admissionNo": "AM/391/25/TA",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "82361a2b-fc73-4b49-b96b-3f339978eee6",
+      "name": "ALBERT MARTIN",
+      "admissionNo": "AM/365/25/AAC",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "c0f5ca49-ef7e-41a1-97a3-33b5e7e84edf",
+      "name": "ASWIN K PRADEEP",
+      "admissionNo": "AM/392/25/PYP",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "e9a0c1b7-e523-46cc-a0f2-56b63c8d2cad",
+      "name": "YASANTH NANDAN M",
+      "admissionNo": "AM/393/25/TC2",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "2a2c9acd-183e-4597-a7e7-5a1beef8986b",
+      "name": "NIRANJAN K K",
+      "admissionNo": "AM/395/25/CA",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "40e81ae2-27e6-41d6-8b43-95db640dbddc",
+      "name": "AJAY SANTHOSH",
+      "admissionNo": "AM/396/25/ITC3",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "a14d71b6-37f1-4a36-85fd-705c7b4d8635",
+      "name": "ABISHEK K F",
+      "admissionNo": "AM/403/25/KY",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "98a0da18-e8bf-4c40-b782-2a8550a07a3b",
+      "name": "ALAN S",
+      "admissionNo": "AM/408/25/TA",
+      "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
     }
   ],
   "assessmentMetadata": {
