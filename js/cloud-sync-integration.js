@@ -223,14 +223,16 @@ window.autoSyncToCloud = async () => {
             } else if (result.queued) {
                 console.log('Auto-sync queued (offline/error)');
                 if (statusEl) {
-                    statusEl.innerHTML = '<span class="text-orange-500" title="Changes saved locally, pending upload">Offline (Saved)</span>';
+                    statusEl.innerHTML = '<span class="text-orange-600 cursor-pointer" title="Click to Retry Upload">⚠️ Pending Upload</span>';
+                    statusEl.onclick = () => window.autoSyncToCloud();
                 }
             }
         } catch (err) {
             console.error('Auto-sync failed:', err);
             // Since we handle queueing inside uploadData, this catch block handles unexpected crashes
             if (statusEl) {
-                statusEl.innerHTML = '<span class="text-red-600">Sync Error</span>';
+                statusEl.innerHTML = '<span class="text-red-600 cursor-pointer" title="Click to Retry">Sync Error</span>';
+                statusEl.onclick = () => window.autoSyncToCloud();
             }
         }
     } catch (error) {
@@ -245,4 +247,14 @@ window.autoSyncToCloud = async () => {
 // Initialize cloud sync when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initializeCloudSync();
+    
+    // Add manual retry to status badge
+    const badge = document.getElementById('menuSyncStatus');
+    if (badge) {
+        badge.onclick = () => {
+             if (badge.textContent.includes('Pending') || badge.textContent.includes('Error') || badge.textContent.includes('Unsynced')) {
+                 window.autoSyncToCloud();
+             }
+        };
+    }
 });
