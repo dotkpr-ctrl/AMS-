@@ -213,6 +213,7 @@ window.renderView = (viewName) => {
         else if (viewName === 'dashboard') calculateDashboardStats();
         else if (viewName === 'attendanceMarking') setupAttendanceView();
         else if (viewName === 'attendanceRegister') renderAttendanceRegister();
+        else if (viewName === 'assessmentHistory') renderAssessmentHistory();
 
         updateBatchDropdowns();
     }
@@ -792,7 +793,11 @@ function renderTranscript(studentId) {
         </tr>
     `;
 
-    const keys = Object.keys(assessmentMetadata).filter(k => k.startsWith(s.batchId)).sort();
+    const keys = Object.keys(assessmentMetadata).filter(k => k.startsWith(s.batchId)).sort((a, b) => {
+        const dateA = new Date(assessmentMetadata[a]?.date || 0);
+        const dateB = new Date(assessmentMetadata[b]?.date || 0);
+        return dateB - dateA;
+    });
 
     const rows = keys.map((k, i) => {
         const m = assessmentMetadata[k];
@@ -936,3 +941,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
     refreshDataAndUI();
 });
+
+// Assessment History Functions
+window.renderAssessmentHistory = () => {
+    const listBody = document.getElementById('assessmentHistoryBody');
+    if (!listBody) return;
+
+    const keys = Object.keys(assessmentMetadata).sort((a, b) => {
+        const dateA = new Date(assessmentMetadata[a]?.date || 0);
+        const dateB = new Date(assessmentMetadata[b]?.date || 0);
+        return dateB - dateA;
+    });
+
+    if (keys.length === 0) {
+        listBody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-500">No recorded assessments found.</td></tr>';
+        return;
+    }
+
+    listBody.innerHTML = keys.map(key => {
+        const meta = assessmentMetadata[key] || {};
+        // Key format: batch-sem-type-maxMark
+        const parts = key.split('-');
+
+        let batchId = parts[0];
+        let sem = parts[1];
+        let keyType = parts[2]; // 'viva' or 'mark'
+        let maxMark = parts[3];
+
+        const date = meta.date ? new Date(meta.date).toLocaleDateString('en-GB') : '-';
+        const typeLabel = (keyType === 'viva') ? 'Workshop Viva' : 'Assessment';
+        const typeCode = (keyType === 'viva') ? 'workshop-viva' : 'mark';
+
+        return `
+            <tr class="border-b hover:bg-gray-50 transition-colors">
+                <td class="p-4 font-medium">${date}</td>
+                <td class="p-4">${batchId}</td>
+                <td class="p-4">${sem}</td>
+                <td class="p-4"><span class="px-2 py-1 rounded text-xs font-bold ${keyType === 'viva' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'}">${typeLabel}</span></td>
+                <td class="p-4">${maxMark}</td>
+                <td class="p-4 text-center">
+                    <button onclick="loadAssessment('${key}', '${typeCode}')" 
+                        class="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors font-medium text-sm">
+                        View
+                    </button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+};
+
+window.loadAssessment = (key, type) => {
+    const parts = key.split('-');
+    const batchId = parts[0];
+    const sem = parts[1];
+    const maxMark = parts[3];
+    const meta = assessmentMetadata[key] || {};
+
+    const config = {
+        batchId: batchId,
+        sem: sem,
+        subBatch: 'All',
+        maxMark: maxMark,
+        type: type,
+        examDate: meta.date
+    };
+
+    generateSheet(false, config);
+};
