@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T10:12:34.052Z",
+  "lastUpdated": "2026-01-29T10:12:44.556Z",
   "version": "4.2",
   "students": [
     {
@@ -1117,7 +1117,7 @@
       "admissionNo": "AM/211/25/KUC",
       "batchId": "AME 36",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "36f922e9-657c-4cb3-8b5e-c55d4cc92e4f",
@@ -1125,7 +1125,7 @@
       "admissionNo": "AM/216/25/TY8",
       "batchId": "AME 36",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "7f3c6d3d-cf98-4cba-af78-61e29a943fba",
