@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-30T07:11:07.561Z",
+  "lastUpdated": "2026-01-30T07:11:18.830Z",
   "version": "4.2",
   "students": [
     {
@@ -2150,7 +2150,7 @@
       "admissionNo": "AM/298/25/ERC",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "5c5ae79f-f265-4ff8-b04a-a7f469081065",
