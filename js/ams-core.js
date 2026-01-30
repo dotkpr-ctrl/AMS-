@@ -994,6 +994,9 @@ window.importData = (e) => {
 // Initialize on DOM Load
 // Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
+    // Version Probe
+    showMessage('System Updated', 'AMS v4.4 is now active.', 'success');
+
     checkSession(); // Check login first
     loadData();
 
@@ -1050,10 +1053,17 @@ window.renderAssessmentHistory = () => {
                 <td class="p-4"><span class="px-2 py-1 rounded text-xs font-bold ${keyType === 'viva' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'}">${typeLabel}</span></td>
                 <td class="p-4">${maxMark}</td>
                 <td class="p-4 text-center">
-                    <button onclick="loadAssessment('${key}', '${typeCode}')" 
-                        class="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors font-medium text-sm">
-                        View
-                    </button>
+                    <div class="flex justify-center gap-2">
+                        <button onclick="loadAssessment('${key}', '${typeCode}')" 
+                            class="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors font-medium text-sm">
+                            View
+                        </button>
+                        ${window.currentUserRole === 'incharge' ? `
+                        <button onclick="deleteAssessment('${key}')" 
+                            class="px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors font-medium text-sm">
+                            Delete
+                        </button>` : ''}
+                    </div>
                 </td>
             </tr>
         `;
@@ -1077,4 +1087,44 @@ window.loadAssessment = (key, type) => {
     };
 
     generateSheet(false, config);
+};
+
+// Update user badge
+const updateRoleBadge = () => {
+    const badge = document.getElementById('currentUserBadge');
+    if (badge) {
+        badge.textContent = (window.currentUserRole || 'Guest').toUpperCase();
+        badge.parentElement.classList.toggle('bg-red-50', window.currentUserRole !== 'incharge');
+        badge.parentElement.classList.toggle('text-red-800', window.currentUserRole !== 'incharge');
+        badge.parentElement.classList.toggle('border-red-100', window.currentUserRole !== 'incharge');
+    }
+};
+document.addEventListener('DOMContentLoaded', updateRoleBadge);
+
+window.deleteAssessment = (key) => {
+    // RBAC Check: Only Incharge can delete
+    if (window.currentUserRole !== 'incharge') {
+        showMessage('Access Denied', 'Only Incharge users can delete assessments.', 'error');
+        return;
+    }
+
+    if (!confirm('Are you sure you want to permanently delete this assessment record? This cannot be undone.')) {
+        return;
+    }
+
+    // 1. Remove metadata
+    delete assessmentMetadata[key];
+
+    // 2. Remove marks from all students
+    students.forEach(student => {
+        if (student.marks && student.marks[key]) {
+            delete student.marks[key];
+        }
+    });
+
+    // 3. Save and refresh
+    saveData();
+    renderAssessmentHistory();
+    calculateDashboardStats(); // Update stats
+    showMessage('Success', 'Assessment record deleted successfully.', 'success');
 };

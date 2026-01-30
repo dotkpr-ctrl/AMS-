@@ -37,7 +37,7 @@
     <div id="app" class="max-w-4xl mx-auto p-4 md:p-6 bg-white shadow-lg min-h-screen md:mt-6 rounded-xl relative">
 
         <nav class="no-print flex justify-between items-center border-b pb-4 mb-6">
-            <div class="font-bold text-xl tracking-tight">AMS <span class="text-primary text-sm">v4.2</span></div>
+            <h1 class="text-xl font-bold text-gray-800">AMS <span class="text-primary text-sm">v4.3</span></h1>
             <button onclick="toggleMenu()"
                 class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none transition-colors">
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,6 +111,11 @@
 
 
                     <div class="pt-6 border-t mt-6">
+                        <div id="userRoleDisplay"
+                            class="mb-4 px-4 py-2 bg-indigo-50 border border-indigo-100 rounded-lg text-xs font-bold text-indigo-800 flex items-center justify-between">
+                            <span>User: <span id="currentUserBadge">...</span></span>
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        </div>
                         <p class="text-[10px] text-gray-400 font-bold uppercase mb-2">Management</p>
 
                         <!-- Cloud Sync Controls -->
@@ -457,11 +462,12 @@
         Local Database Secured • v4.2 Stable</div>
 
     <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=4.3.4"></script>
+    <!-- GitHub Sync Module -->
+    <script src="js/github-sync.js?v=4.3.7"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=4.3.4"></script>
+    <script src="js/cloud-sync-integration.js?v=4.4.0"></script>
     <!-- Main JavaScript Module -->
-    <script type="module" src="js/ams-core.js?v=4.3.4"></script>
+    <script type="module" src="js/ams-core.js?v=4.4.0"></script>
 </body>
 
 </html>
