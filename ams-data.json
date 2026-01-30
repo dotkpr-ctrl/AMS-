@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-30T07:14:43.196Z",
+  "lastUpdated": "2026-01-30T07:14:47.703Z",
   "version": "4.2",
   "students": [
     {
@@ -1690,7 +1690,7 @@
           ]
         }
       },
-      "subBatch": "A"
+      "subBatch": "B"
     },
     {
       "id": "166a925c-a775-4a18-a0c8-d4d4a7b8fe1f",
@@ -1711,7 +1711,7 @@
           ]
         }
       },
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "c3ab625e-13a6-4823-9c54-f5c6e8c8fd07",
