@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-30T07:12:46.289Z",
+  "lastUpdated": "2026-01-30T07:13:44.959Z",
   "version": "4.2",
   "students": [
     {
@@ -3952,6 +3952,11 @@
         "f5c68b7b-0501-4c35-9d93-2ebd29f11842": "absent",
         "7cb66241-efef-4e15-abc6-909b20a403c5": "absent",
         "67f644c1-9d21-4535-ba3c-a737e17617fc": "absent"
+      }
+    },
+    "AME 40": {
+      "2026-01-30": {
+        "0e05a6dd-a8ee-4efe-8c4a-79a8d0defc43": "absent"
       }
     }
   },
