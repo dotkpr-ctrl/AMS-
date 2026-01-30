@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-30T07:15:04.174Z",
+  "lastUpdated": "2026-01-30T07:15:08.255Z",
   "version": "4.2",
   "students": [
     {
@@ -1761,7 +1761,7 @@
       "admissionNo": "AM/240/25/TY4",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "27bee1fd-38c5-4ee9-8d39-5ac57de40fce",
