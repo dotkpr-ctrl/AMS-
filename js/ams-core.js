@@ -1080,6 +1080,35 @@ window.toggleDateInputs = () => {
     }
 };
 
+// Tab Logic
+window.currentRegisterTab = 'Theory'; // Default
+
+window.switchRegisterTab = (tab) => {
+    window.currentRegisterTab = tab;
+
+    // Update UI
+    ['Theory', 'Workshop', 'All'].forEach(t => {
+        const btn = document.getElementById(`tab${t}`);
+        if (t === tab) {
+            // Active Styles
+            btn.classList.add('bg-white', 'shadow-sm', 'scale-105');
+            btn.classList.remove('text-gray-500', 'hover:bg-gray-200');
+
+            // Color Coding based on Tab
+            if (tab === 'Theory') btn.classList.add('text-blue-700', 'border', 'border-blue-200');
+            else if (tab === 'Workshop') btn.classList.add('text-orange-600', 'border', 'border-orange-200');
+            else btn.classList.add('text-gray-800', 'border', 'border-gray-300');
+
+        } else {
+            // Inactive Styles
+            btn.className = "flex-1 py-2 px-4 rounded-md text-xs font-bold transition-all text-gray-500 hover:bg-gray-200";
+        }
+    });
+
+    filterRegister();
+};
+
+
 window.filterRegister = () => {
     const batchId = document.getElementById('registerBatchSelector').value;
     if (!batchId) return;
@@ -1090,7 +1119,7 @@ window.filterRegister = () => {
         subBatch: 'All', // Default to All for overview
         type: 'attendance-register',
         filterType: document.getElementById('registerFilterType').value,
-        sessionFilter: document.getElementById('registerSessionType').value,
+        sessionFilter: window.currentRegisterTab, // Use Tab State
         startDate: document.getElementById('registerStartDate').value,
         endDate: document.getElementById('registerEndDate').value
     };
