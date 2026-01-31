@@ -142,6 +142,12 @@ function startSession(role) {
     refreshDataAndUI();
 }
 
+function refreshDataAndUI() {
+    loadData();
+    calculateDashboardStats();
+    renderView('dashboard');
+}
+
 function checkSession() {
     const role = localStorage.getItem('user_role');
     if (role === 'admin' || role === 'staff') {
