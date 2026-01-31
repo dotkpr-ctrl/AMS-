@@ -1017,9 +1017,21 @@ function generateSheet(isReload = false, config) {
         mainTitleEl.classList.add('hidden');
 
         // Append Session Type to the Sheet Title for clarity
+        // Append Session Type to the Sheet Title for clarity
         if (config.type === 'attendance-register') {
             const sType = config.sessionFilter || 'Theory';
-            document.getElementById('sheetTitle').textContent = `MONTHLY ATTENDANCE REGISTER - ${sType.toUpperCase()}`;
+            const titleEl = document.getElementById('sheetTitle');
+            titleEl.textContent = `MONTHLY ATTENDANCE REGISTER - ${sType.toUpperCase()}`;
+
+            // Visual Distinction
+            titleEl.className = "text-sm md:text-md font-semibold border-b-2 inline-block px-8 pb-0.5 mt-1"; // reset
+            if (sType === 'Theory') {
+                titleEl.classList.add('border-blue-700', 'text-blue-800');
+            } else if (sType === 'Workshop') {
+                titleEl.classList.add('border-orange-600', 'text-orange-700');
+            } else {
+                titleEl.classList.add('border-black', 'text-black');
+            }
         }
     } else {
         mainTitleEl.classList.remove('hidden');
@@ -1157,6 +1169,33 @@ function renderMonthlyRegister(batchId, filtered, config) {
         `;
 
     if (dates.length === 0) {
+        // Smart Empty State: Check if data exists under OTHER categories
+        if (sessionFilter !== 'All') {
+            const allDates = Object.keys(batchAttendance);
+            const otherCounts = {};
+            allDates.forEach(d => {
+                const type = batchAttendance[d]?.sessionType || 'Unspecified';
+                if (type !== sessionFilter) {
+                    otherCounts[type] = (otherCounts[type] || 0) + 1;
+                }
+            });
+
+            const otherMsg = Object.entries(otherCounts).map(([k, v]) => `${v} ${k}`).join(', ');
+
+            if (otherMsg) {
+                document.getElementById('generatedSheetBody').innerHTML = `
+                    <tr><td colspan="100" class="text-center p-8 text-gray-400 italic border-b border-black">
+                        No <b>${sessionFilter.toUpperCase()}</b> records found.<br>
+                        <span class="text-red-500 text-xs not-italic">
+                            However, found: <b>${otherMsg}</b> records.<br>
+                            (Please update "Session Type" in Daily Attendance if this is a mistake)
+                        </span>
+                    </td></tr>
+                 `;
+                return;
+            }
+        }
+
         document.getElementById('generatedSheetBody').innerHTML = `
                 <tr><td colspan="100" class="text-center p-8 text-gray-400 italic border-b border-black">No attendance records found for this period.</td></tr>
             `;
