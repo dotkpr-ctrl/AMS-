@@ -877,6 +877,10 @@ function renderStudentList() {
                 </select>
             </td>
             <td class="p-2">
+                <button onclick="openStudentDocuments('${s.id}')" 
+                    class="text-blue-600 font-bold text-xs hover:underline mr-2" title="Manage Documents">
+                    📎 Docs (${(s.documents || []).length})
+                </button>
                 <button onclick="deleteStudent('${s.id}')" 
                     class="text-red-600 font-bold text-xs hover:underline">Delete</button>
             </td>
@@ -1949,6 +1953,198 @@ window.deleteAssessment = (key) => {
     calculateDashboardStats(); // Update stats
     showMessage('Success', 'Assessment record deleted successfully.', 'success');
 };
+
+// ==================== DOCUMENT MANAGEMENT ====================
+
+let currentDocumentStudentId = null;
+
+// Open document modal for a student
+window.openStudentDocuments = function (studentId) {
+    const student = students.find(s => s.id === studentId);
+    if (!student) return;
+
+    currentDocumentStudentId = studentId;
+
+    // Initialize documents array if it doesn't exist
+    if (!student.documents) {
+        student.documents = [];
+    }
+
+    // Update modal header
+    document.getElementById('docStudentInfo').textContent = `${student.name} (${student.admissionNo})`;
+
+    // Render document list
+    renderDocumentList(studentId);
+
+    // Show modal
+    document.getElementById('studentDocumentModal').classList.remove('hidden');
+};
+
+// Close document modal
+window.closeStudentDocuments = function () {
+    document.getElementById('studentDocumentModal').classList.add('hidden');
+    currentDocumentStudentId = null;
+    document.getElementById('documentFileInput').value = '';
+};
+
+// Handle document upload
+window.handleDocumentUpload = async function (event) {
+    const file = event.target.files[0];
+    if (!file || !currentDocumentStudentId) return;
+
+    const student = students.find(s => s.id === currentDocumentStudentId);
+    if (!student) return;
+
+    // Validate file size (500KB max)
+    const maxSize = 500 * 1024; // 500KB in bytes
+    if (file.size > maxSize) {
+        showMessage('File Too Large', 'Please select a file smaller than 500KB', 'error');
+        event.target.value = '';
+        return;
+    }
+
+    // Validate file type
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png',
+        'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!allowedTypes.includes(file.type)) {
+        showMessage('Invalid File Type', 'Please upload PDF, JPG, PNG, DOC, or DOCX files', 'error');
+        event.target.value = '';
+        return;
+    }
+
+    try {
+        // Convert file to base64
+        const base64Data = await fileToBase64(file);
+
+        // Create document object
+        const document = {
+            id: crypto.randomUUID(),
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            uploadDate: new Date().toISOString(),
+            data: base64Data
+        };
+
+        // Add to student's documents
+        if (!student.documents) student.documents = [];
+        student.documents.push(document);
+
+        // Save and refresh
+        saveData();
+        renderDocumentList(currentDocumentStudentId);
+
+        // Clear input
+        event.target.value = '';
+
+        showMessage('Success', `${file.name} uploaded successfully`, 'success');
+        window.activityLogger.log('Document Upload', `Uploaded ${file.name} for ${student.name}`, 'info');
+    } catch (error) {
+        console.error('Upload error:', error);
+        showMessage('Upload Failed', 'Failed to upload document', 'error');
+        event.target.value = '';
+    }
+};
+
+// Convert file to base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+// Render document list
+function renderDocumentList(studentId) {
+    const student = students.find(s => s.id === studentId);
+    if (!student) return;
+
+    const container = document.getElementById('documentList');
+    const docs = student.documents || [];
+
+    if (docs.length === 0) {
+        container.innerHTML = '<p class="text-sm text-gray-500 italic text-center py-4">No documents uploaded yet</p>';
+        return;
+    }
+
+    container.innerHTML = docs.map(doc => `
+        <div class="flex items-center justify-between p-3 border rounded-lg bg-white hover:bg-gray-50">
+            <div class="flex items-center gap-3 flex-1">
+                <div class="text-2xl">${getFileIcon(doc.type)}</div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">${doc.name}</p>
+                    <p class="text-xs text-gray-500">${formatFileSize(doc.size)} • ${new Date(doc.uploadDate).toLocaleDateString()}</p>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="downloadDocument('${studentId}', '${doc.id}')" 
+                    class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 font-medium">
+                    Download
+                </button>
+                <button onclick="deleteDocument('${studentId}', '${doc.id}')" 
+                    class="px-3 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200 font-medium">
+                    Delete
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Download document
+window.downloadDocument = function (studentId, documentId) {
+    const student = students.find(s => s.id === studentId);
+    if (!student) return;
+
+    const doc = student.documents?.find(d => d.id === documentId);
+    if (!doc) return;
+
+    // Create download link
+    const link = document.createElement('a');
+    link.href = doc.data;
+    link.download = doc.name;
+    link.click();
+
+    window.activityLogger.log('Document Download', `Downloaded ${doc.name} for ${student.name}`, 'info');
+};
+
+// Delete document
+window.deleteDocument = function (studentId, documentId) {
+    const student = students.find(s => s.id === studentId);
+    if (!student) return;
+
+    const doc = student.documents?.find(d => d.id === documentId);
+    if (!doc) return;
+
+    if (!confirm(`Are you sure you want to delete "${doc.name}"?`)) return;
+
+    // Remove document
+    student.documents = student.documents.filter(d => d.id !== documentId);
+
+    // Save and refresh
+    saveData();
+    renderDocumentList(studentId);
+    renderStudentList(); // Update the document count in the list
+
+    showMessage('Success', 'Document deleted successfully', 'success');
+    window.activityLogger.log('Document Delete', `Deleted ${doc.name} for ${student.name}`, 'info');
+};
+
+// Get file icon based on MIME type
+function getFileIcon(mimeType) {
+    if (mimeType.includes('pdf')) return '📄';
+    if (mimeType.includes('image')) return '🖼️';
+    if (mimeType.includes('word')) return '📝';
+    return '📎';
+}
+
+// Format file size
+function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
 
 // Initialize session on page load
 checkSession();
