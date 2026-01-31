@@ -17,7 +17,8 @@ const LS_KEY_STAFF = 'academic_management_staff_v1';
 const INITIAL_BATCH_ID = 'AME 37';
 
 // Auth State
-let currentUserRole = null;
+let currentUserRole = localStorage.getItem('user_role') || null;
+
 
 // Auth Functions
 window.handleLogin = async (e) => {
