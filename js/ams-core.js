@@ -602,12 +602,25 @@ function renderAttendanceRegister() {
     }
 
     const batchAttendance = attendanceData[batchId] || {};
-    const dates = Object.keys(batchAttendance).sort();
+    let dates = Object.keys(batchAttendance).sort();
+
+    // -- FILTER BY SESSION TAB --
+    const currentTab = window.currentRegisterTab || 'Theory';
+    if (currentTab !== 'All') {
+        dates = dates.filter(d => {
+            const sType = batchAttendance[d]?.sessionType || 'Unspecified';
+            // Treat 'Unspecified' as 'Theory' for backward compatibility if needed, 
+            // OR strictly filter. Given user feedback, let's be strict but helpful.
+            if (sType === 'Unspecified') return currentTab === 'Theory';
+            return sType === currentTab;
+        });
+    }
+
     const batchStudents = students.filter(s => s.batchId === batchId)
         .sort((a, b) => a.admissionNo.localeCompare(b.admissionNo));
 
     if (dates.length === 0) {
-        container.innerHTML = '<p class="text-center py-10 text-gray-500 italic">No attendance records found for this batch.</p>';
+        container.innerHTML = `<p class="text-center py-10 text-gray-500 italic">No <b>${currentTab}</b> records found for this batch.</p>`;
         return;
     }
 
@@ -1146,7 +1159,7 @@ window.switchRegisterTab = (tab) => {
         }
     });
 
-    filterRegister();
+    renderAttendanceRegister(); // Update In-Place View
 };
 
 
