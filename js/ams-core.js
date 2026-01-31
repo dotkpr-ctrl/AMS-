@@ -303,6 +303,66 @@ function calculateDashboardStats() {
 
     const statsContainer = document.getElementById('dashboardStats');
     if (statsContainer) statsContainer.innerHTML = statsHtml;
+
+    // Render dashboard cards based on role
+    renderDashboardCards();
+}
+
+function renderDashboardCards() {
+    const cardsContainer = document.getElementById('dashboardCards');
+    if (!cardsContainer) return;
+
+    const isAdmin = currentUserRole === 'admin';
+
+    let cardsHtml = '';
+
+    if (isAdmin) {
+        // Admin Dashboard: Attendance Register, Student Profiles, Staff Management, Recorded Assessments
+        cardsHtml = `
+            <div onclick="renderView('attendanceRegister')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">📅</div>
+                <h3 class="font-bold group-hover:text-primary">Attendance Register</h3>
+                <p class="text-xs text-gray-400">Monthly reports & printables</p>
+            </div>
+            <div onclick="renderView('studentManagement')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">👥</div>
+                <h3 class="font-bold group-hover:text-primary">Student Profiles</h3>
+                <p class="text-xs text-gray-400">Manage batches & bulk imports</p>
+            </div>
+            <div onclick="renderView('staffManagement')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">👔</div>
+                <h3 class="font-bold group-hover:text-primary">Staff Management</h3>
+                <p class="text-xs text-gray-400">Manage staff & credentials</p>
+            </div>
+            <div onclick="renderView('assessmentHistory')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">📂</div>
+                <h3 class="font-bold group-hover:text-primary">Recorded Assessments</h3>
+                <p class="text-xs text-gray-400">View & manage saved records</p>
+            </div>
+        `;
+    } else {
+        // Staff Dashboard: Mark Attendance, Assessments
+        cardsHtml = `
+            <div onclick="renderView('attendanceMarking')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">📋</div>
+                <h3 class="font-bold group-hover:text-primary">Mark Attendance</h3>
+                <p class="text-xs text-gray-400">Record daily status & share summary</p>
+            </div>
+            <div onclick="renderView('assessmentSetup')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">✒️</div>
+                <h3 class="font-bold group-hover:text-primary">Assessments</h3>
+                <p class="text-xs text-gray-400">Log Viva & Practical entries</p>
+            </div>
+        `;
+    }
+
+    cardsContainer.innerHTML = cardsHtml;
 }
 
 function updateBatchDropdowns() {
