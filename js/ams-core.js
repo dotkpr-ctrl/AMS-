@@ -405,6 +405,12 @@ function renderAttendanceList() {
 
     const dailyData = attendanceData[batchId]?.[date] || {};
 
+    // Load Session Type
+    const sessionTypeSelect = document.getElementById('attendanceSessionType');
+    if (sessionTypeSelect) {
+        sessionTypeSelect.value = dailyData.sessionType || 'Theory';
+    }
+
     listBody.innerHTML = filtered.map(s => {
         const isPresent = dailyData[s.id] !== 'absent';
         return `
@@ -428,9 +434,23 @@ window.updateAttendanceStatus = (batchId, date, studentId, isPresent) => {
     saveData();
 };
 
+window.updateSessionType = () => {
+    const batchId = document.getElementById('attendanceBatchSelector').value;
+    const date = document.getElementById('attendanceDate').value;
+    const type = document.getElementById('attendanceSessionType').value;
+
+    if (!batchId || !date) return;
+
+    if (!attendanceData[batchId]) attendanceData[batchId] = {};
+    if (!attendanceData[batchId][date]) attendanceData[batchId][date] = {};
+
+    attendanceData[batchId][date].sessionType = type;
+    saveData();
+};
+
 window.saveAttendanceManual = () => {
     saveData();
-    showMessage('Success', 'Attendance saved to register successfully!', 'success');
+    showMessage('Success', 'Attendance & Session details saved!', 'success');
 };
 
 window.shareAttendanceWhatsApp = () => {

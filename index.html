@@ -60,7 +60,7 @@
 
         <nav class="no-print border-b pb-4 mb-6">
             <div class="flex justify-between items-center">
-                <h1 class="text-xl font-bold text-gray-800">AMS <span class="text-primary text-sm">v4.7.9</span></h1>
+                <h1 class="text-xl font-bold text-gray-800">AMS <span class="text-primary text-sm">v4.8.0</span></h1>
                 <button onclick="toggleMenu()"
                     class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none transition-colors">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -338,13 +338,21 @@
             <div id="attendanceMarking" class="app-view hidden">
                 <h2 class="text-2xl font-bold mb-6">Daily Attendance</h2>
                 <div class="bg-white p-6 border rounded-2xl shadow-sm mb-6">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                         <div><label class="text-[10px] font-bold text-gray-500 uppercase">Select Batch</label><select
                                 id="attendanceBatchSelector" class="w-full p-2.5 border rounded-lg"></select></div>
                         <div><label class="text-[10px] font-bold text-gray-500 uppercase">Sub-Batch</label><select
                                 id="attendanceSubBatchSelector" class="w-full p-2.5 border rounded-lg"></select></div>
                         <div><label class="text-[10px] font-bold text-gray-500 uppercase">Select Date</label><input
                                 type="date" id="attendanceDate" class="w-full p-2.5 border rounded-lg"></div>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-500 uppercase">Session Type</label>
+                            <select id="attendanceSessionType" class="w-full p-2.5 border rounded-lg"
+                                onchange="updateSessionType()">
+                                <option value="Theory">Theory</option>
+                                <option value="Workshop">Workshop</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="max-h-[400px] overflow-y-auto border rounded-lg">
                         <table class="w-full">
@@ -593,15 +601,15 @@
 
     <div id="statusFooter"
         class="no-print fixed bottom-0 left-0 right-0 bg-gray-800 text-white text-center py-1.5 text-[10px] uppercase tracking-widest font-bold border-t border-gray-700">
-        Local Database Secured • v4.7.9 Stable</div>
+        Local Database Secured • v4.8.0 Stable</div>
 
     <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=4.7.9"></script>
+    <script src="js/github-sync.js?v=4.8.0"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=4.7.9"></script>
+    <script src="js/cloud-sync-integration.js?v=4.8.0"></script>
     <!-- Main JavaScript Module -->
-    <script src="js/ams-core.js?v=4.7.9"></script>
-    <script src="js/app.js?v=4.7.9"></script>
+    <script src="js/ams-core.js?v=4.8.0"></script>
+    <script src="js/app.js?v=4.8.0"></script>
 </body>
 
 </html>
