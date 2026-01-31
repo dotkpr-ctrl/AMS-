@@ -391,9 +391,35 @@ function setupAttendanceView() {
 
 function renderAttendanceList() {
     const batchId = document.getElementById('attendanceBatchSelector').value;
-    const subBatch = document.getElementById('attendanceSubBatchSelector').value;
+    let subBatch = document.getElementById('attendanceSubBatchSelector').value;
     const date = document.getElementById('attendanceDate').value;
     const listBody = document.getElementById('attendanceListBody');
+
+    // -- ENFORCE SUB-BATCH UI LOGIC (Always Run) --
+    // We do this before checking if batchId/date exists so the UI is consistent
+    const sessionTypeSelect = document.getElementById('attendanceSessionType');
+    const subBatchSelect = document.getElementById('attendanceSubBatchSelector');
+    let currentSessionType = 'Theory';
+
+    if (sessionTypeSelect && subBatchSelect) {
+        // If we have data context, try to use it. Otherwise rely on DOM value.
+        // If batch/date invalid, we can't look up saved session type, so fallback to current UI value.
+        if (batchId && date && attendanceData[batchId]?.[date]?.sessionType) {
+            currentSessionType = attendanceData[batchId][date].sessionType;
+            sessionTypeSelect.value = currentSessionType;
+        } else {
+            currentSessionType = sessionTypeSelect.value;
+        }
+
+        if (currentSessionType === 'Theory') {
+            subBatchSelect.value = 'All';
+            subBatchSelect.disabled = true;
+            subBatch = 'All'; // Ensure logic uses 'All'
+        } else {
+            subBatchSelect.disabled = false;
+        }
+    }
+    // ---------------------------------------------
 
     if (!batchId || !date) {
         listBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Select batch and date</td></tr>';
@@ -404,37 +430,6 @@ function renderAttendanceList() {
     if (subBatch !== 'All') filtered = filtered.filter(s => s.subBatch === subBatch);
 
     const dailyData = attendanceData[batchId]?.[date] || {};
-
-    // Load Session Type
-    const sessionTypeSelect = document.getElementById('attendanceSessionType');
-    let currentSessionType = 'Theory';
-
-    if (sessionTypeSelect) {
-        currentSessionType = dailyData.sessionType || 'Theory';
-        sessionTypeSelect.value = currentSessionType;
-
-        // Enforce Sub-Batch Logic
-        const subBatchSelect = document.getElementById('attendanceSubBatchSelector');
-        if (subBatchSelect) {
-            if (currentSessionType === 'Theory') {
-                subBatchSelect.value = 'All';
-                subBatchSelect.disabled = true;
-                if (subBatch !== 'All') {
-                    // Force refresh if we were on a specific batch but switched to a date that is Theory
-                    // This prevents showing a filtered list when it should be full batch
-                    // We need to be careful not to infinite loop here, so we just filter by 'All' effectively below
-                    // But visually update the selector
-                }
-            } else {
-                subBatchSelect.disabled = false;
-            }
-        }
-    }
-
-    // Re-filter if Theory forced 'All' but selector was different (though UI disabled updates, data might need sync)
-    if (currentSessionType === 'Theory') {
-        filtered = students.filter(s => s.batchId === batchId); // Reset to full batch
-    }
 
     listBody.innerHTML = filtered.map(s => {
         const isPresent = dailyData[s.id] !== 'absent';
