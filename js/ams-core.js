@@ -118,6 +118,20 @@ function startSession(role) {
         }
     }
 
+    // Update Header Welcome Message
+    const headerMsg = document.getElementById('headerWelcomeMsg');
+    const headerName = document.getElementById('headerUserName');
+    const headerRole = document.getElementById('headerUserRole');
+
+    if (headerMsg) {
+        const userName = localStorage.getItem('logged_in_user') || 'User';
+        const roleText = role === 'admin' ? '(Site Administrator)' : '(Staff Member)';
+
+        if (headerName) headerName.textContent = userName;
+        if (headerRole) headerRole.textContent = roleText;
+        headerMsg.classList.remove('hidden');
+    }
+
     applyPermissions(role);
     refreshDataAndUI();
 }
