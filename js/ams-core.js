@@ -1082,8 +1082,8 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
         return `
             <tr class="h-8 border-b border-black hover:bg-gray-50 transition-colors" data-sid="${s.id}">
                 <td class="text-center border-r border-black font-medium text-xs">${i + 1}</td>
-                <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase">${s.name}</td>
-                <td class="text-center font-mono border-r border-black text-[10px] font-bold text-blue-800 tracking-tighter">${s.admissionNo}</td>
+                <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase leading-tight">${s.name}</td>
+                <td class="text-center font-mono border-r border-black text-[9px] font-bold text-blue-800 tracking-tighter whitespace-nowrap overflow-hidden">${s.admissionNo}</td>
                 ${cells}
                 <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
                 <td class="text-center font-bold rank-cell text-sm">${s.rank}</td>
