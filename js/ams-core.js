@@ -483,8 +483,21 @@ window.updateSessionType = () => {
 };
 
 window.saveAttendanceManual = () => {
+    // Explicitly Save Session Type
+    const batchId = document.getElementById('attendanceBatchSelector').value;
+    const date = document.getElementById('attendanceDate').value;
+    const sessionType = document.getElementById('attendanceSessionType').value;
+
+    if (batchId && date) {
+        if (!attendanceData[batchId]) attendanceData[batchId] = {};
+        if (!attendanceData[batchId][date]) attendanceData[batchId][date] = {};
+
+        // Force update session type
+        attendanceData[batchId][date].sessionType = sessionType;
+    }
+
     saveData();
-    showMessage('Success', 'Attendance & Session details saved!', 'success');
+    showMessage('Success', 'Attendance saved successfully!', 'success');
 };
 
 window.shareAttendanceWhatsApp = () => {
@@ -995,6 +1008,12 @@ function generateSheet(isReload = false, config) {
     const mainTitleEl = document.getElementById('sheetMainTitle');
     if (config.type === 'attendance-register' || config.type === 'transcript') {
         mainTitleEl.classList.add('hidden');
+
+        // Append Session Type to the Sheet Title for clarity
+        if (config.type === 'attendance-register') {
+            const sType = config.sessionFilter || 'Theory';
+            document.getElementById('sheetTitle').textContent = `MONTHLY ATTENDANCE REGISTER - ${sType.toUpperCase()}`;
+        }
     } else {
         mainTitleEl.classList.remove('hidden');
         mainTitleEl.textContent = 'WORKSHOP VIVA';
