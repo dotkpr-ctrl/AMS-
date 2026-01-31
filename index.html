@@ -36,8 +36,27 @@
 <body class="bg-gray-50 text-gray-900 pb-12">
     <div id="app" class="max-w-4xl mx-auto p-4 md:p-6 bg-white shadow-lg min-h-screen md:mt-6 rounded-xl relative">
 
+        <!-- Login Modal -->
+        <div id="loginModal" class="no-print fixed inset-0 bg-gray-900 z-[300] flex justify-center items-center">
+            <div class="bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center">
+                <h2 class="text-3xl font-bold text-primary mb-2">AMS v4.5</h2>
+                <p class="text-gray-500 mb-6 text-sm">Please sign in to continue</p>
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <input type="text" id="loginUsername" placeholder="Username" required
+                        class="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-primary outline-none">
+                    <input type="password" id="loginPassword" placeholder="Password" required
+                        class="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-primary outline-none">
+                    <button type="submit"
+                        class="w-full bg-primary text-white font-bold py-3 rounded-xl shadow-lg hover:scale-[1.02] transition-transform">
+                        Sign In
+                    </button>
+                    <p id="loginError" class="text-red-500 text-xs font-bold hidden">Invalid credentials</p>
+                </form>
+            </div>
+        </div>
+
         <nav class="no-print flex justify-between items-center border-b pb-4 mb-6">
-            <h1 class="text-xl font-bold text-gray-800">AMS <span class="text-primary text-sm">v4.3</span></h1>
+            <h1 class="text-xl font-bold text-gray-800">AMS <span class="text-primary text-sm">v4.5</span></h1>
             <button onclick="toggleMenu()"
                 class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none transition-colors">
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,25 +78,7 @@
                         </svg>
                     </button>
                 </div>
-                <!-- Login Modal -->
-                <div id="loginModal"
-                    class="no-print fixed inset-0 bg-gray-900 z-[300] flex justify-center items-center">
-                    <div class="bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-sm text-center">
-                        <h2 class="text-3xl font-bold text-primary mb-2">AMS v4.3</h2>
-                        <p class="text-gray-500 mb-6 text-sm">Please sign in to continue</p>
-                        <form onsubmit="handleLogin(event)" class="space-y-4">
-                            <input type="text" id="loginUsername" placeholder="Username" required
-                                class="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-primary outline-none">
-                            <input type="password" id="loginPassword" placeholder="Password" required
-                                class="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-primary outline-none">
-                            <button type="submit"
-                                class="w-full bg-primary text-white font-bold py-3 rounded-xl shadow-lg hover:scale-[1.02] transition-transform">
-                                Sign In
-                            </button>
-                            <p id="loginError" class="text-red-500 text-xs font-bold hidden">Invalid credentials</p>
-                        </form>
-                    </div>
-                </div>
+                <!-- Login Modal moved to top -->
 
                 <div class="space-y-2">
                     <button id="nav-dashboard" onclick="renderView('dashboard')"
