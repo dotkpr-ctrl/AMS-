@@ -624,9 +624,23 @@ function renderAttendanceRegister() {
         return;
     }
 
+    const isAdmin = localStorage.getItem('user_role') === 'admin';
+
     const dateHeaders = dates.map(d => {
         const [y, m, day] = d.split('-');
-        return `<th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px]">${day}/${m}</th>`;
+        let headerContent = `${day}/${m}`;
+
+        if (isAdmin) {
+            headerContent += `
+                <button onclick="deleteBatchAttendanceDate('${batchId}', '${d}')" 
+                    title="Delete this column"
+                    class="block mx-auto mt-1 text-red-400 hover:text-red-700 font-bold text-[10px] leading-none">
+                    ×
+                </button>
+            `;
+        }
+
+        return `<th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px] align-top">${headerContent}</th>`;
     }).join('');
 
     const tableRows = batchStudents.map((s, i) => {
@@ -655,6 +669,18 @@ function renderAttendanceRegister() {
             </tr>
         `;
     }).join('');
+
+    // -- DELETE FUNCTION --
+    window.deleteBatchAttendanceDate = (batchId, date) => {
+        if (!confirm(`Are you sure you want to delete the attendance column for ${date}?`)) return;
+
+        if (attendanceData[batchId] && attendanceData[batchId][date]) {
+            delete attendanceData[batchId][date];
+            saveData();
+            renderAttendanceRegister(); // Refresh
+            showMessage('Success', 'Column deleted successfully.', 'success');
+        }
+    };
 
     const tableHtml = `
         <div class="overflow-x-auto border rounded-t-lg shadow-sm bg-white">
