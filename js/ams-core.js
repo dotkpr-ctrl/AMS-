@@ -946,9 +946,35 @@ function generateSheet(isReload = false, config) {
 
     const dateVal = config.examDate || meta.date || new Date();
     const dateObj = new Date(dateVal);
-    document.getElementById('sheetDate').textContent = !isNaN(dateObj)
-        ? dateObj.toLocaleDateString('en-GB')
-        : dateVal;
+
+    // Dynamic Date Header Logic
+    const dateEl = document.getElementById('sheetDate');
+    const noteEl = dateEl.parentElement.querySelector('.text-right'); // "DATE:" label container
+
+    if (config.type === 'attendance-register') {
+        // Change label to PERIOD
+        if (noteEl && noteEl.firstChild) noteEl.firstChild.nodeValue = 'PERIOD: ';
+
+        // Determine Period String
+        let periodStr = '';
+        const now = new Date();
+
+        if (config.filterType === 'month' || !config.filterType) {
+            const m = now.toLocaleString('default', { month: 'long' });
+            periodStr = `${m} ${now.getFullYear()}`;
+        } else if (config.filterType === 'week') {
+            periodStr = 'Current Week';
+        } else if (config.filterType === 'custom') {
+            const d1 = config.startDate ? new Date(config.startDate).toLocaleDateString('en-GB') : '?';
+            const d2 = config.endDate ? new Date(config.endDate).toLocaleDateString('en-GB') : '?';
+            periodStr = `${d1} - ${d2}`;
+        }
+        dateEl.textContent = periodStr;
+    } else {
+        // Reset label to DATE
+        if (noteEl && noteEl.firstChild) noteEl.firstChild.nodeValue = 'DATE: ';
+        dateEl.textContent = !isNaN(dateObj) ? dateObj.toLocaleDateString('en-GB') : dateVal;
+    }
 
     document.getElementById('displayMaxMark').textContent = config.maxMark;
 
@@ -1083,24 +1109,26 @@ function renderMonthlyRegister(batchId, filtered, config) {
     });
 
     const dateHeaders = dates.map(d => `
-            <th class="w-5 text-[9px] rotate-[-90deg] h-20 p-0 border-r border-gray-300 bg-gray-50 align-bottom pb-2">
-                ${new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}
+            <th class="w-6 text-[10px] p-1 border-r border-black bg-gray-50 align-bottom font-medium" style="height: 100px; vertical-align: bottom;">
+                <div style="writing-mode: vertical-rl; transform: rotate(180deg); margin: 0 auto; white-space: nowrap;">
+                    ${new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}
+                </div>
             </th>
         `).join('');
 
     document.getElementById('generatedSheetHeader').innerHTML = `
-            <tr class="bg-gray-100 border-b border-gray-400">
-                <th class="w-8 text-center border-r border-gray-300 p-2">SL.</th>
-                <th class="text-left px-2 border-r border-gray-300">NAME</th>
+            <tr class="bg-gray-100 border-b-2 border-black" style="border-top: 2px solid black;">
+                <th class="w-10 text-center border-r border-black p-2 font-bold text-xs uppercase">SL.</th>
+                <th class="text-left px-2 border-r border-black font-bold text-xs uppercase" style="min-width: 200px;">NAME</th>
                 ${dateHeaders}
-                <th class="w-10 text-center border-r border-gray-300 bg-red-50 text-red-700">ABS</th>
-                <th class="w-10 text-center bg-blue-50 text-blue-700">%</th>
+                <th class="w-10 text-center border-r border-black bg-gray-50 text-red-700 font-bold text-xs border-l-2 border-l-black">ABS</th>
+                <th class="w-10 text-center bg-gray-50 text-blue-700 font-bold text-xs">%</th>
             </tr>
         `;
 
     if (dates.length === 0) {
         document.getElementById('generatedSheetBody').innerHTML = `
-                <tr><td colspan="100" class="text-center p-8 text-gray-400 italic">No attendance records found for this period.</td></tr>
+                <tr><td colspan="100" class="text-center p-8 text-gray-400 italic border-b border-black">No attendance records found for this period.</td></tr>
             `;
         return;
     }
@@ -1112,11 +1140,11 @@ function renderMonthlyRegister(batchId, filtered, config) {
             if (isAbs) absCount++;
             const status = batchAttendance[d] ? (isAbs ? 'A' : 'P') : '-';
 
-            let cellClass = 'text-green-600'; // Default Present
-            if (isAbs) cellClass = 'bg-red-100 text-red-700 font-bold';
-            if (status === '-') cellClass = 'text-gray-300';
+            let cellStyle = 'font-weight: bold; color: green;';
+            if (isAbs) cellStyle = 'font-weight: bold; color: red; background-color: #fee2e2;'; // light red bg
+            if (status === '-') cellStyle = 'color: #d1d5db;'; // gray-300
 
-            return `<td class="p-0 text-[10px] text-center border-r border-gray-200 h-8 ${cellClass}">${status}</td>`;
+            return `<td class="p-0 text-[10px] text-center border-r border-black h-8" style="${cellStyle}">${status}</td>`;
         }).join('');
 
         const total = dates.length;
@@ -1125,12 +1153,12 @@ function renderMonthlyRegister(batchId, filtered, config) {
             : '0';
 
         return `
-                <tr class="h-8 border-b border-gray-200 hover:bg-gray-50 transition-colors">
-                    <td class="text-center text-gray-500 text-xs border-r border-gray-200">${i + 1}</td>
-                    <td class="text-left font-medium p-name text-xs px-2 border-r border-gray-200">${s.name}</td>
+                <tr class="h-8 border-b border-black hover:bg-gray-50 transition-colors">
+                    <td class="text-center text-black font-medium text-xs border-r border-black">${i + 1}</td>
+                    <td class="text-left font-bold p-name text-xs px-2 border-r border-black text-black uppercase">${s.name}</td>
                     ${cells}
-                    <td class="text-center font-bold text-xs bg-red-50 text-red-800 border-r border-gray-200">${absCount}</td>
-                    <td class="text-center font-bold text-xs bg-blue-50 text-blue-800">${percent}%</td>
+                    <td class="text-center font-bold text-xs text-red-700 border-r border-black border-l-2 border-l-black">${absCount}</td>
+                    <td class="text-center font-bold text-xs text-blue-700">${percent}%</td>
                 </tr>
             `;
     }).join('');
