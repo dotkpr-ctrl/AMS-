@@ -2144,49 +2144,153 @@ window.printAssessmentExam = function (key) {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Assessment Exam - ${examData.batchId}</title>
+            <title>Assessment Examination - ${examData.batchId}</title>
             <style>
-                @page { size: A4; margin: 20mm; }
-                body { font-family: Arial, sans-serif; padding: 20px; }
-                h1 { text-align: center; margin-bottom: 10px; }
-                .header { text-align: center; margin-bottom: 20px; }
-                table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                th, td { border: 1px solid #000; padding: 8px; text-align: left; }
-                th { background-color: #f0f0f0; font-weight: bold; }
-                .center { text-align: center; }
-                .signature { height: 30px; border-bottom: 1px dotted #666; }
-            </style>
+                @page { size: A4; margin: 15mm; }
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { 
+                    font-family: Arial, sans-serif; 
+                    padding: 20px;
+                    line-height: 1.4;
+                }
+                .header-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 15px;
+                    gap: 20px;
+                }
+                .logo {
+                    width: 80px;
+                    height: 80px;
+                }
+                .header-text {
+                    text-align: center;
+                    flex: 1;
+                }
+                .header-text h1 {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 2px;
+                }
+                .header-text .subtitle {
+                    font-size: 10px;
+                    font-style: italic;
+                }
+                .program-title {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 14px;
+                    margin: 10px 0;
+                }
+                .exam-title {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 13px;
+                    margin-bottom: 8px;
+                }
+                .info-row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 8px;
+                    font-size: 12px;
+                }
+                .info-row div {
+                    flex: 1;
+                }
+                .batch-info {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 13px;
+                    margin-bottom: 15px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 10px;
+                    font-size: 11px;
+                }
+                th, td {
+                    border: 1px solid #000;
+                    padding: 6px 8px;
+                    text-align: left;
+                }
+                th {
+                    background-color: #fff;
+                    font-weight: bold;
+                    text-align: center;
+                    font-size: 11px;
+                }
+                td.center {
+                    text-align: center;
+                }
+                .slno-col { width: 50px; }
+                .name-col { width: 200px; }
+                .admno-col { width: 150px; }
+                .mark-col { width: 80px; text-align: center; }
+                .signatures {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 40px;
+                    padding: 0 20px;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+                .signatures div {
+                    text-align: center;
+                }
+           </style>
         </head>
         <body>
-            <h1>INSTITUTE OF HEAVY EQUIPMENT & ITC</h1>
-            <div class="header">
-                <strong>Assessment Examination</strong><br>
-                Batch: ${examData.batchId} | Date: ${new Date(examData.date).toLocaleDateString()}
+            <div class="header-container">
+                <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <text x="10" y="50" font-family="Arial Black" font-size="45" fill="#CC0000" font-weight="bold">A</text>
+                    <circle cx="50" cy="20" r="12" fill="none" stroke="#000080" stroke-width="2"/>
+                    <text x="45" y="26" font-family="Arial" font-size="10" fill="#000080" font-weight="bold">2</text>
+                    <text x="60" y="50" font-family="Arial Black" font-size="45" fill="#CC0000" font-weight="bold">Z</text>
+                </svg>
+                <div class="header-text">
+                    <h1>INSTITUTE OF HEAVY EQUIPMENTS & ITC</h1>
+                    <div class="subtitle">(Approved Institute of STED Council of India)</div>
+                </div>
             </div>
+            
+            <div class="program-title">ADVANCED DIPLOMA IN AUTOMOBILE ENGINEERING</div>
+            <div class="exam-title">ASSESSMENT EXAMINATION ${new Date(examData.date).getFullYear()}</div>
+            
+            <div class="info-row">
+                <div><strong>TOPIC:</strong></div>
+                <div style="text-align: right;"><strong>DATE:</strong> ${new Date(examData.date).toLocaleDateString('en-GB')}</div>
+            </div>
+            
+            <div class="batch-info">BATCH: ${examData.batchId}</div>
+            
             <table>
                 <thead>
                     <tr>
-                        <th class="center">SI No</th>
-                        <th>Name</th>
-                        <th>Admission No</th>
-                        <th class="center">Total</th>
-                        <th class="center">Rank</th>
-                        <th class="center">Signature</th>
+                        <th class="slno-col">SLNO</th>
+                        <th class="name-col">NAME</th>
+                        <th class="admno-col">ADMISSION NUMBER</th>
+                        <th class="mark-col">MARK</th>
                     </tr>
                 </thead>
                 <tbody>
                     ${examData.students.map((s, idx) => `
                         <tr>
-                            <td class="center">${idx + 1}</td>
-                            <td>${s.name}</td>
-                            <td>${s.admissionNo}</td>
-                            <td class="center">${s.total}</td>
-                            <td class="center">${s.rank > 0 ? s.rank : '-'}</td>
-                            <td><div class="signature"></div></td>
+                            <td class="slno-col center">${idx + 1}</td>
+                            <td class="name-col">${s.name.toUpperCase()}</td>
+                            <td class="admno-col center">${s.admissionNo}</td>
+                            <td class="mark-col center">${s.total || ''}</td>
                         </tr>
                     `).join('')}
                 </tbody>
             </table>
+            
+            <div class="signatures">
+                <div>INVIGILATOR</div>
+                <div>AME (HOD)</div>
+                <div>PRINCIPAL</div>
+            </div>
         </body>
         </html>
     `;
