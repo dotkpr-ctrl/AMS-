@@ -651,14 +651,14 @@ function renderAttendanceRegister() {
             const isAbs = val === 'absent';
             if (isAbs) absent++; else present++;
             const colorClass = isAbs ? 'text-red-600 bg-red-50 font-bold' : 'text-green-600';
-            return `< td class="border border-gray-200 text-center text-xs p-1 ${colorClass}" > ${isAbs ? 'A' : 'P'}</td > `;
+            return `<td class="border border-gray-200 text-center text-xs p-1 ${colorClass}">${isAbs ? 'A' : 'P'}</td>`;
         }).join('');
 
         const totalDays = dates.length;
         const percent = totalDays > 0 ? Math.round((present / totalDays) * 100) : 0;
 
         return `
-                < tr class="hover:bg-gray-50 transition-colors" >
+            <tr class="hover:bg-gray-50 transition-colors">
                 <td class="border border-gray-200 text-center py-1">${i + 1}</td>
                 <td class="border border-gray-200 px-2 py-1 font-medium">${s.name}</td>
                 <td class="border border-gray-200 text-center py-1 font-mono text-xs text-gray-500">${s.admissionNo}</td>
@@ -666,7 +666,7 @@ function renderAttendanceRegister() {
                 <td class="border border-gray-200 text-center font-bold text-green-700 bg-green-50">${present}</td>
                 <td class="border border-gray-200 text-center font-bold text-red-700 bg-red-50">${absent}</td>
                 <td class="border border-gray-200 text-center font-bold">${percent}%</td>
-            </tr >
+            </tr>
         `;
     }).join('');
 
@@ -683,7 +683,7 @@ function renderAttendanceRegister() {
     };
 
     const tableHtml = `
-        < div class= "overflow-x-auto border rounded-t-lg shadow-sm bg-white" >
+        <div class="overflow-x-auto border rounded-t-lg shadow-sm bg-white">
         <table class="w-full border-collapse text-sm">
             <thead class="bg-blue-50 text-blue-800 sticky top-0 z-10">
                 <tr>
@@ -698,7 +698,7 @@ function renderAttendanceRegister() {
             </thead>
             <tbody>${tableRows}</tbody>
         </table>
-        </div >
+        </div>
         <div class="mt-4 flex justify-end">
             <button onclick="handleGenerateRequest('print', 'attendance-register')"
                 class="bg-primary text-white px-6 py-2 rounded-lg font-bold shadow hover:bg-primary-dark transition-all flex items-center gap-2">
