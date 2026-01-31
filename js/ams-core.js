@@ -853,7 +853,7 @@ window.handleGenerateRequest = (mode, forceType = null) => {
                 studentId: document.getElementById('printStudentSelector')?.value,
                 type: forceType || document.getElementById('printTypeSelector').value,
                 filterType: document.getElementById('registerFilterType')?.value || 'month',
-                sessionFilter: document.getElementById('registerSessionType')?.value || 'All',
+                sessionFilter: document.getElementById('registerSessionType')?.value || 'Theory',
                 startDate: document.getElementById('registerStartDate')?.value,
                 endDate: document.getElementById('registerEndDate')?.value
             };
@@ -1006,13 +1006,12 @@ function renderMonthlyRegister(batchId, filtered, config) {
     }
 
     // 2. Filter by Session Type
-    const sessionFilter = config?.sessionFilter || 'All';
-    if (sessionFilter !== 'All') {
-        dates = dates.filter(d => {
-            const sessionType = batchAttendance[d]?.sessionType || 'Theory'; // Default to Theory if undefined
-            return sessionType === sessionFilter;
-        });
-    }
+    const sessionFilter = config?.sessionFilter || 'Theory';
+
+    dates = dates.filter(d => {
+        const sessionType = batchAttendance[d]?.sessionType || 'Theory'; // Default to Theory if undefined
+        return sessionType === sessionFilter;
+    });
 
     const dateHeaders = dates.map(d => `
             <th class="w-5 text-[9px] rotate-[-90deg] h-20 p-0 border-r border-gray-300 bg-gray-50 align-bottom pb-2">
