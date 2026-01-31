@@ -1061,29 +1061,29 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
         } else {
             // Standard Entry View
             cells = s.mData.map((m, idx) => `
-                <td class="border-r border-black p-0 h-10 text-center align-middle">
+                <td class="border-r border-black p-0 h-8 text-center align-middle">
                     <input type="number" value="${m}" ${isReadOnly ? 'disabled' : ''}
-                        class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold no-print ${isReadOnly ? 'text-gray-500' : ''}"
+                        class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-base font-bold no-print ${isReadOnly ? 'text-gray-500' : ''}"
                         onkeydown="handleEnterKey(event)"
                         oninput="liveUpdateMark('${s.id}', ${idx}, this.value, '${sheetKey}', ${maxMark}, this)">
-                    <span class="print-only">${m}</span>
+                    <span class="print-only text-sm">${m}</span>
                 </td>
             `).join('');
         }
 
         const deleteBtn = isAdmin ? `
-            <td class="text-center border-l border-black no-print">
-                <button onclick="deleteStudentMark('${s.id}', '${sheetKey}')" class="text-red-500 hover:text-red-700 font-bold px-2">
+            <td class="text-center border-l border-black no-print p-0">
+                <button onclick="deleteStudentMark('${s.id}', '${sheetKey}')" class="text-red-500 hover:text-red-700 font-bold px-1 text-xs">
                     🗑️
                 </button>
             </td>
         ` : '';
 
         return `
-            <tr class="h-10 border-b border-black hover:bg-gray-50 transition-colors" data-sid="${s.id}">
-                <td class="text-center border-r border-black font-medium">${i + 1}</td>
-                <td class="text-left pl-2 font-bold p-name border-r border-black text-sm uppercase">${s.name}</td>
-                <td class="text-center font-mono border-r border-black text-[11px] font-bold text-blue-800">${s.admissionNo}</td>
+            <tr class="h-8 border-b border-black hover:bg-gray-50 transition-colors" data-sid="${s.id}">
+                <td class="text-center border-r border-black font-medium text-xs">${i + 1}</td>
+                <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase">${s.name}</td>
+                <td class="text-center font-mono border-r border-black text-[10px] font-bold text-blue-800 tracking-tighter">${s.admissionNo}</td>
                 ${cells}
                 <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
                 <td class="text-center font-bold rank-cell text-sm">${s.rank}</td>
