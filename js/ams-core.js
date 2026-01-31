@@ -26,15 +26,29 @@ window.handleLogin = (e) => {
     const p = document.getElementById('loginPassword').value.trim();
     const err = document.getElementById('loginError');
 
-    // Hardcoded Credentials
+    // Check hardcoded admin credentials
     if ((u === 'incharge' || u === 'admin') && (p === 'admin123' || p === 'incharge')) {
         localStorage.setItem('user_role', 'admin');
+        localStorage.setItem('logged_in_user', u);
         startSession('admin');
-    } else if (u === 'staff' && p === 'staff123') {
+    }
+    // Check hardcoded generic staff credential
+    else if (u === 'staff' && p === 'staff123') {
         localStorage.setItem('user_role', 'staff');
+        localStorage.setItem('logged_in_user', 'staff');
         startSession('staff');
-    } else {
-        err.classList.remove('hidden');
+    }
+    // Check staff member credentials
+    else {
+        const staffMember = staffMembers.find(s => s.username === u && s.password === p);
+        if (staffMember) {
+            localStorage.setItem('user_role', 'staff');
+            localStorage.setItem('logged_in_user', staffMember.name);
+            localStorage.setItem('logged_in_staff_id', staffMember.id);
+            startSession('staff');
+        } else {
+            err.classList.remove('hidden');
+        }
     }
 };
 
@@ -593,16 +607,33 @@ window.handleBulkInput = (e) => {
 
 // Staff Management Functions
 window.addStaff = (name, phone, position, colorCode) => {
-    staffMembers.push({
+    // Generate username from name (first name + last name initial, lowercase)
+    const nameParts = name.trim().toLowerCase().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastInitial = nameParts.length > 1 ? nameParts[nameParts.length - 1].charAt(0) : '';
+    const username = firstName + lastInitial;
+
+    // Password is last 4 digits of phone number
+    const password = phone.trim().slice(-4);
+
+    const newStaff = {
         id: crypto.randomUUID(),
         name: name.trim(),
         phone: phone.trim(),
         position: position.trim(),
-        colorCode: colorCode
-    });
+        colorCode: colorCode,
+        username: username,
+        password: password
+    };
+
+    staffMembers.push(newStaff);
     saveData();
     renderStaffList();
-    showMessage('Success', 'Staff member added successfully!', 'success');
+
+    // Show credentials in success message
+    showMessage('Staff Added!',
+        `${name} added successfully!\nUsername: ${username}\nPassword: ${password}`,
+        'success');
 };
 
 window.deleteStaff = (staffId) => {
@@ -663,6 +694,19 @@ function renderStaffList() {
                         <span class="${colorBadges[staff.colorCode]} px-3 py-1 rounded-full text-xs font-bold">
                             ${staff.position}
                         </span>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-2 mb-3">
+                        <p class="text-[10px] font-bold text-gray-500 uppercase mb-1">Login Credentials</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div>
+                                <span class="text-gray-500">Username:</span>
+                                <span class="font-mono font-bold text-blue-700 ml-1">${staff.username || 'N/A'}</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">Password:</span>
+                                <span class="font-mono font-bold text-blue-700 ml-1">${staff.password || 'N/A'}</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="flex gap-2 mt-3 pt-3 border-t">
                         <button onclick="deleteStaff('${staff.id}')" 
