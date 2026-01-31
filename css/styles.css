@@ -1,112 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* Critical Visibility Fix */
+.hidden {
+    display: none !important;
+}
 
-body {
-    font-family: 'Inter', sans-serif;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
 
 /* Print Styles */
-.print-only {
-    display: none;
-}
-
 @media print {
     .no-print {
         display: none !important;
     }
 
-    .print-only {
-        display: inline !important;
+    body {
+        background: white;
     }
 
-    input[type="number"] {
-        -moz-appearance: textfield;
-    }
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    body * {
-        visibility: hidden;
-    }
-
-    #printable-content,
-    #printable-content * {
-        visibility: visible;
-    }
-
-    #printable-content {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
+    #app {
+        box-shadow: none;
         padding: 0;
-        border: none;
-    }
-
-    table {
-        width: 100% !important;
-        border-collapse: collapse !important;
-    }
-
-    th,
-    td {
-        font-size: 8.5pt !important;
-        padding: 2px !important;
-    }
-
-    tr {
-        page-break-inside: avoid;
-    }
-
-    header {
-        margin-bottom: 8px !important;
-    }
-
-    .header-info-grid {
-        margin-bottom: 6px !important;
-    }
-
-    @page {
-        size: A4;
-        margin: 10mm 8mm;
-    }
-}
-
-/* Crisp Sheet Table Grid */
-#printable-content table {
-    border-collapse: collapse !important;
-    border: 1.5pt solid black !important;
-    width: 100%;
-}
-
-#printable-content th,
-#printable-content td {
-    border: 0.5pt solid black !important;
-    padding: 3px 4px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-#printable-content .p-name {
-    text-align: left;
-    line-height: 1.05;
-}
-
-/* Animations */
-.app-view {
-    animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
+        margin: 0;
+        max-width: 100%;
     }
 }
