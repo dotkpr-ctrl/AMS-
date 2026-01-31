@@ -853,6 +853,7 @@ window.handleGenerateRequest = (mode, forceType = null) => {
                 studentId: document.getElementById('printStudentSelector')?.value,
                 type: forceType || document.getElementById('printTypeSelector').value,
                 filterType: document.getElementById('registerFilterType')?.value || 'month',
+                sessionFilter: document.getElementById('registerSessionType')?.value || 'All',
                 startDate: document.getElementById('registerStartDate')?.value,
                 endDate: document.getElementById('registerEndDate')?.value
             };
