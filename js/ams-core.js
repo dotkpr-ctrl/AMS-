@@ -345,7 +345,7 @@ function renderDashboardCards() {
             </div>
         `;
     } else {
-        // Staff Dashboard: Mark Attendance, Assessments
+        // Staff Dashboard: Mark Attendance, Assessments, Daily Attendance, Workshop Viva Entry
         cardsHtml = `
             <div onclick="renderView('attendanceMarking')"
                 class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
@@ -358,6 +358,18 @@ function renderDashboardCards() {
                 <div class="text-3xl mb-2">✒️</div>
                 <h3 class="font-bold group-hover:text-primary">Assessments</h3>
                 <p class="text-xs text-gray-400">Log Viva & Practical entries</p>
+            </div>
+            <div onclick="renderView('attendanceRegister')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">📊</div>
+                <h3 class="font-bold group-hover:text-primary">Daily Attendance</h3>
+                <p class="text-xs text-gray-400">View attendance records</p>
+            </div>
+            <div onclick="renderView('assessmentSetup')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">🎓</div>
+                <h3 class="font-bold group-hover:text-primary">Workshop Viva Entry</h3>
+                <p class="text-xs text-gray-400">Enter workshop assessment scores</p>
             </div>
         `;
     }
