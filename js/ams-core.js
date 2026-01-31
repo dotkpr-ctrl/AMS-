@@ -168,13 +168,10 @@ function applyPermissions(role) {
     if (navStaff) navStaff.classList.remove('hidden');
 
     if (role === 'staff') {
-        // Hide permissions for staff
-        if (navStudents) navStudents.classList.add('hidden');
+        // Staff: Allow Student Profiles (for document management), hide Docs and Staff Management
+        // navStudents - Keep visible for staff
         if (navDocs) navDocs.classList.add('hidden');
         if (navStaff) navStaff.classList.add('hidden');
-
-        // Also hide Student Management View if active
-        // Logic handled in renderView if needed, but menu hiding is main restriction
     }
 
     // Update Dashboard or other elements if needed based on role
@@ -881,8 +878,10 @@ function renderStudentList() {
                     class="text-blue-600 font-bold text-xs hover:underline mr-2" title="Manage Documents">
                     📎 Docs (${(s.documents || []).length})
                 </button>
+                ${currentUserRole === 'admin' ? `
                 <button onclick="deleteStudent('${s.id}')" 
                     class="text-red-600 font-bold text-xs hover:underline">Delete</button>
+                ` : ''}
             </td>
         </tr>
         `).join('');
