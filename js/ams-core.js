@@ -1955,3 +1955,7 @@ window.deleteAssessment = (key) => {
     calculateDashboardStats(); // Update stats
     showMessage('Success', 'Assessment record deleted successfully.', 'success');
 };
+
+// Initialize session on page load
+checkSession();
+
