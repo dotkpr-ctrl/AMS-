@@ -965,6 +965,16 @@ function generateSheet(isReload = false, config) {
     };
     document.getElementById('sheetTitle').textContent = titles[config.type] || 'SHEET';
 
+    // Dynamic Main Title Logic
+    const mainTitleEl = document.getElementById('sheetMainTitle');
+    if (config.type === 'attendance-register' || config.type === 'transcript') {
+        mainTitleEl.classList.add('hidden');
+    } else {
+        mainTitleEl.classList.remove('hidden');
+        mainTitleEl.textContent = 'WORKSHOP VIVA';
+    }
+
+
     let filtered = students.filter(s => s.batchId === config.batchId);
     if (currentSubBatch !== 'All') {
         filtered = filtered.filter(s => s.subBatch === currentSubBatch);
