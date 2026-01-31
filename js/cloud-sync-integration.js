@@ -129,7 +129,8 @@ window.uploadToCloud = async () => {
             dataToSync.students,
             dataToSync.assessmentMetadata,
             dataToSync.attendanceData,
-            dataToSync.batchMetadata
+            dataToSync.batchMetadata,
+            dataToSync.staffMembers
         );
 
         showMessage('Upload Complete', `Data synced successfully at ${new Date(result.timestamp).toLocaleTimeString()}`, 'success');
@@ -209,7 +210,8 @@ window.autoSyncToCloud = async () => {
                 dataToSync.students,
                 dataToSync.assessmentMetadata,
                 dataToSync.attendanceData,
-                dataToSync.batchMetadata
+                dataToSync.batchMetadata,
+                dataToSync.staffMembers
             );
 
             if (result.success) {
@@ -247,14 +249,14 @@ window.autoSyncToCloud = async () => {
 // Initialize cloud sync when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initializeCloudSync();
-    
+
     // Add manual retry to status badge
     const badge = document.getElementById('menuSyncStatus');
     if (badge) {
         badge.onclick = () => {
-             if (badge.textContent.includes('Pending') || badge.textContent.includes('Error') || badge.textContent.includes('Unsynced')) {
-                 window.autoSyncToCloud();
-             }
+            if (badge.textContent.includes('Pending') || badge.textContent.includes('Error') || badge.textContent.includes('Unsynced')) {
+                window.autoSyncToCloud();
+            }
         };
     }
 });
