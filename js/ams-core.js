@@ -1128,12 +1128,14 @@ function renderMonthlyRegister(batchId, filtered, config) {
     }
 
     // 2. Filter by Session Type
-    const sessionFilter = config?.sessionFilter || 'Theory';
+    const sessionFilter = config?.sessionFilter || 'All';
 
-    dates = dates.filter(d => {
-        const sessionType = batchAttendance[d]?.sessionType || 'Unspecified'; // Default to Unspecified to avoid ghost data
-        return sessionType === sessionFilter;
-    });
+    if (sessionFilter !== 'All') {
+        dates = dates.filter(d => {
+            const sessionType = batchAttendance[d]?.sessionType || 'Unspecified';
+            return sessionType === sessionFilter;
+        });
+    }
 
     const dateHeaders = dates.map(d => `
             <th class="w-6 text-[10px] p-1 border-r border-black bg-gray-50 align-bottom font-medium" style="height: 100px; vertical-align: bottom;">
