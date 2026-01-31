@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-31T14:54:27.867Z",
+  "lastUpdated": "2026-01-31T14:54:32.804Z",
   "version": "4.7",
   "students": [
     {
@@ -4017,7 +4017,9 @@
     "TEST": {
       "2026-01-31": {
         "d52ceb1d-f031-4098-8522-16da6287733c": "absent",
-        "bb9ca808-d320-4579-bff7-1d7c82a10b37": "absent"
+        "bb9ca808-d320-4579-bff7-1d7c82a10b37": "absent",
+        "sessionType": "Workshop",
+        "83df26bf-a41c-4346-bfbd-588bf7e6ecf3": "absent"
       }
     }
   },
