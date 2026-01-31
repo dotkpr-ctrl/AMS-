@@ -375,7 +375,7 @@ function renderDashboardCards() {
             <div onclick="renderView('assessmentSetup')"
                 class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
                 <div class="text-3xl mb-2">🎓</div>
-                <h3 class="font-bold group-hover:text-primary">Workshop Viva Entry</h3>
+                <h3 class="font-bold group-hover:text-primary">Assessment</h3>
                 <p class="text-xs text-gray-400">Enter workshop assessment scores</p>
             </div>
         `;
