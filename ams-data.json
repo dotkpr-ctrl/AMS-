@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-31T14:53:50.670Z",
+  "lastUpdated": "2026-01-31T14:53:55.146Z",
   "version": "4.7",
   "students": [
     {
@@ -3867,7 +3867,7 @@
       "admissionNo": "002",
       "batchId": "TEST",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "8a6c611e-83a9-4bdc-8daa-2c2e4b94b2d5",
@@ -3875,7 +3875,7 @@
       "admissionNo": "003",
       "batchId": "TEST",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "d52ceb1d-f031-4098-8522-16da6287733c",
@@ -3883,7 +3883,7 @@
       "admissionNo": "004",
       "batchId": "TEST",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "e6d49b6f-8179-4163-b3cd-ce1405ea622d",
