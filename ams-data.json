@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-31T14:53:55.146Z",
+  "lastUpdated": "2026-01-31T14:54:15.053Z",
   "version": "4.7",
   "students": [
     {
@@ -3891,7 +3891,7 @@
       "admissionNo": "005",
       "batchId": "TEST",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "bb9ca808-d320-4579-bff7-1d7c82a10b37",
@@ -3899,7 +3899,7 @@
       "admissionNo": "006",
       "batchId": "TEST",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     }
   ],
   "assessmentMetadata": {
@@ -4012,6 +4012,12 @@
     "AME 32": {
       "2026-01-31": {
         "133f105a-88be-4482-a7ef-3160147ca80a": "absent"
+      }
+    },
+    "TEST": {
+      "2026-01-31": {
+        "d52ceb1d-f031-4098-8522-16da6287733c": "absent",
+        "bb9ca808-d320-4579-bff7-1d7c82a10b37": "absent"
       }
     }
   },
