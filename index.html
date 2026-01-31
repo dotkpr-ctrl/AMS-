@@ -62,7 +62,7 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <img src="assets/img/header-logo.png" alt="A2Z Institute" class="h-12 w-auto object-contain">
-                    <span class="text-xs text-gray-400 font-mono mt-1">v4.8.6</span>
+                    <span class="text-xs text-gray-400 font-mono mt-1">v4.8.7</span>
                 </div>
                 <button onclick="toggleMenu()"
                     class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none transition-colors">
@@ -613,17 +613,48 @@
         </div>
     </div>
 
+    <!-- Share Preview Modal -->
+    <div id="sharePreviewModal"
+        class="no-print fixed inset-0 bg-black/60 z-[200] flex justify-center items-center hidden"
+        onclick="closeSharePreview()">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-lg border relative"
+            onclick="event.stopPropagation()">
+            <h3 class="text-xl font-bold mb-4 border-b pb-2 flex justify-between items-center">
+                <span>📝 Preview Summary</span>
+                <button onclick="closeSharePreview()" class="text-gray-400 hover:text-red-500 text-2xl">×</button>
+            </h3>
+
+            <div class="mb-4">
+                <label class="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Message
+                    Preview</label>
+                <textarea id="sharePreviewText" rows="12" readonly
+                    class="w-full p-3 border rounded-lg font-mono text-sm bg-gray-50 focus:ring-2 focus:ring-primary outline-none"></textarea>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <button onclick="copyShareText()"
+                    class="w-full py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+                    <span>📋 Copy Text</span>
+                </button>
+                <button onclick="proceedToWhatsApp()"
+                    class="w-full py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                    <span>📱 Open WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div id="statusFooter"
         class="no-print fixed bottom-0 left-0 right-0 bg-gray-800 text-white text-center py-1.5 text-[10px] uppercase tracking-widest font-bold border-t border-gray-700">
-        Local Database Secured • v4.8.6 Stable</div>
+        Local Database Secured • v4.8.7 Stable</div>
 
     <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=4.8.6"></script>
+    <script src="js/github-sync.js?v=4.8.7"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=4.8.6"></script>
+    <script src="js/cloud-sync-integration.js?v=4.8.7"></script>
     <!-- Main JavaScript Module -->
-    <script src="js/ams-core.js?v=4.8.6"></script>
-    <script src="js/app.js?v=4.8.6"></script>
+    <script src="js/ams-core.js?v=4.8.7"></script>
+    <script src="js/app.js?v=4.8.7"></script>
 </body>
 
 </html>

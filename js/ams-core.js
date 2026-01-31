@@ -510,7 +510,32 @@ window.shareAttendanceWhatsApp = () => {
         message += `\n*All students present.*`;
     }
 
+    // Show Preview Modal instead of opening directly
+    document.getElementById('sharePreviewText').value = message;
+    document.getElementById('sharePreviewModal').classList.remove('hidden');
+};
+
+// -- Share Preview Logic --
+window.closeSharePreview = () => {
+    document.getElementById('sharePreviewModal').classList.add('hidden');
+};
+
+window.copyShareText = () => {
+    const text = document.getElementById('sharePreviewText');
+    text.select();
+    document.execCommand('copy');
+
+    // Visual feedback
+    const btn = event.currentTarget;
+    const original = btn.innerHTML;
+    btn.innerHTML = '<span>✅ Copied!</span>';
+    setTimeout(() => btn.innerHTML = original, 2000);
+};
+
+window.proceedToWhatsApp = () => {
+    const message = document.getElementById('sharePreviewText').value;
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+    closeSharePreview();
 };
 
 function renderAttendanceRegister() {
