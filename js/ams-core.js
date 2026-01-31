@@ -2243,15 +2243,7 @@ window.printAssessmentExam = function (key) {
         </head>
         <body>
             <div class="header-container">
-                <svg class="logo" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-                    <!-- A letter -->
-                    <text x="5" y="45" font-family="Arial Black, sans-serif" font-size="50" fill="#D32F2F" font-weight="900" letter-spacing="-2">A</text>
-                    <!-- Circle with 2 -->
-                    <circle cx="52" cy="15" r="14" fill="none" stroke="#1565C0" stroke-width="2.5"/>
-                    <text x="46" y="22" font-family="Arial, sans-serif" font-size="14" fill="#1565C0" font-weight="bold">2</text>
-                    <!-- Z letter -->
-                    <text x="70" y="45" font-family="Arial Black, sans-serif" font-size="50" fill="#D32F2F" font-weight="900" letter-spacing="-2">Z</text>
-                </svg>
+                <img src="https://dotkpr-ctrl.github.io/AMS-/assets/img/header-logo.png" alt="A2Z Logo" class="logo">
                 <div class="header-text">
                     <h1>INSTITUTE OF HEAVY EQUIPMENTS & ITC</h1>
                     <div class="subtitle">(Approved Institute of STED Council of India)</div>
