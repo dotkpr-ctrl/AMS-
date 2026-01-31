@@ -1000,16 +1000,27 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
     const isEntry = type === 'mark';
     const isViva = type && type.toString().includes('workshop-viva'); // This is now the "Print Summary" mode
 
-    document.getElementById('markSheetControls').classList.toggle('hidden', !isEntry);
+    const isSubmitted = !!assessmentMetadata[sheetKey];
+    const isAdmin = currentUserRole === 'admin';
+    const isReadOnly = isSubmitted && !isAdmin;
+
+    if (isReadOnly) {
+        // Hide controls for staff on submitted sheets
+        document.getElementById('markSheetControls').classList.add('hidden');
+    } else {
+        // Show controls if it's entry mode (and not read-only)
+        document.getElementById('markSheetControls').classList.toggle('hidden', !isEntry);
+    }
 
     let headers = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'PRAC', 'REC'];
-    if (isViva) headers = ['TOTAL']; // Final Sheet only shows Total
+    if (isViva) headers = ['TOTAL'];
 
     const markHeaders = headers.map(h =>
         `<th class="w-12 text-xs text-center border-r border-black bg-gray-50">${h}</th>`
     ).join('');
 
-    const totalHeaderStyle = isViva ? 'display:none' : ''; // Total is the ONLY column in Viva mode, so hide the redundant total
+    const totalHeaderStyle = isViva ? 'display:none' : '';
+    const actionHeader = isAdmin ? '<th class="w-10 text-center text-red-600 border-l border-black">DEL</th>' : '';
 
     document.getElementById('generatedSheetHeader').innerHTML = `
         <tr class="border-b-2 border-black text-center">
@@ -1019,6 +1030,7 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
             ${markHeaders}
             <th class="w-12 border-r border-black" style="${totalHeaderStyle}">TOTAL</th>
             <th class="w-12 text-center">RANK</th>
+            ${actionHeader}
         </tr>
     `;
 
@@ -1050,14 +1062,22 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
             // Standard Entry View
             cells = s.mData.map((m, idx) => `
                 <td class="border-r border-black p-0 h-10 text-center align-middle">
-                    <input type="number" value="${m}"
-                        class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold no-print"
+                    <input type="number" value="${m}" ${isReadOnly ? 'disabled' : ''}
+                        class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold no-print ${isReadOnly ? 'text-gray-500' : ''}"
                         onkeydown="handleEnterKey(event)"
                         oninput="liveUpdateMark('${s.id}', ${idx}, this.value, '${sheetKey}', ${maxMark}, this)">
                     <span class="print-only">${m}</span>
                 </td>
             `).join('');
         }
+
+        const deleteBtn = isAdmin ? `
+            <td class="text-center border-l border-black no-print">
+                <button onclick="deleteStudentMark('${s.id}', '${sheetKey}')" class="text-red-500 hover:text-red-700 font-bold px-2">
+                    🗑️
+                </button>
+            </td>
+        ` : '';
 
         return `
             <tr class="h-10 border-b border-black hover:bg-gray-50 transition-colors" data-sid="${s.id}">
@@ -1067,10 +1087,28 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
                 ${cells}
                 <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
                 <td class="text-center font-bold rank-cell text-sm">${s.rank}</td>
+                ${deleteBtn}
             </tr>
         `;
     }).join('');
 }
+
+window.deleteStudentMark = (sid, sheetKey) => {
+    if (!confirm('Are you sure you want to delete marks for this student?')) return;
+
+    const student = students.find(s => s.id === sid);
+    if (!student || !student.marks[sheetKey]) return;
+
+    // Remove marks
+    delete student.marks[sheetKey];
+
+    saveData();
+    showMessage('Deleted', 'Student marks deleted.', 'success');
+
+    // Re-render
+    const config = window.activeSheetConfig;
+    generateSheet(false, config);
+};
 
 function renderTranscript(studentId) {
     document.getElementById('markSheetControls').classList.add('hidden');
