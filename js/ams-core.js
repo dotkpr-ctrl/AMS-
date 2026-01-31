@@ -42,10 +42,12 @@ window.handleLogin = (e) => {
     else {
         const staffMember = staffMembers.find(s => s.username === u && s.password === p);
         if (staffMember) {
-            localStorage.setItem('user_role', 'staff');
+            // Grant admin role if staff member is site administrator
+            const role = staffMember.isAdmin ? 'admin' : 'staff';
+            localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
             localStorage.setItem('logged_in_staff_id', staffMember.id);
-            startSession('staff');
+            startSession(role);
         } else {
             err.classList.remove('hidden');
         }
@@ -606,7 +608,7 @@ window.handleBulkInput = (e) => {
 };
 
 // Staff Management Functions
-window.addStaff = (name, phone, position, colorCode) => {
+window.addStaff = (name, phone, position, colorCode, isAdmin = false) => {
     // Generate username from name (first name + last name initial, lowercase)
     const nameParts = name.trim().toLowerCase().split(' ');
     const firstName = nameParts[0] || '';
@@ -623,7 +625,8 @@ window.addStaff = (name, phone, position, colorCode) => {
         position: position.trim(),
         colorCode: colorCode,
         username: username,
-        password: password
+        password: password,
+        isAdmin: isAdmin
     };
 
     staffMembers.push(newStaff);
@@ -631,8 +634,9 @@ window.addStaff = (name, phone, position, colorCode) => {
     renderStaffList();
 
     // Show credentials in success message
+    const adminNote = isAdmin ? '\n(Site Administrator - Full Access)' : '';
     showMessage('Staff Added!',
-        `${name} added successfully!\nUsername: ${username}\nPassword: ${password}`,
+        `${name} added successfully!${adminNote}\nUsername: ${username}\nPassword: ${password}`,
         'success');
 };
 
@@ -688,7 +692,10 @@ function renderStaffList() {
                 <div class="bg-white border rounded-xl p-4 shadow-sm hover:shadow-md transition-all">
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex-1">
-                            <h4 class="font-bold text-lg text-gray-800">${staff.name}</h4>
+                            <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                ${staff.name}
+                                ${staff.isAdmin ? '<span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full border border-yellow-300">⭐ Admin</span>' : ''}
+                            </h4>
                             <p class="text-sm text-gray-600 font-mono mt-1">📞 ${staff.phone}</p>
                         </div>
                         <span class="${colorBadges[staff.colorCode]} px-3 py-1 rounded-full text-xs font-bold">
@@ -726,8 +733,9 @@ window.handleStaffFormSubmit = (e) => {
     const phone = document.getElementById('staffPhone').value;
     const position = document.getElementById('staffPosition').value;
     const colorCode = document.getElementById('staffColor').value;
+    const isAdmin = document.getElementById('staffIsAdmin').checked;
 
-    addStaff(name, phone, position, colorCode);
+    addStaff(name, phone, position, colorCode, isAdmin);
     e.target.reset();
 };
 
