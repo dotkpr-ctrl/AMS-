@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-31T12:59:54.610Z",
+  "lastUpdated": "2026-01-31T13:01:11.957Z",
   "version": "4.7",
   "students": [
     {
@@ -3970,6 +3970,16 @@
       "username": "ziyadb",
       "password": "7699",
       "isAdmin": true
+    },
+    {
+      "id": "477efa66-728a-41a4-a941-0701b41def0f",
+      "name": "KIRAN",
+      "phone": "8281602475",
+      "position": "Workshop Faculty",
+      "colorCode": "blue",
+      "username": "kiran",
+      "password": "2475",
+      "isAdmin": false
     }
   ]
 }
