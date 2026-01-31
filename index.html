@@ -92,6 +92,10 @@
                         class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
                         <span>👥</span> Student Profiles
                     </button>
+                    <button id="nav-staff" onclick="renderView('staffManagement')"
+                        class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
+                        <span>👔</span> Staff Management
+                    </button>
                     <button id="nav-attend-mark" onclick="renderView('attendanceMarking')"
                         class="w-full text-left px-4 py-3 bg-gray-50 rounded-xl font-medium hover:bg-blue-50 hover:text-primary transition-all flex items-center gap-3">
                         <span>✅</span> Daily Attendance
@@ -242,6 +246,76 @@
                         Student</button>
                 </form>
             </div>
+
+            <!-- Staff Management View -->
+            <div id="staffManagement" class="app-view hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Staff Management</h2>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-gray-500 font-bold">
+                            Total Staff: <span id="staffCount" class="text-primary">0</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Add Staff Form -->
+                <form id="staffForm" onsubmit="handleStaffFormSubmit(event)"
+                    class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 mb-8 shadow-sm">
+                    <h3 class="font-bold mb-4 text-primary flex items-center gap-2">
+                        <span>➕</span> Add New Staff Member
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <input id="staffName" name="staffName" placeholder="Full Name" required
+                            class="p-3 border rounded-lg text-sm bg-white focus:ring-2 focus:ring-primary outline-none">
+                        <input id="staffPhone" name="staffPhone" type="tel" placeholder="Phone Number" required
+                            pattern="[0-9]{10}" title="Enter 10-digit phone number"
+                            class="p-3 border rounded-lg text-sm bg-white focus:ring-2 focus:ring-primary outline-none">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-600 uppercase mb-1 block">Position</label>
+                            <select id="staffPosition" required
+                                class="w-full p-3 border rounded-lg text-sm bg-white focus:ring-2 focus:ring-primary outline-none">
+                                <option value="">-- Select Position --</option>
+                                <option value="Head of Department">Head of Department</option>
+                                <option value="Senior Lecturer">Senior Lecturer</option>
+                                <option value="Assistant Professor">Assistant Professor</option>
+                                <option value="Guest Lecturer">Guest Lecturer</option>
+                                <option value="Workshop Instructor">Workshop Instructor</option>
+                                <option value="Admin Staff">Admin Staff</option>
+                                <option value="Lab Assistant">Lab Assistant</option>
+                                <option value="Manager">Manager</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-600 uppercase mb-1 block">Color Badge</label>
+                            <select id="staffColor" required
+                                class="w-full p-3 border rounded-lg text-sm bg-white focus:ring-2 focus:ring-primary outline-none">
+                                <option value="">-- Select Color --</option>
+                                <option value="blue">🔵 Blue - Staff</option>
+                                <option value="green">🟢 Green - Senior Staff/Incharge</option>
+                                <option value="red">🔴 Red - HOD</option>
+                                <option value="white">⚪ White - Manager</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="w-full md:w-auto px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-dark shadow-md transition-all hover:scale-[1.02]">
+                        <span>💾</span> Add Staff Member
+                    </button>
+                </form>
+
+                <!-- Staff List Display -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-gray-700 flex items-center gap-2">
+                        <span>📋</span> Staff Directory
+                    </h3>
+                    <div id="staffListContainer" class="min-h-[200px]">
+                        <!-- Staff cards will be rendered here -->
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Attendance Marking View -->
             <div id="attendanceMarking" class="app-view hidden">

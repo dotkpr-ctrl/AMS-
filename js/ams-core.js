@@ -5,6 +5,7 @@ let students = [];
 let assessmentMetadata = {};
 let attendanceData = {};
 let batchMetadata = {};
+let staffMembers = [];
 let currentBatch = 'AME 37';
 let currentSubBatch = 'All';
 
@@ -12,6 +13,7 @@ const LS_KEY = 'academic_management_students_v3';
 const LS_KEY_METADATA = 'academic_management_metadata_v3';
 const LS_KEY_ATTENDANCE = 'academic_management_attendance_v3';
 const LS_KEY_BATCH_META = 'academic_management_batch_metadata_v3';
+const LS_KEY_STAFF = 'academic_management_staff_v1';
 const INITIAL_BATCH_ID = 'AME 37';
 
 // Auth State
@@ -60,15 +62,18 @@ function checkSession() {
 function applyPermissions(role) {
     const navStudents = document.getElementById('nav-students');
     const navDocs = document.getElementById('nav-docs');
+    const navStaff = document.getElementById('nav-staff');
 
     // Default: Show all
     if (navStudents) navStudents.classList.remove('hidden');
     if (navDocs) navDocs.classList.remove('hidden');
+    if (navStaff) navStaff.classList.remove('hidden');
 
     if (role === 'staff') {
         // Hide permissions for staff
         if (navStudents) navStudents.classList.add('hidden');
         if (navDocs) navDocs.classList.add('hidden');
+        if (navStaff) navStaff.classList.add('hidden');
 
         // Also hide Student Management View if active
         // Logic handled in renderView if needed, but menu hiding is main restriction
@@ -92,6 +97,9 @@ function loadData() {
         const storedBatchMeta = localStorage.getItem(LS_KEY_BATCH_META);
         batchMetadata = storedBatchMeta ? JSON.parse(storedBatchMeta) : {};
 
+        const storedStaff = localStorage.getItem(LS_KEY_STAFF);
+        staffMembers = storedStaff ? JSON.parse(storedStaff) : [];
+
         students = students.map(s => ({
             ...s,
             id: s.id || crypto.randomUUID(),
@@ -114,6 +122,7 @@ function saveData() {
         localStorage.setItem(LS_KEY_METADATA, JSON.stringify(assessmentMetadata));
         localStorage.setItem(LS_KEY_ATTENDANCE, JSON.stringify(attendanceData));
         localStorage.setItem(LS_KEY_BATCH_META, JSON.stringify(batchMetadata));
+        localStorage.setItem(LS_KEY_STAFF, JSON.stringify(staffMembers));
 
         // Trigger auto-sync to cloud if available
         if (window.autoSyncToCloud) {
@@ -133,6 +142,7 @@ window.updateLocalDataFromCloud = (data) => {
     assessmentMetadata = data.assessmentMetadata || {};
     attendanceData = data.attendanceData || {};
     batchMetadata = data.batchMetadata || {};
+    staffMembers = data.staffMembers || [];
 
     saveData(); // Save to local storage cache
     refreshDataAndUI();
@@ -143,7 +153,8 @@ window.getAppData = () => ({
     students,
     assessmentMetadata,
     attendanceData,
-    batchMetadata
+    batchMetadata,
+    staffMembers
 });
 
 function refreshDataAndUI() {
@@ -273,6 +284,7 @@ window.renderView = (viewName) => {
         targetView.classList.remove('hidden');
 
         if (viewName === 'studentManagement') renderStudentList();
+        else if (viewName === 'staffManagement') renderStaffList();
         else if (viewName === 'dashboard') calculateDashboardStats();
         else if (viewName === 'attendanceMarking') setupAttendanceView();
         else if (viewName === 'attendanceRegister') renderAttendanceRegister();
@@ -578,6 +590,103 @@ window.handleBulkInput = (e) => {
     window.toggleBulkInputModal(false);
     showMessage('Success', 'Batch imported.', 'success');
 };
+
+// Staff Management Functions
+window.addStaff = (name, phone, position, colorCode) => {
+    staffMembers.push({
+        id: crypto.randomUUID(),
+        name: name.trim(),
+        phone: phone.trim(),
+        position: position.trim(),
+        colorCode: colorCode
+    });
+    saveData();
+    renderStaffList();
+    showMessage('Success', 'Staff member added successfully!', 'success');
+};
+
+window.deleteStaff = (staffId) => {
+    if (confirm('Permanently delete this staff member? This cannot be undone.')) {
+        staffMembers = staffMembers.filter(s => s.id !== staffId);
+        saveData();
+        renderStaffList();
+        showMessage('Success', 'Staff member deleted.', 'success');
+    }
+};
+
+window.updateStaff = (staffId, updates) => {
+    const staff = staffMembers.find(s => s.id === staffId);
+    if (staff) {
+        Object.assign(staff, updates);
+        saveData();
+        renderStaffList();
+        showMessage('Success', 'Staff member updated.', 'success');
+    }
+};
+
+function renderStaffList() {
+    const container = document.getElementById('staffListContainer');
+    const staffCount = document.getElementById('staffCount');
+
+    if (staffCount) {
+        staffCount.textContent = staffMembers.length;
+    }
+
+    if (!container) return;
+
+    if (staffMembers.length === 0) {
+        container.innerHTML = `
+            <div class="text-center py-10 text-gray-500 italic border-2 border-dashed rounded-xl">
+                <div class="text-4xl mb-2">👥</div>
+                No staff members added yet. Use the form above to add staff.
+            </div>
+        `;
+        return;
+    }
+
+    const colorBadges = {
+        blue: 'bg-blue-500 text-white',
+        green: 'bg-green-500 text-white',
+        red: 'bg-red-500 text-white',
+        white: 'bg-white text-gray-800 border border-gray-300'
+    };
+
+    container.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${staffMembers.map(staff => `
+                <div class="bg-white border rounded-xl p-4 shadow-sm hover:shadow-md transition-all">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg text-gray-800">${staff.name}</h4>
+                            <p class="text-sm text-gray-600 font-mono mt-1">📞 ${staff.phone}</p>
+                        </div>
+                        <span class="${colorBadges[staff.colorCode]} px-3 py-1 rounded-full text-xs font-bold">
+                            ${staff.position}
+                        </span>
+                    </div>
+                    <div class="flex gap-2 mt-3 pt-3 border-t">
+                        <button onclick="deleteStaff('${staff.id}')" 
+                            class="flex-1 bg-red-50 text-red-600 px-3 py-2 rounded-lg text-sm font-bold hover:bg-red-100 transition-all">
+                            🗑️ Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+window.handleStaffFormSubmit = (e) => {
+    e.preventDefault();
+    const name = document.getElementById('staffName').value;
+    const phone = document.getElementById('staffPhone').value;
+    const position = document.getElementById('staffPosition').value;
+    const colorCode = document.getElementById('staffColor').value;
+
+    addStaff(name, phone, position, colorCode);
+    e.target.reset();
+};
+
 
 // Sheet Generation Functions
 window.handleGenerateRequest = (mode, forceType = null) => {
@@ -960,7 +1069,8 @@ window.exportData = () => {
         students,
         assessmentMetadata,
         attendanceData,
-        batchMetadata
+        batchMetadata,
+        staffMembers
     };
 
     const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
@@ -981,6 +1091,7 @@ window.importData = (e) => {
             assessmentMetadata = d.assessmentMetadata || {};
             attendanceData = d.attendanceData || {};
             batchMetadata = d.batchMetadata || {};
+            staffMembers = d.staffMembers || [];
             saveData();
             refreshDataAndUI();
             showMessage('Success', 'System restored.', 'success');
