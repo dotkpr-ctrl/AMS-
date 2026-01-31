@@ -458,7 +458,18 @@ window.updateSessionType = () => {
     const batchId = document.getElementById('attendanceBatchSelector').value;
     const date = document.getElementById('attendanceDate').value;
     const type = document.getElementById('attendanceSessionType').value;
+    const subBatchSelect = document.getElementById('attendanceSubBatchSelector');
 
+    // -- STRICT UI ENFORCEMENT --
+    // This runs immediately, even if no batch is selected yet
+    if (type === 'Theory') {
+        subBatchSelect.value = 'All';
+        subBatchSelect.disabled = true;
+    } else {
+        subBatchSelect.disabled = false;
+    }
+
+    // Only proceed to save if we have a valid batch and date
     if (!batchId || !date) return;
 
     if (!attendanceData[batchId]) attendanceData[batchId] = {};
@@ -466,6 +477,9 @@ window.updateSessionType = () => {
 
     attendanceData[batchId][date].sessionType = type;
     saveData();
+
+    // Refresh list to apply filtering if needed
+    renderAttendanceList();
 };
 
 window.saveAttendanceManual = () => {
