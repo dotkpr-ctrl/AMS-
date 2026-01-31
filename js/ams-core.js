@@ -640,7 +640,7 @@ function renderAttendanceRegister() {
             `;
         }
 
-        return `< th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px] align-top" > ${headerContent}</th > `;
+        return `<th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px] align-top">${headerContent}</th>`;
     }).join('');
 
     const tableRows = batchStudents.map((s, i) => {
