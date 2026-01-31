@@ -631,6 +631,7 @@ function renderAttendanceRegister() {
         let headerContent = `${day}/${m}`;
 
         if (isAdmin) {
+            headerContent += `
             <button onclick="deleteBatchAttendanceDate('${batchId}', '${d}')"
                 title="Delete this column"
                 class="block mx-auto mt-1 w-5 h-5 rounded bg-red-500 text-white font-bold text-[10px] leading-none hover:bg-red-700 shadow-sm transition-all flex items-center justify-center">
@@ -639,7 +640,7 @@ function renderAttendanceRegister() {
             `;
         }
 
-        return `< th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px] align-top" > ${ headerContent }</th > `;
+        return `< th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px] align-top" > ${headerContent}</th > `;
     }).join('');
 
     const tableRows = batchStudents.map((s, i) => {
@@ -650,7 +651,7 @@ function renderAttendanceRegister() {
             const isAbs = val === 'absent';
             if (isAbs) absent++; else present++;
             const colorClass = isAbs ? 'text-red-600 bg-red-50 font-bold' : 'text-green-600';
-            return `< td class="border border-gray-200 text-center text-xs p-1 ${colorClass}" > ${ isAbs ? 'A' : 'P' }</td > `;
+            return `< td class="border border-gray-200 text-center text-xs p-1 ${colorClass}" > ${isAbs ? 'A' : 'P'}</td > `;
         }).join('');
 
         const totalDays = dates.length;
@@ -661,7 +662,7 @@ function renderAttendanceRegister() {
                 <td class="border border-gray-200 text-center py-1">${i + 1}</td>
                 <td class="border border-gray-200 px-2 py-1 font-medium">${s.name}</td>
                 <td class="border border-gray-200 text-center py-1 font-mono text-xs text-gray-500">${s.admissionNo}</td>
-                ${ cells }
+                ${cells}
                 <td class="border border-gray-200 text-center font-bold text-green-700 bg-green-50">${present}</td>
                 <td class="border border-gray-200 text-center font-bold text-red-700 bg-red-50">${absent}</td>
                 <td class="border border-gray-200 text-center font-bold">${percent}%</td>
@@ -671,7 +672,7 @@ function renderAttendanceRegister() {
 
     // -- DELETE FUNCTION --
     window.deleteBatchAttendanceDate = (batchId, date) => {
-        if (!confirm(`Are you sure you want to delete the attendance column for ${ date } ? `)) return;
+        if (!confirm(`Are you sure you want to delete the attendance column for ${date} ? `)) return;
 
         if (attendanceData[batchId] && attendanceData[batchId][date]) {
             delete attendanceData[batchId][date];
@@ -877,7 +878,7 @@ window.addStaff = (name, phone, position, colorCode, isAdmin = false) => {
     // Show credentials in success message
     const adminNote = isAdmin ? '\n(Site Administrator - Full Access)' : '';
     showMessage('Staff Added!',
-        `${ name } added successfully!${ adminNote } \nUsername: ${ username } \nPassword: ${ password } `,
+        `${name} added successfully!${adminNote} \nUsername: ${username} \nPassword: ${password} `,
         'success');
 };
 
@@ -929,8 +930,7 @@ function renderStaffList() {
 
     container.innerHTML = `
         < div class="grid grid-cols-1 md:grid-cols-2 gap-4" >
-            ${
-                staffMembers.map(staff => `
+            ${staffMembers.map(staff => `
                 <div class="bg-white border rounded-xl p-4 shadow-sm hover:shadow-md transition-all">
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex-1">
@@ -965,7 +965,7 @@ function renderStaffList() {
                     </div>
                 </div>
             `).join('')
-    }
+        }
         </div >
         `;
 }
@@ -1030,7 +1030,7 @@ function generateSheet(isReload = false, config) {
 
     // Unified storage key: Always use 'mark' so data is shared between Entry and Print views
     const keyType = 'mark';
-    const sheetKey = `${ config.batchId } -${ config.sem } -${ keyType } -${ config.maxMark } `;
+    const sheetKey = `${config.batchId} -${config.sem} -${keyType} -${config.maxMark} `;
     const meta = assessmentMetadata[sheetKey] || {};
 
     renderView('sheetGeneration');
@@ -1062,13 +1062,13 @@ function generateSheet(isReload = false, config) {
 
         if (config.filterType === 'month' || !config.filterType) {
             const m = now.toLocaleString('default', { month: 'long' });
-            periodStr = `${ m } ${ now.getFullYear() } `;
+            periodStr = `${m} ${now.getFullYear()} `;
         } else if (config.filterType === 'week') {
             periodStr = 'Current Week';
         } else if (config.filterType === 'custom') {
             const d1 = config.startDate ? new Date(config.startDate).toLocaleDateString('en-GB') : '?';
             const d2 = config.endDate ? new Date(config.endDate).toLocaleDateString('en-GB') : '?';
-            periodStr = `${ d1 } - ${ d2 } `;
+            periodStr = `${d1} - ${d2} `;
         }
         dateEl.textContent = periodStr;
     } else {
@@ -1102,7 +1102,7 @@ function generateSheet(isReload = false, config) {
         if (config.type === 'attendance-register') {
             const sType = config.sessionFilter || 'Theory';
             const titleEl = document.getElementById('sheetTitle');
-            titleEl.textContent = `MONTHLY ATTENDANCE REGISTER - ${ sType.toUpperCase() } `;
+            titleEl.textContent = `MONTHLY ATTENDANCE REGISTER - ${sType.toUpperCase()} `;
 
             // Visual Distinction
             titleEl.className = "text-sm md:text-md font-semibold border-b-2 inline-block px-8 pb-0.5 mt-1"; // reset
@@ -1169,7 +1169,7 @@ window.switchRegisterTab = (tab) => {
 
     // Update UI
     ['Theory', 'Workshop', 'All'].forEach(t => {
-        const btn = document.getElementById(`tab${ t } `);
+        const btn = document.getElementById(`tab${t} `);
         if (t === tab) {
             // Active Styles
             btn.classList.add('bg-white', 'shadow-sm', 'scale-105');
@@ -1271,7 +1271,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
         < tr class="border-b-2 border-black" >
                 <th class="w-10 text-center border-r border-black p-2 font-bold text-xs uppercase bg-gray-100">SL.</th>
                 <th class="text-left px-2 border-r border-black font-bold text-xs uppercase bg-gray-100" style="min-width: 250px;">NAME</th>
-                ${ dateHeaders }
+                ${dateHeaders}
                 <th class="w-8 text-center border-r border-black bg-green-50 text-green-800 font-bold text-xs border-l-2 border-l-black">P</th>
                 <th class="w-8 text-center border-r border-black bg-red-50 text-red-800 font-bold text-xs">A</th>
                 <th class="w-10 text-center bg-blue-50 text-blue-800 font-bold text-xs">%</th>
@@ -1290,7 +1290,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
                 }
             });
 
-            const otherMsg = Object.entries(otherCounts).map(([k, v]) => `${ v } ${ k } `).join(', ');
+            const otherMsg = Object.entries(otherCounts).map(([k, v]) => `${v} ${k} `).join(', ');
 
             if (otherMsg) {
                 document.getElementById('generatedSheetBody').innerHTML = `
@@ -1329,7 +1329,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
             if (isAbs) cellStyle = 'font-weight: bold; color: red; background-color: #fee2e2;'; // light red bg
             if (status === '-') cellStyle = 'color: #d1d5db;'; // gray-300
 
-            return `< td class="p-0 text-[10px] text-center border-r border-black h-8" style = "${cellStyle}" > ${ status }</td > `;
+            return `< td class="p-0 text-[10px] text-center border-r border-black h-8" style = "${cellStyle}" > ${status}</td > `;
         }).join('');
 
         const total = dates.length;
@@ -1343,7 +1343,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
         < tr class="h-8 border-b border-black ${rowBg} print:bg-transparent" >
                     <td class="text-center text-black font-medium text-xs border-r border-black">${i + 1}</td>
                     <td class="text-left font-bold p-name text-xs px-2 border-r border-black text-black uppercase">${s.name}</td>
-                    ${ cells }
+                    ${cells}
                     <td class="text-center font-bold text-xs text-green-700 bg-green-50 border-r border-black border-l-2 border-l-black">${presentCount}</td>
                     <td class="text-center font-bold text-xs text-red-700 bg-red-50 border-r border-black">${absCount}</td>
                     <td class="text-center font-bold text-xs text-blue-700 bg-blue-50">${percent}%</td>
@@ -1355,14 +1355,14 @@ function renderMonthlyRegister(batchId, filtered, config) {
 function renderBlankMarkSheet(filtered) {
     document.getElementById('markSheetControls').classList.add('hidden');
     const headers = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'PRAC', 'REC'];
-    const markHeaders = headers.map(h => `< th class="w-7 text-[9px]" > ${ h }</th > `).join('');
+    const markHeaders = headers.map(h => `< th class="w-7 text-[9px]" > ${h}</th > `).join('');
 
     document.getElementById('generatedSheetHeader').innerHTML = `
         < tr >
             <th class="w-9">SL.</th>
             <th class="text-left">NAME</th>
             <th class="w-28">ADM NO.</th>
-            ${ markHeaders }
+            ${markHeaders}
     <th class="w-10">TOTAL</th>
         </tr >
         `;
@@ -1372,7 +1372,7 @@ function renderBlankMarkSheet(filtered) {
             <td>${i + 1}</td>
             <td class="text-left font-medium p-name">${s.name}</td>
             <td class="text-[9px] font-mono">${s.admissionNo}</td>
-            ${ Array(9).fill('<td></td>').join('') }
+            ${Array(9).fill('<td></td>').join('')}
         </tr >
         `).join('');
 }
@@ -1409,7 +1409,7 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
     if (isViva) headers = ['TOTAL'];
 
     const markHeaders = headers.map(h =>
-        `< th class="w-12 text-xs text-center border-r border-black bg-gray-50" > ${ h }</th > `
+        `< th class="w-12 text-xs text-center border-r border-black bg-gray-50" > ${h}</th > `
     ).join('');
 
     const totalHeaderStyle = isViva ? 'display:none' : '';
@@ -1420,10 +1420,10 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
             <th class="w-12 text-center border-r border-black">SL.</th>
             <th class="text-left pl-2 border-r border-black">NAME</th>
             <th class="w-24 text-center border-r border-black">ADM NO.</th>
-            ${ markHeaders }
+            ${markHeaders}
             <th class="w-12 border-r border-black" style="${totalHeaderStyle}">TOTAL</th>
             <th class="w-12 text-center">RANK</th>
-            ${ actionHeader }
+            ${actionHeader}
         </tr >
         `;
 
@@ -1477,10 +1477,10 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
                 <td class="text-center border-r border-black font-medium text-xs">${i + 1}</td>
                 <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase leading-tight">${s.name}</td>
                 <td class="text-center font-mono border-r border-black text-[9px] font-bold text-blue-800 tracking-tighter whitespace-nowrap overflow-hidden">${s.admissionNo}</td>
-                ${ cells }
+                ${cells}
                 <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
                 <td class="text-center font-bold rank-cell text-sm">${s.rank}</td>
-                ${ deleteBtn }
+                ${deleteBtn}
             </tr >
         `;
     }).join('');
@@ -1603,7 +1603,7 @@ window.liveUpdateMark = (sid, idx, val, key, max, inputEl) => {
 window.saveMarks = () => {
     const config = window.activeSheetConfig;
     const keyType = 'mark'; // Unified storage
-    const sheetKey = `${ config.batchId } -${ config.sem } -${ keyType } -${ config.maxMark } `;
+    const sheetKey = `${config.batchId} -${config.sem} -${keyType} -${config.maxMark} `;
 
     assessmentMetadata[sheetKey] = {
         date: config.examDate,
