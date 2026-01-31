@@ -436,31 +436,65 @@
 
             <!-- Setup View -->
             <div id="assessmentSetup" class="app-view hidden">
-                <h2 class="text-2xl font-bold mb-6 text-primary text-center">Workshop Viva Entry</h2>
-                <div class="bg-white p-8 border rounded-2xl shadow-sm max-w-xl mx-auto space-y-4">
-                    <div><label class="text-[10px] font-bold text-gray-500 uppercase">Batch</label><select
-                            id="assessBatchSelector" class="w-full p-3 border rounded-xl bg-gray-50"></select></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Semester</label><select
-                                id="assessSemesterSelector" class="w-full p-3 border rounded-xl text-sm">
-                                <option value="1st">1st Sem</option>
-                                <option value="2nd">2nd Sem</option>
-                                <option value="3rd">3rd Sem</option>
-                            </select></div>
-                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Sub-Batch</label><select
-                                id="assessSubBatchSelector" class="w-full p-3 border rounded-xl text-sm"></select></div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Max Mark</label><input
-                                type="number" id="assessMaxMark" value="200"
-                                class="w-full p-3 border rounded-xl text-sm">
+                <h2 class="text-2xl font-bold mb-6 text-primary text-center">Assessment Entry</h2>
+
+                <!-- Tab Navigation -->
+                <div class="flex justify-center gap-2 mb-6">
+                    <button onclick="switchAssessmentTab('workshop')" id="workshopTab"
+                        class="px-6 py-3 font-bold rounded-xl transition-all bg-primary text-white">
+                        Workshop Viva Entry
+                    </button>
+                    <button onclick="switchAssessmentTab('exam')" id="examTab"
+                        class="px-6 py-3 font-bold rounded-xl transition-all bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        Assessment Exam
+                    </button>
+                </div>
+
+                <!-- Workshop Viva Tab Content -->
+                <div id="workshopTabContent" class="tab-content">
+                    <div class="bg-white p-8 border rounded-2xl shadow-sm max-w-xl mx-auto space-y-4">
+                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Batch</label><select
+                                id="assessBatchSelector" class="w-full p-3 border rounded-xl bg-gray-50"></select></div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="text-[10px] font-bold text-gray-500 uppercase">Semester</label><select
+                                    id="assessSemesterSelector" class="w-full p-3 border rounded-xl text-sm">
+                                    <option value="1st">1st Sem</option>
+                                    <option value="2nd">2nd Sem</option>
+                                    <option value="3rd">3rd Sem</option>
+                                </select></div>
+                            <div><label class="text-[10px] font-bold text-gray-500 uppercase">Sub-Batch</label><select
+                                    id="assessSubBatchSelector" class="w-full p-3 border rounded-xl text-sm"></select>
+                            </div>
                         </div>
-                        <div><label class="text-[10px] font-bold text-gray-500 uppercase">Exam Date</label><input
-                                type="date" id="assessExamDate" class="w-full p-3 border rounded-xl text-sm"></div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="text-[10px] font-bold text-gray-500 uppercase">Max Mark</label><input
+                                    type="number" id="assessMaxMark" value="200"
+                                    class="w-full p-3 border rounded-xl text-sm">
+                            </div>
+                            <div><label class="text-[10px] font-bold text-gray-500 uppercase">Exam Date</label><input
+                                    type="date" id="assessExamDate" class="w-full p-3 border rounded-xl text-sm"></div>
+                        </div>
+                        <button onclick="handleGenerateRequest('assessment')"
+                            class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:scale-[1.01] transition-all">Begin
+                            Mark Entry</button>
                     </div>
-                    <button onclick="handleGenerateRequest('assessment')"
-                        class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:scale-[1.01] transition-all">Begin
-                        Mark Entry</button>
+                </div>
+
+                <!-- Assessment Exam Tab Content -->
+                <div id="examTabContent" class="tab-content hidden">
+                    <div class="bg-white p-8 border rounded-2xl shadow-sm max-w-4xl mx-auto space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="text-[10px] font-bold text-gray-500 uppercase">Batch</label><select
+                                    id="examBatchSelector" onchange="loadAssessmentExamTable()"
+                                    class="w-full p-3 border rounded-xl bg-gray-50"></select></div>
+                            <div><label class="text-[10px] font-bold text-gray-500 uppercase">Exam Date</label><input
+                                    type="date" id="examDate" onchange="loadAssessmentExamTable()"
+                                    class="w-full p-3 border rounded-xl text-sm"></div>
+                        </div>
+                        <div id="assessmentExamTableContainer" class="mt-6">
+                            <!-- Table will be rendered here by JavaScript -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -725,14 +759,14 @@
 
 
     <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=4.9.7"></script>
+    <script src="js/github-sync.js?v=4.9.9"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=4.9.8"></script>
+    <script src="js/cloud-sync-integration.js?v=4.9.9"></script>
     <!-- Main JavaScript Module -->
     <!-- Activity Logger -->
     <script src="js/logger.js"></script>
-    <script src="js/ams-core.js?v=4.9.8"></script>
-    <script src="js/app.js?v=4.9.8"></script>
+    <script src="js/ams-core.js?v=4.9.9"></script>
+    <script src="js/app.js?v=4.9.9"></script>
 </body>
 
 </html>

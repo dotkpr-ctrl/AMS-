@@ -380,7 +380,8 @@ function updateBatchDropdowns() {
     const selectors = [
         'batchSelector', 'assessBatchSelector', 'printBatchSelector',
         'attendanceBatchSelector', 'registerBatchSelector', 'printSubBatchSelector',
-        'printStudentSelector', 'attendanceSubBatchSelector', 'assessSubBatchSelector'
+        'printStudentSelector', 'attendanceSubBatchSelector', 'assessSubBatchSelector',
+        'examBatchSelector'
     ];
 
     selectors.forEach(id => {
@@ -1952,6 +1953,253 @@ window.deleteAssessment = (key) => {
     calculateDashboardStats(); // Update stats
     showMessage('Success', 'Assessment record deleted successfully.', 'success');
 };
+
+// ==================== ASSESSMENT EXAM TAB ====================
+
+let assessmentExams = {};
+const LS_KEY_ASSESSMENT_EXAMS = 'academic_management_assessment_exams';
+
+// Load assessment exams from storage
+function loadAssessmentExams() {
+    try {
+        const stored = localStorage.getItem(LS_KEY_ASSESSMENT_EXAMS);
+        assessmentExams = stored ? JSON.parse(stored) : {};
+    } catch (error) {
+        console.error('Error loading assessment exams:', error);
+        assessmentExams = {};
+    }
+}
+
+// Save assessment exams to storage
+function saveAssessmentExams() {
+    try {
+        localStorage.setItem(LS_KEY_ASSESSMENT_EXAMS, JSON.stringify(assessmentExams));
+    } catch (error) {
+        console.error('Error saving assessment exams:', error);
+        showMessage('Save Error', 'Could not save assessment data', 'error');
+    }
+}
+
+// Switch between assessment tabs
+window.switchAssessmentTab = function (tab) {
+    const workshopTab = document.getElementById('workshopTab');
+    const examTab = document.getElementById('examTab');
+    const workshopContent = document.getElementById('workshopTabContent');
+    const examContent = document.getElementById('examTabContent');
+
+    if (tab === 'workshop') {
+        workshopTab.classList.remove('bg-gray-200', 'text-gray-700');
+        workshopTab.classList.add('bg-primary', 'text-white');
+        examTab.classList.remove('bg-primary', 'text-white');
+        examTab.classList.add('bg-gray-200', 'text-gray-700');
+
+        workshopContent.classList.remove('hidden');
+        examContent.classList.add('hidden');
+    } else {
+        examTab.classList.remove('bg-gray-200', 'text-gray-700');
+        examTab.classList.add('bg-primary', 'text-white');
+        workshopTab.classList.remove('bg-primary', 'text-white');
+        workshopTab.classList.add('bg-gray-200', 'text-gray-700');
+
+        examContent.classList.remove('hidden');
+        workshopContent.classList.add('hidden');
+
+        // Load the table when switching to exam tab
+        loadAssessmentExamTable();
+    }
+};
+
+//Load and render assessment exam table
+window.loadAssessmentExamTable = function () {
+    const batchSelector = document.getElementById('examBatchSelector');
+    const dateInput = document.getElementById('examDate');
+    const container = document.getElementById('assessmentExamTableContainer');
+
+    const batchId = batchSelector?.value;
+    const date = dateInput?.value;
+
+    if (!batchId || !date) {
+        container.innerHTML = '<p class="text-center text-gray-500 py-8">Please select batch and date</p>';
+        return;
+    }
+
+    const key = `${batchId}_${date}`;
+    const filtered = students.filter(s => s.batchId === batchId).sort((a, b) => a.admissionNo.localeCompare(b.admissionNo));
+
+    if (filtered.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500 py-8">No students in this batch</p>';
+        return;
+    }
+
+    // Initialize exam data if doesn't exist
+    if (!assessmentExams[key]) {
+        assessmentExams[key] = {
+            date: date,
+            batchId: batchId,
+            students: filtered.map(s => ({
+                id: s.id,
+                name: s.name,
+                admissionNo: s.admissionNo,
+                total: 0,
+                rank: 0
+            }))
+        };
+    }
+
+    // Render the table
+    renderAssessmentExamTable(key, filtered);
+};
+
+// Render the assessment exam table
+function renderAssessmentExamTable(key, studentList) {
+    const container = document.getElementById('assessmentExamTableContainer');
+    const examData = assessmentExams[key];
+
+    // Calculate ranks
+    const sorted = [...examData.students].sort((a, b) => b.total - a.total);
+    sorted.forEach((s, idx) => {
+        const student = examData.students.find(st => st.id === s.id);
+        if (student) {
+            student.rank = s.total > 0 ? idx + 1 : 0;
+        }
+    });
+
+    const html = `
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+                <thead class="bg-gray-100 border-b-2 border-gray-300">
+                    <tr>
+                        <th class="p-3 text-left font-bold border">SI No</th>
+                        <th class="p-3 text-left font-bold border">Name</th>
+                        <th class="p-3 text-left font-bold border">Admission No</th>
+                        <th class="p-3 text-center font-bold border">Total</th>
+                        <th class="p-3 text-center font-bold border">Rank</th>
+                        <th class="p-3 text-center font-bold border">Signature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${examData.students.map((s, idx) => `
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-3 border text-center">${idx + 1}</td>
+                            <td class="p-3 border font-medium">${s.name}</td>
+                            <td class="p-3 border text-xs font-mono">${s.admissionNo}</td>
+                            <td class="p-3 border">
+                                <input type="number" value="${s.total}" min="0" max="200"
+                                    onchange="updateExamTotal('${key}', '${s.id}', this.value)"
+                                    class="w-full p-2 border rounded text-center focus:ring-2 focus:ring-primary">
+                            </td>
+                            <td class="p-3 border text-center font-bold ${s.rank === 1 ? 'text-green-600' : ''}">
+                                ${s.rank > 0 ? s.rank : '-'}
+                            </td>
+                            <td class="p-3 border">
+                                <div class="h-8 border-b-2 border-dotted border-gray-400"></div>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex justify-between items-center mt-6">
+            <button onclick="printAssessmentExam('${key}')" 
+                class="px-6 py-3 bg-gray-800 text-white font-bold rounded-xl hover:bg-black transition-all">
+                🖨️ Print
+            </button>
+            <button onclick="saveAssessmentExam()" 
+                class="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all">
+                💾 Save
+            </button>
+        </div>
+    `;
+
+    container.innerHTML = html;
+}
+
+// Update exam total marks
+window.updateExamTotal = function (key, studentId, value) {
+    const total = parseInt(value) || 0;
+    const examData = assessmentExams[key];
+    const student = examData.students.find(s => s.id === studentId);
+
+    if (student) {
+        student.total = total;
+        // Re-render to update ranks
+        const filtered = students.filter(s => s.batchId === examData.batchId);
+        renderAssessmentExamTable(key, filtered);
+    }
+};
+
+// Save assessment exam
+window.saveAssessmentExam = function () {
+    saveAssessmentExams();
+    showMessage('Success', 'Assessment exam saved successfully', 'success');
+    window.activityLogger.log('Assessment Exam', 'Saved assessment exam data', 'info');
+};
+
+// Print assessment exam
+window.printAssessmentExam = function (key) {
+    const examData = assessmentExams[key];
+    const printWindow = window.open('', '_blank');
+
+    const html = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Assessment Exam - ${examData.batchId}</title>
+            <style>
+                @page { size: A4; margin: 20mm; }
+                body { font-family: Arial, sans-serif; padding: 20px; }
+                h1 { text-align: center; margin-bottom: 10px; }
+                .header { text-align: center; margin-bottom: 20px; }
+                table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+                th { background-color: #f0f0f0; font-weight: bold; }
+                .center { text-align: center; }
+                .signature { height: 30px; border-bottom: 1px dotted #666; }
+            </style>
+        </head>
+        <body>
+            <h1>INSTITUTE OF HEAVY EQUIPMENT & ITC</h1>
+            <div class="header">
+                <strong>Assessment Examination</strong><br>
+                Batch: ${examData.batchId} | Date: ${new Date(examData.date).toLocaleDateString()}
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="center">SI No</th>
+                        <th>Name</th>
+                        <th>Admission No</th>
+                        <th class="center">Total</th>
+                        <th class="center">Rank</th>
+                        <th class="center">Signature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${examData.students.map((s, idx) => `
+                        <tr>
+                            <td class="center">${idx + 1}</td>
+                            <td>${s.name}</td>
+                            <td>${s.admissionNo}</td>
+                            <td class="center">${s.total}</td>
+                            <td class="center">${s.rank > 0 ? s.rank : '-'}</td>
+                            <td><div class="signature"></div></td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </body>
+        </html>
+    `;
+
+    printWindow.document.write(html);
+    printWindow.document.close();
+    printWindow.print();
+
+    window.activityLogger.log('Print', `Printed assessment exam for ${examData.batchId}`, 'info');
+};
+
+// Initialize assessment exams on load
+loadAssessmentExams();
 
 // ==================== DOCUMENT MANAGEMENT ====================
 
