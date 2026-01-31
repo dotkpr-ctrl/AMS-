@@ -1052,6 +1052,7 @@ window.filterRegister = () => {
         subBatch: 'All', // Default to All for overview
         type: 'attendance-register',
         filterType: document.getElementById('registerFilterType').value,
+        sessionFilter: document.getElementById('registerSessionType').value,
         startDate: document.getElementById('registerStartDate').value,
         endDate: document.getElementById('registerEndDate').value
     };
@@ -1117,12 +1118,13 @@ function renderMonthlyRegister(batchId, filtered, config) {
         `).join('');
 
     document.getElementById('generatedSheetHeader').innerHTML = `
-            <tr class="bg-gray-100 border-b-2 border-black" style="border-top: 2px solid black;">
-                <th class="w-10 text-center border-r border-black p-2 font-bold text-xs uppercase">SL.</th>
-                <th class="text-left px-2 border-r border-black font-bold text-xs uppercase" style="min-width: 200px;">NAME</th>
+            <tr class="border-b-2 border-black">
+                <th class="w-10 text-center border-r border-black p-2 font-bold text-xs uppercase bg-gray-100">SL.</th>
+                <th class="text-left px-2 border-r border-black font-bold text-xs uppercase bg-gray-100" style="min-width: 250px;">NAME</th>
                 ${dateHeaders}
-                <th class="w-10 text-center border-r border-black bg-gray-50 text-red-700 font-bold text-xs border-l-2 border-l-black">ABS</th>
-                <th class="w-10 text-center bg-gray-50 text-blue-700 font-bold text-xs">%</th>
+                <th class="w-8 text-center border-r border-black bg-green-50 text-green-800 font-bold text-xs border-l-2 border-l-black">P</th>
+                <th class="w-8 text-center border-r border-black bg-red-50 text-red-800 font-bold text-xs">A</th>
+                <th class="w-10 text-center bg-blue-50 text-blue-800 font-bold text-xs">%</th>
             </tr>
         `;
 
@@ -1135,10 +1137,16 @@ function renderMonthlyRegister(batchId, filtered, config) {
 
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => {
         let absCount = 0;
+        let presentCount = 0;
+
         const cells = dates.map(d => {
             const isAbs = batchAttendance[d] && batchAttendance[d][s.id] === 'absent';
+            const hasRecord = !!batchAttendance[d];
+
             if (isAbs) absCount++;
-            const status = batchAttendance[d] ? (isAbs ? 'A' : 'P') : '-';
+            else if (hasRecord) presentCount++;
+
+            const status = hasRecord ? (isAbs ? 'A' : 'P') : '-';
 
             let cellStyle = 'font-weight: bold; color: green;';
             if (isAbs) cellStyle = 'font-weight: bold; color: red; background-color: #fee2e2;'; // light red bg
@@ -1152,13 +1160,16 @@ function renderMonthlyRegister(batchId, filtered, config) {
             ? (((total - absCount) / total) * 100).toFixed(0)
             : '0';
 
+        const rowBg = i % 2 === 0 ? 'bg-white' : 'bg-gray-50'; // Zebra Striping
+
         return `
-                <tr class="h-8 border-b border-black hover:bg-gray-50 transition-colors">
+                <tr class="h-8 border-b border-black ${rowBg} print:bg-transparent">
                     <td class="text-center text-black font-medium text-xs border-r border-black">${i + 1}</td>
                     <td class="text-left font-bold p-name text-xs px-2 border-r border-black text-black uppercase">${s.name}</td>
                     ${cells}
-                    <td class="text-center font-bold text-xs text-red-700 border-r border-black border-l-2 border-l-black">${absCount}</td>
-                    <td class="text-center font-bold text-xs text-blue-700">${percent}%</td>
+                    <td class="text-center font-bold text-xs text-green-700 bg-green-50 border-r border-black border-l-2 border-l-black">${presentCount}</td>
+                    <td class="text-center font-bold text-xs text-red-700 bg-red-50 border-r border-black">${absCount}</td>
+                    <td class="text-center font-bold text-xs text-blue-700 bg-blue-50">${percent}%</td>
                 </tr>
             `;
     }).join('');
