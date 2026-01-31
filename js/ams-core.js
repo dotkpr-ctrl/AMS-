@@ -48,6 +48,7 @@ window.handleLogin = async (e) => {
             staffMembers = cloudResult.data.staffMembers;
             // Save to localStorage for offline access
             localStorage.setItem(LS_KEY_STAFF, JSON.stringify(staffMembers));
+            window.activityLogger.log('Sync', 'Staff data updated from cloud', 'info');
         }
 
         // Find user in staff members
@@ -59,9 +60,11 @@ window.handleLogin = async (e) => {
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
             localStorage.setItem('logged_in_staff_id', staffMember.id);
+            window.activityLogger.log('Login', `User ${staffMember.name} logged in successfully`, 'success');
             startSession(role);
         } else {
             // Invalid credentials
+            window.activityLogger.log('Login Failed', `Failed login attempt for username: ${u}`, 'warning');
             err.textContent = 'Invalid username or password';
             err.classList.remove('hidden');
             btn.innerHTML = originalBtnText;
@@ -79,8 +82,10 @@ window.handleLogin = async (e) => {
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
             localStorage.setItem('logged_in_staff_id', staffMember.id);
+            window.activityLogger.log('Login', `User ${staffMember.name} logged in (Offline Mode)`, 'success');
             startSession(role);
         } else {
+            window.activityLogger.log('Login Failed', `Failed login attempt (Offline) for username: ${u}`, 'warning');
             err.textContent = 'Authentication failed. Please check your internet connection.';
             err.classList.remove('hidden');
             btn.innerHTML = originalBtnText;
@@ -537,7 +542,8 @@ window.deleteAttendanceManual = () => {
 
         // 4. UI Feedback
         renderAttendanceList();
-        showMessage('Success', 'Record deleted successfully.', 'success');
+        showMessage('Success', 'Attendance record deleted successfully.', 'success');
+        window.activityLogger.log('Delete Attendance', `Deleted attendance for ${batchId} on ${date}`, 'warning');
     }
 };
 
@@ -567,6 +573,7 @@ window.shareAttendanceWhatsApp = () => {
     // Show Preview Modal instead of opening directly
     document.getElementById('sharePreviewText').value = message;
     document.getElementById('sharePreviewModal').classList.remove('hidden');
+    window.activityLogger.log('Share Attendance', `Prepared WhatsApp message for ${batchId} on ${date}`, 'info');
 };
 
 // -- Share Preview Logic --
@@ -584,12 +591,14 @@ window.copyShareText = () => {
     const original = btn.innerHTML;
     btn.innerHTML = '<span>✅ Copied!</span>';
     setTimeout(() => btn.innerHTML = original, 2000);
+    window.activityLogger.log('Share Attendance', 'Copied attendance summary to clipboard', 'info');
 };
 
 window.proceedToWhatsApp = () => {
     const message = document.getElementById('sharePreviewText').value;
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
     closeSharePreview();
+    window.activityLogger.log('Share Attendance', 'Opened WhatsApp with attendance summary', 'info');
 };
 
 function renderAttendanceRegister() {
@@ -679,6 +688,7 @@ function renderAttendanceRegister() {
             saveData();
             renderAttendanceRegister(); // Refresh
             showMessage('Success', 'Column deleted successfully.', 'success');
+            window.activityLogger.log('Delete Attendance Column', `Deleted attendance column for ${batchId} on ${date}`, 'warning');
         }
     };
 
@@ -714,6 +724,55 @@ function renderAttendanceRegister() {
 
     container.innerHTML = tableHtml;
 }
+
+// -- Activity Log Functions --
+
+window.renderActivityLogs = () => {
+    const tbody = document.getElementById('activityLogBody');
+    if (!tbody) return;
+
+    const logs = window.activityLogger.getLogs();
+
+    if (logs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-400">No activity recorded yet.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = logs.map(log => {
+        let typeClass = 'text-gray-600';
+        if (log.type === 'error') typeClass = 'text-red-600 font-bold';
+        if (log.type === 'warning') typeClass = 'text-orange-600';
+        if (log.type === 'success') typeClass = 'text-green-600';
+
+        return `
+            <tr class="border-b hover:bg-gray-50">
+                <td class="p-3 text-gray-500 whitespace-nowrap">${new Date(log.timestamp).toLocaleString()}</td>
+                <td class="p-3 font-bold text-gray-700">${log.user}</td>
+                <td class="p-3"><span class="${typeClass}">${log.action}</span></td>
+                <td class="p-3 text-gray-600 break-words">${log.details}</td>
+            </tr>
+        `;
+    }).join('');
+};
+
+window.exportLogsToCSV = () => {
+    const csv = window.activityLogger.exportLogsCSV();
+    if (!csv) {
+        alert("No logs to export!");
+        return;
+    }
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', `ams_activity_logs_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.activityLogger.log('Export Logs', 'Activity logs exported to CSV', 'info');
+};
 
 // Student Management Functions
 function renderStudentList() {
@@ -758,6 +817,7 @@ window.updateBatchInCharge = (val) => {
     if (!batchMetadata[bId]) batchMetadata[bId] = {};
     batchMetadata[bId].inCharge = val;
     saveData();
+    window.activityLogger.log('Update Batch Incharge', `Batch ${bId} incharge updated to ${val}`, 'info');
 };
 
 window.updateSubBatch = (id, val) => {
@@ -765,6 +825,7 @@ window.updateSubBatch = (id, val) => {
     if (s) {
         s.subBatch = val;
         saveData();
+        window.activityLogger.log('Update Sub-Batch', `Student ${s.name} (${s.admissionNo}) sub-batch updated to ${val}`, 'info');
     }
 };
 
@@ -773,11 +834,13 @@ window.deleteStudent = (id) => {
         console.log('Attempting to delete student:', id);
         if (confirm('Permanently delete student profile? This cannot be undone.')) {
             const initialCount = students.length;
+            const studentName = students.find(s => s.id === id)?.name || 'Unknown';
             students = students.filter(s => s.id !== id);
 
             if (students.length === initialCount) {
                 console.warn('Student ID not found in list:', id);
                 showMessage('Error', 'Student could not be found.', 'error');
+                window.activityLogger.log('Delete Student Failed', `Attempted to delete non-existent student ID: ${id}`, 'error');
                 return;
             }
 
@@ -786,30 +849,35 @@ window.deleteStudent = (id) => {
             updateBatchDropdowns();
             console.log('Student deleted successfully. New count:', students.length);
             showMessage('Success', 'Student profile deleted.', 'success');
+            window.activityLogger.log('Delete Student', `Deleted student: ${studentName} (ID: ${id})`, 'warning');
         } else {
             console.log('Deletion cancelled by user.');
+            window.activityLogger.log('Delete Student', `Deletion of student ID: ${id} cancelled`, 'info');
         }
     } catch (err) {
         console.error('Delete failed:', err);
         showMessage('Error', 'Could not delete student. Check console.', 'error');
+        window.activityLogger.log('Delete Student Failed', `Error deleting student ID: ${id} - ${err.message}`, 'error');
     }
 };
 
 window.handleStudentFormSubmit = (e) => {
     e.preventDefault();
-    students.push({
+    const newStudent = {
         name: e.target.studentName.value.trim(),
         admissionNo: e.target.admissionNo.value.trim(),
         batchId: e.target.batchId.value.trim().toUpperCase(),
         id: crypto.randomUUID(),
         marks: {},
         subBatch: 'None'
-    });
+    };
+    students.push(newStudent);
     saveData();
     e.target.reset();
     renderStudentList();
     updateBatchDropdowns();
     showMessage('Success', 'Student added.', 'success');
+    window.activityLogger.log('Add Student', `Added student: ${newStudent.name} (${newStudent.admissionNo}) to batch ${newStudent.batchId}`, 'success');
 };
 
 window.toggleBulkInputModal = (show) => {
@@ -817,6 +885,7 @@ window.toggleBulkInputModal = (show) => {
     if (show) {
         modal.classList.remove('hidden');
         document.getElementById('bulkBatchId').value = document.getElementById('batchSelector').value || '';
+        window.activityLogger.log('Bulk Input', 'Opened bulk student input modal', 'info');
     } else {
         modal.classList.add('hidden');
     }
@@ -829,6 +898,7 @@ window.handleBulkInput = (e) => {
 
     if (!bId || !text) return;
 
+    let addedCount = 0;
     text.split('\n').forEach(line => {
         const p = line.split(/[,\t;]/).map(x => x.trim());
         if (p.length >= 2 && p[0] && p[1]) {
@@ -840,6 +910,7 @@ window.handleBulkInput = (e) => {
                 marks: {},
                 subBatch: 'None'
             });
+            addedCount++;
         }
     });
 
@@ -847,6 +918,7 @@ window.handleBulkInput = (e) => {
     refreshDataAndUI();
     window.toggleBulkInputModal(false);
     showMessage('Success', 'Batch imported.', 'success');
+    window.activityLogger.log('Bulk Import', `Imported ${addedCount} students into batch ${bId}`, 'success');
 };
 
 // Staff Management Functions
@@ -880,14 +952,17 @@ window.addStaff = (name, phone, position, colorCode, isAdmin = false) => {
     showMessage('Staff Added!',
         `${name} added successfully!${adminNote}\nUsername: ${username}\nPassword: ${password}`,
         'success');
+    window.activityLogger.log('Add Staff', `Added staff: ${name} (${position}, Admin: ${isAdmin})`, 'success');
 };
 
 window.deleteStaff = (staffId) => {
     if (confirm('Permanently delete this staff member? This cannot be undone.')) {
+        const staffName = staffMembers.find(s => s.id === staffId)?.name || 'Unknown';
         staffMembers = staffMembers.filter(s => s.id !== staffId);
         saveData();
         renderStaffList();
         showMessage('Success', 'Staff member deleted.', 'success');
+        window.activityLogger.log('Delete Staff', `Deleted staff: ${staffName} (ID: ${staffId})`, 'warning');
     }
 };
 
@@ -898,6 +973,7 @@ window.updateStaff = (staffId, updates) => {
         saveData();
         renderStaffList();
         showMessage('Success', 'Staff member updated.', 'success');
+        window.activityLogger.log('Update Staff', `Updated staff: ${staff.name} (ID: ${staffId})`, 'info');
     }
 };
 
@@ -1017,8 +1093,10 @@ window.handleGenerateRequest = (mode, forceType = null) => {
         }
 
         generateSheet(false, config);
+        window.activityLogger.log('Generate Sheet', `Generated sheet of type: ${config.type} for batch: ${config.batchId}`, 'info');
     } catch (err) {
         showMessage('Error', 'Generation failed. Check selections.', 'error');
+        window.activityLogger.log('Generate Sheet Failed', `Error generating sheet: ${err.message}`, 'error');
     }
 };
 
@@ -1204,6 +1282,7 @@ window.filterRegister = () => {
         endDate: document.getElementById('registerEndDate').value
     };
     generateSheet(false, config);
+    window.activityLogger.log('Filter Register', `Filtered attendance register for batch ${batchId} by ${config.filterType} and session ${config.sessionFilter}`, 'info');
 };
 
 function renderMonthlyRegister(batchId, filtered, config) {
@@ -1500,6 +1579,7 @@ window.deleteStudentMark = (sid, sheetKey) => {
     // Re-render
     const config = window.activeSheetConfig;
     generateSheet(false, config);
+    window.activityLogger.log('Delete Student Marks', `Deleted marks for student ${student.name} (ID: ${sid}) from assessment ${sheetKey}`, 'warning');
 };
 
 function renderTranscript(studentId) {
@@ -1613,6 +1693,7 @@ window.saveMarks = () => {
     saveData();
     generateSheet(true, config);
     showMessage('Success', 'Marks saved successfully.', 'success');
+    window.activityLogger.log('Save Marks', `Marks saved for assessment ${sheetKey}`, 'success');
 };
 
 // Import/Export Functions
@@ -1630,6 +1711,7 @@ window.exportData = () => {
     a.href = URL.createObjectURL(blob);
     a.download = 'ams_v4_2_backup.json';
     a.click();
+    window.activityLogger.log('Export Data', 'All system data exported to JSON backup', 'info');
 };
 
 window.importData = (e) => {
@@ -1647,8 +1729,10 @@ window.importData = (e) => {
             saveData();
             refreshDataAndUI();
             showMessage('Success', 'System restored.', 'success');
+            window.activityLogger.log('Import Data', 'System data imported from backup file', 'warning');
         } catch (err) {
             showMessage('Error', 'Invalid backup file.', 'error');
+            window.activityLogger.log('Import Data Failed', `Error importing data: ${err.message}`, 'error');
         }
     };
     reader.readAsText(e.target.files[0]);
