@@ -631,16 +631,15 @@ function renderAttendanceRegister() {
         let headerContent = `${day}/${m}`;
 
         if (isAdmin) {
-            headerContent += `
-                <button onclick="deleteBatchAttendanceDate('${batchId}', '${d}')" 
-                    title="Delete this column"
-                    class="block mx-auto mt-1 text-red-400 hover:text-red-700 font-bold text-[10px] leading-none">
-                    ×
-                </button>
+            <button onclick="deleteBatchAttendanceDate('${batchId}', '${d}')"
+                title="Delete this column"
+                class="block mx-auto mt-1 w-5 h-5 rounded bg-red-500 text-white font-bold text-[10px] leading-none hover:bg-red-700 shadow-sm transition-all flex items-center justify-center">
+                ✕
+            </button>
             `;
         }
 
-        return `<th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px] align-top">${headerContent}</th>`;
+        return `< th class="px-2 py-1 text-[10px] border border-gray-300 bg-gray-50 min-w-[30px] align-top" > ${ headerContent }</th > `;
     }).join('');
 
     const tableRows = batchStudents.map((s, i) => {
@@ -651,28 +650,28 @@ function renderAttendanceRegister() {
             const isAbs = val === 'absent';
             if (isAbs) absent++; else present++;
             const colorClass = isAbs ? 'text-red-600 bg-red-50 font-bold' : 'text-green-600';
-            return `<td class="border border-gray-200 text-center text-xs p-1 ${colorClass}">${isAbs ? 'A' : 'P'}</td>`;
+            return `< td class="border border-gray-200 text-center text-xs p-1 ${colorClass}" > ${ isAbs ? 'A' : 'P' }</td > `;
         }).join('');
 
         const totalDays = dates.length;
         const percent = totalDays > 0 ? Math.round((present / totalDays) * 100) : 0;
 
         return `
-            <tr class="hover:bg-gray-50 transition-colors">
+                < tr class="hover:bg-gray-50 transition-colors" >
                 <td class="border border-gray-200 text-center py-1">${i + 1}</td>
                 <td class="border border-gray-200 px-2 py-1 font-medium">${s.name}</td>
                 <td class="border border-gray-200 text-center py-1 font-mono text-xs text-gray-500">${s.admissionNo}</td>
-                ${cells}
+                ${ cells }
                 <td class="border border-gray-200 text-center font-bold text-green-700 bg-green-50">${present}</td>
                 <td class="border border-gray-200 text-center font-bold text-red-700 bg-red-50">${absent}</td>
                 <td class="border border-gray-200 text-center font-bold">${percent}%</td>
-            </tr>
+            </tr >
         `;
     }).join('');
 
     // -- DELETE FUNCTION --
     window.deleteBatchAttendanceDate = (batchId, date) => {
-        if (!confirm(`Are you sure you want to delete the attendance column for ${date}?`)) return;
+        if (!confirm(`Are you sure you want to delete the attendance column for ${ date } ? `)) return;
 
         if (attendanceData[batchId] && attendanceData[batchId][date]) {
             delete attendanceData[batchId][date];
@@ -683,28 +682,28 @@ function renderAttendanceRegister() {
     };
 
     const tableHtml = `
-        <div class="overflow-x-auto border rounded-t-lg shadow-sm bg-white">
-            <table class="w-full border-collapse text-sm">
-                <thead class="bg-blue-50 text-blue-800 sticky top-0 z-10">
-                    <tr>
-                        <th class="p-2 border border-blue-200 text-center w-10">SL</th>
-                        <th class="p-2 border border-blue-200 text-left min-w-[150px]">Student Name</th>
-                        <th class="p-2 border border-blue-200 text-center w-24">Adm No</th>
-                        ${dateHeaders}
-                        <th class="p-2 border border-blue-200 text-center w-10 text-green-700">P</th>
-                        <th class="p-2 border border-blue-200 text-center w-10 text-red-700">A</th>
-                        <th class="p-2 border border-blue-200 text-center w-12">%</th>
-                    </tr>
-                </thead>
-                <tbody>${tableRows}</tbody>
-            </table>
-        </div>
+        < div class= "overflow-x-auto border rounded-t-lg shadow-sm bg-white" >
+        <table class="w-full border-collapse text-sm">
+            <thead class="bg-blue-50 text-blue-800 sticky top-0 z-10">
+                <tr>
+                    <th class="p-2 border border-blue-200 text-center w-10">SL</th>
+                    <th class="p-2 border border-blue-200 text-left min-w-[150px]">Student Name</th>
+                    <th class="p-2 border border-blue-200 text-center w-24">Adm No</th>
+                    ${dateHeaders}
+                    <th class="p-2 border border-blue-200 text-center w-10 text-green-700">P</th>
+                    <th class="p-2 border border-blue-200 text-center w-10 text-red-700">A</th>
+                    <th class="p-2 border border-blue-200 text-center w-12">%</th>
+                </tr>
+            </thead>
+            <tbody>${tableRows}</tbody>
+        </table>
+        </div >
         <div class="mt-4 flex justify-end">
-            <button onclick="handleGenerateRequest('print', 'attendance-register')" 
+            <button onclick="handleGenerateRequest('print', 'attendance-register')"
                 class="bg-primary text-white px-6 py-2 rounded-lg font-bold shadow hover:bg-primary-dark transition-all flex items-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
                     </path>
                 </svg>
                 Print Register
@@ -728,12 +727,12 @@ function renderStudentList() {
     const filtered = students.filter(s => s.batchId === batchId);
 
     if (filtered.length === 0) {
-        list.innerHTML = `<tr><td colspan="5" class="p-4 text-center italic opacity-50">No student profiles in this batch.</td></tr>`;
+        list.innerHTML = `< tr > <td colspan="5" class="p-4 text-center italic opacity-50">No student profiles in this batch.</td></tr > `;
         return;
     }
 
     list.innerHTML = filtered.map(s => `
-        <tr class="border-b hover:bg-gray-50">
+        < tr class="border-b hover:bg-gray-50" >
             <td class="p-2 text-sm font-medium">${s.name}</td>
             <td class="p-2 text-xs font-mono">${s.admissionNo}</td>
             <td class="p-2 text-xs">${s.batchId}</td>
@@ -748,8 +747,8 @@ function renderStudentList() {
                 <button onclick="deleteStudent('${s.id}')" 
                     class="text-red-600 font-bold text-xs hover:underline">Delete</button>
             </td>
-        </tr>
-    `).join('');
+        </tr >
+        `).join('');
 }
 
 window.updateBatchInCharge = (val) => {
@@ -878,7 +877,7 @@ window.addStaff = (name, phone, position, colorCode, isAdmin = false) => {
     // Show credentials in success message
     const adminNote = isAdmin ? '\n(Site Administrator - Full Access)' : '';
     showMessage('Staff Added!',
-        `${name} added successfully!${adminNote}\nUsername: ${username}\nPassword: ${password}`,
+        `${ name } added successfully!${ adminNote } \nUsername: ${ username } \nPassword: ${ password } `,
         'success');
 };
 
@@ -913,10 +912,10 @@ function renderStaffList() {
 
     if (staffMembers.length === 0) {
         container.innerHTML = `
-            <div class="text-center py-10 text-gray-500 italic border-2 border-dashed rounded-xl">
-                <div class="text-4xl mb-2">👥</div>
-                No staff members added yet. Use the form above to add staff.
-            </div>
+        < div class="text-center py-10 text-gray-500 italic border-2 border-dashed rounded-xl" >
+            <div class="text-4xl mb-2">👥</div>
+                No staff members added yet.Use the form above to add staff.
+            </div >
         `;
         return;
     }
@@ -929,8 +928,9 @@ function renderStaffList() {
     };
 
     container.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            ${staffMembers.map(staff => `
+        < div class="grid grid-cols-1 md:grid-cols-2 gap-4" >
+            ${
+                staffMembers.map(staff => `
                 <div class="bg-white border rounded-xl p-4 shadow-sm hover:shadow-md transition-all">
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex-1">
@@ -964,9 +964,10 @@ function renderStaffList() {
                         </button>
                     </div>
                 </div>
-            `).join('')}
-        </div>
-    `;
+            `).join('')
+    }
+        </div >
+        `;
 }
 
 window.handleStaffFormSubmit = (e) => {
@@ -1029,7 +1030,7 @@ function generateSheet(isReload = false, config) {
 
     // Unified storage key: Always use 'mark' so data is shared between Entry and Print views
     const keyType = 'mark';
-    const sheetKey = `${config.batchId}-${config.sem}-${keyType}-${config.maxMark}`;
+    const sheetKey = `${ config.batchId } -${ config.sem } -${ keyType } -${ config.maxMark } `;
     const meta = assessmentMetadata[sheetKey] || {};
 
     renderView('sheetGeneration');
@@ -1061,13 +1062,13 @@ function generateSheet(isReload = false, config) {
 
         if (config.filterType === 'month' || !config.filterType) {
             const m = now.toLocaleString('default', { month: 'long' });
-            periodStr = `${m} ${now.getFullYear()}`;
+            periodStr = `${ m } ${ now.getFullYear() } `;
         } else if (config.filterType === 'week') {
             periodStr = 'Current Week';
         } else if (config.filterType === 'custom') {
             const d1 = config.startDate ? new Date(config.startDate).toLocaleDateString('en-GB') : '?';
             const d2 = config.endDate ? new Date(config.endDate).toLocaleDateString('en-GB') : '?';
-            periodStr = `${d1} - ${d2}`;
+            periodStr = `${ d1 } - ${ d2 } `;
         }
         dateEl.textContent = periodStr;
     } else {
@@ -1101,7 +1102,7 @@ function generateSheet(isReload = false, config) {
         if (config.type === 'attendance-register') {
             const sType = config.sessionFilter || 'Theory';
             const titleEl = document.getElementById('sheetTitle');
-            titleEl.textContent = `MONTHLY ATTENDANCE REGISTER - ${sType.toUpperCase()}`;
+            titleEl.textContent = `MONTHLY ATTENDANCE REGISTER - ${ sType.toUpperCase() } `;
 
             // Visual Distinction
             titleEl.className = "text-sm md:text-md font-semibold border-b-2 inline-block px-8 pb-0.5 mt-1"; // reset
@@ -1134,21 +1135,21 @@ function generateSheet(isReload = false, config) {
 function renderAttendanceIndex(filtered) {
     document.getElementById('markSheetControls').classList.add('hidden');
     document.getElementById('generatedSheetHeader').innerHTML = `
-        <tr>
+        < tr >
             <th class="w-10 text-center border-r border-gray-300">SL.</th>
             <th class="text-left px-2 border-r border-gray-300">NAME</th>
             <th class="w-32 text-center border-r border-gray-300">ADMISSION NO.</th>
             <th class="w-32 text-center">SIGNATURE</th>
-        </tr>
-    `;
+        </tr >
+        `;
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => `
-        <tr class="h-9">
+        < tr class="h-9" >
             <td>${i + 1}</td>
             <td class="text-left font-medium p-name">${s.name}</td>
             <td class="font-mono text-[9px]">${s.admissionNo}</td>
             <td></td>
-        </tr>
-    `).join('');
+        </tr >
+        `).join('');
 }
 
 // Filter Register Logic
@@ -1168,7 +1169,7 @@ window.switchRegisterTab = (tab) => {
 
     // Update UI
     ['Theory', 'Workshop', 'All'].forEach(t => {
-        const btn = document.getElementById(`tab${t}`);
+        const btn = document.getElementById(`tab${ t } `);
         if (t === tab) {
             // Active Styles
             btn.classList.add('bg-white', 'shadow-sm', 'scale-105');
@@ -1259,22 +1260,22 @@ function renderMonthlyRegister(batchId, filtered, config) {
     }
 
     const dateHeaders = dates.map(d => `
-            <th class="w-6 text-[10px] p-1 border-r border-black bg-gray-50 align-bottom font-medium" style="height: 100px; vertical-align: bottom;">
-                <div style="writing-mode: vertical-rl; transform: rotate(180deg); margin: 0 auto; white-space: nowrap;">
-                    ${new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}
-                </div>
-            </th>
+        < th class="w-6 text-[10px] p-1 border-r border-black bg-gray-50 align-bottom font-medium" style = "height: 100px; vertical-align: bottom;" >
+            <div style="writing-mode: vertical-rl; transform: rotate(180deg); margin: 0 auto; white-space: nowrap;">
+                ${new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}
+            </div>
+            </th >
         `).join('');
 
     document.getElementById('generatedSheetHeader').innerHTML = `
-            <tr class="border-b-2 border-black">
+        < tr class="border-b-2 border-black" >
                 <th class="w-10 text-center border-r border-black p-2 font-bold text-xs uppercase bg-gray-100">SL.</th>
                 <th class="text-left px-2 border-r border-black font-bold text-xs uppercase bg-gray-100" style="min-width: 250px;">NAME</th>
-                ${dateHeaders}
+                ${ dateHeaders }
                 <th class="w-8 text-center border-r border-black bg-green-50 text-green-800 font-bold text-xs border-l-2 border-l-black">P</th>
                 <th class="w-8 text-center border-r border-black bg-red-50 text-red-800 font-bold text-xs">A</th>
                 <th class="w-10 text-center bg-blue-50 text-blue-800 font-bold text-xs">%</th>
-            </tr>
+            </tr >
         `;
 
     if (dates.length === 0) {
@@ -1289,25 +1290,25 @@ function renderMonthlyRegister(batchId, filtered, config) {
                 }
             });
 
-            const otherMsg = Object.entries(otherCounts).map(([k, v]) => `${v} ${k}`).join(', ');
+            const otherMsg = Object.entries(otherCounts).map(([k, v]) => `${ v } ${ k } `).join(', ');
 
             if (otherMsg) {
                 document.getElementById('generatedSheetBody').innerHTML = `
-                    <tr><td colspan="100" class="text-center p-8 text-gray-400 italic border-b border-black">
-                        No <b>${sessionFilter.toUpperCase()}</b> records found.<br>
-                        <span class="text-red-500 text-xs not-italic">
-                            However, found: <b>${otherMsg}</b> records.<br>
-                            (Please update "Session Type" in Daily Attendance if this is a mistake)
-                        </span>
-                    </td></tr>
-                 `;
+        < tr > <td colspan="100" class="text-center p-8 text-gray-400 italic border-b border-black">
+            No <b>${sessionFilter.toUpperCase()}</b> records found.<br>
+                <span class="text-red-500 text-xs not-italic">
+                    However, found: <b>${otherMsg}</b> records.<br>
+                        (Please update "Session Type" in Daily Attendance if this is a mistake)
+                </span>
+        </td></tr >
+            `;
                 return;
             }
         }
 
         document.getElementById('generatedSheetBody').innerHTML = `
-                <tr><td colspan="100" class="text-center p-8 text-gray-400 italic border-b border-black">No attendance records found for this period.</td></tr>
-            `;
+            < tr > <td colspan="100" class="text-center p-8 text-gray-400 italic border-b border-black">No attendance records found for this period.</td></tr >
+                `;
         return;
     }
 
@@ -1328,7 +1329,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
             if (isAbs) cellStyle = 'font-weight: bold; color: red; background-color: #fee2e2;'; // light red bg
             if (status === '-') cellStyle = 'color: #d1d5db;'; // gray-300
 
-            return `<td class="p-0 text-[10px] text-center border-r border-black h-8" style="${cellStyle}">${status}</td>`;
+            return `< td class="p-0 text-[10px] text-center border-r border-black h-8" style = "${cellStyle}" > ${ status }</td > `;
         }).join('');
 
         const total = dates.length;
@@ -1339,41 +1340,41 @@ function renderMonthlyRegister(batchId, filtered, config) {
         const rowBg = i % 2 === 0 ? 'bg-white' : 'bg-gray-50'; // Zebra Striping
 
         return `
-                <tr class="h-8 border-b border-black ${rowBg} print:bg-transparent">
+        < tr class="h-8 border-b border-black ${rowBg} print:bg-transparent" >
                     <td class="text-center text-black font-medium text-xs border-r border-black">${i + 1}</td>
                     <td class="text-left font-bold p-name text-xs px-2 border-r border-black text-black uppercase">${s.name}</td>
-                    ${cells}
+                    ${ cells }
                     <td class="text-center font-bold text-xs text-green-700 bg-green-50 border-r border-black border-l-2 border-l-black">${presentCount}</td>
                     <td class="text-center font-bold text-xs text-red-700 bg-red-50 border-r border-black">${absCount}</td>
                     <td class="text-center font-bold text-xs text-blue-700 bg-blue-50">${percent}%</td>
-                </tr>
-            `;
+                </tr >
+        `;
     }).join('');
 }
 
 function renderBlankMarkSheet(filtered) {
     document.getElementById('markSheetControls').classList.add('hidden');
     const headers = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'PRAC', 'REC'];
-    const markHeaders = headers.map(h => `<th class="w-7 text-[9px]">${h}</th>`).join('');
+    const markHeaders = headers.map(h => `< th class="w-7 text-[9px]" > ${ h }</th > `).join('');
 
     document.getElementById('generatedSheetHeader').innerHTML = `
-        <tr>
+        < tr >
             <th class="w-9">SL.</th>
             <th class="text-left">NAME</th>
             <th class="w-28">ADM NO.</th>
-            ${markHeaders}
-            <th class="w-10">TOTAL</th>
-        </tr>
-    `;
+            ${ markHeaders }
+    <th class="w-10">TOTAL</th>
+        </tr >
+        `;
 
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => `
-        <tr class="h-10">
+        < tr class="h-10" >
             <td>${i + 1}</td>
             <td class="text-left font-medium p-name">${s.name}</td>
             <td class="text-[9px] font-mono">${s.admissionNo}</td>
-            ${Array(9).fill('<td></td>').join('')}
-        </tr>
-    `).join('');
+            ${ Array(9).fill('<td></td>').join('') }
+        </tr >
+        `).join('');
 }
 
 window.handleEnterKey = (e) => {
@@ -1408,23 +1409,23 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
     if (isViva) headers = ['TOTAL'];
 
     const markHeaders = headers.map(h =>
-        `<th class="w-12 text-xs text-center border-r border-black bg-gray-50">${h}</th>`
+        `< th class="w-12 text-xs text-center border-r border-black bg-gray-50" > ${ h }</th > `
     ).join('');
 
     const totalHeaderStyle = isViva ? 'display:none' : '';
     const actionHeader = isAdmin ? '<th class="w-10 text-center text-red-600 border-l border-black">DEL</th>' : '';
 
     document.getElementById('generatedSheetHeader').innerHTML = `
-        <tr class="border-b-2 border-black text-center">
+        < tr class="border-b-2 border-black text-center" >
             <th class="w-12 text-center border-r border-black">SL.</th>
             <th class="text-left pl-2 border-r border-black">NAME</th>
             <th class="w-24 text-center border-r border-black">ADM NO.</th>
-            ${markHeaders}
+            ${ markHeaders }
             <th class="w-12 border-r border-black" style="${totalHeaderStyle}">TOTAL</th>
             <th class="w-12 text-center">RANK</th>
-            ${actionHeader}
-        </tr>
-    `;
+            ${ actionHeader }
+        </tr >
+        `;
 
     // Calculate ranks first
     let processed = filtered.map(s => {
@@ -1444,43 +1445,43 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
         if (isViva) {
             // Read-Only Summary View
             cells = `
-                <td class="p-0 border-r border-black h-10 text-center align-middle">
-                     <input type="number" value="${s.total}" disabled 
-                        class="w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold text-black no-print">
-                    <span class="print-only">${s.total}</span>
-                </td>
-            `;
+        < td class="p-0 border-r border-black h-10 text-center align-middle" >
+            <input type="number" value="${s.total}" disabled
+                class="w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold text-black no-print">
+                <span class="print-only">${s.total}</span>
+            </td>
+    `;
         } else {
             // Standard Entry View
             cells = s.mData.map((m, idx) => `
-                <td class="border-r border-black p-0 h-8 text-center align-middle">
-                    <input type="number" value="${m}" ${isReadOnly ? 'disabled' : ''}
-                        class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-base font-bold no-print ${isReadOnly ? 'text-gray-500' : ''}"
-                        onkeydown="handleEnterKey(event)"
-                        oninput="liveUpdateMark('${s.id}', ${idx}, this.value, '${sheetKey}', ${maxMark}, this)">
-                    <span class="print-only text-sm">${m}</span>
-                </td>
-            `).join('');
+        < td class="border-r border-black p-0 h-8 text-center align-middle" >
+            <input type="number" value="${m}" ${isReadOnly ? 'disabled' : ''}
+                class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-base font-bold no-print ${isReadOnly ? 'text-gray-500' : ''}"
+                onkeydown="handleEnterKey(event)"
+                oninput="liveUpdateMark('${s.id}', ${idx}, this.value, '${sheetKey}', ${maxMark}, this)">
+                <span class="print-only text-sm">${m}</span>
+            </td>
+    `).join('');
         }
 
         const deleteBtn = isAdmin ? `
-            <td class="text-center border-l border-black no-print p-0">
-                <button onclick="deleteStudentMark('${s.id}', '${sheetKey}')" class="text-red-500 hover:text-red-700 font-bold px-1 text-xs">
-                    🗑️
-                </button>
-            </td>
+        < td class="text-center border-l border-black no-print p-0" >
+            <button onclick="deleteStudentMark('${s.id}', '${sheetKey}')" class="text-red-500 hover:text-red-700 font-bold px-1 text-xs">
+                🗑️
+            </button>
+            </td >
         ` : '';
 
         return `
-            <tr class="h-8 border-b border-black hover:bg-gray-50 transition-colors" data-sid="${s.id}">
+        < tr class="h-8 border-b border-black hover:bg-gray-50 transition-colors" data - sid="${s.id}" >
                 <td class="text-center border-r border-black font-medium text-xs">${i + 1}</td>
                 <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase leading-tight">${s.name}</td>
                 <td class="text-center font-mono border-r border-black text-[9px] font-bold text-blue-800 tracking-tighter whitespace-nowrap overflow-hidden">${s.admissionNo}</td>
-                ${cells}
+                ${ cells }
                 <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
                 <td class="text-center font-bold rank-cell text-sm">${s.rank}</td>
-                ${deleteBtn}
-            </tr>
+                ${ deleteBtn }
+            </tr >
         `;
     }).join('');
 }
@@ -1513,14 +1514,14 @@ function renderTranscript(studentId) {
     }
 
     document.getElementById('generatedSheetHeader').innerHTML = `
-        <tr>
+        < tr >
             <th class="w-12">#</th>
             <th class="text-left">ASSESSMENT SEMESTER</th>
             <th class="w-20">MAX SCORE</th>
             <th class="w-20">SCORE</th>
             <th class="w-20">RANK</th>
-        </tr>
-    `;
+        </tr >
+        `;
 
     const keys = Object.keys(assessmentMetadata).filter(k => k.startsWith(s.batchId)).sort((a, b) => {
         const dateA = new Date(assessmentMetadata[a]?.date || 0);
@@ -1532,13 +1533,13 @@ function renderTranscript(studentId) {
         const m = assessmentMetadata[k];
         const studentData = calculateRankForStudent(k, s.id, m.maxMark);
         return `
-            <tr>
+        < tr >
                 <td>${i + 1}</td>
                 <td class="text-left font-medium">${m.semester} Semester Workshop Assessment</td>
                 <td>${m.maxMark * 8}</td>
                 <td class="font-bold">${studentData.total}</td>
                 <td class="font-bold">${studentData.rank}</td>
-            </tr>
+            </tr >
         `;
     }).join('');
 
@@ -1592,7 +1593,7 @@ window.liveUpdateMark = (sid, idx, val, key, max, inputEl) => {
 
     student.marks[key].marks[idx] = numVal;
 
-    const row = document.querySelector(`tr[data-sid="${sid}"]`);
+    const row = document.querySelector(`tr[data - sid= "${sid}"]`);
     if (row) {
         const total = student.marks[key].marks.reduce((a, b) => a + b, 0);
         row.querySelector('.total-cell').textContent = total;
@@ -1602,7 +1603,7 @@ window.liveUpdateMark = (sid, idx, val, key, max, inputEl) => {
 window.saveMarks = () => {
     const config = window.activeSheetConfig;
     const keyType = 'mark'; // Unified storage
-    const sheetKey = `${config.batchId}-${config.sem}-${keyType}-${config.maxMark}`;
+    const sheetKey = `${ config.batchId } -${ config.sem } -${ keyType } -${ config.maxMark } `;
 
     assessmentMetadata[sheetKey] = {
         date: config.examDate,
@@ -1709,7 +1710,7 @@ window.renderAssessmentHistory = () => {
         const typeCode = (keyType === 'viva') ? 'workshop-viva' : 'mark';
 
         return `
-            <tr class="border-b hover:bg-gray-50 transition-colors">
+        < tr class="border-b hover:bg-gray-50 transition-colors" >
                 <td class="p-4 font-medium">${date}</td>
                 <td class="p-4">${batchId}</td>
                 <td class="p-4">${sem}</td>
@@ -1728,7 +1729,7 @@ window.renderAssessmentHistory = () => {
                         </button>` : ''}
                     </div>
                 </td>
-            </tr>
+            </tr >
         `;
     }).join('');
 };
