@@ -20,36 +20,71 @@ const INITIAL_BATCH_ID = 'AME 37';
 let currentUserRole = null;
 
 // Auth Functions
-window.handleLogin = (e) => {
+window.handleLogin = async (e) => {
     e.preventDefault();
     const u = document.getElementById('loginUsername').value.trim().toLowerCase();
     const p = document.getElementById('loginPassword').value.trim();
     const err = document.getElementById('loginError');
+    const btn = e.target.querySelector('button[type="submit"]');
 
-    // Check hardcoded admin credentials
-    if ((u === 'incharge' || u === 'admin') && (p === 'admin123' || p === 'incharge')) {
-        localStorage.setItem('user_role', 'admin');
-        localStorage.setItem('logged_in_user', u);
-        startSession('admin');
-    }
-    // Check hardcoded generic staff credential
-    else if (u === 'staff' && p === 'staff123') {
-        localStorage.setItem('user_role', 'staff');
-        localStorage.setItem('logged_in_user', 'staff');
-        startSession('staff');
-    }
-    // Check staff member credentials
-    else {
+    // Disable button and show loading
+    const originalBtnText = btn.innerHTML;
+    btn.innerHTML = '<span>⏳</span> Authenticating...';
+    btn.disabled = true;
+    err.classList.add('hidden');
+
+    try {
+        // Check if cloud sync is configured
+        if (!githubSync || !githubSync.isConfigured()) {
+            throw new Error('Cloud authentication not available. Please check your connection.');
+        }
+
+        // Download latest staff data from cloud
+        console.log('Fetching user credentials from cloud...');
+        const cloudResult = await githubSync.downloadData();
+
+        // Update local staff data
+        if (cloudResult && cloudResult.data && cloudResult.data.staffMembers) {
+            staffMembers = cloudResult.data.staffMembers;
+            // Save to localStorage for offline access
+            localStorage.setItem(LS_KEY_STAFF, JSON.stringify(staffMembers));
+        }
+
+        // Find user in staff members
         const staffMember = staffMembers.find(s => s.username === u && s.password === p);
+
         if (staffMember) {
-            // Grant admin role if staff member is site administrator
+            // Grant role based on staff member settings
             const role = staffMember.isAdmin ? 'admin' : 'staff';
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
             localStorage.setItem('logged_in_staff_id', staffMember.id);
             startSession(role);
         } else {
+            // Invalid credentials
+            err.textContent = 'Invalid username or password';
             err.classList.remove('hidden');
+            btn.innerHTML = originalBtnText;
+            btn.disabled = false;
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+
+        // Fallback to local credentials if cloud fails
+        console.log('Cloud authentication failed, checking local credentials...');
+        const staffMember = staffMembers.find(s => s.username === u && s.password === p);
+
+        if (staffMember) {
+            const role = staffMember.isAdmin ? 'admin' : 'staff';
+            localStorage.setItem('user_role', role);
+            localStorage.setItem('logged_in_user', staffMember.name);
+            localStorage.setItem('logged_in_staff_id', staffMember.id);
+            startSession(role);
+        } else {
+            err.textContent = 'Authentication failed. Please check your internet connection.';
+            err.classList.remove('hidden');
+            btn.innerHTML = originalBtnText;
+            btn.disabled = false;
         }
     }
 };
