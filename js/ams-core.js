@@ -831,7 +831,10 @@ window.handleGenerateRequest = (mode, forceType = null) => {
                 subBatch: document.getElementById('printSubBatchSelector')?.value || 'All',
                 maxMark: document.getElementById('printMaxMark')?.value || '200',
                 studentId: document.getElementById('printStudentSelector')?.value,
-                type: forceType || document.getElementById('printTypeSelector').value
+                type: forceType || document.getElementById('printTypeSelector').value,
+                filterType: document.getElementById('registerFilterType')?.value || 'month',
+                startDate: document.getElementById('registerStartDate')?.value,
+                endDate: document.getElementById('registerEndDate')?.value
             };
         }
 
@@ -888,7 +891,7 @@ function generateSheet(isReload = false, config) {
     }
 
     if (config.type === 'attendance-index') renderAttendanceIndex(filtered);
-    else if (config.type === 'attendance-register') renderMonthlyRegister(config.batchId, filtered);
+    else if (config.type === 'attendance-register') renderMonthlyRegister(config.batchId, filtered, config);
     else if (config.type === 'mark-sheet') renderBlankMarkSheet(filtered);
     else if (config.type === 'transcript') renderTranscript(config.studentId);
     else renderMarksEntry(filtered, config.type, config.maxMark, sheetKey);
@@ -898,10 +901,10 @@ function renderAttendanceIndex(filtered) {
     document.getElementById('markSheetControls').classList.add('hidden');
     document.getElementById('generatedSheetHeader').innerHTML = `
         <tr>
-            <th class="w-10">SL.</th>
-            <th class="text-left">NAME</th>
-            <th class="w-32">ADMISSION NO.</th>
-            <th class="w-32">SIGNATURE</th>
+            <th class="w-10 text-center border-r border-gray-300">SL.</th>
+            <th class="text-left px-2 border-r border-gray-300">NAME</th>
+            <th class="w-32 text-center border-r border-gray-300">ADMISSION NO.</th>
+            <th class="w-32 text-center">SIGNATURE</th>
         </tr>
     `;
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => `
@@ -914,48 +917,124 @@ function renderAttendanceIndex(filtered) {
     `).join('');
 }
 
-function renderMonthlyRegister(batchId, filtered) {
+// Filter Register Logic
+window.toggleDateInputs = () => {
+    const type = document.getElementById('registerFilterType').value;
+    const customContainer = document.getElementById('customDateInputs');
+    if (customContainer) {
+        customContainer.classList.toggle('hidden', type !== 'custom');
+    }
+};
+
+window.filterRegister = () => {
+    const batchId = document.getElementById('registerBatchSelector').value;
+    if (!batchId) return;
+
+    // Trigger generation with register config
+    const config = {
+        batchId: batchId,
+        subBatch: 'All', // Default to All for overview
+        type: 'attendance-register',
+        filterType: document.getElementById('registerFilterType').value,
+        startDate: document.getElementById('registerStartDate').value,
+        endDate: document.getElementById('registerEndDate').value
+    };
+    generateSheet(false, config);
+};
+
+function renderMonthlyRegister(batchId, filtered, config) {
     document.getElementById('markSheetControls').classList.add('hidden');
     const batchAttendance = attendanceData[batchId] || {};
-    const dates = Object.keys(batchAttendance).sort();
+    let dates = Object.keys(batchAttendance).sort();
+
+    // -- FILTERING LOGIC --
+    const now = new Date();
+    const filterType = config?.filterType || 'month';
+
+    if (filterType === 'week') {
+        // Get start of week (Sunday)
+        const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+        startOfWeek.setHours(0, 0, 0, 0);
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(endOfWeek.getDate() + 6);
+        endOfWeek.setHours(23, 59, 59, 999);
+
+        dates = dates.filter(d => {
+            const date = new Date(d);
+            return date >= startOfWeek && date <= endOfWeek;
+        });
+    } else if (filterType === 'month') {
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        dates = dates.filter(d => {
+            const date = new Date(d);
+            return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+        });
+    } else if (filterType === 'custom') {
+        const start = config.startDate ? new Date(config.startDate) : null;
+        const end = config.endDate ? new Date(config.endDate) : null;
+
+        if (start && end) {
+            // Set end to end of day
+            end.setHours(23, 59, 59, 999);
+            dates = dates.filter(d => {
+                const date = new Date(d);
+                return date >= start && date <= end;
+            });
+        }
+    }
 
     const dateHeaders = dates.map(d => `
-        <th class="w-5 text-[7px] rotate-[-90deg] h-14 p-0">
-            ${new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}
-        </th>
-    `).join('');
+            <th class="w-5 text-[9px] rotate-[-90deg] h-20 p-0 border-r border-gray-300 bg-gray-50 align-bottom pb-2">
+                ${new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' })}
+            </th>
+        `).join('');
 
     document.getElementById('generatedSheetHeader').innerHTML = `
-        <tr>
-            <th class="w-8">SL.</th>
-            <th class="text-left">NAME</th>
-            ${dateHeaders}
-            <th class="w-8">ABS</th>
-            <th class="w-8">%</th>
-        </tr>
-    `;
+            <tr class="bg-gray-100 border-b border-gray-400">
+                <th class="w-8 text-center border-r border-gray-300 p-2">SL.</th>
+                <th class="text-left px-2 border-r border-gray-300">NAME</th>
+                ${dateHeaders}
+                <th class="w-10 text-center border-r border-gray-300 bg-red-50 text-red-700">ABS</th>
+                <th class="w-10 text-center bg-blue-50 text-blue-700">%</th>
+            </tr>
+        `;
+
+    if (dates.length === 0) {
+        document.getElementById('generatedSheetBody').innerHTML = `
+                <tr><td colspan="100" class="text-center p-8 text-gray-400 italic">No attendance records found for this period.</td></tr>
+            `;
+        return;
+    }
 
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => {
         let absCount = 0;
         const cells = dates.map(d => {
-            const isAbs = batchAttendance[d][s.id] === 'absent';
+            const isAbs = batchAttendance[d] && batchAttendance[d][s.id] === 'absent';
             if (isAbs) absCount++;
-            return `<td class="p-0 text-[8px] ${isAbs ? 'bg-red-50 font-bold text-red-600' : 'text-green-600'}">${isAbs ? 'A' : 'P'}</td>`;
+            const status = batchAttendance[d] ? (isAbs ? 'A' : 'P') : '-';
+
+            let cellClass = 'text-green-600'; // Default Present
+            if (isAbs) cellClass = 'bg-red-100 text-red-700 font-bold';
+            if (status === '-') cellClass = 'text-gray-300';
+
+            return `<td class="p-0 text-[10px] text-center border-r border-gray-200 h-8 ${cellClass}">${status}</td>`;
         }).join('');
 
-        const percent = dates.length > 0
-            ? (((dates.length - absCount) / dates.length) * 100).toFixed(0)
+        const total = dates.length;
+        const percent = total > 0
+            ? (((total - absCount) / total) * 100).toFixed(0)
             : '0';
 
         return `
-            <tr class="h-7">
-                <td>${i + 1}</td>
-                <td class="text-left font-medium p-name text-[9px]">${s.name}</td>
-                ${cells}
-                <td class="font-bold text-[9px]">${absCount}</td>
-                <td class="font-bold text-[9px]">${percent}%</td>
-            </tr>
-        `;
+                <tr class="h-8 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                    <td class="text-center text-gray-500 text-xs border-r border-gray-200">${i + 1}</td>
+                    <td class="text-left font-medium p-name text-xs px-2 border-r border-gray-200">${s.name}</td>
+                    ${cells}
+                    <td class="text-center font-bold text-xs bg-red-50 text-red-800 border-r border-gray-200">${absCount}</td>
+                    <td class="text-center font-bold text-xs bg-blue-50 text-blue-800">${percent}%</td>
+                </tr>
+            `;
     }).join('');
 }
 
