@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-31T15:25:38.206Z",
+  "lastUpdated": "2026-01-31T15:25:43.480Z",
   "version": "4.7",
   "students": [
     {
@@ -4042,6 +4042,10 @@
       "2026-01-26": {
         "8a6c611e-83a9-4bdc-8daa-2c2e4b94b2d5": "absent",
         "d52ceb1d-f031-4098-8522-16da6287733c": "absent"
+      },
+      "2026-01-25": {
+        "e6d49b6f-8179-4163-b3cd-ce1405ea622d": "absent",
+        "bb9ca808-d320-4579-bff7-1d7c82a10b37": "absent"
       }
     }
   },
