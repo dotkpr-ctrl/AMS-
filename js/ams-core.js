@@ -955,7 +955,14 @@ function generateSheet(isReload = false, config) {
     renderView('sheetGeneration');
 
     document.getElementById('sheetBatchDisplay').textContent = config.batchId;
-    document.getElementById('sheetSemesterDisplay').textContent = config.sem;
+    document.getElementById('sheetBatchDisplay').textContent = config.batchId;
+
+    // Repurpose Semester Display for Session Type in Registers
+    if (config.type === 'attendance-register') {
+        document.getElementById('sheetSemesterDisplay').textContent = (config.sessionFilter || 'THEORY').toUpperCase();
+    } else {
+        document.getElementById('sheetSemesterDisplay').textContent = config.sem;
+    }
 
     const dateVal = config.examDate || meta.date || new Date();
     const dateObj = new Date(dateVal);
@@ -1124,7 +1131,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
     const sessionFilter = config?.sessionFilter || 'Theory';
 
     dates = dates.filter(d => {
-        const sessionType = batchAttendance[d]?.sessionType || 'Theory'; // Default to Theory if undefined
+        const sessionType = batchAttendance[d]?.sessionType || 'Unspecified'; // Default to Unspecified to avoid ghost data
         return sessionType === sessionFilter;
     });
 
