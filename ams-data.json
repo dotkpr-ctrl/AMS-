@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-01-31T12:09:42.972Z",
-  "version": "4.7",
+  "lastUpdated": "2026-01-31T12:10:11.023Z",
+  "version": "4.2",
   "students": [
     {
       "name": "JOYAL R",
@@ -3959,6 +3959,5 @@
       }
     }
   },
-  "batchMetadata": {},
-  "staffMembers": []
+  "batchMetadata": {}
 }
