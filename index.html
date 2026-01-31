@@ -119,6 +119,21 @@
 
 
                     <div class="pt-6 border-t mt-6">
+                        <div id="userProfileDisplay" class="mb-4 px-2 py-2 bg-blue-50 rounded-lg hidden">
+                            <p class="text-xs text-gray-500 uppercase font-bold mb-1">Logged In As</p>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 font-bold text-xs"
+                                    id="userAvatar">
+                                    👤
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="text-sm font-bold text-gray-800 truncate" id="userNameDisplay">User</p>
+                                    <p class="text-[10px] text-gray-500 font-mono truncate" id="userRoleDisplay">Staff
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <p class="text-[10px] text-gray-400 font-bold uppercase mb-2">Management</p>
 
                         <!-- Cloud Sync Controls -->
@@ -538,15 +553,15 @@
 
     <div id="statusFooter"
         class="no-print fixed bottom-0 left-0 right-0 bg-gray-800 text-white text-center py-1.5 text-[10px] uppercase tracking-widest font-bold border-t border-gray-700">
-        Local Database Secured • v4.2 Stable</div>
+        Local Database Secured • v4.7.3 Stable</div>
 
     <!-- GitHub Sync Module -->
-    <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=4.3.7"></script>
+    <script src="js/github-sync.js?v=4.7.3"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=4.4.0"></script>
+    <script src="js/cloud-sync-integration.js?v=4.7.3"></script>
     <!-- Main JavaScript Module -->
-    <script type="module" src="js/ams-core.js?v=4.4.0"></script>
+    <script src="js/ams-core.js?v=4.7.3"></script>
+    <script src="js/app.js?v=4.7.3"></script>
 </body>
 
 </html>

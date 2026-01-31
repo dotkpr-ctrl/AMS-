@@ -97,6 +97,27 @@ window.handleLogout = () => {
 function startSession(role) {
     currentUserRole = role;
     document.getElementById('loginModal').classList.add('hidden');
+
+    // Update User Profile Display
+    const profileDisplay = document.getElementById('userProfileDisplay');
+    const nameDisplay = document.getElementById('userNameDisplay');
+    const roleDisplay = document.getElementById('userRoleDisplay');
+    const avatar = document.getElementById('userAvatar');
+
+    if (profileDisplay) {
+        profileDisplay.classList.remove('hidden');
+        const userName = localStorage.getItem('logged_in_user') || 'User';
+
+        if (nameDisplay) nameDisplay.textContent = userName;
+        if (roleDisplay) roleDisplay.textContent = role === 'admin' ? 'Site Administrator' : 'Staff Member';
+
+        // Initials avatar
+        if (avatar) {
+            const initials = userName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            avatar.textContent = initials;
+        }
+    }
+
     applyPermissions(role);
     refreshDataAndUI();
 }
