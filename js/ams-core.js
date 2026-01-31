@@ -423,7 +423,16 @@ function renderAttendanceList() {
 
     if (!batchId || !date) {
         listBody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-500">Select batch and date</td></tr>';
+        document.getElementById('btnDeleteRecord').classList.add('hidden');
         return;
+    }
+
+    // Role Check for Delete Button
+    const isAdmin = localStorage.getItem('user_role') === 'admin';
+    const deleteBtn = document.getElementById('btnDeleteRecord');
+    if (deleteBtn) {
+        if (isAdmin) deleteBtn.classList.remove('hidden');
+        else deleteBtn.classList.add('hidden');
     }
 
     let filtered = students.filter(s => s.batchId === batchId);
@@ -498,6 +507,38 @@ window.saveAttendanceManual = () => {
 
     saveData();
     showMessage('Success', 'Attendance saved successfully!', 'success');
+};
+
+window.deleteAttendanceManual = () => {
+    // 1. Permission Check
+    if (localStorage.getItem('user_role') !== 'admin') {
+        showMessage('Error', 'Permission Denied: Only Incharge can delete records.', 'error');
+        return;
+    }
+
+    const batchId = document.getElementById('attendanceBatchSelector').value;
+    const date = document.getElementById('attendanceDate').value;
+
+    if (!batchId || !date) {
+        showMessage('Error', 'Please select a batch and date first.', 'error');
+        return;
+    }
+
+    if (!attendanceData[batchId] || !attendanceData[batchId][date]) {
+        showMessage('Info', 'No record exists to delete.', 'error');
+        return;
+    }
+
+    // 2. Confirmation
+    if (confirm(`Are you sure you want to PERMANENTLY DELETE the attendance record for ${date}? This cannot be undone.`)) {
+        // 3. Delete Logic
+        delete attendanceData[batchId][date];
+        saveData();
+
+        // 4. UI Feedback
+        renderAttendanceList();
+        showMessage('Success', 'Record deleted successfully.', 'success');
+    }
 };
 
 window.shareAttendanceWhatsApp = () => {
