@@ -407,8 +407,33 @@ function renderAttendanceList() {
 
     // Load Session Type
     const sessionTypeSelect = document.getElementById('attendanceSessionType');
+    let currentSessionType = 'Theory';
+
     if (sessionTypeSelect) {
-        sessionTypeSelect.value = dailyData.sessionType || 'Theory';
+        currentSessionType = dailyData.sessionType || 'Theory';
+        sessionTypeSelect.value = currentSessionType;
+
+        // Enforce Sub-Batch Logic
+        const subBatchSelect = document.getElementById('attendanceSubBatchSelector');
+        if (subBatchSelect) {
+            if (currentSessionType === 'Theory') {
+                subBatchSelect.value = 'All';
+                subBatchSelect.disabled = true;
+                if (subBatch !== 'All') {
+                    // Force refresh if we were on a specific batch but switched to a date that is Theory
+                    // This prevents showing a filtered list when it should be full batch
+                    // We need to be careful not to infinite loop here, so we just filter by 'All' effectively below
+                    // But visually update the selector
+                }
+            } else {
+                subBatchSelect.disabled = false;
+            }
+        }
+    }
+
+    // Re-filter if Theory forced 'All' but selector was different (though UI disabled updates, data might need sync)
+    if (currentSessionType === 'Theory') {
+        filtered = students.filter(s => s.batchId === batchId); // Reset to full batch
     }
 
     listBody.innerHTML = filtered.map(s => {
