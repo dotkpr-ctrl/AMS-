@@ -2157,27 +2157,14 @@ window.printAssessmentExam = function (key) {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    margin-bottom: 25px; /* Increased margin */
-                    gap: 30px; /* Increased gap */
+                    margin-bottom: 25px;
                 }
                 .logo {
-                    width: 300px; /* Banner size */
+                    width: 300px;
                     max-height: 120px;
                     height: auto;
                     object-fit: contain;
-                }
-                .header-text {
-                    text-align: center;
-                    flex: 1;
-                }
-                .header-text h1 {
-                    font-size: 18px;
-                    font-weight: bold;
-                    margin-bottom: 2px;
-                }
-                .header-text .subtitle {
-                    font-size: 10px;
-                    font-style: italic;
+                    display: block;
                 }
                 .program-title {
                     text-align: center;
@@ -2247,10 +2234,6 @@ window.printAssessmentExam = function (key) {
         <body>
             <div class="header-container">
                 <img src="https://dotkpr-ctrl.github.io/AMS-/assets/img/header-logo.png" alt="A2Z Logo" class="logo">
-                <div class="header-text">
-                    <h1>INSTITUTE OF HEAVY EQUIPMENTS & ITC</h1>
-                    <div class="subtitle">(Approved Institute of STED Council of India)</div>
-                </div>
             </div>
             
             <div class="program-title">ADVANCED DIPLOMA IN AUTOMOBILE ENGINEERING</div>
