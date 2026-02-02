@@ -215,7 +215,7 @@ class GitHubDataSync {
     }
 
     // Upload all data to GitHub
-    async uploadData(students, assessmentMetadata, attendanceData, batchMetadata, staffMembers = []) {
+    async uploadData(students, assessmentMetadata, attendanceData, batchMetadata, staffMembers = [], activityLogs = []) {
         if (!this.isConfigured()) {
             throw new Error('GitHub token not configured. Please set up sync in Settings.');
         }
@@ -233,12 +233,13 @@ class GitHubDataSync {
             // Prepare data structure
             const data = {
                 lastUpdated: new Date().toISOString(),
-                version: '4.7',
+                version: '4.8', // Bump version in JSON
                 students: students,
                 assessmentMetadata: assessmentMetadata,
                 attendanceData: attendanceData,
                 batchMetadata: batchMetadata,
-                staffMembers: staffMembers
+                staffMembers: staffMembers,
+                activityLogs: activityLogs
             };
 
             // Get existing file SHA if it exists

@@ -160,7 +160,7 @@ function checkSession() {
         verEl.className = "fixed bottom-0 w-full text-center text-[10px] bg-slate-900 text-slate-500 py-1 z-50 pointer-events-none";
         document.body.appendChild(verEl);
     }
-    verEl.textContent = "AMS v5.1.3 • ACTIVITY LOGS ENABLED";
+    verEl.textContent = "AMS v5.1.4 • CLOUD LOG SYNC ENABLED";
 
     if (role === 'admin' || role === 'staff') {
         startSession(role);
@@ -289,11 +289,46 @@ function saveData() {
     }
 }
 
+// Function to expose data for cloud sync
+window.getAppData = () => {
+    return {
+        students,
+        assessmentMetadata,
+        attendanceData,
+        batchMetadata,
+        staffMembers,
+        activityLogs: window.activityLogger ? window.activityLogger.getLogs() : []
+    };
+};
+
 // Function to update local data from cloud download
 window.updateLocalDataFromCloud = (data) => {
     if (!data) return;
 
     students = data.students || [];
+    // ... rest handled by existing code? No, I need to verify I'm not overwriting everything blindly without handling logs.
+    // The existing code likely assigned variables.
+
+    assessmentMetadata = data.assessmentMetadata || {};
+    attendanceData = data.attendanceData || {};
+    batchMetadata = data.batchMetadata || {};
+    staffMembers = data.staffMembers || [];
+
+    // Merge Activity Logs
+    if (data.activityLogs && window.activityLogger) {
+        try {
+            const currentLogs = window.activityLogger.getLogs();
+            const newLogs = data.activityLogs;
+            // Deduplicate by ID
+            const combined = [...currentLogs, ...newLogs];
+            const uniqueMap = new Map();
+            combined.forEach(log => uniqueMap.set(log.id, log));
+            const uniqueLogs = Array.from(uniqueMap.values()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            // Save directly to localStorage to bypass Logger limit if needed, or just use logger
+            localStorage.setItem('ams_activity_logs', JSON.stringify(uniqueLogs.slice(0, 2000))); // Keep 2000
+        } catch (e) { console.error('Error merging logs:', e); }
+    }
     assessmentMetadata = data.assessmentMetadata || {};
     attendanceData = data.attendanceData || {};
     batchMetadata = data.batchMetadata || {};

@@ -130,7 +130,8 @@ window.uploadToCloud = async () => {
             dataToSync.assessmentMetadata,
             dataToSync.attendanceData,
             dataToSync.batchMetadata,
-            dataToSync.staffMembers
+            dataToSync.staffMembers,
+            dataToSync.activityLogs || []
         );
 
         showMessage('Upload Complete', `Data synced successfully at ${new Date(result.timestamp).toLocaleTimeString()}`, 'success');
