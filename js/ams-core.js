@@ -142,7 +142,9 @@ function startSession(role) {
 
     if (headerMsg) {
         const userName = localStorage.getItem('logged_in_user') || 'User';
-        const roleText = role === 'admin' ? 'Admin' : 'Staff';
+        let roleText = 'Staff';
+        if (role === 'admin') roleText = 'Admin';
+        else if (role === 'incharge') roleText = 'Incharge';
 
         if (headerName) headerName.textContent = userName;
         if (headerRole) headerRole.textContent = roleText;
@@ -500,7 +502,7 @@ function updateBatchDropdowns() {
                 const filtered = students.filter(s => s.batchId === batchId);
                 selector.innerHTML = `<option value="" disabled selected>-- Select Student --</option>`;
                 filtered.forEach(s => {
-                    selector.innerHTML += `<option value="${s.id}">${s.name} (${s.admissionNo})</option>`;
+                    selector.innerHTML += `<option value="${s.id}">${escapeHtml(s.name)} (${s.admissionNo})</option>`;
                 });
             } else if (id.includes('SubBatch')) {
                 selector.innerHTML = `
@@ -852,7 +854,7 @@ function renderAttendanceRegister() {
         return `
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="border border-gray-200 text-center py-1">${i + 1}</td>
-                <td class="border border-gray-200 px-2 py-1 font-medium">${s.name}</td>
+                <td class="border border-gray-200 px-2 py-1 font-medium">${escapeHtml(s.name)}</td>
                 <td class="border border-gray-200 text-center py-1 font-mono text-xs text-gray-500">${s.admissionNo}</td>
                 ${cells}
                 <td class="border border-gray-200 text-center font-bold text-green-700 bg-green-50">${present}</td>
@@ -1412,7 +1414,7 @@ function renderAttendanceIndex(filtered) {
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => `
         <tr class="h-9">
             <td>${i + 1}</td>
-            <td class="text-left font-medium p-name">${s.name}</td>
+            <td class="text-left font-medium p-name">${escapeHtml(s.name)}</td>
             <td class="font-mono text-[9px]">${s.admissionNo}</td>
             <td></td>
         </tr>
@@ -1651,7 +1653,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
         return `
         <tr class="h-8 border-b border-black ${rowBg} print:bg-transparent">
                     <td class="text-center text-black font-medium text-xs border-r border-black">${i + 1}</td>
-                    <td class="text-left font-bold p-name text-xs px-2 border-r border-black text-black uppercase">${s.name}</td>
+                    <td class="text-left font-bold p-name text-xs px-2 border-r border-black text-black uppercase">${escapeHtml(s.name)}</td>
                     ${cells}
                     <td class="text-center font-bold text-xs text-green-700 bg-green-50 border-r border-black border-l-2 border-l-black">${presentCount}</td>
                     <td class="text-center font-bold text-xs text-red-700 bg-red-50 border-r border-black">${absCount}</td>
@@ -1679,7 +1681,7 @@ function renderBlankMarkSheet(filtered) {
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => `
         <tr class="h-10">
             <td>${i + 1}</td>
-            <td class="text-left font-medium p-name">${s.name}</td>
+            <td class="text-left font-medium p-name">${escapeHtml(s.name)}</td>
             <td class="text-[9px] font-mono">${s.admissionNo}</td>
             ${Array(9).fill('<td></td>').join('')}
         </tr>
@@ -2387,7 +2389,7 @@ window.printAssessmentExam = function (key) {
                     </head>
                     <body>
                         <div class="header-container">
-                            <img src="https://a2zwb.github.io/ams/assets/img/header-logo.png" alt="A2Z Logo" class="logo">
+                            <img src="assets/img/header-logo.png" alt="A2Z Logo" class="logo">
                         </div>
 
                         <div class="program-title">ADVANCED DIPLOMA IN AUTOMOBILE ENGINEERING</div>
@@ -2707,7 +2709,7 @@ window.renderStaffList = function () {
             <div class="bg-white p-4 rounded-xl border shadow-sm hover:shadow-md transition-all relative group">
                 <div class="flex justify-between items-start">
                     <div>
-                        <h4 class="font-bold text-gray-800">${s.name}</h4>
+                        <h4 class="font-bold text-gray-800">${escapeHtml(s.name)}</h4>
                         <p class="text-xs text-gray-500">${s.position} • ${s.phone}</p>
                     </div>
                     <span class="text-xs px-2 py-1 rounded-full font-bold ${s.isAdmin ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700'}">
