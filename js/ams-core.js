@@ -151,6 +151,17 @@ function refreshDataAndUI() {
 
 function checkSession() {
     const role = localStorage.getItem('user_role');
+
+    // Version Display (Dynamic)
+    let verEl = document.getElementById('appVersionFooter');
+    if (!verEl) {
+        verEl = document.createElement('div');
+        verEl.id = 'appVersionFooter';
+        verEl.className = "fixed bottom-0 w-full text-center text-[10px] bg-slate-900 text-slate-500 py-1 z-50 pointer-events-none";
+        document.body.appendChild(verEl);
+    }
+    verEl.textContent = "AMS v5.1.3 • ACTIVITY LOGS ENABLED";
+
     if (role === 'admin' || role === 'staff') {
         startSession(role);
     } else {
