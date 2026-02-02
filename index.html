@@ -68,9 +68,10 @@
                         </path>
                     </svg>
                 </button>
-                <div class="flex items-center gap-2">
-                    <img src="assets/img/header-logo.png" alt="A2Z Institute" class="h-12 w-auto object-contain">
-                    <span class="text-xs text-gray-400 font-mono mt-1" id="headerVersionDisplay">v5.2.0</span>
+                <div class="flex items-center gap-3">
+                    <img src="assets/img/header-logo.png" alt="AMS Logo" class="h-8 w-auto object-contain">
+                    <span class="text-[10px] text-gray-400 font-mono font-bold px-2 py-0.5 bg-gray-100 rounded"
+                        id="headerVersionDisplay">v5.2.0</span>
                 </div>
             </div>
             <div id="headerWelcomeMsg" class="mt-1 text-sm text-gray-600 font-medium hidden">
@@ -183,10 +184,18 @@
         <div id="mainView" data-current-view="dashboard">
             <!-- Dashboard View -->
             <div id="dashboard" class="app-view">
-                <div class="text-center mb-10">
-                    <img src="assets/img/header-logo.png" class="mx-auto max-w-sm mb-4">
-                    <h1 class="text-2xl font-bold text-gray-800">Academic Management System</h1>
-                    <p class="text-gray-500">Automobile Engineering Department</p>
+                <div class="text-center mb-12 py-8 bg-gradient-to-b from-blue-50/50 to-transparent rounded-3xl">
+                    <h1
+                        class="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2">
+                        Academic Management System
+                    </h1>
+                    <div class="flex items-center justify-center gap-2 mb-4">
+                        <span class="h-px w-8 bg-blue-200"></span>
+                        <p class="text-blue-500 font-bold uppercase tracking-[0.2em] text-xs">Automobile Engineering
+                            Department</p>
+                        <span class="h-px w-8 bg-blue-200"></span>
+                    </div>
+                    <p class="text-sm text-gray-400 font-medium">Institute of Heavy Equipments & ITC</p>
                 </div>
                 <div id="dashboardStats"></div>
                 <div id="dashboardCards" class="grid grid-cols-1 md:grid-cols-2 gap-4">
