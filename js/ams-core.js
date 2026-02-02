@@ -1,4 +1,4 @@
-// Academic Management System v4.2
+// Academic Management System v5.2.0
 // Main Application Module
 
 let students = [];
@@ -58,7 +58,12 @@ window.handleLogin = async (e) => {
 
         if (staffMember) {
             // Grant role based on staff member settings
-            const role = staffMember.isAdmin ? 'admin' : 'staff';
+            let role = 'staff';
+            if (staffMember.isAdmin) {
+                role = 'admin';
+            } else if (staffMember.position === 'Workshop Incharge') {
+                role = 'incharge';
+            }
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
             localStorage.setItem('logged_in_staff_id', staffMember.id);
@@ -80,7 +85,12 @@ window.handleLogin = async (e) => {
         const staffMember = staffMembers.find(s => s.username === u && s.password === p);
 
         if (staffMember) {
-            const role = staffMember.isAdmin ? 'admin' : 'staff';
+            let role = 'staff';
+            if (staffMember.isAdmin) {
+                role = 'admin';
+            } else if (staffMember.position === 'Workshop Incharge') {
+                role = 'incharge';
+            }
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
             localStorage.setItem('logged_in_staff_id', staffMember.id);
@@ -155,10 +165,10 @@ function checkSession() {
     // Version Display (Dynamic)
     const verEl = document.getElementById('statusFooter') || document.getElementById('appVersionFooter');
     if (verEl) {
-        verEl.textContent = "AMS v5.1.7 • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.2.0 • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
-    if (headVer) headVer.textContent = "v5.1.7";
+    if (headVer) headVer.textContent = "v5.2.0";
 
     if (role === 'admin' || role === 'staff') {
         startSession(role);
@@ -357,8 +367,8 @@ function showMessage(title, message, type = 'error') {
 
     const messageHtml = `
         <div id="appMessage" class="no-print fixed top-4 right-4 p-4 rounded-lg shadow-xl border-l-4 ${bgColor} transition-all duration-300 transform translate-x-0 z-50">
-            <h4 class="font-bold">${title}</h4>
-            <p class="text-sm">${message}</p>
+            <h4 class="font-bold">${escapeHtml(title)}</h4>
+            <p class="text-sm">${escapeHtml(message)}</p>
         </div>
     `;
 
@@ -690,7 +700,7 @@ window.saveAttendanceManual = () => {
 window.deleteAttendanceManual = () => {
     // 1. Permission Check
     if (localStorage.getItem('user_role') !== 'admin') {
-        showMessage('Error', 'Permission Denied: Only Incharge can delete records.', 'error');
+        showMessage('Error', 'Permission Denied: Only Administrators can delete records.', 'error');
         return;
     }
 
@@ -1774,7 +1784,7 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
         return `
         <tr class="h-8 border-b border-black hover:bg-gray-50 transition-colors" data-sid="${s.id}">
                 <td class="text-center border-r border-black font-medium text-xs">${i + 1}</td>
-                <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase leading-tight">${s.name}</td>
+                <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase leading-tight">${escapeHtml(s.name)}</td>
                 <td class="text-center font-mono border-r border-black text-[9px] font-bold text-blue-800 tracking-tighter whitespace-nowrap overflow-hidden">${s.admissionNo}</td>
                 ${cells}
                 <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
@@ -1893,7 +1903,7 @@ window.liveUpdateMark = (sid, idx, val, key, max, inputEl) => {
 
     student.marks[key].marks[idx] = numVal;
 
-    const row = document.querySelector(`tr[data - sid= "${sid}"]`);
+    const row = document.querySelector(`tr[data-sid="${sid}"]`);
     if (row) {
         const total = student.marks[key].marks.reduce((a, b) => a + b, 0);
         row.querySelector('.total-cell').textContent = total;
@@ -1963,7 +1973,7 @@ window.importData = (e) => {
 // Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     // Version Probe
-    showMessage('System Updated', 'AMS v4.4 is now active.', 'success');
+    showMessage('System Updated', 'AMS v5.2.0 is now active.', 'success');
 
     checkSession(); // Check login first
     loadData();
@@ -2026,14 +2036,14 @@ window.renderAssessmentHistory = () => {
                             class="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors font-medium text-sm">
                             View
                         </button>
-                        ${window.currentUserRole === 'incharge' ? `
+                        ${(window.currentUserRole === 'admin' || window.currentUserRole === 'incharge') ? `
                         <button onclick="deleteAssessment('${key}')" 
                             class="px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors font-medium text-sm">
                             Delete
                         </button>` : ''}
                     </div>
                 </td>
-            </tr>
+        </tr>
         `;
     }).join('');
 };
@@ -2062,17 +2072,18 @@ const updateRoleBadge = () => {
     const badge = document.getElementById('currentUserBadge');
     if (badge) {
         badge.textContent = (window.currentUserRole || 'Guest').toUpperCase();
-        badge.parentElement.classList.toggle('bg-red-50', window.currentUserRole !== 'incharge');
-        badge.parentElement.classList.toggle('text-red-800', window.currentUserRole !== 'incharge');
-        badge.parentElement.classList.toggle('border-red-100', window.currentUserRole !== 'incharge');
+        const hasElevatedPrivs = (window.currentUserRole === 'admin' || window.currentUserRole === 'incharge');
+        badge.parentElement.classList.toggle('bg-red-50', !hasElevatedPrivs);
+        badge.parentElement.classList.toggle('text-red-800', !hasElevatedPrivs);
+        badge.parentElement.classList.toggle('border-red-100', !hasElevatedPrivs);
     }
 };
 document.addEventListener('DOMContentLoaded', updateRoleBadge);
 
 window.deleteAssessment = (key) => {
-    // RBAC Check: Only Incharge can delete
-    if (window.currentUserRole !== 'incharge') {
-        showMessage('Access Denied', 'Only Incharge users can delete assessments.', 'error');
+    // RBAC Check: Only Admin or Incharge can delete
+    if (window.currentUserRole !== 'admin' && window.currentUserRole !== 'incharge') {
+        showMessage('Access Denied', 'Only Administrators or Incharge users can delete assessments.', 'error');
         return;
     }
 
@@ -2208,23 +2219,23 @@ function renderAssessmentExamTable(key, studentList) {
     });
 
     const html = `
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm border-collapse">
-                <thead class="bg-gray-100 border-b-2 border-gray-300">
-                    <tr>
-                        <th class="p-3 text-left font-bold border">SI No</th>
-                        <th class="p-3 text-left font-bold border">Name</th>
-                        <th class="p-3 text-left font-bold border">Admission No</th>
-                        <th class="p-3 text-center font-bold border">Total</th>
-                        <th class="p-3 text-center font-bold border">Rank</th>
-                        <th class="p-3 text-center font-bold border">Signature</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${examData.students.map((s, idx) => `
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border-collapse">
+                    <thead class="bg-gray-100 border-b-2 border-gray-300">
+                        <tr>
+                            <th class="p-3 text-left font-bold border">SI No</th>
+                            <th class="p-3 text-left font-bold border">Name</th>
+                            <th class="p-3 text-left font-bold border">Admission No</th>
+                            <th class="p-3 text-center font-bold border">Total</th>
+                            <th class="p-3 text-center font-bold border">Rank</th>
+                            <th class="p-3 text-center font-bold border">Signature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${examData.students.map((s, idx) => `
                         <tr class="border-b hover:bg-gray-50">
                             <td class="p-3 border text-center">${idx + 1}</td>
-                            <td class="p-3 border font-medium">${s.name}</td>
+                            <td class="p-3 border font-medium">${escapeHtml(s.name)}</td>
                             <td class="p-3 border text-xs font-mono">${s.admissionNo}</td>
                             <td class="p-3 border">
                                 <input type="number" value="${s.total}" min="0" max="200"
@@ -2239,20 +2250,20 @@ function renderAssessmentExamTable(key, studentList) {
                             </td>
                         </tr>
                     `).join('')}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
         </div>
-        <div class="flex justify-between items-center mt-6">
-            <button onclick="printAssessmentExam('${key}')" 
-                class="px-6 py-3 bg-gray-800 text-white font-bold rounded-xl hover:bg-black transition-all">
-                🖨️ Print
-            </button>
-            <button onclick="saveAssessmentExam()" 
-                class="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all">
-                💾 Save
-            </button>
-        </div>
-    `;
+            <div class="flex justify-between items-center mt-6">
+                <button onclick="saveAssessmentExam()"
+                    class="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all">
+                    💾 Save
+                </button>
+                <button onclick="printAssessmentExam('${key}')"
+                    class="px-6 py-3 bg-gray-800 text-white font-bold rounded-xl hover:bg-black transition-all">
+                    🖨️ Print
+                </button>
+            </div>
+        `;
 
     container.innerHTML = html;
 }
@@ -2284,123 +2295,123 @@ window.printAssessmentExam = function (key) {
     const printWindow = window.open('', '_blank');
 
     const html = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Assessment Examination - ${examData.batchId}</title>
-            <style>
-                @page { size: A4; margin: 15mm; }
-                * { margin: 0; padding: 0; box-sizing: border-box; }
-                body { 
-                    font-family: Arial, sans-serif; 
-                    padding: 20px;
-                    line-height: 1.4;
+            <!DOCTYPE html>
+                <html>
+                    <head>
+                        <title>Academic Management System | AMS v5.2.0</title>
+                        <style>
+                            @page { size: A4; margin: 15mm; }
+                            * {margin: 0; padding: 0; box-sizing: border-box; }
+                            body {
+                                font-family: Arial, sans-serif;
+                            padding: 20px;
+                            line-height: 1.4;
                 }
-                .header-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-bottom: 25px;
+                            .header-container {
+                                display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-bottom: 25px;
                 }
-                .logo {
-                    width: 300px;
-                    max-height: 120px;
-                    height: auto;
-                    object-fit: contain;
-                    display: block;
+                            .logo {
+                                width: 300px;
+                            max-height: 120px;
+                            height: auto;
+                            object-fit: contain;
+                            display: block;
                 }
-                .program-title {
-                    text-align: center;
-                    font-weight: bold;
-                    font-size: 14px;
-                    margin: 10px 0;
+                            .program-title {
+                                text-align: center;
+                            font-weight: bold;
+                            font-size: 14px;
+                            margin: 10px 0;
                 }
-                .exam-title {
-                    text-align: center;
-                    font-weight: bold;
-                    font-size: 13px;
-                    margin-bottom: 8px;
+                            .exam-title {
+                                text-align: center;
+                            font-weight: bold;
+                            font-size: 13px;
+                            margin-bottom: 8px;
                 }
-                .info-row {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 8px;
-                    font-size: 12px;
+                            .info-row {
+                                display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 8px;
+                            font-size: 12px;
                 }
-                .info-row div {
-                    flex: 1;
+                            .info-row div {
+                                flex: 1;
                 }
-                .batch-info {
-                    text-align: center;
-                    font-weight: bold;
-                    font-size: 13px;
-                    margin-bottom: 15px;
+                            .batch-info {
+                                text-align: center;
+                            font-weight: bold;
+                            font-size: 13px;
+                            margin-bottom: 15px;
                 }
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 10px;
-                    font-size: 11px;
+                            table {
+                                width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 10px;
+                            font-size: 11px;
                 }
-                th, td {
-                    border: 1px solid #000;
-                    padding: 6px 8px;
-                    text-align: left;
+                            th, td {
+                                border: 1px solid #000;
+                            padding: 6px 8px;
+                            text-align: left;
                 }
-                th {
-                    background-color: #fff;
-                    font-weight: bold;
-                    text-align: center;
-                    font-size: 11px;
+                            th {
+                                background-color: #fff;
+                            font-weight: bold;
+                            text-align: center;
+                            font-size: 11px;
                 }
-                td.center {
-                    text-align: center;
+                            td.center {
+                                text-align: center;
                 }
-                .slno-col { width: 50px; }
-                .name-col { width: 200px; }
-                .admno-col { width: 150px; }
-                .mark-col { width: 80px; text-align: center; }
-                .rank-col { width: 60px; text-align: center; }
-                .signatures {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-top: 40px;
-                    padding: 0 20px;
-                    font-size: 12px;
-                    font-weight: bold;
+                            .slno-col {width: 50px; }
+                            .name-col {width: 200px; }
+                            .admno-col {width: 150px; }
+                            .mark-col {width: 80px; text-align: center; }
+                            .rank-col {width: 60px; text-align: center; }
+                            .signatures {
+                                display: flex;
+                            justify-content: space-between;
+                            margin-top: 40px;
+                            padding: 0 20px;
+                            font-size: 12px;
+                            font-weight: bold;
                 }
-                .signatures div {
-                    text-align: center;
+                            .signatures div {
+                                text-align: center;
                 }
-           </style>
-        </head>
-        <body>
-            <div class="header-container">
-                <img src="https://dotkpr-ctrl.github.io/AMS-/assets/img/header-logo.png" alt="A2Z Logo" class="logo">
-            </div>
-            
-            <div class="program-title">ADVANCED DIPLOMA IN AUTOMOBILE ENGINEERING</div>
-            <div class="exam-title">ASSESSMENT EXAMINATION ${new Date(examData.date).getFullYear()}</div>
-            
-            <div class="info-row">
-                <div><strong>TOPIC:</strong></div>
-                <div style="text-align: right;"><strong>DATE:</strong> ${new Date(examData.date).toLocaleDateString('en-GB')}</div>
-            </div>
-            
-            <div class="batch-info">BATCH: ${examData.batchId}</div>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th class="slno-col">SLNO</th>
-                        <th class="name-col">NAME</th>
-                        <th class="admno-col">ADMISSION NUMBER</th>
-                        <th class="mark-col">MARK</th>
-                        <th class="rank-col">RANK</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${examData.students.map((s, idx) => `
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header-container">
+                            <img src="https://a2zwb.github.io/ams/assets/img/header-logo.png" alt="A2Z Logo" class="logo">
+                        </div>
+
+                        <div class="program-title">ADVANCED DIPLOMA IN AUTOMOBILE ENGINEERING</div>
+                        <div class="exam-title">ASSESSMENT EXAMINATION ${new Date(examData.date).getFullYear()}</div>
+
+                        <div class="info-row">
+                            <div><strong>TOPIC:</strong></div>
+                            <div style="text-align: right;"><strong>DATE:</strong> ${new Date(examData.date).toLocaleDateString('en-GB')}</div>
+                        </div>
+
+                        <div class="batch-info">BATCH: ${examData.batchId}</div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="slno-col">SLNO</th>
+                                    <th class="name-col">NAME</th>
+                                    <th class="admno-col">ADMISSION NUMBER</th>
+                                    <th class="mark-col">MARK</th>
+                                    <th class="rank-col">RANK</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${examData.students.map((s, idx) => `
                         <tr>
                             <td class="slno-col center">${idx + 1}</td>
                             <td class="name-col">${s.name.toUpperCase()}</td>
@@ -2409,17 +2420,17 @@ window.printAssessmentExam = function (key) {
                             <td class="rank-col center">${s.rank > 0 ? s.rank : '-'}</td>
                         </tr>
                     `).join('')}
-                </tbody>
-            </table>
-            
-            <div class="signatures">
-                <div>INVIGILATOR</div>
-                <div>AME (HOD)</div>
-                <div>PRINCIPAL</div>
-            </div>
-        </body>
-        </html>
-    `;
+                            </tbody>
+                        </table>
+
+                        <div class="signatures">
+                            <div>INVIGILATOR</div>
+                            <div>AME (HOD)</div>
+                            <div>PRINCIPAL</div>
+                        </div>
+                    </body>
+                </html>
+        `;
 
     printWindow.document.write(html);
     printWindow.document.close();
@@ -2582,7 +2593,7 @@ function renderDocumentList(studentId) {
                 </button>
             </div>
         </div>
-    `).join('');
+        `).join('');
 }
 
 // Download document
@@ -2610,7 +2621,7 @@ window.deleteDocument = function (studentId, documentId) {
     const doc = student.documents?.find(d => d.id === documentId);
     if (!doc) return;
 
-    if (!confirm(`Are you sure you want to delete "${doc.name}"?`)) return;
+    if (!confirm(`Are you sure you want to delete "${doc.name}" ? `)) return;
 
     // Remove document
     student.documents = student.documents.filter(d => d.id !== documentId);
@@ -2675,7 +2686,7 @@ window.handleStaffFormSubmit = function (e) {
     saveData();
     renderStaffList();
     e.target.reset();
-    showMessage('Success', `Staff ${name} added. Default Login: ${username} / ${password}`, 'success');
+    showMessage('Success', `Staff ${name} added.Default Login: ${username} / ${password}`, 'success');
 };
 
 window.renderStaffList = function () {
@@ -2918,4 +2929,5 @@ window.exportLogsToCSV = function () {
 // Initialize application data and session
 loadData();
 checkSession();
+
 

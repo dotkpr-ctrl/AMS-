@@ -1,12 +1,12 @@
-# Academic Management System (AMS) v4.9.8
+# Academic Management System (AMS) v5.2.0
 
-[![GitHub Pages](https://img.shields.io/badge/demo-live-success)](https://dotkpr-ctrl.github.io/AMS-/)
-[![Version](https://img.shields.io/badge/version-4.9.8-blue)](https://github.com/dotkpr-ctrl/AMS-)
+[![GitHub Pages](https://img.shields.io/badge/demo-live-success)](https://a2zwb.github.io/ams/)
+[![Version](https://img.shields.io/badge/version-5.2.0-blue)](https://github.com/a2zwb/ams)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 A comprehensive web-based Academic Management System designed for the **Automobile Engineering Department** at the **Institute of Heavy Equipment & ITC**. Built with vanilla JavaScript, this system handles student profiles, attendance tracking, assessment management, document uploads, and document generation—all with offline-first capabilities using browser local storage.
 
-![AMS Dashboard](https://raw.githubusercontent.com/dotkpr-ctrl/-assets/87413e49245de21f59888203d550557d31c03cf6/Picture1.png)
+![AMS Dashboard](assets/img/header-logo.png)
 
 ## ✨ Features
 
@@ -89,7 +89,7 @@ A comprehensive web-based Academic Management System designed for the **Automobi
 ## 🚀 Quick Start
 
 ### Option 1: GitHub Pages (Recommended)
-Simply visit: [https://dotkpr-ctrl.github.io/AMS-/](https://dotkpr-ctrl.github.io/AMS-/)
+Simply visit: [https://a2zwb.github.io/ams/](https://a2zwb.github.io/ams/)
 
 **Default Login Credentials:**
 - **Admin**: Ziyad Basheer (Site Administrator)
@@ -99,7 +99,7 @@ Simply visit: [https://dotkpr-ctrl.github.io/AMS-/](https://dotkpr-ctrl.github.i
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/dotkpr-ctrl/AMS-.git
+   git clone https://github.com/a2zwb/ams.git
    cd AMS-
    ```
 
@@ -244,9 +244,9 @@ AMS-/
 - **Active Batches**: 16
 - **Assessments Recorded**: 7
 - **Storage**: LocalStorage + GitHub Sync
-- **Version**: 4.9.8
+- **Version**: 5.2.0
 
-## 🆕 Recent Updates (v4.9.8)
+## 🆕 Recent Updates (v5.2.0)
 
 ### New Features
 - ✅ Student document upload system
@@ -282,9 +282,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**dot kpr**
-- GitHub: [@dotkpr-ctrl](https://github.com/dotkpr-ctrl)
-- Email: dotkpr@gmail.com
+**a2zwb**
+- GitHub: [@a2zwb](https://github.com/a2zwb)
+- Email: a2zwb@github.com1
 
 ## 🏫 Institution
 
@@ -302,17 +302,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For issues, questions, or suggestions:
-- Open an [issue](https://github.com/dotkpr-ctrl/AMS-/issues)
-- Email: dotkpr@gmail.com
+- Open an [issue](https://github.com/a2zwb/ams/issues)
+- Contact: via GitHub Issues
 
 ## 🔗 Links
 
-- **Live Demo**: [https://dotkpr-ctrl.github.io/AMS-/](https://dotkpr-ctrl.github.io/AMS-/)
-- **Repository**: [https://github.com/dotkpr-ctrl/AMS-](https://github.com/dotkpr-ctrl/AMS-)
+- **Live Demo**: [https://a2zwb.github.io/ams/](https://a2zwb.github.io/ams/)
+- **Repository**: [https://github.com/a2zwb/ams](https://github.com/a2zwb/ams)
 - **Documentation**: See [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ---
 
-**Version**: 4.9.8 | **Status**: Stable | **Last Updated**: January 31, 2026
+**Version**: 5.2.0 | **Status**: Stable | **Last Updated**: February 2, 2026
 
 **Built with vanilla JavaScript - No frameworks, no build tools, no dependencies!** ⚡
+

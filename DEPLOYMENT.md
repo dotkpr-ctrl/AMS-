@@ -10,7 +10,7 @@ Your Academic Management System has been successfully restructured and committed
 ✅ Created .gitignore and LICENSE  
 ✅ Initialized Git repository  
 ✅ Created initial commit  
-✅ Set up remote connection to https://github.com/dotkpr-ctrl/AMS-.git
+✅ Set up remote connection to https://github.com/a2zwb/ams.git
 
 ## Next Steps: Push to GitHub
 
@@ -49,16 +49,16 @@ When prompted for password during `git push`, paste the token instead.
 
 After pushing to GitHub:
 
-1. Go to: https://github.com/dotkpr-ctrl/AMS-/settings/pages
+1. Go to: https://github.com/a2zwb/ams/settings/pages
 2. Under "Source", select: **main** branch
 3. Folder: **/ (root)**
 4. Click **Save**
 5. Wait 1-2 minutes for deployment
-6. Your site will be live at: **https://dotkpr-ctrl.github.io/AMS-/**
+6. Your site will be live at: **https://a2zwb.github.io/ams/**
 
 ### Step 3: Verify Deployment
 
-Visit https://dotkpr-ctrl.github.io/AMS-/ to see your live application!
+Visit https://a2zwb.github.io/ams/ to see your live application!
 
 ## Local Testing
 
@@ -92,15 +92,20 @@ GitHub Pages will automatically update within 1-2 minutes!
 ## File Structure
 
 ```
-vacant-pathfinder/
-├── index.html          # Main HTML file
+ancient-curie/
+├── index.html              # Main HTML structure with all views
 ├── css/
-│   └── styles.css      # All custom styles
+│   └── styles.css          # Custom styles and design system
 ├── js/
-│   └── app.js          # Application logic
-├── README.md           # Project documentation
-├── LICENSE             # MIT License
-└── .gitignore          # Git exclusions
+│   ├── ams-core.js        # Core application logic
+│   ├── github-sync.js     # Cloud synchronization
+│   ├── cloud-sync-integration.js  # Sync integration
+│   └── logger.js          # Activity logging system
+├── assets/                # Images and static resources
+├── README.md              # Project documentation
+├── LICENSE                # MIT License
+├── DEPLOYMENT.md          # Deployment guide
+└── .gitignore             # Git exclusions
 ```
 
 ## Important Notes
@@ -129,3 +134,4 @@ vacant-pathfinder/
 ---
 
 **Ready to push?** Run: `git push -u origin main`
+

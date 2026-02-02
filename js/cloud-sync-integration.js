@@ -8,10 +8,7 @@ function initializeCloudSync() {
 
     // Auto-connect with embedded token if available and not already configured
     // Token split to avoid GitHub secret scanning detection
-    const part1 = 'ghp_T7j04mUTPOD';
-    const part2 = 'TMYBeoN8RXJUU';
-    const part3 = '0y2oJ125sIbC';
-    const EMBEDDED_TOKEN = part1 + part2 + part3;
+    const EMBEDDED_TOKEN = ''; // Security: Removed hardcoded token
 
     if (!githubSync.isConfigured() && EMBEDDED_TOKEN) {
         console.log('Using embedded GitHub token');
@@ -261,3 +258,4 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
+

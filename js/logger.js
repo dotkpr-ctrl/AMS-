@@ -82,3 +82,4 @@ class ActivityLogger {
 
 // Global Instance
 window.activityLogger = new ActivityLogger();
+
