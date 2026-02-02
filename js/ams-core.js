@@ -207,6 +207,24 @@ function loadData() {
             staffMembers = [];
         }
 
+        // Restore/Merge Allocations from specific backup
+        const storedAllocations = localStorage.getItem('academic_management_allocations_v1');
+        if (storedAllocations && staffMembers.length > 0) {
+            try {
+                const allocationsMap = JSON.parse(storedAllocations);
+                staffMembers.forEach(s => {
+                    // Only restore if currently empty/missing to avoid overwriting newer changes
+                    if (!s.allocatedBatches || s.allocatedBatches.length === 0) {
+                        if (allocationsMap[s.id]) {
+                            s.allocatedBatches = allocationsMap[s.id];
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error('Error restoring allocations:', e);
+            }
+        }
+
         students = students.map(s => ({
             ...s,
             id: s.id || crypto.randomUUID(),
@@ -231,6 +249,13 @@ function saveData() {
         localStorage.setItem(LS_KEY_BATCH_META, JSON.stringify(batchMetadata));
         localStorage.setItem(LS_KEY_STAFF, JSON.stringify(staffMembers));
         localStorage.setItem(LS_KEY_STAFF + '_BACKUP_AUTO', JSON.stringify(staffMembers)); // Auto-backup
+
+        // Explicit Allocation Backup
+        const allocations = staffMembers.reduce((acc, s) => {
+            acc[s.id] = s.allocatedBatches || [];
+            return acc;
+        }, {});
+        localStorage.setItem('academic_management_allocations_v1', JSON.stringify(allocations));
 
         // Trigger auto-sync to cloud if available
         if (window.autoSyncToCloud) {
