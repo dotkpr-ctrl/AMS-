@@ -2162,6 +2162,7 @@ window.printAssessmentExam = function (key) {
                 }
                 .logo {
                     width: 300px; /* Banner size */
+                    max-height: 120px;
                     height: auto;
                     object-fit: contain;
                 }
