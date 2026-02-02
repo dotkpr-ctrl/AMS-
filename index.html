@@ -586,6 +586,41 @@
                     </div>
                 </div>
 
+                <!-- Log Filters -->
+                <div
+                    class="bg-white border rounded-xl p-4 mb-4 shadow-sm grid grid-cols-2 md:grid-cols-5 gap-3 items-end">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">From Date</label>
+                        <input type="date" id="logStartDate" class="w-full text-xs p-2 border rounded-lg bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">To Date</label>
+                        <input type="date" id="logEndDate" class="w-full text-xs p-2 border rounded-lg bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">User</label>
+                        <select id="logUserFilter"
+                            class="w-full text-xs p-2 border rounded-lg bg-gray-50 outline-none focus:border-blue-500">
+                            <option value="">All Users</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Action Type</label>
+                        <select id="logActionFilter"
+                            class="w-full text-xs p-2 border rounded-lg bg-gray-50 outline-none focus:border-blue-500">
+                            <option value="">All Actions</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" id="logSearch" placeholder="Search keywords..."
+                            class="w-full text-xs p-2 border rounded-lg bg-gray-50 outline-none focus:border-blue-500">
+                        <button onclick="renderActivityLogs()"
+                            class="bg-blue-600 text-white font-bold px-3 py-2 rounded-lg hover:bg-blue-700 shadow-sm">
+                            Apply
+                        </button>
+                    </div>
+                </div>
+
                 <div class="bg-white border rounded-2xl shadow-sm overflow-hidden">
                     <div class="overflow-x-auto max-h-[600px]">
                         <table class="w-full text-left">
@@ -774,14 +809,14 @@
 
 
     <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=5.1.1"></script>
+    <script src="js/github-sync.js?v=5.1.2"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=5.1.1"></script>
+    <script src="js/cloud-sync-integration.js?v=5.1.2"></script>
     <!-- Main JavaScript Module -->
     <!-- Activity Logger -->
     <script src="js/logger.js"></script>
-    <script src="js/ams-core.js?v=5.1.1"></script>
-    <script src="js/app.js?v=5.1.1"></script>
+    <script src="js/ams-core.js?v=5.1.2"></script>
+    <script src="js/app.js?v=5.1.2"></script>
 </body>
 
 </html>

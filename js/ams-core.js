@@ -2768,10 +2768,41 @@ window.renderActivityLogs = function () {
     // Admin allowed - ensure buttons are visible
     if (clearBtn) clearBtn.classList.remove('hidden');
 
-    const logs = window.activityLogger ? window.activityLogger.getLogs() : [];
+    let logs = window.activityLogger ? window.activityLogger.getLogs() : [];
+
+    // --- Populate Filters Check ---
+    const userFilter = document.getElementById('logUserFilter');
+    const actionFilter = document.getElementById('logActionFilter');
+
+    if (userFilter && userFilter.options.length <= 1) {
+        const users = [...new Set(logs.map(l => l.user))].sort();
+        users.forEach(u => userFilter.innerHTML += `<option value="${u}">${u}</option>`);
+    }
+    if (actionFilter && actionFilter.options.length <= 1) {
+        const actions = [...new Set(logs.map(l => l.action))].sort();
+        actions.forEach(a => actionFilter.innerHTML += `<option value="${a}">${a}</option>`);
+    }
+
+    // --- Apply Filters ---
+    const startDate = document.getElementById('logStartDate') ? document.getElementById('logStartDate').value : '';
+    const endDate = document.getElementById('logEndDate') ? document.getElementById('logEndDate').value : '';
+    const selectedUser = userFilter ? userFilter.value : '';
+    const selectedAction = actionFilter ? actionFilter.value : '';
+    const search = document.getElementById('logSearch') ? document.getElementById('logSearch').value.toLowerCase() : '';
+
+    logs = logs.filter(log => {
+        const logDate = log.timestamp.split('T')[0];
+        if (startDate && logDate < startDate) return false;
+        if (endDate && logDate > endDate) return false;
+        if (selectedUser && log.user !== selectedUser) return false;
+        if (selectedAction && log.action !== selectedAction) return false;
+        if (search && !log.details.toLowerCase().includes(search) && !log.action.toLowerCase().includes(search)) return false;
+        return true;
+    });
+
 
     if (logs.length === 0) {
-        container.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-400">No activity recorded yet.</td></tr>';
+        container.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-gray-400 border-dashed border-2 rounded-lg m-4">No matching activity records found.</td></tr>';
         return;
     }
 
