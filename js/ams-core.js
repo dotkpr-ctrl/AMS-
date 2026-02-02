@@ -2161,8 +2161,9 @@ window.printAssessmentExam = function (key) {
                     gap: 20px;
                 }
                 .logo {
-                    width: 80px;
-                    height: 80px;
+                    width: 100px;
+                    height: 100px;
+                    object-fit: contain;
                 }
                 .header-text {
                     text-align: center;
