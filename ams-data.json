@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T04:19:28.190Z",
+  "lastUpdated": "2026-02-02T04:20:46.325Z",
   "version": "4.7",
   "students": [
     {
@@ -3993,6 +3993,9 @@
       },
       "2026-01-31": {
         "sessionType": "Theory"
+      },
+      "2026-02-02": {
+        "sessionType": "Workshop"
       }
     },
     "AME 31": {
