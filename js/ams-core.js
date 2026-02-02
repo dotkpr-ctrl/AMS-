@@ -2527,7 +2527,7 @@ window.handleStaffFormSubmit = function (e) {
     // Generate username/pass (Short & Simple)
     const firstName = name.split(' ')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
     const username = firstName;
-    const password = '123';
+    const password = phone.length >= 4 ? phone.slice(-4) : phone;
 
     const newStaff = {
         id: crypto.randomUUID(),
@@ -2573,9 +2573,10 @@ window.renderStaffList = function () {
                         ${s.isAdmin ? 'ADMIN' : 'STAFF'}
                     </span>
                 </div>
-                <div class="mt-2 flex gap-2">
+                <div class="mt-2 flex gap-3 items-center">
+                     <button onclick="editStaffCredentials('${s.id}')" class="text-blue-600 text-xs hover:underline pt-2 font-bold">Edit Pass</button>
                      <button onclick="deleteStaff('${s.id}')" class="text-red-500 text-xs hover:underline pt-2">Delete</button>
-                     <div class="text-[10px] text-gray-400 pt-2 ml-auto">User: ${s.username} / Pass: ${s.password}</div>
+                     <div class="text-[10px] text-gray-400 pt-2 ml-auto font-mono">User: ${s.username} / Pass: ${s.password}</div>
                 </div>
                 <!-- Badge Color Indicator -->
                 <div class="absolute top-0 left-0 w-1 h-full rounded-l-xl bg-${s.badgeColor === 'white' ? 'gray-200' : s.badgeColor + '-500'}"></div>
@@ -2592,6 +2593,24 @@ window.deleteStaff = function (id) {
     staffMembers = staffMembers.filter(s => s.id !== id);
     saveData();
     renderStaffList();
+};
+
+window.editStaffCredentials = function (id) {
+    const staff = staffMembers.find(s => s.id === id);
+    if (!staff) return;
+
+    // Prompt for new password
+    const newPass = prompt(`Enter NEW password for ${staff.name}:`, staff.password);
+    if (newPass !== null) {
+        if (newPass.trim() === '') {
+            alert('Password cannot be empty.');
+            return;
+        }
+        staff.password = newPass.trim();
+        saveData();
+        renderStaffList();
+        showMessage('Success', 'Password updated successfully.', 'success');
+    }
 };
 
 window.renderBatchAllocation = function () {
