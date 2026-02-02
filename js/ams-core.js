@@ -155,8 +155,10 @@ function checkSession() {
     // Version Display (Dynamic)
     const verEl = document.getElementById('statusFooter') || document.getElementById('appVersionFooter');
     if (verEl) {
-        verEl.textContent = "AMS v5.1.6 • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.1.7 • LOCAL DATABASE SECURED";
     }
+    const headVer = document.getElementById('headerVersionDisplay');
+    if (headVer) headVer.textContent = "v5.1.7";
 
     if (role === 'admin' || role === 'staff') {
         startSession(role);
