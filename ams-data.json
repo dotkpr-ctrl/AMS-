@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T04:27:04.864Z",
+  "lastUpdated": "2026-02-02T04:32:42.609Z",
   "version": "4.7",
   "students": [
     {
@@ -4108,7 +4108,10 @@
       "isAdmin": false,
       "username": "test",
       "password": "123",
-      "allocatedBatches": []
+      "allocatedBatches": [
+        "AME 31",
+        "AME 32"
+      ]
     },
     {
       "id": "728d32b2-1545-4ab7-ace4-6278a84a08c3",
