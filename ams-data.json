@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T09:03:07.310Z",
+  "lastUpdated": "2026-02-02T09:03:17.694Z",
   "version": "4.8",
   "students": [
     {
@@ -4113,6 +4113,17 @@
       "isAdmin": false,
       "username": "abhijith",
       "password": "2572",
+      "allocatedBatches": []
+    },
+    {
+      "id": "c639d89e-6823-4c42-bd35-04186741efe0",
+      "name": "Ziyad Basheer",
+      "phone": "9400567699",
+      "position": "Workshop Incharge",
+      "badgeColor": "green",
+      "isAdmin": false,
+      "username": "ziyad",
+      "password": "7699",
       "allocatedBatches": []
     }
   ],
