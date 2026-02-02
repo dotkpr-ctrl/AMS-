@@ -1413,6 +1413,22 @@ window.filterRegister = () => {
     const batchId = document.getElementById('registerBatchSelector').value;
     if (!batchId) return;
 
+    // Permissions Check
+    if (currentUserRole === 'staff') {
+        const me = staffMembers.find(s => s.id === currentStaffId);
+        if (me) {
+            // If allocatedBatches exists and is not empty, check it.
+            // If empty, we might default to allow (legacy) or deny (strict). 
+            // Given the feature request "only allowcated staff", we default to DENY if array exists but doesn't include batch.
+            if (me.allocatedBatches && me.allocatedBatches.length > 0 && !me.allocatedBatches.includes(batchId)) {
+                showMessage('Access Denied', `You are not authorized to view the register for batch ${batchId}.`, 'error');
+                return;
+            }
+            // If allocatedBatches is missing/empty, we allow access (backward compatibility until verified)
+            // or ideally deny. Let's allow for now to prevent lockout unless explicitly set.
+        }
+    }
+
     // Trigger generation with register config
     const config = {
         batchId: batchId,
