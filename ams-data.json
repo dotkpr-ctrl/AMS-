@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T03:49:21.330Z",
+  "lastUpdated": "2026-02-02T03:49:37.048Z",
   "version": "4.7",
   "students": [
     {
@@ -4084,6 +4084,17 @@
       "badgeColor": "blue",
       "isAdmin": false,
       "username": "test",
+      "password": "123",
+      "allocatedBatches": []
+    },
+    {
+      "id": "728d32b2-1545-4ab7-ace4-6278a84a08c3",
+      "name": "abhijith a",
+      "phone": "8086492572",
+      "position": "Workshop Faculty",
+      "badgeColor": "blue",
+      "isAdmin": false,
+      "username": "abhijith",
       "password": "123",
       "allocatedBatches": []
     }
