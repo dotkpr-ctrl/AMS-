@@ -142,7 +142,7 @@ function startSession(role) {
 
     if (headerMsg) {
         const userName = localStorage.getItem('logged_in_user') || 'User';
-        const roleText = role === 'admin' ? '(Site Administrator)' : '(Staff Member)';
+        const roleText = role === 'admin' ? 'Admin' : 'Staff';
 
         if (headerName) headerName.textContent = userName;
         if (headerRole) headerRole.textContent = roleText;

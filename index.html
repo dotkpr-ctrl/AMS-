@@ -59,24 +59,44 @@
         </div>
 
         <nav class="no-print border-b pb-4 mb-6">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-40">
                 <button onclick="toggleMenu()"
-                    class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none transition-colors">
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="p-2.5 bg-gray-50 text-gray-600 rounded-xl hover:bg-gray-100 hover:text-primary transition-all shadow-sm border border-gray-100">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16">
                         </path>
                     </svg>
                 </button>
                 <div class="flex items-center gap-3">
-                    <img src="assets/img/header-logo.png" alt="AMS Logo" class="h-8 w-auto object-contain">
-                    <span class="text-[10px] text-gray-400 font-mono font-bold px-2 py-0.5 bg-gray-100 rounded"
-                        id="headerVersionDisplay">v5.2.0</span>
+                    <div class="text-right hidden sm:block">
+                        <p class="text-[10px] font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                            Institute of Heavy Equipments & ITC</p>
+                        <p class="text-[8px] text-gray-400 font-bold leading-tight tracking-wider">Approved STED Council
+                            of India</p>
+                    </div>
+                    <div class="h-8 w-px bg-gray-200 hidden sm:block"></div>
+                    <div class="flex flex-col items-end">
+                        <img src="assets/img/header-logo.png" alt="AMS Logo" class="h-7 w-auto object-contain">
+                        <span class="text-[9px] text-gray-400 font-mono font-bold"
+                            id="headerVersionDisplay">v5.2.0</span>
+                    </div>
                 </div>
             </div>
-            <div id="headerWelcomeMsg" class="mt-1 text-sm text-gray-600 font-medium hidden">
-                Welcome <span class="text-primary font-bold" id="headerUserName"></span> <span
-                    class="text-gray-500 text-xs" id="headerUserRole"></span>
+            <div id="headerWelcomeMsg"
+                class="mt-4 flex items-center justify-between bg-blue-50/50 p-2 px-3 rounded-xl border border-blue-100/50 hidden">
+                <div class="flex items-center gap-2">
+                    <div class="flex -space-x-1">
+                        <div
+                            class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] animate-pulse">
+                        </div>
+                    </div>
+                    <span class="text-[11px] text-gray-500 font-semibold">User: <span class="text-blue-700 font-bold"
+                            id="headerUserName"></span></span>
+                </div>
+                <span
+                    class="text-[9px] bg-blue-600 text-white px-2 py-0.5 rounded-md font-black uppercase tracking-widest shadow-sm"
+                    id="headerUserRole"></span>
             </div>
         </nav>
 
