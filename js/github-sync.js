@@ -4,8 +4,8 @@
 class GitHubDataSync {
     constructor() {
         this.token = localStorage.getItem('github_token') || '';
-        this.owner = 'a2zwb';
-        this.repo = 'ams';
+        this.owner = 'dotkpr-ctrl';
+        this.repo = 'AMS-';
         this.branch = 'data';
         this.apiBase = 'https://api.github.com';
         this.lastSync = localStorage.getItem('last_sync') || null;
