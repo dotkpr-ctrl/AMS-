@@ -153,14 +153,10 @@ function checkSession() {
     const role = localStorage.getItem('user_role');
 
     // Version Display (Dynamic)
-    let verEl = document.getElementById('appVersionFooter');
-    if (!verEl) {
-        verEl = document.createElement('div');
-        verEl.id = 'appVersionFooter';
-        verEl.className = "fixed bottom-0 w-full text-center text-[10px] bg-slate-900 text-slate-500 py-1 z-50 pointer-events-none";
-        document.body.appendChild(verEl);
+    const verEl = document.getElementById('statusFooter') || document.getElementById('appVersionFooter');
+    if (verEl) {
+        verEl.textContent = "AMS v5.1.6 • LOCAL DATABASE SECURED";
     }
-    verEl.textContent = "AMS v5.1.5 • RECOVERY COMPLETE";
 
     if (role === 'admin' || role === 'staff') {
         startSession(role);

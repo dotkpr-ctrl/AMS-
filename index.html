@@ -60,10 +60,6 @@
 
         <nav class="no-print border-b pb-4 mb-6">
             <div class="flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <img src="assets/img/header-logo.png" alt="A2Z Institute" class="h-12 w-auto object-contain">
-                    <span class="text-xs text-gray-400 font-mono mt-1">v4.8.7</span>
-                </div>
                 <button onclick="toggleMenu()"
                     class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none transition-colors">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,6 +68,10 @@
                         </path>
                     </svg>
                 </button>
+                <div class="flex items-center gap-2">
+                    <img src="assets/img/header-logo.png" alt="A2Z Institute" class="h-12 w-auto object-contain">
+                    <span class="text-xs text-gray-400 font-mono mt-1" id="headerVersionDisplay">v5.1.5</span>
+                </div>
             </div>
             <div id="headerWelcomeMsg" class="mt-1 text-sm text-gray-600 font-medium hidden">
                 Welcome <span class="text-primary font-bold" id="headerUserName"></span> <span
@@ -81,7 +81,8 @@
 
         <!-- Menu Drawer -->
         <div id="mobileMenu" class="no-print fixed inset-0 bg-black/50 z-[100] hidden" onclick="toggleMenu()">
-            <div class="bg-white w-72 h-full p-6 shadow-2xl overflow-y-auto" onclick="event.stopPropagation()">
+            <div class="bg-white w-72 h-full p-6 shadow-2xl overflow-y-auto fixed left-0 top-0 transition-transform duration-300"
+                onclick="event.stopPropagation()">
                 <div class="flex justify-between items-center mb-6 border-b pb-2">
                     <h2 class="text-2xl font-bold text-primary">Main Menu</h2>
                     <button onclick="toggleMenu()" class="text-gray-400 hover:text-red-500">
@@ -809,14 +810,14 @@
 
 
     <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=5.1.5"></script>
+    <script src="js/github-sync.js?v=5.1.6"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=5.1.5"></script>
+    <script src="js/cloud-sync-integration.js?v=5.1.6"></script>
     <!-- Main JavaScript Module -->
     <!-- Activity Logger -->
     <script src="js/logger.js"></script>
-    <script src="js/ams-core.js?v=5.1.5"></script>
-    <script src="js/app.js?v=5.1.5"></script>
+    <script src="js/ams-core.js?v=5.1.6"></script>
+    <script src="js/app.js?v=5.1.6"></script>
 </body>
 
 </html>
