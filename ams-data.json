@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T03:36:50.145Z",
+  "lastUpdated": "2026-02-02T03:36:54.791Z",
   "version": "4.7",
   "students": [
     {
@@ -4096,7 +4096,9 @@
       "isAdmin": false,
       "username": "0000000123",
       "password": "0000000123",
-      "allocatedBatches": []
+      "allocatedBatches": [
+        "AME 31"
+      ]
     }
   ]
 }
