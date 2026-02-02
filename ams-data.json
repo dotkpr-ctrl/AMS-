@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T04:20:46.325Z",
+  "lastUpdated": "2026-02-02T04:21:03.252Z",
   "version": "4.7",
   "students": [
     {
@@ -3995,7 +3995,10 @@
         "sessionType": "Theory"
       },
       "2026-02-02": {
-        "sessionType": "Workshop"
+        "sessionType": "Workshop",
+        "f1196415-0a77-4ff2-a4db-d81b2bb1f457": "absent",
+        "97ab2e72-677f-4174-ac8c-a7c075aba72d": "absent",
+        "bb503f37-d4a9-456c-80bd-8ab238f9b9e5": "absent"
       }
     },
     "AME 31": {
