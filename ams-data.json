@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T03:44:03.985Z",
+  "lastUpdated": "2026-02-02T03:44:14.615Z",
   "version": "4.7",
   "students": [
     {
@@ -4085,6 +4085,17 @@
       "isAdmin": false,
       "username": "8086492572",
       "password": "8086492572",
+      "allocatedBatches": []
+    },
+    {
+      "id": "e285127f-ead7-40af-b422-aa97edb0db7d",
+      "name": "test",
+      "phone": "0000000124",
+      "position": "Technical Faculty",
+      "badgeColor": "blue",
+      "isAdmin": false,
+      "username": "test",
+      "password": "123",
       "allocatedBatches": []
     }
   ]
