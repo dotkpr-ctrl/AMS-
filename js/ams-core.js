@@ -194,7 +194,18 @@ function loadData() {
         batchMetadata = storedBatchMeta ? JSON.parse(storedBatchMeta) : {};
 
         const storedStaff = localStorage.getItem(LS_KEY_STAFF);
-        staffMembers = storedStaff ? JSON.parse(storedStaff) : [];
+        const storedStaffBackup = localStorage.getItem(LS_KEY_STAFF + '_BACKUP_AUTO');
+
+        if (storedStaff) {
+            staffMembers = JSON.parse(storedStaff);
+        } else if (storedStaffBackup) {
+            console.log('Restoring staff from automatic backup...');
+            staffMembers = JSON.parse(storedStaffBackup);
+            // Restore to main key immediately
+            localStorage.setItem(LS_KEY_STAFF, storedStaffBackup);
+        } else {
+            staffMembers = [];
+        }
 
         students = students.map(s => ({
             ...s,
@@ -219,6 +230,7 @@ function saveData() {
         localStorage.setItem(LS_KEY_ATTENDANCE, JSON.stringify(attendanceData));
         localStorage.setItem(LS_KEY_BATCH_META, JSON.stringify(batchMetadata));
         localStorage.setItem(LS_KEY_STAFF, JSON.stringify(staffMembers));
+        localStorage.setItem(LS_KEY_STAFF + '_BACKUP_AUTO', JSON.stringify(staffMembers)); // Auto-backup
 
         // Trigger auto-sync to cloud if available
         if (window.autoSyncToCloud) {
@@ -2512,9 +2524,10 @@ window.handleStaffFormSubmit = function (e) {
     const color = document.getElementById('staffColor').value;
     const isAdmin = document.getElementById('staffIsAdmin').checked;
 
-    // Generate username/pass (simple default)
-    const username = phone;
-    const password = phone; // default password is phone
+    // Generate username/pass (Short & Simple)
+    const firstName = name.split(' ')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+    const username = firstName;
+    const password = '123';
 
     const newStaff = {
         id: crypto.randomUUID(),
