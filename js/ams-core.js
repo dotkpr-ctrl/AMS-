@@ -18,6 +18,7 @@ const INITIAL_BATCH_ID = 'AME 37';
 
 // Auth State
 let currentUserRole = localStorage.getItem('user_role') || null;
+let currentStaffId = localStorage.getItem('logged_in_staff_id') || null;
 
 
 // Auth Functions
@@ -2297,6 +2298,22 @@ window.openStudentDocuments = function (studentId) {
     const student = students.find(s => s.id === studentId);
     if (!student) return;
 
+    // Check Permissions (Batch Allocation)
+    if (currentUserRole === 'staff') {
+        const me = staffMembers.find(s => s.id === currentStaffId);
+        // Admin always has access (handled by role check above), Staff needs check
+        if (!me) {
+            showMessage('Access Error', 'User profile not found.', 'error');
+            return;
+        }
+
+        // If no batches allocated or current student batch not in list
+        if (!me.allocatedBatches || !me.allocatedBatches.includes(student.batchId)) {
+            showMessage('Access Denied', `You are not authorized to view documents for batch ${student.batchId}.`, 'error');
+            return;
+        }
+    }
+
     currentDocumentStudentId = studentId;
 
     // Initialize documents array if it doesn't exist
@@ -2481,5 +2498,155 @@ function formatFileSize(bytes) {
 }
 
 // Initialize session on page load
+// Initialize session on page load
 checkSession();
+
+
+// ==================== STAFF MANAGEMENT & BATCH ALLOCATION ====================
+
+window.handleStaffFormSubmit = function (e) {
+    e.preventDefault();
+    const name = document.getElementById('staffName').value;
+    const phone = document.getElementById('staffPhone').value;
+    const position = document.getElementById('staffPosition').value;
+    const color = document.getElementById('staffColor').value;
+    const isAdmin = document.getElementById('staffIsAdmin').checked;
+
+    // Generate username/pass (simple default)
+    const username = phone;
+    const password = phone; // default password is phone
+
+    const newStaff = {
+        id: crypto.randomUUID(),
+        name,
+        phone,
+        position,
+        badgeColor: color,
+        isAdmin,
+        username,
+        password,
+        allocatedBatches: [] // Init empty
+    };
+
+    staffMembers.push(newStaff);
+    saveData();
+    renderStaffList();
+    e.target.reset();
+    showMessage('Success', `Staff ${name} added. Default Login: ${username} / ${password}`, 'success');
+};
+
+window.renderStaffList = function () {
+    const container = document.getElementById('staffListContainer');
+    if (!container) return;
+
+    if (staffMembers.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500 py-4">No staff members found.</p>';
+        renderBatchAllocation(); // Also render empty allocation
+        document.getElementById('staffCount').textContent = '0';
+        return;
+    }
+
+    document.getElementById('staffCount').textContent = staffMembers.length;
+
+    container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        ${staffMembers.map(s => `
+            <div class="bg-white p-4 rounded-xl border shadow-sm hover:shadow-md transition-all relative group">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-gray-800">${s.name}</h4>
+                        <p class="text-xs text-gray-500">${s.position} • ${s.phone}</p>
+                    </div>
+                    <span class="text-xs px-2 py-1 rounded-full font-bold ${s.isAdmin ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700'}">
+                        ${s.isAdmin ? 'ADMIN' : 'STAFF'}
+                    </span>
+                </div>
+                <div class="mt-2 flex gap-2">
+                     <button onclick="deleteStaff('${s.id}')" class="text-red-500 text-xs hover:underline pt-2">Delete</button>
+                     <div class="text-[10px] text-gray-400 pt-2 ml-auto">User: ${s.username} / Pass: ${s.password}</div>
+                </div>
+                <!-- Badge Color Indicator -->
+                <div class="absolute top-0 left-0 w-1 h-full rounded-l-xl bg-${s.badgeColor === 'white' ? 'gray-200' : s.badgeColor + '-500'}"></div>
+            </div>
+        `).join('')}
+    </div>`;
+
+    // Also render batch allocation
+    renderBatchAllocation();
+};
+
+window.deleteStaff = function (id) {
+    if (!confirm('Are you sure you want to delete this staff member?')) return;
+    staffMembers = staffMembers.filter(s => s.id !== id);
+    saveData();
+    renderStaffList();
+};
+
+window.renderBatchAllocation = function () {
+    const container = document.getElementById('batchAllocationContainer');
+    if (!container) return;
+
+    // Get unique batches from students
+    const batches = [...new Set(students.map(s => s.batchId))].sort();
+
+    if (staffMembers.length === 0) {
+        container.innerHTML = '<p class="text-sm text-center text-gray-400">Add staff members first.</p>';
+        return;
+    }
+
+    let html = `<div class="overflow-x-auto"><table class="w-full text-sm">
+        <thead>
+            <tr class="bg-gray-100 text-left text-xs uppercase text-gray-600">
+                <th class="p-3 rounded-tl-lg">Staff Name</th>
+                <th class="p-3">Role</th>
+                <th class="p-3 w-2/3 rounded-tr-lg">Allocated Batches</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">`;
+
+    staffMembers.forEach(staff => {
+        // If admin, show "ALL ACCESS"
+        const isAdm = staff.isAdmin;
+        const currentBatches = staff.allocatedBatches || [];
+
+        html += `<tr class="hover:bg-gray-50">
+            <td class="p-3 font-medium">${staff.name}</td>
+            <td class="p-3"><span class="text-xs ${isAdm ? 'text-yellow-600 font-bold' : 'text-gray-500'}">${isAdm ? 'Admin' : 'Staff'}</span></td>
+            <td class="p-3">
+                ${isAdm ?
+                '<span class="text-green-600 font-bold text-xs">✅ All Batches (Admin)</span>' :
+                `<div class="flex flex-wrap gap-2">
+                        ${batches.map(b => `
+                            <label class="inline-flex items-center gap-1 px-2 py-1 rounded border ${currentBatches.includes(b) ? 'bg-blue-50 border-blue-200 text-blue-700' : 'bg-white border-gray-200 text-gray-600'} cursor-pointer hover:bg-gray-50 transition-colors">
+                                <input type="checkbox" 
+                                    onchange="toggleBatchAllocation('${staff.id}', '${b}')"
+                                    ${currentBatches.includes(b) ? 'checked' : ''}
+                                    class="w-3 h-3 text-blue-600 rounded">
+                                <span class="text-xs">${b}</span>
+                            </label>
+                        `).join('')}
+                    </div>`
+            }
+            </td>
+        </tr>`;
+    });
+
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+};
+
+window.toggleBatchAllocation = function (staffId, batchId) {
+    const staff = staffMembers.find(s => s.id === staffId);
+    if (!staff) return;
+
+    if (!staff.allocatedBatches) staff.allocatedBatches = [];
+
+    if (staff.allocatedBatches.includes(batchId)) {
+        staff.allocatedBatches = staff.allocatedBatches.filter(b => b !== batchId);
+    } else {
+        staff.allocatedBatches.push(batchId);
+    }
+
+    saveData();
+    renderBatchAllocation(); // Re-render to update UI if needed (though checkboxes strictly don't need it, styles do)
+};
 
