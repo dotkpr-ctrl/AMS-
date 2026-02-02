@@ -320,6 +320,16 @@ function refreshDataAndUI() {
 }
 
 // UI Helper Functions
+function escapeHtml(text) {
+    if (!text) return text;
+    return text.toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 function showMessage(title, message, type = 'error') {
     const container = document.getElementById('app');
     let existingMessage = document.getElementById('appMessage');
@@ -596,8 +606,8 @@ function renderAttendanceList() {
         const isPresent = dailyData[s.id] !== 'absent';
         return `
             <tr class="border-b hover:bg-gray-50">
-                <td class="p-3 text-sm font-medium">${s.name}</td>
-                <td class="p-3 text-xs font-mono">${s.admissionNo}</td>
+                <td class="p-3 text-sm font-medium">${escapeHtml(s.name)}</td>
+                <td class="p-3 text-xs font-mono">${escapeHtml(s.admissionNo)}</td>
                 <td class="p-3 text-center">
                     <input type="checkbox" class="w-5 h-5 accent-green-600 cursor-pointer" 
                         ${isPresent ? 'checked' : ''} 
@@ -940,9 +950,9 @@ function renderStudentList() {
 
     list.innerHTML = filtered.map(s => `
         <tr class="border-b hover:bg-gray-50">
-            <td class="p-2 text-sm font-medium">${s.name}</td>
-            <td class="p-2 text-xs font-mono">${s.admissionNo}</td>
-            <td class="p-2 text-xs">${s.batchId}</td>
+            <td class="p-2 text-sm font-medium">${escapeHtml(s.name)}</td>
+            <td class="p-2 text-xs font-mono">${escapeHtml(s.admissionNo)}</td>
+            <td class="p-2 text-xs">${escapeHtml(s.batchId)}</td>
             <td class="p-2">
                 <select onchange="updateSubBatch('${s.id}', this.value)" class="text-xs border rounded p-1">
                     <option value="None" ${s.subBatch === 'None' ? 'selected' : ''}>None</option>
@@ -1164,13 +1174,13 @@ function renderStaffList() {
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex-1">
                             <h4 class="font-bold text-lg text-gray-800 flex items-center gap-2">
-                                ${staff.name}
+                                ${escapeHtml(staff.name)}
                                 ${staff.isAdmin ? '<span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full border border-yellow-300">⭐ Admin</span>' : ''}
                             </h4>
-                            <p class="text-sm text-gray-600 font-mono mt-1">📞 ${staff.phone}</p>
+                            <p class="text-sm text-gray-600 font-mono mt-1">📞 ${escapeHtml(staff.phone)}</p>
                         </div>
                         <span class="${colorBadges[staff.colorCode]} px-3 py-1 rounded-full text-xs font-bold">
-                            ${staff.position}
+                            ${escapeHtml(staff.position)}
                         </span>
                     </div>
                     <div class="bg-blue-50 border border-blue-100 rounded-lg p-2 mb-3">
@@ -1178,7 +1188,7 @@ function renderStaffList() {
                         <div class="grid grid-cols-2 gap-2 text-xs">
                             <div>
                                 <span class="text-gray-500">Username:</span>
-                                <span class="font-mono font-bold text-blue-700 ml-1">${staff.username || 'N/A'}</span>
+                                <span class="font-mono font-bold text-blue-700 ml-1">***</span>
                             </div>
                             <div>
                                 <span class="text-gray-500">Password:</span>
