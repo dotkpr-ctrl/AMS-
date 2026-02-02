@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-02-02T03:07:11.156Z",
-  "version": "4.7",
+  "lastUpdated": "2026-02-02T03:07:30.461Z",
+  "version": "4.2",
   "students": [
     {
       "name": "JOYAL R",
@@ -4063,37 +4063,5 @@
       }
     }
   },
-  "batchMetadata": {},
-  "staffMembers": [
-    {
-      "id": "admin-1769862302902",
-      "name": "Ziyad Basheer",
-      "phone": "9400567699",
-      "position": "Workshop Incharge",
-      "colorCode": "green",
-      "username": "ziyadb",
-      "password": "7699",
-      "isAdmin": true
-    },
-    {
-      "id": "477efa66-728a-41a4-a941-0701b41def0f",
-      "name": "KIRAN",
-      "phone": "8281602475",
-      "position": "Workshop Faculty",
-      "colorCode": "blue",
-      "username": "kiran",
-      "password": "2475",
-      "isAdmin": false
-    },
-    {
-      "id": "41536df6-4715-470c-965e-f9a4d9745f66",
-      "name": "Vileesh",
-      "phone": "0000000123",
-      "position": "A.GM",
-      "colorCode": "white",
-      "username": "vileesh",
-      "password": "0123",
-      "isAdmin": true
-    }
-  ]
+  "batchMetadata": {}
 }
