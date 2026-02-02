@@ -10,7 +10,7 @@ Your Academic Management System has been successfully restructured and committed
 ✅ Created .gitignore and LICENSE  
 ✅ Initialized Git repository  
 ✅ Created initial commit  
-✅ Set up remote connection to https://github.com/a2zwb/ams.git
+✅ Set up remote connection to https://github.com/dotkpr-ctrl/AMS-.git
 
 ## Next Steps: Push to GitHub
 
@@ -49,16 +49,16 @@ When prompted for password during `git push`, paste the token instead.
 
 After pushing to GitHub:
 
-1. Go to: https://github.com/a2zwb/ams/settings/pages
+1. Go to: https://github.com/dotkpr-ctrl/AMS-/settings/pages
 2. Under "Source", select: **main** branch
 3. Folder: **/ (root)**
 4. Click **Save**
 5. Wait 1-2 minutes for deployment
-6. Your site will be live at: **https://a2zwb.github.io/ams/**
+6. Your site will be live at: **https://dotkpr-ctrl.github.io/AMS-/**
 
 ### Step 3: Verify Deployment
 
-Visit https://a2zwb.github.io/ams/ to see your live application!
+Visit https://dotkpr-ctrl.github.io/AMS-/ to see your live application!
 
 ## Local Testing
 

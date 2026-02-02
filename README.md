@@ -1,124 +1,77 @@
 # Academic Management System (AMS) v5.2.0
 
-[![GitHub Pages](https://img.shields.io/badge/demo-live-success)](https://a2zwb.github.io/ams/)
-[![Version](https://img.shields.io/badge/version-5.2.0-blue)](https://github.com/a2zwb/ams)
+[![GitHub Pages](https://img.shields.io/badge/demo-live-success)](https://dotkpr-ctrl.github.io/AMS-/)
+[![Version](https://img.shields.io/badge/version-5.2.0-blue)](https://github.com/dotkpr-ctrl/AMS-)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
+---
+
+## 🚀 Overview
 A comprehensive web-based Academic Management System designed for the **Automobile Engineering Department** at the **Institute of Heavy Equipment & ITC**. Built with vanilla JavaScript, this system handles student profiles, attendance tracking, assessment management, document uploads, and document generation—all with offline-first capabilities using browser local storage.
 
-![AMS Dashboard](assets/img/header-logo.png)
+---
 
-## ✨ Features
+## 🌟 Key Features
 
-### 🔐 Role-Based Access Control
-- **Admin Access** (Site Administrator): Full system control
-- **Staff Access** (Staff Members): Limited permissions for daily operations
-- Automatic role persistence across sessions
-- Custom dashboards for each role
+### 📅 Attendance System
+- **Daily Marking**: Record attendance for Theory and Practical sessions.
+- **Sub-Batch Support**: Filter students by batch divisions for practicals.
+- **Live Search**: Quickly find students by name or admission number.
+- **WhatsApp Integration**: Share attendance summaries directly to faculty groups.
 
-### 📊 Dashboard
-- **Admin Dashboard**: Student Profiles, Document Management, Staff Management, Activity Logs
-- **Staff Dashboard**: Mark Attendance, Assessments, Daily Attendance
-- Real-time statistics on students, batches, and assessments
-- Quick access to role-specific functions
-- Clean, modern interface with dynamic cards
+### ✒️ Assessment Management
+- **Grade Entry**: Streamlined interface for Viva and Practical marks.
+- **Auto-Ranking**: Instant calculation of ranks based on total scores.
+- **Data Validation**: Real-time validation against maximum mark limits.
 
-### 👥 Student Management
-- Individual student profile creation
-- Bulk import via CSV/TSV format
-- Batch and sub-batch organization (A/B)
-- Batch in-charge assignment
-- **🆕 Student Document Upload** - Upload, download, and manage documents per student
-  - Supported formats: PDF, JPG, PNG, DOC, DOCX
-  - 500KB file size limit per document
-  - Document count display in student list
-  - Activity logging for all document operations
+### 📁 Document Management
+- **Smart Uploads**: Attach certificates and documents to student profiles.
+- **Cloud Sync**: Optional GitHub-powered cloud storage for cross-device access.
 
-### 📎 Document Upload System **(NEW)**
-- Upload important documents for individual students
-- Support for multiple file types (PDFs, images, Word docs)
-- File validation and size limits
-- Download documents anytime
-- Delete documents with confirmation
-- Document count displayed next to each student
-- Accessible to both admin and staff members
-- All uploads logged in Activity Logs
+### 🖨️ Document Center
+- **Automated Generation**: Create Assessment Sheets and Hall Tickets instantly.
+- **Print-Ready Designs**: All generated documents are optimized for A4 printing.
 
-### ✅ Attendance System
-- Daily attendance marking with date selection
-- Session types: Theory, Lab, Workshop
-- Sub-batch filtering for workshops
-- WhatsApp share integration for absence reports
-- Monthly attendance registers with percentage calculations
-- Print-ready attendance documents
-- Attendance history tracking
+---
 
-### 📝 Assessment & Grading
-- Workshop assessment mark entry with automatic ranking
-- Support for multiple assessment types (Q1-Q6, Practical, Record)
-- Per-question mark limits with validation
-- Automatic total calculation and ranking
-- Semester-wise tracking
-- Student transcript generation
-- Assessment history with filtering
+## 🛠️ Tech Stack
+- **Frontend**: HTML5, Tailwind CSS
+- **Logic**: Vanilla JavaScript (ES6+)
+- **Storage**: LocalStorage + GitHub Sync
+- **Version**: 5.2.0
 
-### 📋 Activity Logging
-- Comprehensive activity tracking for all user actions
-- Log levels: Info, Warning, Error
-- Timestamps and user attribution
-- Export activity logs to CSV
-- View recent activities from dashboard
+## 🆕 Recent Updates (v5.2.0)
 
-### 🖨️ Document Generation
-- **Attendance Index**: Signature sheets
-- **Blank Mark Sheets**: Pre-formatted templates
-- **Final Mark Sheets**: Complete with rankings
-- **Monthly Registers**: Date-wise attendance grids
-- **Student Transcripts**: Complete academic history
-- Professional A4 print layouts
-- No-print classes for clean output
+### New Features
+- ✅ Student document upload system
+- ✅ Detailed activity logging for administrators
+- ✅ Cloud sync status indicators
 
-### 💾 Data Management
-- Complete backup/restore functionality
-- JSON export/import
-- Browser local storage (offline-first)
-- **Cloud Sync via GitHub** - Automatic data synchronization
-- No server required for basic operation
-- Data persistence across sessions
+### Bug Fixes
+- ✅ Fixed dashboard initialization on page load
+- ✅ Fixed role persistence across sessions
+- ✅ Improved permission controls
 
-## 🚀 Quick Start
+### Improvements
+- ✅ Cleaner staff dashboard (3 cards)
+- ✅ Better error messages
+- ✅ Enhanced file validation
+- ✅ Updated UI/UX
 
-### Option 1: GitHub Pages (Recommended)
-Simply visit: [https://a2zwb.github.io/ams/](https://a2zwb.github.io/ams/)
+---
 
-**Default Login Credentials:**
-- **Admin**: Ziyad Basheer (Site Administrator)
-- **Staff**: KIRAN (Staff Member)
+## 💻 Quick Start
 
-### Option 2: Local Deployment
+### 🌐 Direct Link
+Simply visit: [https://dotkpr-ctrl.github.io/AMS-/](https://dotkpr-ctrl.github.io/AMS-/)
 
-1. **Clone the repository**
+### 🏠 Local Installation
+1. Register/Login to your GitHub account.
+2. Clone the repository:
    ```bash
-   git clone https://github.com/a2zwb/ams.git
-   cd AMS-
+   git clone https://github.com/dotkpr-ctrl/AMS-.git
    ```
-
-2. **Serve the files**
-   
-   Using Python:
-   ```bash
-   python -m http.server 8000
-   ```
-   
-   Using Node.js (http-server):
-   ```bash
-   npx http-server -p 8000
-   ```
-
-3. **Open in browser**
-   ```
-   http://localhost:8000
-   ```
+3. Open `index.html` in any modern web browser.
 
 ### Option 3: Direct File Access
 Simply open `index.html` in your web browser. No server needed!
@@ -140,15 +93,6 @@ AMS-/
 ├── DEPLOYMENT.md          # Deployment guide
 └── .gitignore             # Git exclusions
 ```
-
-## 🛠️ Technology Stack
-
-- **Frontend**: HTML5, Vanilla JavaScript (ES6+)
-- **Styling**: Tailwind CSS (CDN), Custom CSS
-- **Storage**: Browser LocalStorage API
-- **Cloud Sync**: GitHub API
-- **Fonts**: Google Fonts (Inter)
-- **Icons**: Emoji + Unicode
 
 ## 📖 Usage Guide
 
@@ -246,25 +190,16 @@ AMS-/
 - **Storage**: LocalStorage + GitHub Sync
 - **Version**: 5.2.0
 
-## 🆕 Recent Updates (v5.2.0)
+---
 
-### New Features
-- ✅ Student document upload system
-- ✅ Role-based dashboard cards
-- ✅ Staff access to Student Profiles
-- ✅ Activity logging system
-- ✅ Cloud sync with GitHub
+## ☁️ Cloud Sync Setup
 
-### Bug Fixes
-- ✅ Fixed dashboard initialization on page load
-- ✅ Fixed role persistence across sessions
-- ✅ Improved permission controls
+To enable cross-device synchronization:
+1. Generate a **GitHub Personal Access Token** (classic) with `repo` scope.
+2. Open the **Cloud Sync** menu in the application.
+3. Paste your token and click **Connect**.
 
-### Improvements
-- ✅ Cleaner staff dashboard (3 cards)
-- ✅ Better error messages
-- ✅ Enhanced file validation
-- ✅ Updated UI/UX
+---
 
 ## 🤝 Contributing
 
@@ -276,14 +211,65 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+## Next Steps: Push to GitHub
 
+### Step 1: Push to GitHub
+
+You need to push the code to GitHub. Since this is your first push, you'll need to authenticate.
+
+Run this command:
+
+```bash
+git push -u origin main
+```
+
+**Important**: GitHub will prompt you for authentication. You have two options:
+
+#### Option A: Using Personal Access Token (Recommended)
+
+1. **Create a token** at: https://github.com/settings/tokens
+2. Click "Generate new token (classic)"
+3. Give it a name: "AMS Push Token"
+4. Select scopes: `repo` (full control of private repositories)
+5. Click "Generate token"
+6. **Copy the token immediately** (you won't see it again!)
+
+When prompted for password during `git push`, paste the token instead.
+
+#### Option B: Using GitHub Desktop
+
+1. Install GitHub Desktop: https://desktop.github.com/
+2. Sign in with your GitHub account
+3. Add this repository: File → Add Local Repository
+4. Select folder: `c:\Users\a2zin\.gemini\antigravity\playground\vacant-pathfinder`
+5. Click "Publish repository"
+
+### Step 2: Enable GitHub Pages
+
+After pushing to GitHub:
+
+1. Go to: https://github.com/dotkpr-ctrl/AMS-/settings/pages
+2. Under "Source", select: **main** branch
+3. Folder: **/ (root)**
+4. Click **Save**
+5. Wait 1-2 minutes for deployment
+6. Your site will be live at: **https://dotkpr-ctrl.github.io/AMS-/**
+
+### Step 3: Verify Deployment
+
+Visit https://dotkpr-ctrl.github.io/AMS-/ to see your live application!
+
+---
+
+## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## 👨‍💻 Author
 
-**a2zwb**
-- GitHub: [@a2zwb](https://github.com/a2zwb)
+**dotkpr-ctrl**
+- GitHub: [@dotkpr-ctrl](https://github.com/dotkpr-ctrl)
 - Email: a2zwb@github.com1
 
 ## 🏫 Institution
@@ -302,14 +288,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For issues, questions, or suggestions:
-- Open an [issue](https://github.com/a2zwb/ams/issues)
+- Open an [issue](https://github.com/dotkpr-ctrl/AMS-/issues)
 - Contact: via GitHub Issues
 
 ## 🔗 Links
 
-- **Live Demo**: [https://a2zwb.github.io/ams/](https://a2zwb.github.io/ams/)
-- **Repository**: [https://github.com/a2zwb/ams](https://github.com/a2zwb/ams)
-- **Documentation**: See [DEPLOYMENT.md](DEPLOYMENT.md)
+- **Live Demo**: [https://dotkpr-ctrl.github.io/AMS-/](https://dotkpr-ctrl.github.io/AMS-/)
+- **Repository**: [https://github.com/dotkpr-ctrl/AMS-](https://github.com/dotkpr-ctrl/AMS-)
 
 ---
 
