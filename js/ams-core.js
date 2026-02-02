@@ -2754,7 +2754,19 @@ window.toggleBatchAllocation = function (staffId, batchId) {
 
 window.renderActivityLogs = function () {
     const container = document.getElementById('activityLogBody');
+    const clearBtn = document.getElementById('btnClearLogs');
+
     if (!container) return;
+
+    // Permission Check: Only Admin can view logs
+    if (currentUserRole !== 'admin') {
+        container.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-red-500 font-bold bg-red-50 rounded-lg">🚫 Access Denied<br><span class="text-xs font-normal text-gray-500">Only Administrators can view system logs.</span></td></tr>';
+        if (clearBtn) clearBtn.classList.add('hidden');
+        return;
+    }
+
+    // Admin allowed - ensure buttons are visible
+    if (clearBtn) clearBtn.classList.remove('hidden');
 
     const logs = window.activityLogger ? window.activityLogger.getLogs() : [];
 
