@@ -179,6 +179,17 @@ function applyPermissions(role) {
     if (navDocs) navDocs.classList.remove('hidden');
     if (navStaff) navStaff.classList.remove('hidden');
 
+    const navLogs = document.getElementById('nav-logs');
+
+    // "Deny by Default" - Only show logs if explicitly Admin
+    if (navLogs) {
+        if (role === 'admin') {
+            navLogs.classList.remove('hidden');
+        } else {
+            navLogs.classList.add('hidden');
+        }
+    }
+
     if (role === 'staff') {
         // Staff: Allow Student Profiles (for document management), hide Docs and Staff Management
         // navStudents - Keep visible for staff
@@ -425,7 +436,16 @@ function renderDashboardCards() {
 }
 
 function updateBatchDropdowns() {
-    const batchIds = [...new Set(students.map(s => s.batchId))].sort();
+    let batchIds = [...new Set(students.map(s => s.batchId))].sort();
+
+    // Filter for Staff based on Allocation
+    if (currentUserRole === 'staff' && currentStaffId) {
+        const me = staffMembers.find(s => s.id === currentStaffId);
+        if (me && me.allocatedBatches && me.allocatedBatches.length > 0) {
+            batchIds = batchIds.filter(b => me.allocatedBatches.includes(b));
+        }
+    }
+
     const selectors = [
         'batchSelector', 'assessBatchSelector', 'printBatchSelector',
         'attendanceBatchSelector', 'registerBatchSelector', 'printSubBatchSelector',
@@ -492,6 +512,14 @@ window.renderView = (viewName) => {
 
     const targetView = document.getElementById(viewName);
     if (targetView) {
+        // Guard: Activity Logs only for Admin
+        if (viewName === 'activityLogs' && currentUserRole !== 'admin') {
+            showMessage('Access Denied', 'Only administrators can view activity logs.', 'error');
+            return;
+        }
+
+        updateBatchDropdowns();
+
         targetView.classList.remove('hidden');
 
         if (viewName === 'studentManagement') renderStudentList();
@@ -501,8 +529,6 @@ window.renderView = (viewName) => {
         else if (viewName === 'attendanceRegister') renderAttendanceRegister();
         else if (viewName === 'assessmentHistory') renderAssessmentHistory();
         else if (viewName === 'activityLogs') renderActivityLogs();
-
-        updateBatchDropdowns();
     }
 };
 
