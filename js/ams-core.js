@@ -2157,12 +2157,12 @@ window.printAssessmentExam = function (key) {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    margin-bottom: 15px;
-                    gap: 20px;
+                    margin-bottom: 25px; /* Increased margin */
+                    gap: 30px; /* Increased gap */
                 }
                 .logo {
-                    width: 100px;
-                    height: 100px;
+                    width: 300px; /* Banner size */
+                    height: auto;
                     object-fit: contain;
                 }
                 .header-text {
@@ -2229,6 +2229,7 @@ window.printAssessmentExam = function (key) {
                 .name-col { width: 200px; }
                 .admno-col { width: 150px; }
                 .mark-col { width: 80px; text-align: center; }
+                .rank-col { width: 60px; text-align: center; }
                 .signatures {
                     display: flex;
                     justify-content: space-between;
@@ -2268,6 +2269,7 @@ window.printAssessmentExam = function (key) {
                         <th class="name-col">NAME</th>
                         <th class="admno-col">ADMISSION NUMBER</th>
                         <th class="mark-col">MARK</th>
+                        <th class="rank-col">RANK</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2277,6 +2279,7 @@ window.printAssessmentExam = function (key) {
                             <td class="name-col">${s.name.toUpperCase()}</td>
                             <td class="admno-col center">${s.admissionNo}</td>
                             <td class="mark-col center">${s.total || ''}</td>
+                            <td class="rank-col center">${s.rank > 0 ? s.rank : '-'}</td>
                         </tr>
                     `).join('')}
                 </tbody>
