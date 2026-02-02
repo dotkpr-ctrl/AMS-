@@ -489,6 +489,7 @@ window.renderView = (viewName) => {
         else if (viewName === 'attendanceMarking') setupAttendanceView();
         else if (viewName === 'attendanceRegister') renderAttendanceRegister();
         else if (viewName === 'assessmentHistory') renderAssessmentHistory();
+        else if (viewName === 'activityLogs') renderActivityLogs();
 
         updateBatchDropdowns();
     }
@@ -2705,5 +2706,63 @@ window.toggleBatchAllocation = function (staffId, batchId) {
 
     saveData();
     renderBatchAllocation(); // Re-render to update UI if needed (though checkboxes strictly don't need it, styles do)
+};
+
+
+// ==================== ACTIVITY LOGS ====================
+
+window.renderActivityLogs = function () {
+    const container = document.getElementById('activityLogBody');
+    if (!container) return;
+
+    const logs = window.activityLogger ? window.activityLogger.getLogs() : [];
+
+    if (logs.length === 0) {
+        container.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-400">No activity recorded yet.</td></tr>';
+        return;
+    }
+
+    container.innerHTML = logs.map(log => {
+        let typeClass = 'text-gray-600';
+        if (log.type === 'success') typeClass = 'text-green-600';
+        if (log.type === 'warning') typeClass = 'text-orange-600';
+        if (log.type === 'error') typeClass = 'text-red-600';
+
+        return `
+            <tr class="hover:bg-gray-50 border-b last:border-0 border-gray-100 transition-colors">
+                <td class="p-3 text-[10px] text-gray-400 font-mono whitespace-nowrap">
+                    ${new Date(log.timestamp).toLocaleString()}
+                </td>
+                <td class="p-3 font-bold text-gray-700 text-xs">
+                    ${log.user} <span class="opacity-50 font-normal">(${log.role})</span>
+                </td>
+                <td class="p-3 font-bold text-xs ${typeClass}">
+                    ${log.action}
+                </td>
+                <td class="p-3 text-gray-600 text-xs break-all">
+                    ${log.details}
+                </td>
+            </tr>
+        `;
+    }).join('');
+};
+
+window.exportLogsToCSV = function () {
+    if (!window.activityLogger) return;
+    const csvContent = window.activityLogger.exportLogsCSV();
+    if (!csvContent) {
+        showMessage('Export Failed', 'No logs to export.', 'warning');
+        return;
+    }
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", `ams_logs_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 };
 
