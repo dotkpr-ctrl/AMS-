@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T09:02:50.660Z",
+  "lastUpdated": "2026-02-02T09:03:07.310Z",
   "version": "4.8",
   "students": [
     {
@@ -4088,17 +4088,6 @@
   },
   "batchMetadata": {},
   "staffMembers": [
-    {
-      "id": "9c06627d-1399-468a-ab70-8d4ec2f890f0",
-      "name": "Ziyad Basheer",
-      "phone": "9400567699",
-      "position": "Workshop Incharge",
-      "badgeColor": "green",
-      "isAdmin": true,
-      "username": "9400567699",
-      "password": "7699",
-      "allocatedBatches": []
-    },
     {
       "id": "e285127f-ead7-40af-b422-aa97edb0db7d",
       "name": "test",
