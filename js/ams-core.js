@@ -1384,6 +1384,31 @@ window.switchRegisterTab = (tab) => {
 };
 
 
+// Initialize Tab State
+window.currentRegisterTab = 'Theory';
+
+window.switchRegisterTab = (tabName) => {
+    window.currentRegisterTab = tabName;
+
+    // Update UI
+    ['Theory', 'Workshop', 'All'].forEach(t => {
+        const btn = document.getElementById(`tab${t}`);
+        if (btn) {
+            if (t === tabName) {
+                btn.className = "flex-1 py-2 px-4 rounded-md text-xs font-bold transition-all bg-white text-blue-700 shadow-sm border border-blue-200";
+            } else {
+                btn.className = "flex-1 py-2 px-4 rounded-md text-xs font-bold transition-all text-gray-500 hover:bg-gray-200";
+            }
+        }
+    });
+
+    // Auto-refresh if batch is selected
+    const batchSelector = document.getElementById('registerBatchSelector');
+    if (batchSelector && batchSelector.value) {
+        filterRegister();
+    }
+};
+
 window.filterRegister = () => {
     const batchId = document.getElementById('registerBatchSelector').value;
     if (!batchId) return;
