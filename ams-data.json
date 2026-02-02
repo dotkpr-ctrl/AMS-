@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-02T03:33:22.666Z",
+  "lastUpdated": "2026-02-02T03:33:44.933Z",
   "version": "4.7",
   "students": [
     {
@@ -4064,5 +4064,17 @@
     }
   },
   "batchMetadata": {},
-  "staffMembers": []
+  "staffMembers": [
+    {
+      "id": "9c06627d-1399-468a-ab70-8d4ec2f890f0",
+      "name": "Ziyad Basheer",
+      "phone": "9400567699",
+      "position": "Workshop Incharge",
+      "badgeColor": "green",
+      "isAdmin": true,
+      "username": "9400567699",
+      "password": "9400567699",
+      "allocatedBatches": []
+    }
+  ]
 }
