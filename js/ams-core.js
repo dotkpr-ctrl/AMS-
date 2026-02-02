@@ -160,7 +160,7 @@ function checkSession() {
         verEl.className = "fixed bottom-0 w-full text-center text-[10px] bg-slate-900 text-slate-500 py-1 z-50 pointer-events-none";
         document.body.appendChild(verEl);
     }
-    verEl.textContent = "AMS v5.1.4 • CLOUD LOG SYNC ENABLED";
+    verEl.textContent = "AMS v5.1.5 • RECOVERY COMPLETE";
 
     if (role === 'admin' || role === 'staff') {
         startSession(role);
@@ -306,9 +306,6 @@ window.updateLocalDataFromCloud = (data) => {
     if (!data) return;
 
     students = data.students || [];
-    // ... rest handled by existing code? No, I need to verify I'm not overwriting everything blindly without handling logs.
-    // The existing code likely assigned variables.
-
     assessmentMetadata = data.assessmentMetadata || {};
     attendanceData = data.attendanceData || {};
     batchMetadata = data.batchMetadata || {};
@@ -325,27 +322,13 @@ window.updateLocalDataFromCloud = (data) => {
             combined.forEach(log => uniqueMap.set(log.id, log));
             const uniqueLogs = Array.from(uniqueMap.values()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
-            // Save directly to localStorage to bypass Logger limit if needed, or just use logger
-            localStorage.setItem('ams_activity_logs', JSON.stringify(uniqueLogs.slice(0, 2000))); // Keep 2000
+            localStorage.setItem('ams_activity_logs', JSON.stringify(uniqueLogs.slice(0, 2000)));
         } catch (e) { console.error('Error merging logs:', e); }
     }
-    assessmentMetadata = data.assessmentMetadata || {};
-    attendanceData = data.attendanceData || {};
-    batchMetadata = data.batchMetadata || {};
-    staffMembers = data.staffMembers || [];
 
-    saveData(); // Save to local storage cache
+    saveData();
     refreshDataAndUI();
 };
-
-// Expose data for cloud sync integration
-window.getAppData = () => ({
-    students,
-    assessmentMetadata,
-    attendanceData,
-    batchMetadata,
-    staffMembers
-});
 
 function refreshDataAndUI() {
     loadData();
@@ -2931,4 +2914,10 @@ window.exportLogsToCSV = function () {
     link.click();
     document.body.removeChild(link);
 };
+
+// ==================== INITIALIZATION ====================
+
+// Initialize application data and session
+loadData();
+checkSession();
 
