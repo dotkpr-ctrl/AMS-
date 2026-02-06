@@ -2055,7 +2055,7 @@ window.renderAssessmentHistory = () => {
                             class="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors font-medium text-sm">
                             View
                         </button>
-                        ${(window.currentUserRole === 'admin' || window.currentUserRole === 'incharge') ? `
+                        ${(currentUserRole === 'admin' || currentUserRole === 'incharge') ? `
                         <button onclick="deleteAssessment('${key}')" 
                             class="px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors font-medium text-sm">
                             Delete
@@ -2090,8 +2090,8 @@ window.loadAssessment = (key, type) => {
 const updateRoleBadge = () => {
     const badge = document.getElementById('currentUserBadge');
     if (badge) {
-        badge.textContent = (window.currentUserRole || 'Guest').toUpperCase();
-        const hasElevatedPrivs = (window.currentUserRole === 'admin' || window.currentUserRole === 'incharge');
+        badge.textContent = (currentUserRole || 'Guest').toUpperCase();
+        const hasElevatedPrivs = (currentUserRole === 'admin' || currentUserRole === 'incharge');
         badge.parentElement.classList.toggle('bg-red-50', !hasElevatedPrivs);
         badge.parentElement.classList.toggle('text-red-800', !hasElevatedPrivs);
         badge.parentElement.classList.toggle('border-red-100', !hasElevatedPrivs);
@@ -2101,7 +2101,7 @@ document.addEventListener('DOMContentLoaded', updateRoleBadge);
 
 window.deleteAssessment = (key) => {
     // RBAC Check: Only Admin or Incharge can delete
-    if (window.currentUserRole !== 'admin' && window.currentUserRole !== 'incharge') {
+    if (currentUserRole !== 'admin' && currentUserRole !== 'incharge') {
         showMessage('Access Denied', 'Only Administrators or Incharge users can delete assessments.', 'error');
         return;
     }
