@@ -314,7 +314,8 @@ class GitHubDataSync {
                     assessmentMetadata: data.assessmentMetadata,
                     attendanceData: data.attendanceData,
                     batchMetadata: data.batchMetadata,
-                    staffMembers: data.staffMembers || []
+                    staffMembers: data.staffMembers || [],
+                    activityLogs: data.activityLogs || []
                 },
                 timestamp: data.lastUpdated
             };

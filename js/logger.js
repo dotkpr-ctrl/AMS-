@@ -6,7 +6,7 @@
 class ActivityLogger {
     constructor() {
         this.STORAGE_KEY = 'ams_activity_logs';
-        this.maxLogs = 1000; // Keep last 1000 logs to prevent storage overflow
+        this.maxLogs = 2000; // Increased to 2000 logs for better cloud sharing
     }
 
     /**
@@ -38,6 +38,11 @@ class ActivityLogger {
         try {
             localStorage.setItem(this.STORAGE_KEY, JSON.stringify(logs));
             console.log(`[Logger] ${action}: ${details}`);
+
+            // Trigger auto-sync to cloud if available
+            if (window.autoSyncToCloud) {
+                window.autoSyncToCloud();
+            }
         } catch (e) {
             console.error('Failed to save log:', e);
         }

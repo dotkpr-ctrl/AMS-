@@ -212,7 +212,8 @@ window.autoSyncToCloud = async () => {
                 dataToSync.assessmentMetadata,
                 dataToSync.attendanceData,
                 dataToSync.batchMetadata,
-                dataToSync.staffMembers
+                dataToSync.staffMembers,
+                dataToSync.activityLogs || []
             );
 
             if (result.success) {
