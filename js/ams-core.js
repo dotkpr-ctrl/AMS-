@@ -65,6 +65,8 @@ window.handleLogin = async (e) => {
                 role = 'incharge';
             } else if (staffMember.position === 'Workshop Faculty') {
                 role = 'workshop_faculty';
+            } else if (staffMember.position === 'Technical Faculty') {
+                role = 'technical_faculty';
             }
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
@@ -94,6 +96,8 @@ window.handleLogin = async (e) => {
                 role = 'incharge';
             } else if (staffMember.position === 'Workshop Faculty') {
                 role = 'workshop_faculty';
+            } else if (staffMember.position === 'Technical Faculty') {
+                role = 'technical_faculty';
             }
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
@@ -176,7 +180,7 @@ function checkSession() {
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
 
-    if (role === 'admin' || role === 'staff' || role === 'incharge' || role === 'workshop_faculty') {
+    if (role === 'admin' || role === 'staff' || role === 'incharge' || role === 'workshop_faculty' || role === 'technical_faculty') {
         startSession(role);
     } else {
         document.getElementById('loginModal').classList.remove('hidden');
@@ -204,8 +208,8 @@ function applyPermissions(role) {
         }
     }
 
-    if (role === 'staff' || role === 'workshop_faculty') {
-        // Staff/Workshop Faculty: Hide Docs and Staff Management
+    if (role === 'staff' || role === 'workshop_faculty' || role === 'technical_faculty') {
+        // Staff/Faculty: Hide Docs and Staff Management
         if (navDocs) navDocs.classList.add('hidden');
         if (navStaff) navStaff.classList.add('hidden');
 
@@ -491,7 +495,7 @@ function updateBatchDropdowns() {
     let batchIds = [...new Set(students.map(s => s.batchId))].sort();
 
     // Filter for Staff based on Allocation
-    if (currentUserRole === 'staff' && currentStaffId) {
+    if ((currentUserRole === 'staff' || currentUserRole === 'technical_faculty') && currentStaffId) {
         const me = staffMembers.find(s => s.id === currentStaffId);
         if (me && me.allocatedBatches && me.allocatedBatches.length > 0) {
             batchIds = batchIds.filter(b => me.allocatedBatches.includes(b));
@@ -583,11 +587,19 @@ window.renderView = (viewName) => {
         // Logic for Assessment Setup (Tabs)
         if (viewName === 'assessmentSetup') {
             const examTabBtn = document.getElementById('examTab');
+            const workshopTabBtn = document.getElementById('workshopTab');
+
             if (currentUserRole === 'workshop_faculty') {
                 if (examTabBtn) examTabBtn.classList.add('hidden');
-                switchAssessmentTab('workshop'); // Always force workshop tab
+                if (workshopTabBtn) workshopTabBtn.classList.remove('hidden');
+                switchAssessmentTab('workshop');
+            } else if (currentUserRole === 'technical_faculty') {
+                if (workshopTabBtn) workshopTabBtn.classList.add('hidden');
+                if (examTabBtn) examTabBtn.classList.remove('hidden');
+                switchAssessmentTab('exam');
             } else {
                 if (examTabBtn) examTabBtn.classList.remove('hidden');
+                if (workshopTabBtn) workshopTabBtn.classList.remove('hidden');
             }
         }
 
@@ -1536,7 +1548,7 @@ window.filterRegister = () => {
     if (!batchId) return;
 
     // Permissions Check
-    if (currentUserRole === 'staff') {
+    if (currentUserRole === 'staff' || currentUserRole === 'technical_faculty') {
         const me = staffMembers.find(s => s.id === currentStaffId);
         if (me) {
             // If allocatedBatches exists and is not empty, check it.
@@ -2054,6 +2066,10 @@ window.renderAssessmentHistory = () => {
     if (currentUserRole === 'workshop_faculty') {
         keys = keys.filter(k => k.split('-')[2] === 'viva');
     }
+    // Filter for Technical Faculty: No Viva records
+    if (currentUserRole === 'technical_faculty') {
+        keys = keys.filter(k => k.split('-')[2] !== 'viva');
+    }
 
     keys.sort((a, b) => {
         const dateA = new Date(assessmentMetadata[a]?.date || 0);
@@ -2198,6 +2214,10 @@ function saveAssessmentExams() {
 window.switchAssessmentTab = function (tab) {
     if (tab === 'exam' && currentUserRole === 'workshop_faculty') {
         showMessage('Access Denied', 'Workshop Faculty members only have access to Workshop Viva entries.', 'error');
+        return;
+    }
+    if (tab === 'workshop' && currentUserRole === 'technical_faculty') {
+        showMessage('Access Denied', 'Technical Faculty members do not have access to Workshop Viva entries.', 'error');
         return;
     }
     const workshopTab = document.getElementById('workshopTab');
