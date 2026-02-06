@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T04:27:23.067Z",
+  "lastUpdated": "2026-02-06T04:29:40.190Z",
   "version": "4.8",
   "students": [
     {
@@ -4129,6 +4129,17 @@
       "isAdmin": true,
       "username": "ziyad",
       "password": "7699",
+      "allocatedBatches": []
+    },
+    {
+      "id": "b1c1964d-ea2d-4dcb-95bd-0ab1811c0b2e",
+      "name": "test1",
+      "phone": "0000001235",
+      "position": "Workshop Faculty",
+      "badgeColor": "blue",
+      "isAdmin": false,
+      "username": "test1",
+      "password": "1235",
       "allocatedBatches": []
     }
   ],
