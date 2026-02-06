@@ -184,20 +184,23 @@ function checkSession() {
     if (staffMembers.length === 0) loadData();
 
     // AUTO-SYNC ROLE: If logged in, ensure role matches current position
-    // This handles users who were logged in before the new roles were added
     if (staffId && staffMembers.length > 0) {
-        const me = staffMembers.find(s => s.id === staffId);
+        // Use loose equality (==) for ID as it might be string/number mismatch
+        const me = staffMembers.find(s => s.id == staffId);
         if (me) {
             let correctRole = 'staff';
+            const pos = (me.position || '').trim();
+
             if (me.isAdmin) correctRole = 'admin';
-            else if (me.position === 'Workshop Incharge' || me.position === 'MD') correctRole = 'incharge';
-            else if (me.position === 'Workshop Faculty') correctRole = 'workshop_faculty';
-            else if (me.position === 'Technical Faculty') correctRole = 'technical_faculty';
+            else if (pos === 'Workshop Incharge' || pos === 'MD') correctRole = 'incharge';
+            else if (pos === 'Workshop Faculty') correctRole = 'workshop_faculty';
+            else if (pos === 'Technical Faculty') correctRole = 'technical_faculty';
 
             if (role !== correctRole) {
-                console.log(`Syncing role: ${role} -> ${correctRole}`);
+                console.warn(`[Permission Sync] Updating role for ${me.name}: ${role} -> ${correctRole}`);
                 localStorage.setItem('user_role', correctRole);
                 role = correctRole;
+                currentUserRole = correctRole; // Force global update
             }
         }
     }
