@@ -206,9 +206,8 @@ function checkSession() {
     }
 
     // Version Display (Dynamic)
-    const verEl = document.getElementById('statusFooter') || document.getElementById('appVersionFooter');
     if (verEl) {
-        verEl.textContent = "AMS v5.2.0 (LIVE UPDATE) • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.2.1 (SYNC FIXED) • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
