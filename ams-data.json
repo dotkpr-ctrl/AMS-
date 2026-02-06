@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T04:57:21.862Z",
+  "lastUpdated": "2026-02-06T04:57:40.498Z",
   "version": "4.8",
   "students": [
     {
@@ -4144,6 +4144,33 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770353860475,
+      "timestamp": "2026-02-06T04:57:40.475Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770353847257,
+      "timestamp": "2026-02-06T04:57:27.257Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Login Failed",
+      "details": "Failed login attempt (Offline) for username: test",
+      "type": "warning"
+    },
+    {
+      "id": 1770353841859,
+      "timestamp": "2026-02-06T04:57:21.859Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: test",
+      "type": "warning"
+    },
     {
       "id": 1770353841858,
       "timestamp": "2026-02-06T04:57:21.858Z",
