@@ -134,7 +134,12 @@ function startSession(role) {
         const userName = localStorage.getItem('logged_in_user') || 'User';
 
         if (nameDisplay) nameDisplay.textContent = userName;
-        if (roleDisplay) roleDisplay.textContent = role === 'admin' ? 'Site Administrator' : 'Staff Member';
+        let detailedRole = 'Staff Member';
+        if (role === 'admin') detailedRole = 'Site Administrator';
+        else if (role === 'incharge') detailedRole = 'Incharge';
+        else if (role === 'workshop_faculty') detailedRole = 'Workshop Faculty';
+        else if (role === 'technical_faculty') detailedRole = 'Technical Faculty';
+        if (roleDisplay) roleDisplay.textContent = detailedRole;
 
         // Initials avatar
         if (avatar) {
@@ -153,6 +158,8 @@ function startSession(role) {
         let roleText = 'Staff';
         if (role === 'admin') roleText = 'Admin';
         else if (role === 'incharge') roleText = 'Incharge';
+        else if (role === 'workshop_faculty') roleText = 'Workshop';
+        else if (role === 'technical_faculty') roleText = 'Technical';
 
         if (headerName) headerName.textContent = userName;
         if (headerRole) headerRole.textContent = roleText;
@@ -2147,7 +2154,8 @@ window.loadAssessment = (key, type) => {
 const updateRoleBadge = () => {
     const badge = document.getElementById('currentUserBadge');
     if (badge) {
-        badge.textContent = (currentUserRole || 'Guest').toUpperCase();
+        let text = (currentUserRole || 'Guest').toUpperCase().replace('_', ' ');
+        badge.textContent = text;
         const hasElevatedPrivs = (currentUserRole === 'admin' || currentUserRole === 'incharge');
         badge.parentElement.classList.toggle('bg-red-50', !hasElevatedPrivs);
         badge.parentElement.classList.toggle('text-red-800', !hasElevatedPrivs);
