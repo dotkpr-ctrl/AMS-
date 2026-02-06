@@ -177,7 +177,27 @@ function refreshDataAndUI() {
 }
 
 function checkSession() {
-    const role = localStorage.getItem('user_role');
+    let role = localStorage.getItem('user_role');
+    const staffId = localStorage.getItem('logged_in_staff_id');
+
+    // AUTO-SYNC ROLE: If logged in, ensure role matches current position
+    // This handles users who were logged in before the new roles were added
+    if (staffId && staffMembers.length > 0) {
+        const me = staffMembers.find(s => s.id === staffId);
+        if (me) {
+            let correctRole = 'staff';
+            if (me.isAdmin) correctRole = 'admin';
+            else if (me.position === 'Workshop Incharge' || me.position === 'MD') correctRole = 'incharge';
+            else if (me.position === 'Workshop Faculty') correctRole = 'workshop_faculty';
+            else if (me.position === 'Technical Faculty') correctRole = 'technical_faculty';
+
+            if (role !== correctRole) {
+                console.log(`Syncing role: ${role} -> ${correctRole}`);
+                localStorage.setItem('user_role', correctRole);
+                role = correctRole;
+            }
+        }
+    }
 
     // Version Display (Dynamic)
     const verEl = document.getElementById('statusFooter') || document.getElementById('appVersionFooter');
