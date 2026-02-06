@@ -63,6 +63,8 @@ window.handleLogin = async (e) => {
                 role = 'admin';
             } else if (staffMember.position === 'Workshop Incharge' || staffMember.position === 'MD') {
                 role = 'incharge';
+            } else if (staffMember.position === 'Workshop Faculty') {
+                role = 'workshop_faculty';
             }
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
@@ -90,6 +92,8 @@ window.handleLogin = async (e) => {
                 role = 'admin';
             } else if (staffMember.position === 'Workshop Incharge' || staffMember.position === 'MD') {
                 role = 'incharge';
+            } else if (staffMember.position === 'Workshop Faculty') {
+                role = 'workshop_faculty';
             }
             localStorage.setItem('user_role', role);
             localStorage.setItem('logged_in_user', staffMember.name);
@@ -172,7 +176,7 @@ function checkSession() {
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
 
-    if (role === 'admin' || role === 'staff') {
+    if (role === 'admin' || role === 'staff' || role === 'incharge' || role === 'workshop_faculty') {
         startSession(role);
     } else {
         document.getElementById('loginModal').classList.remove('hidden');
@@ -200,11 +204,15 @@ function applyPermissions(role) {
         }
     }
 
-    if (role === 'staff') {
-        // Staff: Allow Student Profiles (for document management), hide Docs and Staff Management
-        // navStudents - Keep visible for staff
+    if (role === 'staff' || role === 'workshop_faculty') {
+        // Staff/Workshop Faculty: Hide Docs and Staff Management
         if (navDocs) navDocs.classList.add('hidden');
         if (navStaff) navStaff.classList.add('hidden');
+
+        // Workshop Faculty specifically: No Student Profiles
+        if (role === 'workshop_faculty' && navStudents) {
+            navStudents.classList.add('hidden');
+        }
     }
 
     // Update Dashboard or other elements if needed based on role
@@ -467,6 +475,12 @@ function renderDashboardCards() {
                 <h3 class="font-bold group-hover:text-primary">Daily Attendance</h3>
                 <p class="text-xs text-gray-400">View attendance records</p>
             </div>
+            <div onclick="renderView('assessmentHistory')"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">📂</div>
+                <h3 class="font-bold group-hover:text-primary">Recorded Assessments</h3>
+                <p class="text-xs text-gray-400">View saved marks & viva</p>
+            </div>
         `;
     }
 
@@ -556,9 +570,26 @@ window.renderView = (viewName) => {
             return;
         }
 
+        // Guard: Student Management restricted for Workshop Faculty
+        if (viewName === 'studentManagement' && currentUserRole === 'workshop_faculty') {
+            showMessage('Access Denied', 'Workshop Faculty members do not have access to Student Profiles.', 'error');
+            return;
+        }
+
         updateBatchDropdowns();
 
         targetView.classList.remove('hidden');
+
+        // Logic for Assessment Setup (Tabs)
+        if (viewName === 'assessmentSetup') {
+            const examTabBtn = document.getElementById('examTab');
+            if (currentUserRole === 'workshop_faculty') {
+                if (examTabBtn) examTabBtn.classList.add('hidden');
+                switchAssessmentTab('workshop'); // Always force workshop tab
+            } else {
+                if (examTabBtn) examTabBtn.classList.remove('hidden');
+            }
+        }
 
         if (viewName === 'studentManagement') renderStudentList();
         else if (viewName === 'staffManagement') renderStaffList();
@@ -2017,7 +2048,14 @@ window.renderAssessmentHistory = () => {
     const listBody = document.getElementById('assessmentHistoryBody');
     if (!listBody) return;
 
-    const keys = Object.keys(assessmentMetadata).sort((a, b) => {
+    let keys = Object.keys(assessmentMetadata);
+
+    // Filter for Workshop Faculty: Only show Viva records
+    if (currentUserRole === 'workshop_faculty') {
+        keys = keys.filter(k => k.split('-')[2] === 'viva');
+    }
+
+    keys.sort((a, b) => {
         const dateA = new Date(assessmentMetadata[a]?.date || 0);
         const dateB = new Date(assessmentMetadata[b]?.date || 0);
         return dateB - dateA;
@@ -2158,6 +2196,10 @@ function saveAssessmentExams() {
 
 // Switch between assessment tabs
 window.switchAssessmentTab = function (tab) {
+    if (tab === 'exam' && currentUserRole === 'workshop_faculty') {
+        showMessage('Access Denied', 'Workshop Faculty members only have access to Workshop Viva entries.', 'error');
+        return;
+    }
     const workshopTab = document.getElementById('workshopTab');
     const examTab = document.getElementById('examTab');
     const workshopContent = document.getElementById('workshopTabContent');
