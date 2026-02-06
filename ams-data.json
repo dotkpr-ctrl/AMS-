@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T05:06:45.397Z",
+  "lastUpdated": "2026-02-06T05:06:56.619Z",
   "version": "4.8",
   "students": [
     {
@@ -4144,6 +4144,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770354416606,
+      "timestamp": "2026-02-06T05:06:56.606Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "System Backup",
+      "details": "Created offline backup file",
+      "type": "success"
+    },
+    {
+      "id": 1770354405370,
+      "timestamp": "2026-02-06T05:06:45.370Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1770354405369,
       "timestamp": "2026-02-06T05:06:45.369Z",
