@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T03:22:46.367Z",
+  "lastUpdated": "2026-02-06T03:26:17.572Z",
   "version": "4.8",
   "students": [
     {
@@ -4130,5 +4130,87 @@
       "allocatedBatches": []
     }
   ],
-  "activityLogs": []
+  "activityLogs": [
+    {
+      "id": 1770347874053,
+      "timestamp": "2026-02-06T03:17:54.053Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by week and session Theory",
+      "type": "info"
+    },
+    {
+      "id": 1770347543650,
+      "timestamp": "2026-02-06T03:12:23.650Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by month and session All",
+      "type": "info"
+    },
+    {
+      "id": 1770347530808,
+      "timestamp": "2026-02-06T03:12:10.808Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by month and session Workshop",
+      "type": "info"
+    },
+    {
+      "id": 1770347505065,
+      "timestamp": "2026-02-06T03:11:45.065Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for TEST on 2026-02-06",
+      "type": "info"
+    },
+    {
+      "id": 1770347482171,
+      "timestamp": "2026-02-06T03:11:22.171Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for TEST on 2026-02-06",
+      "type": "info"
+    },
+    {
+      "id": 1770005605743,
+      "timestamp": "2026-02-02T04:13:25.743Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by month and session Workshop",
+      "type": "info"
+    },
+    {
+      "id": 1770005185134,
+      "timestamp": "2026-02-02T04:06:25.134Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for TEST on 2026-02-02",
+      "type": "info"
+    },
+    {
+      "id": 1770004322370,
+      "timestamp": "2026-02-02T03:52:02.370Z",
+      "user": "KIRAN",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770003463512,
+      "timestamp": "2026-02-02T03:37:43.512Z",
+      "user": "KIRAN",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    }
+  ]
 }
