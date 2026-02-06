@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T03:11:49.302Z",
+  "lastUpdated": "2026-02-06T03:11:56.219Z",
   "version": "4.8",
   "students": [
     {
@@ -4086,9 +4086,10 @@
       },
       "2026-02-06": {
         "d52ceb1d-f031-4098-8522-16da6287733c": "absent",
-        "8a6c611e-83a9-4bdc-8daa-2c2e4b94b2d5": "absent",
+        "8a6c611e-83a9-4bdc-8daa-2c2e4b94b2d5": "present",
         "e6d49b6f-8179-4163-b3cd-ce1405ea622d": "absent",
-        "sessionType": "Theory"
+        "sessionType": "Workshop",
+        "83df26bf-a41c-4346-bfbd-588bf7e6ecf3": "absent"
       }
     }
   },
