@@ -477,6 +477,18 @@ function renderDashboardCards() {
                 <h3 class="font-bold group-hover:text-primary">Student Profiles</h3>
                 <p class="text-xs text-gray-400">Manage batches & bulk imports</p>
             </div>
+            <div onclick="window.createOfflineBackup()"
+                class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">💾</div>
+                <h3 class="font-bold group-hover:text-primary">Download Backup</h3>
+                <p class="text-xs text-gray-400">Save full system data locally</p>
+            </div>
+            <div onclick="window.triggerOfflineRestore()"
+                class="p-6 border border-red-100 rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
+                <div class="text-3xl mb-2">🔄</div>
+                <h3 class="font-bold text-red-600 group-hover:text-red-700">Restore Data</h3>
+                <p class="text-xs text-gray-400">Load checks from backup file</p>
+            </div>
             <div onclick="renderView('staffManagement')"
                 class="p-6 border rounded-2xl bg-white shadow-sm hover:shadow-md cursor-pointer group transition-all">
                 <div class="text-3xl mb-2">👔</div>
@@ -2766,6 +2778,96 @@ function formatFileSize(bytes) {
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
 }
+
+// ==================== OFFLINE BACKUP & RESTORE SYSTEMS ====================
+window.createOfflineBackup = function () {
+    // Collect all critical data
+    const backupData = {
+        meta: {
+            title: 'AMS Offline Backup',
+            version: '5.2.1',
+            date: new Date().toISOString(),
+            exportedBy: localStorage.getItem('logged_in_user') || 'Admin'
+        },
+        data: {
+            students: JSON.parse(localStorage.getItem(LS_KEY) || '[]'),
+            attendance: JSON.parse(localStorage.getItem(LS_KEY_ATTENDANCE) || '{}'),
+            assessmentMetadata: JSON.parse(localStorage.getItem(LS_KEY_METADATA) || '{}'),
+            staff: JSON.parse(localStorage.getItem(LS_KEY_STAFF) || '[]'),
+            allocations: JSON.parse(localStorage.getItem('academic_management_allocations_v1') || '{}'),
+            batchMetadata: JSON.parse(localStorage.getItem(LS_KEY_BATCH_META) || '{}')
+        }
+    };
+
+    // Serialize and download
+    const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `AMS_Backup_${new Date().toISOString().split('T')[0]}_v5.2.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    window.activityLogger.log('System Backup', 'Created offline backup file', 'success');
+};
+
+window.triggerOfflineRestore = function () {
+    const input = document.getElementById('offlineRestoreInput');
+    if (input) input.click();
+};
+
+window.handleOfflineRestore = function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        try {
+            const backup = JSON.parse(e.target.result);
+
+            // Validate backup structure
+            if (!backup.meta || !backup.data) throw new Error("Invalid backup file format");
+
+            // Restore Data
+            if (confirm(`Restore data from backup created on ${new Date(backup.meta.date).toLocaleDateString()}? \n\nWARNING: Current data will be merged/overwritten.`)) {
+
+                // We use merging strategy where possible to avoid total data loss
+                // However, for simplicity and integrity, direct replacement is often safer for "Restores"
+
+                localStorage.setItem(LS_KEY, JSON.stringify(backup.data.students));
+                localStorage.setItem(LS_KEY_ATTENDANCE, JSON.stringify(backup.data.attendance));
+                localStorage.setItem(LS_KEY_METADATA, JSON.stringify(backup.data.assessmentMetadata));
+                localStorage.setItem(LS_KEY_STAFF, JSON.stringify(backup.data.staff));
+                localStorage.setItem('academic_management_allocations_v1', JSON.stringify(backup.data.allocations));
+                localStorage.setItem(LS_KEY_BATCH_META, JSON.stringify(backup.data.batchMetadata));
+
+                showMessage('Restore Complete', 'System data restored successfully. Reloading...', 'success');
+                window.activityLogger.log('System Restore', `Restored data from ${backup.meta.date}`, 'warning');
+
+                setTimeout(() => location.reload(), 2000);
+            }
+        } catch (err) {
+            console.error(err);
+            showMessage('Restore Failed', 'Invalid or corrupt backup file.', 'error');
+        }
+        // Reset input
+        event.target.value = '';
+    };
+    reader.readAsText(file);
+};
+
+// Inject hidden file input for restore
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.id = 'offlineRestoreInput';
+    input.accept = '.json';
+    input.classList.add('hidden');
+    input.onchange = window.handleOfflineRestore;
+    document.body.appendChild(input);
+});
 
 // Initialize session on page load
 // Initialize session on page load
