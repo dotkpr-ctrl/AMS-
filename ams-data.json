@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T03:17:26.249Z",
+  "lastUpdated": "2026-02-06T03:17:31.567Z",
   "version": "4.8",
   "students": [
     {
@@ -4092,7 +4092,7 @@
         "83df26bf-a41c-4346-bfbd-588bf7e6ecf3": "present"
       },
       "2026-02-05": {
-        "sessionType": "Workshop"
+        "sessionType": "Theory"
       }
     }
   },
