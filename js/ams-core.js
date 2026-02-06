@@ -180,6 +180,9 @@ function checkSession() {
     let role = localStorage.getItem('user_role');
     const staffId = localStorage.getItem('logged_in_staff_id');
 
+    // Ensure data is loaded if this is called early
+    if (staffMembers.length === 0) loadData();
+
     // AUTO-SYNC ROLE: If logged in, ensure role matches current position
     // This handles users who were logged in before the new roles were added
     if (staffId && staffMembers.length > 0) {
@@ -2064,8 +2067,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Version Probe
     showMessage('System Updated', 'AMS v5.2.0 is now active.', 'success');
 
-    checkSession(); // Check login first
     loadData();
+    checkSession(); // Check role after data is loaded
 
     // Setup event listeners
     document.getElementById('batchSelector').onchange = renderStudentList;
