@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T04:56:58.076Z",
+  "lastUpdated": "2026-02-06T04:57:13.589Z",
   "version": "4.8",
   "students": [
     {
@@ -4144,6 +4144,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770353817731,
+      "timestamp": "2026-02-06T04:56:57.731Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User test1 logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1770353817730,
       "timestamp": "2026-02-06T04:56:57.730Z",
