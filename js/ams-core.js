@@ -1273,7 +1273,7 @@ window.handleGenerateRequest = (mode, forceType = null) => {
                 studentId: document.getElementById('printStudentSelector')?.value,
                 type: forceType || document.getElementById('printTypeSelector').value,
                 filterType: document.getElementById('registerFilterType')?.value || 'month',
-                sessionFilter: document.getElementById('registerSessionType')?.value || 'Theory',
+                sessionFilter: window.currentRegisterTab || 'Theory',
                 startDate: document.getElementById('registerStartDate')?.value,
                 endDate: document.getElementById('registerEndDate')?.value
             };
@@ -1428,36 +1428,16 @@ window.toggleDateInputs = () => {
     if (customContainer) {
         customContainer.classList.toggle('hidden', type !== 'custom');
     }
+
+    // Auto-apply filters on change
+    if (type !== 'custom') {
+        filterRegister();
+    }
 };
 
 // Tab Logic
+// Tab Logic
 window.currentRegisterTab = 'Theory'; // Default
-
-window.switchRegisterTab = (tab) => {
-    window.currentRegisterTab = tab;
-
-    // Update UI
-    ['Theory', 'Workshop', 'All'].forEach(t => {
-        const btn = document.getElementById(`tab${t} `);
-        if (t === tab) {
-            // Active Styles
-            btn.classList.add('bg-white', 'shadow-sm', 'scale-105');
-            btn.classList.remove('text-gray-500', 'hover:bg-gray-200');
-
-            // Color Coding based on Tab
-            if (tab === 'Theory') btn.classList.add('text-blue-700', 'border', 'border-blue-200');
-            else if (tab === 'Workshop') btn.classList.add('text-orange-600', 'border', 'border-orange-200');
-            else btn.classList.add('text-gray-800', 'border', 'border-gray-300');
-
-        } else {
-            // Inactive Styles
-            btn.className = "flex-1 py-2 px-4 rounded-md text-xs font-bold transition-all text-gray-500 hover:bg-gray-200";
-        }
-    });
-
-    renderAttendanceRegister(); // Update In-Place View
-};
-
 
 // Initialize Tab State
 window.currentRegisterTab = 'Theory';
