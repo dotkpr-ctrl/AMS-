@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T03:26:38.054Z",
+  "lastUpdated": "2026-02-06T04:11:21.414Z",
   "version": "4.8",
   "students": [
     {
@@ -4133,6 +4133,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770348338562,
+      "timestamp": "2026-02-06T03:25:38.562Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by week and session Theory",
+      "type": "info"
+    },
     {
       "id": 1770347874053,
       "timestamp": "2026-02-06T03:17:54.053Z",
