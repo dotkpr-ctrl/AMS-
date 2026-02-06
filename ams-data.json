@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T03:05:47.162Z",
+  "lastUpdated": "2026-02-06T03:06:57.935Z",
   "version": "4.8",
   "students": [
     {
@@ -4103,17 +4103,6 @@
         "AME 39",
         "AME 40"
       ]
-    },
-    {
-      "id": "728d32b2-1545-4ab7-ace4-6278a84a08c3",
-      "name": "abhijith a",
-      "phone": "8086492572",
-      "position": "Workshop Faculty",
-      "badgeColor": "blue",
-      "isAdmin": false,
-      "username": "abhijith",
-      "password": "2572",
-      "allocatedBatches": []
     },
     {
       "id": "7ff75473-f611-46b8-bd66-4b5568de2733",
