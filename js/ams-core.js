@@ -61,7 +61,7 @@ window.handleLogin = async (e) => {
             let role = 'staff';
             if (staffMember.isAdmin) {
                 role = 'admin';
-            } else if (staffMember.position === 'Workshop Incharge') {
+            } else if (staffMember.position === 'Workshop Incharge' || staffMember.position === 'MD') {
                 role = 'incharge';
             }
             localStorage.setItem('user_role', role);
@@ -88,7 +88,7 @@ window.handleLogin = async (e) => {
             let role = 'staff';
             if (staffMember.isAdmin) {
                 role = 'admin';
-            } else if (staffMember.position === 'Workshop Incharge') {
+            } else if (staffMember.position === 'Workshop Incharge' || staffMember.position === 'MD') {
                 role = 'incharge';
             }
             localStorage.setItem('user_role', role);
