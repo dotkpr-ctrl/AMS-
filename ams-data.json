@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T05:17:08.114Z",
+  "lastUpdated": "2026-02-06T05:17:22.853Z",
   "version": "4.8",
   "students": [
     {
@@ -4151,6 +4151,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770355042781,
+      "timestamp": "2026-02-06T05:17:22.781Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch AME 35 by month and session All",
+      "type": "info"
+    },
     {
       "id": 1770354936507,
       "timestamp": "2026-02-06T05:15:36.507Z",
