@@ -803,11 +803,47 @@ function renderAttendanceRegister() {
     if (currentTab !== 'All') {
         dates = dates.filter(d => {
             const sType = batchAttendance[d]?.sessionType || 'Unspecified';
-            // Treat 'Unspecified' as 'Theory' for backward compatibility if needed, 
-            // OR strictly filter. Given user feedback, let's be strict but helpful.
             if (sType === 'Unspecified') return currentTab === 'Theory';
             return sType === currentTab;
         });
+    }
+
+    // -- FILTER BY DATE --
+    const filterType = document.getElementById('registerFilterType')?.value || 'month';
+    const now = new Date();
+
+    if (filterType === 'week') {
+        // Get start of week (Sunday)
+        const startOfWeek = new Date(now);
+        startOfWeek.setDate(now.getDate() - now.getDay());
+        startOfWeek.setHours(0, 0, 0, 0);
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 6);
+        endOfWeek.setHours(23, 59, 59, 999);
+
+        dates = dates.filter(d => {
+            const date = new Date(d);
+            return date >= startOfWeek && date <= endOfWeek;
+        });
+    } else if (filterType === 'month') {
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        dates = dates.filter(d => {
+            const date = new Date(d);
+            return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+        });
+    } else if (filterType === 'custom') {
+        const startStr = document.getElementById('registerStartDate')?.value;
+        const endStr = document.getElementById('registerEndDate')?.value;
+        if (startStr && endStr) {
+            const start = new Date(startStr);
+            const end = new Date(endStr);
+            end.setHours(23, 59, 59, 999);
+            dates = dates.filter(d => {
+                const date = new Date(d);
+                return date >= start && date <= end;
+            });
+        }
     }
 
     const batchStudents = students.filter(s => s.batchId === batchId)
@@ -1431,7 +1467,7 @@ window.toggleDateInputs = () => {
 
     // Auto-apply filters on change
     if (type !== 'custom') {
-        filterRegister();
+        renderAttendanceRegister();
     }
 };
 
@@ -1460,7 +1496,7 @@ window.switchRegisterTab = (tabName) => {
     // Auto-refresh if batch is selected
     const batchSelector = document.getElementById('registerBatchSelector');
     if (batchSelector && batchSelector.value) {
-        filterRegister();
+        renderAttendanceRegister();
     }
 };
 
@@ -1546,6 +1582,7 @@ function renderMonthlyRegister(batchId, filtered, config) {
     if (sessionFilter !== 'All') {
         dates = dates.filter(d => {
             const sessionType = batchAttendance[d]?.sessionType || 'Unspecified';
+            if (sessionType === 'Unspecified') return sessionFilter === 'Theory';
             return sessionType === sessionFilter;
         });
     }

@@ -426,14 +426,14 @@
                         <div class="w-full md:w-64">
                             <label class="text-[10px] font-bold text-gray-500 uppercase">Select Batch</label>
                             <select id="registerBatchSelector" class="w-full p-2.5 border rounded-lg"
-                                onchange="filterRegister()"></select>
+                                onchange="renderAttendanceRegister()"></select>
                         </div>
 
                         <!-- Date Filters -->
                         <div class="w-full md:w-48">
                             <label class="text-[10px] font-bold text-gray-500 uppercase">Filter By</label>
                             <select id="registerFilterType" class="w-full p-2.5 border rounded-lg"
-                                onchange="toggleDateInputs(); filterRegister()">
+                                onchange="toggleDateInputs(); renderAttendanceRegister()">
                                 <option value="month">This Month</option>
                                 <option value="week">This Week</option>
                                 <option value="custom">Custom Date</option>
@@ -463,16 +463,16 @@
                             <div>
                                 <label class="text-[10px] font-bold text-gray-500 uppercase">From</label>
                                 <input type="date" id="registerStartDate" class="w-full p-2.5 border rounded-lg"
-                                    onchange="filterRegister()">
+                                    onchange="renderAttendanceRegister()">
                             </div>
                             <div>
                                 <label class="text-[10px] font-bold text-gray-500 uppercase">To</label>
                                 <input type="date" id="registerEndDate" class="w-full p-2.5 border rounded-lg"
-                                    onchange="filterRegister()">
+                                    onchange="renderAttendanceRegister()">
                             </div>
                         </div>
 
-                        <button onclick="filterRegister()"
+                        <button onclick="renderAttendanceRegister()"
                             class="bg-blue-600 text-white font-bold py-2.5 px-6 rounded-lg hover:bg-blue-700 shadow-md transition-colors h-[42px]">
                             Apply
                         </button>
