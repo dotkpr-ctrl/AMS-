@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T05:14:08.077Z",
+  "lastUpdated": "2026-02-06T05:14:16.158Z",
   "version": "4.8",
   "students": [
     {
@@ -4009,7 +4009,8 @@
         "733c72b9-27ca-41a5-9778-dd32084da958": "absent"
       },
       "2026-02-06": {
-        "sessionType": "Workshop"
+        "sessionType": "Workshop",
+        "a18e0c26-04a8-4a3d-b358-bb9053c233d1": "absent"
       }
     },
     "AME 31": {
