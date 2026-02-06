@@ -167,7 +167,7 @@ function checkSession() {
     // Version Display (Dynamic)
     const verEl = document.getElementById('statusFooter') || document.getElementById('appVersionFooter');
     if (verEl) {
-        verEl.textContent = "AMS v5.2.0 • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.2.0 (LIVE UPDATE) • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
@@ -2042,6 +2042,9 @@ window.renderAssessmentHistory = () => {
         const typeLabel = (keyType === 'viva') ? 'Workshop Viva' : 'Assessment';
         const typeCode = (keyType === 'viva') ? 'workshop-viva' : 'mark';
 
+        const currentRole = localStorage.getItem('user_role');
+        const showDelete = (currentRole === 'admin' || currentRole === 'incharge');
+
         return `
         <tr class="border-b hover:bg-gray-50 transition-colors">
                 <td class="p-4 font-medium">${date}</td>
@@ -2055,7 +2058,7 @@ window.renderAssessmentHistory = () => {
                             class="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors font-medium text-sm">
                             View
                         </button>
-                        ${(currentUserRole === 'admin' || currentUserRole === 'incharge') ? `
+                        ${showDelete ? `
                         <button onclick="deleteAssessment('${key}')" 
                             class="px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors font-medium text-sm">
                             Delete
