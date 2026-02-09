@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:14:46.113Z",
+  "lastUpdated": "2026-02-09T10:14:59.262Z",
   "version": "4.8",
   "students": [
     {
@@ -3739,7 +3739,7 @@
       "admissionNo": "AM/404/25/ITC4",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "b3dc45dc-9e26-42e6-909f-9d668ad74139",
@@ -3763,7 +3763,7 @@
       "admissionNo": "OTC/41/25/TA",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "1bce699a-8a48-42de-b769-6ca677b2d0a0",
@@ -4158,6 +4158,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770632088808,
+      "timestamp": "2026-02-09T10:14:48.808Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student GOVIND RAJ (OTC/41/25/TA) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770632086088,
+      "timestamp": "2026-02-09T10:14:46.088Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ALAN S (AM/408/25/TA) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1770632075689,
       "timestamp": "2026-02-09T10:14:35.689Z",
