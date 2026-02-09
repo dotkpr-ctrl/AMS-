@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:14:59.262Z",
+  "lastUpdated": "2026-02-09T10:15:10.488Z",
   "version": "4.8",
   "students": [
     {
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770632098827,
+      "timestamp": "2026-02-09T10:14:58.827Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ASHIK TV (AM/404/25/ITC4) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1770632088808,
       "timestamp": "2026-02-09T10:14:48.808Z",
