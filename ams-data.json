@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:12:38.942Z",
+  "lastUpdated": "2026-02-09T10:12:44.752Z",
   "version": "4.8",
   "students": [
     {
@@ -3611,7 +3611,7 @@
       "admissionNo": "AM/348/25/KUC",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "82361a2b-fc73-4b49-b96b-3f339978eee6",
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770631958126,
+      "timestamp": "2026-02-09T10:12:38.126Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ABIN ANISH (AM/213/25/KB) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1770631728747,
       "timestamp": "2026-02-09T10:08:48.747Z",
