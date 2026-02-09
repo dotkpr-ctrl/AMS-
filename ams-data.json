@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:13:35.115Z",
+  "lastUpdated": "2026-02-09T10:13:47.262Z",
   "version": "4.8",
   "students": [
     {
@@ -3699,7 +3699,7 @@
       "admissionNo": "AM/393/25/TC2",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "2a2c9acd-183e-4597-a7e7-5a1beef8986b",
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770632015092,
+      "timestamp": "2026-02-09T10:13:35.092Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ADITHYAN A (AM/391/25/TA) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1770632010068,
       "timestamp": "2026-02-09T10:13:30.068Z",
