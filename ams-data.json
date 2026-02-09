@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:12:56.563Z",
+  "lastUpdated": "2026-02-09T10:13:10.038Z",
   "version": "4.8",
   "students": [
     {
@@ -3643,7 +3643,7 @@
       "admissionNo": "AM/385/25/TY4",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "03886396-c17e-46ca-973e-9d9ff7fdfddf",
@@ -3651,7 +3651,7 @@
       "admissionNo": "AM/386/25/MTC",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "5fa01e80-b459-4ac8-ad6b-8767cf8c18ef",
@@ -4158,6 +4158,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770631979303,
+      "timestamp": "2026-02-09T10:12:59.303Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student SREEKRISHNA RAVEENDRAN (AM/385/25/TY4) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631976553,
+      "timestamp": "2026-02-09T10:12:56.553Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student SHALVIN BINU (AM/384/25/KB) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1770631972466,
       "timestamp": "2026-02-09T10:12:52.466Z",
