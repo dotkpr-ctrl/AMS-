@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:13:15.461Z",
+  "lastUpdated": "2026-02-09T10:13:30.089Z",
   "version": "4.8",
   "students": [
     {
@@ -3675,7 +3675,7 @@
       "admissionNo": "AM/390/25/TA",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "b89fe93f-651b-4cd2-a6e3-246409db0819",
@@ -4158,6 +4158,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770631996927,
+      "timestamp": "2026-02-09T10:13:16.927Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student JAKE JOHN VARGHESE (AM/389/25/TC34) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770631995444,
+      "timestamp": "2026-02-09T10:13:15.444Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ABHIMANU (AM/387/25/TVM) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1770631990015,
       "timestamp": "2026-02-09T10:13:10.015Z",
