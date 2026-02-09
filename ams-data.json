@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:14:14.823Z",
+  "lastUpdated": "2026-02-09T10:14:32.125Z",
   "version": "4.8",
   "students": [
     {
@@ -3731,7 +3731,7 @@
       "admissionNo": "AM/403/25/KY",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "3dac9310-449b-467e-b3ed-7abbb4e2ee41",
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770632054810,
+      "timestamp": "2026-02-09T10:14:14.810Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ADWAITH J (AM/397/25/AAC) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1770632035453,
       "timestamp": "2026-02-09T10:13:55.453Z",
