@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:07:21.071Z",
+  "lastUpdated": "2026-02-09T10:07:38.687Z",
   "version": "4.8",
   "students": [
     {
@@ -4040,7 +4040,8 @@
         "70c54fe5-c681-46dc-81a9-5d9f340a27ee": "absent"
       },
       "2026-02-09": {
-        "sessionType": "Workshop"
+        "sessionType": "Workshop",
+        "f9cf393e-ee28-47fd-b56d-8188140fd494": "absent"
       }
     },
     "AME 32": {
