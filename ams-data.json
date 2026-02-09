@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:12:44.752Z",
+  "lastUpdated": "2026-02-09T10:12:49.177Z",
   "version": "4.8",
   "students": [
     {
@@ -3619,7 +3619,7 @@
       "admissionNo": "AM/365/25/AAC",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "3666b26b-9c24-4148-a264-679d8fc2a26c",
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770631964732,
+      "timestamp": "2026-02-09T10:12:44.732Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ARJUN SUNILKUMAR (AM/348/25/KUC) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1770631958126,
       "timestamp": "2026-02-09T10:12:38.126Z",
