@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:13:47.262Z",
+  "lastUpdated": "2026-02-09T10:13:51.455Z",
   "version": "4.8",
   "students": [
     {
@@ -3707,7 +3707,7 @@
       "admissionNo": "AM/395/25/CA",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "40e81ae2-27e6-41d6-8b43-95db640dbddc",
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770632026730,
+      "timestamp": "2026-02-09T10:13:46.730Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student YASANTH NANDAN M (AM/393/25/TC2) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1770632015092,
       "timestamp": "2026-02-09T10:13:35.092Z",
