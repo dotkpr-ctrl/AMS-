@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:12:52.489Z",
+  "lastUpdated": "2026-02-09T10:12:56.563Z",
   "version": "4.8",
   "students": [
     {
@@ -3635,7 +3635,7 @@
       "admissionNo": "AM/384/25/KB",
       "batchId": "AME 44",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "8bb35f34-0a9f-4b6f-a5aa-2e2c78905b8a",
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770631972466,
+      "timestamp": "2026-02-09T10:12:52.466Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student JORWIN SHIBY (AM/383/25/CA) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1770631969159,
       "timestamp": "2026-02-09T10:12:49.159Z",
