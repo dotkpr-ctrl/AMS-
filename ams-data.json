@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:08:34.165Z",
+  "lastUpdated": "2026-02-09T10:08:48.808Z",
   "version": "4.8",
   "students": [
     {
@@ -4158,6 +4158,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770631728723,
+      "timestamp": "2026-02-09T10:08:48.723Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch AME 36 by week and session Theory",
+      "type": "info"
+    },
     {
       "id": 1770631699286,
       "timestamp": "2026-02-09T10:08:19.286Z",
