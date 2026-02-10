@@ -1507,8 +1507,17 @@ function generateSheet(isReload = false, config) {
             }
         }
     } else {
-        mainTitleEl.classList.remove('hidden');
         mainTitleEl.textContent = 'WORKSHOP VIVA';
+    }
+
+    // Toggle Table Borders
+    const tableEl = document.getElementById('generatedSheetTable');
+    if (tableEl) {
+        if (config.type === 'attendance-index') {
+            tableEl.classList.remove('border-2', 'border-black');
+        } else {
+            tableEl.classList.add('border-2', 'border-black');
+        }
     }
 
 
@@ -1527,19 +1536,17 @@ function generateSheet(isReload = false, config) {
 function renderAttendanceIndex(filtered) {
     document.getElementById('markSheetControls').classList.add('hidden');
     document.getElementById('generatedSheetHeader').innerHTML = `
-        <tr>
-            <th class="w-10 text-center border-r border-gray-300">SL.</th>
-            <th class="text-left px-2 border-r border-gray-300">NAME</th>
-            <th class="w-32 text-center border-r border-gray-300">ADMISSION NO.</th>
-            <th class="w-32 text-center">SIGNATURE</th>
-        </tr>
+            <th class="w-10 text-center border-b border-gray-300 pb-2">SL.</th>
+            <th class="text-left px-2 border-b border-gray-300 pb-2">NAME</th>
+            <th class="w-32 text-center border-b border-gray-300 pb-2">ADMISSION NO.</th>
+            <th class="w-32 text-center border-b border-gray-300 pb-2">SIGNATURE</th>
         `;
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => `
-        <tr class="h-9">
-            <td>${i + 1}</td>
-            <td class="text-left font-medium p-name">${escapeHtml(s.name)}</td>
-            <td class="font-mono text-[9px]">${s.admissionNo}</td>
-            <td></td>
+        <tr class="h-9 border-b border-gray-100">
+            <td class="text-center">${i + 1}</td>
+            <td class="text-left font-medium p-name px-2">${escapeHtml(s.name)}</td>
+            <td class="text-center font-mono text-[9px]">${s.admissionNo}</td>
+            <td class="border-b border-gray-200"></td>
         </tr>
         `).join('');
 }
