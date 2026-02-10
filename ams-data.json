@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T12:49:43.753Z",
+  "lastUpdated": "2026-02-10T13:00:05.114Z",
   "version": "4.8",
   "students": [
     {
@@ -4168,6 +4168,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770728403726,
+      "timestamp": "2026-02-10T13:00:03.726Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770727783367,
+      "timestamp": "2026-02-10T12:49:43.367Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1770727783365,
       "timestamp": "2026-02-10T12:49:43.365Z",
