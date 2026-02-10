@@ -207,7 +207,7 @@ function checkSession() {
 
     // Version Display (Dynamic)
     if (verEl) {
-        verEl.textContent = "AMS v5.2.5 (BULK FIX) • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.2.6 (PRINT FIX) • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
@@ -2120,7 +2120,7 @@ window.importData = (e) => {
 // Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     // Version Probe
-    showMessage('System Updated', 'AMS v5.2.5 is now active.', 'success');
+    showMessage('System Updated', 'AMS v5.2.6 is now active.', 'success');
 
     loadData();
     checkSession(); // Check role after data is loaded

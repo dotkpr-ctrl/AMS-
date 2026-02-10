@@ -23,19 +23,40 @@
 }
 
 /* Print Styles */
+/* Print Styles */
 @media print {
+    @page {
+        size: A4;
+        margin: 5mm;
+    }
+
     .no-print {
         display: none !important;
     }
 
     body {
+        margin: 0;
+        padding: 0;
         background: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 
     #app {
         box-shadow: none;
         padding: 0;
         margin: 0;
+        width: 100%;
         max-width: 100%;
+    }
+
+    /* Force single page fit for tables if possible */
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
     }
 }
