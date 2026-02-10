@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-09T10:16:28.543Z",
+  "lastUpdated": "2026-02-10T03:39:01.844Z",
   "version": "4.8",
   "students": [
     {
@@ -4482,6 +4482,15 @@
       "action": "Sync",
       "details": "Staff data updated from cloud",
       "type": "info"
+    },
+    {
+      "id": 1770354429901,
+      "timestamp": "2026-02-06T05:07:09.901Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
     },
     {
       "id": 1770354424703,
