@@ -207,7 +207,7 @@ function checkSession() {
 
     // Version Display (Dynamic)
     if (verEl) {
-        verEl.textContent = "AMS v5.2.4 (CLEAN) • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.2.5 (BULK FIX) • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
@@ -1210,16 +1210,41 @@ window.handleBulkInput = (e) => {
     const bId = document.getElementById('bulkBatchId').value.trim().toUpperCase();
     const text = document.getElementById('bulkStudentData').value.trim();
 
-    if (!bId || !text) return;
+    if (!bId) { showMessage('Error', 'Batch ID is required', 'error'); return; }
+    if (!text) { showMessage('Error', 'No data provided', 'error'); return; }
 
     let addedCount = 0;
-    text.split('\n').forEach(line => {
-        const p = line.split(/[,\t;]/).map(x => x.trim());
-        if (p.length >= 2 && p[0] && p[1]) {
+    let duplicateCount = 0;
+
+    const generateId = () => {
+        if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    };
+
+    text.split(/\r?\n/).forEach(line => {
+        if (!line.trim()) return;
+
+        // Split by comma, tab, semicolon, or pipe
+        const p = line.split(/[,\t;|]/).map(x => x.trim()).filter(x => x !== '');
+
+        if (p.length >= 2) {
+            const name = p[0];
+            const adm = p[1];
+
+            // Check duplicate in same batch
+            const exists = students.some(s => s.batchId === bId && s.admissionNo === adm);
+            if (exists) {
+                duplicateCount++;
+                return;
+            }
+
             students.push({
-                id: crypto.randomUUID(),
-                name: p[0],
-                admissionNo: p[1],
+                id: generateId(),
+                name: name,
+                admissionNo: adm,
                 batchId: bId,
                 marks: {},
                 subBatch: 'None'
@@ -1228,11 +1253,20 @@ window.handleBulkInput = (e) => {
         }
     });
 
-    saveData();
-    refreshDataAndUI();
-    window.toggleBulkInputModal(false);
-    showMessage('Success', 'Batch imported.', 'success');
-    window.activityLogger.log('Bulk Import', `Imported ${addedCount} students into batch ${bId}`, 'success');
+    if (addedCount > 0) {
+        saveData();
+        refreshDataAndUI();
+        window.toggleBulkInputModal(false);
+        showMessage('Success', `Imported ${addedCount} students.${duplicateCount ? ` (${duplicateCount} skipped)` : ''}`, 'success');
+        window.activityLogger.log('Bulk Import', `Imported ${addedCount} students into batch ${bId}`, 'success');
+        document.getElementById('bulkStudentData').value = ''; // Clear
+    } else {
+        if (duplicateCount > 0) {
+            showMessage('Info', `No new students added. ${duplicateCount} duplicates found.`, 'info');
+        } else {
+            showMessage('Error', 'Parse failed. Check format: "Name, AdmissionNo"', 'error');
+        }
+    }
 };
 
 // Staff Management Functions
@@ -2086,7 +2120,7 @@ window.importData = (e) => {
 // Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     // Version Probe
-    showMessage('System Updated', 'AMS v5.2.4 is now active.', 'success');
+    showMessage('System Updated', 'AMS v5.2.5 is now active.', 'success');
 
     loadData();
     checkSession(); // Check role after data is loaded
