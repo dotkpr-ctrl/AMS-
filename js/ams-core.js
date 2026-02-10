@@ -207,7 +207,7 @@ function checkSession() {
 
     // Version Display (Dynamic)
     if (verEl) {
-        verEl.textContent = "AMS v5.2.2 (LAYOUT FIXED) • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.2.3 (LAYOUT FIXED) • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
@@ -1542,7 +1542,7 @@ function renderAttendanceIndex(filtered) {
             <th class="w-32 text-center border-b border-gray-300 pb-2">SIGNATURE</th>
         `;
     document.getElementById('generatedSheetBody').innerHTML = filtered.map((s, i) => `
-        <tr class="h-9 border-b border-gray-100">
+        <tr class="h-12 border-b border-gray-100">
             <td class="text-center">${i + 1}</td>
             <td class="text-left font-medium p-name px-2">${escapeHtml(s.name)}</td>
             <td class="text-center font-mono text-[9px]">${s.admissionNo}</td>
