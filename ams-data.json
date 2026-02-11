@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T03:00:57.236Z",
+  "lastUpdated": "2026-02-11T03:01:37.085Z",
   "version": "4.8",
   "students": [
     {
@@ -4165,9 +4165,28 @@
       "username": "test1",
       "password": "1235",
       "allocatedBatches": []
+    },
+    {
+      "id": "d5e20101-9f4e-4eb0-9ca4-1cbefe735564",
+      "name": "kiran",
+      "phone": "8281602475",
+      "position": "Workshop Faculty",
+      "colorCode": "blue",
+      "username": "kiran",
+      "password": "2475",
+      "isAdmin": false
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770778858023,
+      "timestamp": "2026-02-11T03:00:58.023Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
     {
       "id": 1770728403726,
       "timestamp": "2026-02-10T13:00:03.726Z",
