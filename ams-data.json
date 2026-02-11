@@ -1,10 +1,12 @@
 {
-  "lastUpdated": "2026-02-11T06:12:15.747Z",
+  "lastUpdated": "2026-02-11T06:12:57.623Z",
   "version": "4.8",
   "students": [],
   "assessmentMetadata": {},
   "attendanceData": {},
-  "batchMetadata": {},
+  "batchMetadata": {
+    "AME 37": {}
+  },
   "staffMembers": [
     {
       "id": "fe7b6f05-9195-4e6d-a500-bbd23be907a0",
@@ -14,10 +16,20 @@
       "colorCode": "red",
       "username": "testa",
       "password": "7890",
-      "isAdmin": true
+      "isAdmin": true,
+      "allocatedBatches": []
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770790335459,
+      "timestamp": "2026-02-11T06:12:15.459Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Test Admin logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1770790335457,
       "timestamp": "2026-02-11T06:12:15.457Z",
