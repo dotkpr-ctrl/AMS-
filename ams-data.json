@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T05:38:41.571Z",
+  "lastUpdated": "2026-02-11T05:38:52.508Z",
   "version": "4.8",
   "students": [
     {
@@ -3929,7 +3929,20 @@
       "admissionNo": "101",
       "batchId": "B1",
       "id": "714ed036-f961-4482-b196-a56fe6106cd9",
-      "marks": {},
+      "marks": {
+        "B1 -1st -mark -200 ": {
+          "marks": [
+            5,
+            10,
+            10,
+            10,
+            10,
+            10,
+            35,
+            40
+          ]
+        }
+      },
       "subBatch": "None"
     }
   ],
@@ -4205,6 +4218,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770788332478,
+      "timestamp": "2026-02-11T05:38:52.478Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for B1 on 2026-02-11",
+      "type": "info"
+    },
     {
       "id": 1770788320878,
       "timestamp": "2026-02-11T05:38:40.878Z",
