@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T05:34:31.715Z",
+  "lastUpdated": "2026-02-11T05:36:07.350Z",
   "version": "4.8",
   "students": [
     {
@@ -4197,6 +4197,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770788166957,
+      "timestamp": "2026-02-11T05:36:06.957Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770788071711,
+      "timestamp": "2026-02-11T05:34:31.711Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: admin",
+      "type": "warning"
+    },
     {
       "id": 1770788071710,
       "timestamp": "2026-02-11T05:34:31.710Z",
