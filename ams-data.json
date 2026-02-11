@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T03:01:37.085Z",
+  "lastUpdated": "2026-02-11T03:03:09.916Z",
   "version": "4.8",
   "students": [
     {
@@ -4178,6 +4178,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770778897015,
+      "timestamp": "2026-02-11T03:01:37.015Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Add Staff",
+      "details": "Added staff: kiran (Workshop Faculty, Admin: false)",
+      "type": "success"
+    },
     {
       "id": 1770778858023,
       "timestamp": "2026-02-11T03:00:58.023Z",
