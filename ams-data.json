@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T06:12:57.623Z",
+  "lastUpdated": "2026-02-11T06:13:05.062Z",
   "version": "4.8",
   "students": [],
   "assessmentMetadata": {},
@@ -21,6 +21,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770790375819,
+      "timestamp": "2026-02-11T06:12:55.819Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Update Batch Incharge",
+      "details": "Batch AME 37 incharge updated to undefined",
+      "type": "info"
+    },
+    {
+      "id": 1770790375818,
+      "timestamp": "2026-02-11T06:12:55.818Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Update Batch Incharge",
+      "details": "Batch AME 37 incharge updated to Test Admin",
+      "type": "info"
+    },
     {
       "id": 1770790335459,
       "timestamp": "2026-02-11T06:12:15.459Z",
