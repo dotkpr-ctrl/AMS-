@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T05:07:28.627Z",
+  "lastUpdated": "2026-02-11T05:08:01.813Z",
   "version": "4.8",
   "students": [
     {
@@ -4197,6 +4197,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770786481712,
+      "timestamp": "2026-02-11T05:08:01.712Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770786451208,
+      "timestamp": "2026-02-11T05:07:31.208Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
     {
       "id": 1770782969173,
       "timestamp": "2026-02-11T04:09:29.173Z",
