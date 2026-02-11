@@ -207,7 +207,7 @@ function checkSession() {
 
     // Version Display (Dynamic)
     if (verEl) {
-        verEl.textContent = "AMS v5.2.9 (EXCEL TABLES) • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.3.0 (NO ZEROS) • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
@@ -1907,20 +1907,20 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
             // Read-Only Summary View
             cells = `
         <td class="p-0 border-r border-black h-10 text-center align-middle">
-            <input type="number" value="${s.total}" disabled
+            <input type="number" value="${s.total || ''}" disabled
                 class="w-full h-full text-center bg-transparent outline-none border-none text-lg font-bold text-black no-print">
-                <span class="print-only">${s.total}</span>
+                <span class="print-only">${s.total || ''}</span>
             </td>
     `;
         } else {
             // Standard Entry View
             cells = s.mData.map((m, idx) => `
         <td class="border-r border-black p-0 h-8 text-center align-middle">
-            <input type="number" value="${m}" ${isReadOnly ? 'disabled' : ''}
+            <input type="number" value="${m || ''}" ${isReadOnly ? 'disabled' : ''}
                 class="mark-input w-full h-full text-center bg-transparent outline-none border-none text-base font-bold no-print ${isReadOnly ? 'text-gray-500' : ''}"
                 onkeydown="handleEnterKey(event)"
                 oninput="liveUpdateMark('${s.id}', ${idx}, this.value, '${sheetKey}', ${maxMark}, this)">
-                <span class="print-only text-sm">${m}</span>
+                <span class="print-only text-sm">${m || ''}</span>
             </td>
     `).join('');
         }
@@ -1939,7 +1939,7 @@ function renderMarksEntry(filtered, type, maxMark, sheetKey) {
                 <td class="text-left pl-1 font-bold p-name border-r border-black text-[11px] uppercase leading-tight">${escapeHtml(s.name)}</td>
                 <td class="text-center font-mono border-r border-black text-[9px] font-bold text-blue-800 tracking-tighter whitespace-nowrap overflow-hidden">${s.admissionNo}</td>
                 ${cells}
-                <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total}</td>
+                <td class="text-center font-bold border-r border-black total-cell text-sm" style="${totalHeaderStyle}">${s.total || ''}</td>
                 <td class="text-center font-bold rank-cell text-sm">${s.rank}</td>
                 ${deleteBtn}
             </tr>
@@ -1999,7 +1999,7 @@ function renderTranscript(studentId) {
                 <td>${i + 1}</td>
                 <td class="text-left font-medium">${m.semester} Semester Workshop Assessment</td>
                 <td>${m.maxMark * 8}</td>
-                <td class="font-bold">${studentData.total}</td>
+                <td class="font-bold">${studentData.total || ''}</td>
                 <td class="font-bold">${studentData.rank}</td>
             </tr>
         `;
@@ -2058,7 +2058,7 @@ window.liveUpdateMark = (sid, idx, val, key, max, inputEl) => {
     const row = document.querySelector(`tr[data-sid="${sid}"]`);
     if (row) {
         const total = student.marks[key].marks.reduce((a, b) => a + b, 0);
-        row.querySelector('.total-cell').textContent = total;
+        row.querySelector('.total-cell').textContent = total || '';
     }
 };
 
@@ -2125,7 +2125,7 @@ window.importData = (e) => {
 // Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     // Version Probe
-    showMessage('System Updated', 'AMS v5.2.9 is now active.', 'success');
+    showMessage('System Updated', 'AMS v5.3.0 is now active.', 'success');
 
     loadData();
     checkSession(); // Check role after data is loaded
@@ -2413,7 +2413,7 @@ function renderAssessmentExamTable(key, studentList) {
                             <td class="p-3 border font-medium">${escapeHtml(s.name)}</td>
                             <td class="p-3 border text-xs font-mono">${s.admissionNo}</td>
                             <td class="p-3 border">
-                                <input type="number" value="${s.total}" min="0" max="200"
+                                <input type="number" value="${s.total || ''}" min="0" max="200"
                                     onchange="updateExamTotal('${key}', '${s.id}', this.value)"
                                     class="w-full p-2 border rounded text-center focus:ring-2 focus:ring-primary">
                             </td>
