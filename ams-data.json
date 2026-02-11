@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T05:36:47.637Z",
+  "lastUpdated": "2026-02-11T05:38:41.571Z",
   "version": "4.8",
   "students": [
     {
@@ -4205,6 +4205,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770788320878,
+      "timestamp": "2026-02-11T05:38:40.878Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: B1",
+      "type": "info"
+    },
+    {
+      "id": 1770788207617,
+      "timestamp": "2026-02-11T05:36:47.617Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Add Student",
+      "details": "Added student: Test Student (101) to batch B1",
+      "type": "success"
+    },
     {
       "id": 1770788166960,
       "timestamp": "2026-02-11T05:36:06.960Z",
