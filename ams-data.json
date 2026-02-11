@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-02-11T06:13:05.062Z",
+  "lastUpdated": "2026-02-11T06:14:43.936Z",
   "version": "4.8",
-  "students": [],
+  "students": [
+    {
+      "name": "Test Student",
+      "admissionNo": "S101",
+      "batchId": "AME 37",
+      "id": "ffaf6d68-f708-47dd-9f80-916a97d140aa",
+      "marks": {},
+      "subBatch": "None"
+    }
+  ],
   "assessmentMetadata": {},
   "attendanceData": {},
   "batchMetadata": {
@@ -21,6 +30,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770790384681,
+      "timestamp": "2026-02-11T06:13:04.681Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Update Batch Incharge",
+      "details": "Batch AME 37 incharge updated to undefined",
+      "type": "info"
+    },
+    {
+      "id": 1770790384680,
+      "timestamp": "2026-02-11T06:13:04.680Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Update Batch Incharge",
+      "details": "Batch AME 37 incharge updated to Test Admin",
+      "type": "info"
+    },
     {
       "id": 1770790375819,
       "timestamp": "2026-02-11T06:12:55.819Z",
