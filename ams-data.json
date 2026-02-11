@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T06:40:24.411Z",
+  "lastUpdated": "2026-02-11T06:42:12.141Z",
   "version": "4.8",
   "students": [
     {
@@ -2777,6 +2777,15 @@
   ],
   "activityLogs": [
     {
+      "id": 1770792024400,
+      "timestamp": "2026-02-11T06:40:24.400Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Test Admin logged in successfully",
+      "type": "success"
+    },
+    {
       "id": 1770792024399,
       "timestamp": "2026-02-11T06:40:24.399Z",
       "user": "Ziyad Basheer",
@@ -2792,15 +2801,6 @@
       "role": "admin",
       "action": "Login Failed",
       "details": "Failed login attempt (Offline) for username: ziyad",
-      "type": "warning"
-    },
-    {
-      "id": 1770791990930,
-      "timestamp": "2026-02-11T06:39:50.930Z",
-      "user": "Ziyad Basheer",
-      "role": "admin",
-      "action": "Login Failed",
-      "details": "Failed login attempt for username: ziyad",
       "type": "warning"
     },
     {
