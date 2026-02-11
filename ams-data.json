@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T06:39:44.948Z",
+  "lastUpdated": "2026-02-11T06:39:50.932Z",
   "version": "4.8",
   "students": [
     {
@@ -2776,6 +2776,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770791990930,
+      "timestamp": "2026-02-11T06:39:50.930Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770791987291,
+      "timestamp": "2026-02-11T06:39:47.291Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login Failed",
+      "details": "Failed login attempt (Offline) for username: ziyad",
+      "type": "warning"
+    },
     {
       "id": 1770791531103,
       "timestamp": "2026-02-11T06:32:11.103Z",
