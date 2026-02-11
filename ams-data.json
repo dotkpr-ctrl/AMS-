@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T06:38:06.384Z",
+  "lastUpdated": "2026-02-11T06:39:44.948Z",
   "version": "4.8",
   "students": [
     {
@@ -2906,6 +2906,1005 @@
       "id": 1770790335457,
       "timestamp": "2026-02-11T06:12:15.457Z",
       "user": "System",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770786481712,
+      "timestamp": "2026-02-11T05:08:01.712Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770786451208,
+      "timestamp": "2026-02-11T05:07:31.208Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770782969173,
+      "timestamp": "2026-02-11T04:09:29.173Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark-sheet for batch: AME 34",
+      "type": "info"
+    },
+    {
+      "id": 1770782918846,
+      "timestamp": "2026-02-11T04:08:38.846Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark-sheet for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770782904951,
+      "timestamp": "2026-02-11T04:08:24.951Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770780951120,
+      "timestamp": "2026-02-11T03:35:51.120Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770780905459,
+      "timestamp": "2026-02-11T03:35:05.459Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770780890944,
+      "timestamp": "2026-02-11T03:34:50.944Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User kiran logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770780832979,
+      "timestamp": "2026-02-11T03:33:52.979Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770780803054,
+      "timestamp": "2026-02-11T03:33:23.054Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770780736889,
+      "timestamp": "2026-02-11T03:32:16.889Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Save Marks",
+      "details": "Marks saved for assessment AME 35 -2nd -mark -200 ",
+      "type": "success"
+    },
+    {
+      "id": 1770779916320,
+      "timestamp": "2026-02-11T03:18:36.320Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770779900133,
+      "timestamp": "2026-02-11T03:18:20.133Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User kiran logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770779900125,
+      "timestamp": "2026-02-11T03:18:20.125Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770779827679,
+      "timestamp": "2026-02-11T03:17:07.679Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770779741167,
+      "timestamp": "2026-02-11T03:15:41.167Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User kiran logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770779202282,
+      "timestamp": "2026-02-11T03:06:42.282Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770779184583,
+      "timestamp": "2026-02-11T03:06:24.583Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User kiran logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770778989823,
+      "timestamp": "2026-02-11T03:03:09.823Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770778897015,
+      "timestamp": "2026-02-11T03:01:37.015Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Add Staff",
+      "details": "Added staff: kiran (Workshop Faculty, Admin: false)",
+      "type": "success"
+    },
+    {
+      "id": 1770778858023,
+      "timestamp": "2026-02-11T03:00:58.023Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770728403726,
+      "timestamp": "2026-02-10T13:00:03.726Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770727783367,
+      "timestamp": "2026-02-10T12:49:43.367Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770727783365,
+      "timestamp": "2026-02-10T12:49:43.365Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770698649230,
+      "timestamp": "2026-02-10T04:44:09.230Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770698637278,
+      "timestamp": "2026-02-10T04:43:57.278Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770698443623,
+      "timestamp": "2026-02-10T04:40:43.623Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770698287787,
+      "timestamp": "2026-02-10T04:38:07.787Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770697336371,
+      "timestamp": "2026-02-10T04:22:16.371Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 32",
+      "type": "info"
+    },
+    {
+      "id": 1770697310143,
+      "timestamp": "2026-02-10T04:21:50.143Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 32",
+      "type": "info"
+    },
+    {
+      "id": 1770696805311,
+      "timestamp": "2026-02-10T04:13:25.311Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Bulk Import",
+      "details": "Imported 0 students into batch AME 30",
+      "type": "success"
+    },
+    {
+      "id": 1770696790800,
+      "timestamp": "2026-02-10T04:13:10.800Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Bulk Input",
+      "details": "Opened bulk student input modal",
+      "type": "info"
+    },
+    {
+      "id": 1770696775443,
+      "timestamp": "2026-02-10T04:12:55.443Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770696775441,
+      "timestamp": "2026-02-10T04:12:55.441Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770696575757,
+      "timestamp": "2026-02-10T04:09:35.757Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770696497342,
+      "timestamp": "2026-02-10T04:08:17.342Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 34",
+      "type": "info"
+    },
+    {
+      "id": 1770696255739,
+      "timestamp": "2026-02-10T04:04:15.739Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770696240123,
+      "timestamp": "2026-02-10T04:04:00.123Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770696240122,
+      "timestamp": "2026-02-10T04:04:00.122Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770695842822,
+      "timestamp": "2026-02-10T03:57:22.822Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770695808815,
+      "timestamp": "2026-02-10T03:56:48.815Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770695808814,
+      "timestamp": "2026-02-10T03:56:48.814Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770695533530,
+      "timestamp": "2026-02-10T03:52:13.530Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770695520820,
+      "timestamp": "2026-02-10T03:52:00.820Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770695520819,
+      "timestamp": "2026-02-10T03:52:00.819Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770695183861,
+      "timestamp": "2026-02-10T03:46:23.861Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770695158458,
+      "timestamp": "2026-02-10T03:45:58.458Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770695158457,
+      "timestamp": "2026-02-10T03:45:58.457Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770694765094,
+      "timestamp": "2026-02-10T03:39:25.094Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770694746119,
+      "timestamp": "2026-02-10T03:39:06.119Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770694746118,
+      "timestamp": "2026-02-10T03:39:06.118Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770632188506,
+      "timestamp": "2026-02-09T10:16:28.506Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Opened WhatsApp with attendance summary",
+      "type": "info"
+    },
+    {
+      "id": 1770632185173,
+      "timestamp": "2026-02-09T10:16:25.173Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for AME 44 on 2026-02-09",
+      "type": "info"
+    },
+    {
+      "id": 1770632098827,
+      "timestamp": "2026-02-09T10:14:58.827Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ASHIK TV (AM/404/25/ITC4) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632088808,
+      "timestamp": "2026-02-09T10:14:48.808Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student GOVIND RAJ (OTC/41/25/TA) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770632086088,
+      "timestamp": "2026-02-09T10:14:46.088Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ALAN S (AM/408/25/TA) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632075689,
+      "timestamp": "2026-02-09T10:14:35.689Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student FAWAS NIHAL (AM/405/25/TY) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770632072103,
+      "timestamp": "2026-02-09T10:14:32.103Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ABISHEK K F (AM/403/25/KY) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632054810,
+      "timestamp": "2026-02-09T10:14:14.810Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ADWAITH J (AM/397/25/AAC) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632035453,
+      "timestamp": "2026-02-09T10:13:55.453Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student AJAY SANTHOSH (AM/396/25/ITC3) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632031432,
+      "timestamp": "2026-02-09T10:13:51.432Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student NIRANJAN K K (AM/395/25/CA) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632026730,
+      "timestamp": "2026-02-09T10:13:46.730Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student YASANTH NANDAN M (AM/393/25/TC2) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632015092,
+      "timestamp": "2026-02-09T10:13:35.092Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ADITHYAN A (AM/391/25/TA) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770632010068,
+      "timestamp": "2026-02-09T10:13:30.068Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student NIKHIL KRISHNA R (AM/390/25/TA) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770631996927,
+      "timestamp": "2026-02-09T10:13:16.927Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student JAKE JOHN VARGHESE (AM/389/25/TC34) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770631995444,
+      "timestamp": "2026-02-09T10:13:15.444Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ABHIMANU (AM/387/25/TVM) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631990015,
+      "timestamp": "2026-02-09T10:13:10.015Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student NIKHIL KRISHNA P (AM/386/25/MTC) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631979303,
+      "timestamp": "2026-02-09T10:12:59.303Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student SREEKRISHNA RAVEENDRAN (AM/385/25/TY4) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631976553,
+      "timestamp": "2026-02-09T10:12:56.553Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student SHALVIN BINU (AM/384/25/KB) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631972466,
+      "timestamp": "2026-02-09T10:12:52.466Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student JORWIN SHIBY (AM/383/25/CA) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631969159,
+      "timestamp": "2026-02-09T10:12:49.159Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ALBERT MARTIN (AM/365/25/AAC) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1770631964732,
+      "timestamp": "2026-02-09T10:12:44.732Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ARJUN SUNILKUMAR (AM/348/25/KUC) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631958126,
+      "timestamp": "2026-02-09T10:12:38.126Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Update Sub-Batch",
+      "details": "Student ABIN ANISH (AM/213/25/KB) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1770631728747,
+      "timestamp": "2026-02-09T10:08:48.747Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch AME 36 by week and session Theory",
+      "type": "info"
+    },
+    {
+      "id": 1770631728723,
+      "timestamp": "2026-02-09T10:08:48.723Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch AME 36 by week and session Theory",
+      "type": "info"
+    },
+    {
+      "id": 1770631699286,
+      "timestamp": "2026-02-09T10:08:19.286Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Opened WhatsApp with attendance summary",
+      "type": "info"
+    },
+    {
+      "id": 1770631690093,
+      "timestamp": "2026-02-09T10:08:10.093Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for AME 36 on 2026-02-09",
+      "type": "info"
+    },
+    {
+      "id": 1770438393418,
+      "timestamp": "2026-02-07T04:26:33.418Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770438363726,
+      "timestamp": "2026-02-07T04:26:03.726Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 33",
+      "type": "info"
+    },
+    {
+      "id": 1770355042781,
+      "timestamp": "2026-02-06T05:17:22.781Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch AME 35 by month and session All",
+      "type": "info"
+    },
+    {
+      "id": 1770354936507,
+      "timestamp": "2026-02-06T05:15:36.507Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Opened WhatsApp with attendance summary",
+      "type": "info"
+    },
+    {
+      "id": 1770354934705,
+      "timestamp": "2026-02-06T05:15:34.705Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for AME 35 on 2026-02-06",
+      "type": "info"
+    },
+    {
+      "id": 1770354902694,
+      "timestamp": "2026-02-06T05:15:02.694Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for AME 35 on 2026-02-06",
+      "type": "info"
+    },
+    {
+      "id": 1770354830073,
+      "timestamp": "2026-02-06T05:13:50.073Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770354830070,
+      "timestamp": "2026-02-06T05:13:50.070Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770354502899,
+      "timestamp": "2026-02-06T05:08:22.899Z",
+      "user": "test",
+      "role": "technical_faculty",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770354429901,
+      "timestamp": "2026-02-06T05:07:09.901Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770354424703,
+      "timestamp": "2026-02-06T05:07:04.703Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "System Restore",
+      "details": "Restored data from 2026-02-06T05:06:56.593Z",
+      "type": "warning"
+    },
+    {
+      "id": 1770354416606,
+      "timestamp": "2026-02-06T05:06:56.606Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "System Backup",
+      "details": "Created offline backup file",
+      "type": "success"
+    },
+    {
+      "id": 1770354405370,
+      "timestamp": "2026-02-06T05:06:45.370Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770354405369,
+      "timestamp": "2026-02-06T05:06:45.369Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770353860476,
+      "timestamp": "2026-02-06T04:57:40.476Z",
+      "user": "test",
+      "role": "technical_faculty",
+      "action": "Login",
+      "details": "User test logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770353860475,
+      "timestamp": "2026-02-06T04:57:40.475Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770353847257,
+      "timestamp": "2026-02-06T04:57:27.257Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Login Failed",
+      "details": "Failed login attempt (Offline) for username: test",
+      "type": "warning"
+    },
+    {
+      "id": 1770353841859,
+      "timestamp": "2026-02-06T04:57:21.859Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: test",
+      "type": "warning"
+    },
+    {
+      "id": 1770353841858,
+      "timestamp": "2026-02-06T04:57:21.858Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770353817731,
+      "timestamp": "2026-02-06T04:56:57.731Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User test1 logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770353817730,
+      "timestamp": "2026-02-06T04:56:57.730Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770353357585,
+      "timestamp": "2026-02-06T04:49:17.585Z",
+      "user": "test1",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User test1 logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770353357584,
+      "timestamp": "2026-02-06T04:49:17.584Z",
+      "user": "test",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770352042475,
+      "timestamp": "2026-02-06T04:27:22.475Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Print",
+      "details": "Printed assessment exam for TEST",
+      "type": "info"
+    },
+    {
+      "id": 1770348338562,
+      "timestamp": "2026-02-06T03:25:38.562Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by week and session Theory",
+      "type": "info"
+    },
+    {
+      "id": 1770347874053,
+      "timestamp": "2026-02-06T03:17:54.053Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by week and session Theory",
+      "type": "info"
+    },
+    {
+      "id": 1770347543650,
+      "timestamp": "2026-02-06T03:12:23.650Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by month and session All",
+      "type": "info"
+    },
+    {
+      "id": 1770347530808,
+      "timestamp": "2026-02-06T03:12:10.808Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by month and session Workshop",
+      "type": "info"
+    },
+    {
+      "id": 1770347505065,
+      "timestamp": "2026-02-06T03:11:45.065Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for TEST on 2026-02-06",
+      "type": "info"
+    },
+    {
+      "id": 1770347482171,
+      "timestamp": "2026-02-06T03:11:22.171Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for TEST on 2026-02-06",
+      "type": "info"
+    },
+    {
+      "id": 1770005605743,
+      "timestamp": "2026-02-02T04:13:25.743Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Filter Register",
+      "details": "Filtered attendance register for batch TEST by month and session Workshop",
+      "type": "info"
+    },
+    {
+      "id": 1770005185134,
+      "timestamp": "2026-02-02T04:06:25.134Z",
+      "user": "test",
+      "role": "staff",
+      "action": "Share Attendance",
+      "details": "Prepared WhatsApp message for TEST on 2026-02-02",
+      "type": "info"
+    },
+    {
+      "id": 1770004322370,
+      "timestamp": "2026-02-02T03:52:02.370Z",
+      "user": "KIRAN",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770003463512,
+      "timestamp": "2026-02-02T03:37:43.512Z",
+      "user": "KIRAN",
       "role": "Unknown",
       "action": "Sync",
       "details": "Staff data updated from cloud",
