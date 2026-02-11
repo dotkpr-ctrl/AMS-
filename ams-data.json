@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T05:36:07.350Z",
+  "lastUpdated": "2026-02-11T05:36:47.637Z",
   "version": "4.8",
   "students": [
     {
@@ -3923,6 +3923,14 @@
       "batchId": "TEST",
       "marks": {},
       "subBatch": "B"
+    },
+    {
+      "name": "Test Student",
+      "admissionNo": "101",
+      "batchId": "B1",
+      "id": "714ed036-f961-4482-b196-a56fe6106cd9",
+      "marks": {},
+      "subBatch": "None"
     }
   ],
   "assessmentMetadata": {
@@ -4197,6 +4205,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770788166960,
+      "timestamp": "2026-02-11T05:36:06.960Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1770788166957,
       "timestamp": "2026-02-11T05:36:06.957Z",
