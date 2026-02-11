@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T03:35:51.737Z",
+  "lastUpdated": "2026-02-11T04:08:25.133Z",
   "version": "4.8",
   "students": [
     {
@@ -4312,6 +4312,15 @@
       "role": "workshop_faculty",
       "action": "Login",
       "details": "User kiran logged in (Offline Mode)",
+      "type": "success"
+    },
+    {
+      "id": 1770778989823,
+      "timestamp": "2026-02-11T03:03:09.823Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login",
+      "details": "User Ziyad Basheer logged in (Offline Mode)",
       "type": "success"
     },
     {
