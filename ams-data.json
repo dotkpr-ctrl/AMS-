@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T06:14:43.936Z",
+  "lastUpdated": "2026-02-11T06:15:23.388Z",
   "version": "4.8",
   "students": [
     {
@@ -12,7 +12,13 @@
     }
   ],
   "assessmentMetadata": {},
-  "attendanceData": {},
+  "attendanceData": {
+    "AME 37": {
+      "2026-02-11": {
+        "ffaf6d68-f708-47dd-9f80-916a97d140aa": "absent"
+      }
+    }
+  },
   "batchMetadata": {
     "AME 37": {}
   },
@@ -30,6 +36,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770790483064,
+      "timestamp": "2026-02-11T06:14:43.064Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Add Student",
+      "details": "Added student: Test Student (S101) to batch AME 37",
+      "type": "success"
+    },
     {
       "id": 1770790384681,
       "timestamp": "2026-02-11T06:13:04.681Z",
