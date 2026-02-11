@@ -240,8 +240,10 @@
                     <div>
                         <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 block">Batch In
                             Charge</label>
-                        <input id="batchInChargeInput" oninput="updateBatchInCharge(this.value)"
-                            placeholder="Enter name for this batch" class="w-full p-2.5 border rounded-lg">
+                        <select id="batchInChargeInput" onchange="updateBatchInCharge(this.value)"
+                            class="w-full p-2.5 border rounded-lg bg-gray-50 border-gray-100 focus:ring-2 focus:ring-primary outline-none">
+                            <option value="">-- No In-Charge Assigned --</option>
+                        </select>
                     </div>
                 </div>
                 <div class="overflow-x-auto border rounded-xl mb-8">
@@ -850,7 +852,6 @@
     <!-- Activity Logger -->
     <script src="js/logger.js"></script>
     <script src="js/ams-core.js?v=5.3.0"></script>
-    <script src="js/app.js?v=5.3.0"></script>
 </body>
 
 </html>  

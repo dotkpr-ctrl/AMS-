@@ -181,9 +181,15 @@ window.downloadFromCloud = async () => {
 };
 
 // Automatic background sync
+let isSyncing = false;
 window.autoSyncToCloud = async () => {
+    if (isSyncing) {
+        console.log('Skipping auto-sync: Sync already in progress');
+        return;
+    }
     if (!githubSync || !githubSync.isConfigured()) return;
 
+    isSyncing = true;
     const menuSyncStatus = document.getElementById('menuSyncStatus');
     if (menuSyncStatus) {
         menuSyncStatus.textContent = 'Syncing...';
@@ -245,6 +251,8 @@ window.autoSyncToCloud = async () => {
             menuSyncStatus.textContent = 'Error';
             menuSyncStatus.className = 'text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-bold';
         }
+    } finally {
+        isSyncing = false;
     }
 };
 
