@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T03:06:19.586Z",
+  "lastUpdated": "2026-02-11T03:06:42.388Z",
   "version": "4.8",
   "students": [
     {
@@ -4174,10 +4174,29 @@
       "colorCode": "blue",
       "username": "kiran",
       "password": "2475",
-      "isAdmin": false
+      "isAdmin": false,
+      "allocatedBatches": []
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770779202282,
+      "timestamp": "2026-02-11T03:06:42.282Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770779184583,
+      "timestamp": "2026-02-11T03:06:24.583Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User kiran logged in (Offline Mode)",
+      "type": "success"
+    },
     {
       "id": 1770778897015,
       "timestamp": "2026-02-11T03:01:37.015Z",
