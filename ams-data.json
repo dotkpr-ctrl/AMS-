@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-11T03:15:37.260Z",
+  "lastUpdated": "2026-02-11T03:17:08.494Z",
   "version": "4.8",
   "students": [
     {
@@ -4179,6 +4179,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770779827679,
+      "timestamp": "2026-02-11T03:17:07.679Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark for batch: AME 35",
+      "type": "info"
+    },
+    {
+      "id": 1770779741167,
+      "timestamp": "2026-02-11T03:15:41.167Z",
+      "user": "kiran",
+      "role": "workshop_faculty",
+      "action": "Login",
+      "details": "User kiran logged in (Offline Mode)",
+      "type": "success"
+    },
     {
       "id": 1770779202282,
       "timestamp": "2026-02-11T03:06:42.282Z",
