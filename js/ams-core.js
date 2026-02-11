@@ -207,7 +207,7 @@ function checkSession() {
 
     // Version Display (Dynamic)
     if (verEl) {
-        verEl.textContent = "AMS v5.2.7 (1-PAGE FIX) • LOCAL DATABASE SECURED";
+        verEl.textContent = "AMS v5.2.9 (EXCEL TABLES) • LOCAL DATABASE SECURED";
     }
     const headVer = document.getElementById('headerVersionDisplay');
     if (headVer) headVer.textContent = "v5.2.0";
@@ -1544,14 +1544,11 @@ function generateSheet(isReload = false, config) {
         mainTitleEl.textContent = 'WORKSHOP VIVA';
     }
 
-    // Toggle Table Borders
+    // Toggle Table Borders (Force Excel Style)
     const tableEl = document.getElementById('generatedSheetTable');
     if (tableEl) {
-        if (config.type === 'attendance-index') {
-            tableEl.classList.remove('border-2', 'border-black');
-        } else {
-            tableEl.classList.add('border-2', 'border-black');
-        }
+        // Reset classes
+        tableEl.className = 'w-full excel-table';
     }
 
 
@@ -1572,10 +1569,10 @@ function renderAttendanceIndex(filtered) {
 
     // Dynamic Height Calculation to fit A4
     const count = filtered.length;
-    let rowHeight = 'h-12'; // Default spacious
-    if (count > 20) rowHeight = 'h-10'; // Standard
-    if (count > 25) rowHeight = 'h-9';  // Compact
-    if (count > 30) rowHeight = 'h-8';  // Ultra Compact
+    let rowHeight = 'h-12'; // Default spacious (< 15 students)
+    if (count > 15) rowHeight = 'h-10'; // Standard
+    if (count > 20) rowHeight = 'h-9';  // Compact
+    if (count > 24) rowHeight = 'h-8';  // Ultra Compact
 
     document.getElementById('generatedSheetHeader').innerHTML = `
             <th class="w-10 text-center border-b border-gray-300 pb-2">SL.</th>
@@ -2128,7 +2125,7 @@ window.importData = (e) => {
 // Initialize on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     // Version Probe
-    showMessage('System Updated', 'AMS v5.2.7 is now active.', 'success');
+    showMessage('System Updated', 'AMS v5.2.9 is now active.', 'success');
 
     loadData();
     checkSession(); // Check role after data is loaded

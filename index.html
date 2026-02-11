@@ -693,12 +693,14 @@
                         Print to A4</button>
                 </div>
 
-                <div id="printable-content" class="bg-white p-6 md:p-10 border shadow-sm mx-auto">
+                <div id="printable-content" class="bg-white p-6 md:p-10 print:p-0 border shadow-sm mx-auto">
                     <header class="text-center">
                         <img src="assets/img/header-logo.png" class="mx-auto h-20 print:h-12 object-contain mb-2">
-                        <h2 class="text-lg md:text-xl font-bold uppercase tracking-wide">ADVANCED DIPLOMA IN AUTOMOBILE
+                        <h2 class="text-lg md:text-xl print:text-sm font-bold uppercase tracking-wide">ADVANCED DIPLOMA
+                            IN AUTOMOBILE
                             ENGINEERING</h2>
-                        <h3 id="sheetMainTitle" class="text-md md:text-lg font-bold text-blue-700 uppercase">WORKSHOP
+                        <h3 id="sheetMainTitle"
+                            class="text-md md:text-lg print:text-xs font-bold text-blue-700 uppercase">WORKSHOP
                             VIVA</h3>
                         <h4 id="sheetTitle"
                             class="text-sm md:text-md font-semibold border-b-2 border-black inline-block px-8 pb-0.5 mt-1">
@@ -706,7 +708,7 @@
                     </header>
 
                     <div
-                        class="grid grid-cols-2 gap-y-1 text-[10px] md:text-xs font-semibold mt-4 mb-4 header-info-grid">
+                        class="grid grid-cols-2 gap-y-1 text-[10px] md:text-xs font-semibold mt-4 mb-4 print:mt-1 print:mb-2 header-info-grid">
                         <p>SESSION: <span id="sheetSemesterDisplay" class="font-normal underline"></span></p>
                         <p class="text-right">DATE: <span id="sheetDate" class="font-normal underline"></span></p>
                         <p>BATCH: <span id="sheetBatchDisplay" class="font-normal underline"></span></p>
@@ -723,7 +725,7 @@
                         </table>
                     </div>
 
-                    <div class="mt-12 flex justify-between text-center px-12">
+                    <div class="mt-8 print:mt-4 flex justify-between text-center px-12">
                         <div class="flex flex-col items-center">
                             <div class="w-32 border-b border-black mb-1"></div>
                             <p class="text-[9px] font-bold">Class Incharge</p>
@@ -837,18 +839,18 @@
 
     <div id="statusFooter"
         class="no-print fixed bottom-0 left-0 right-0 bg-gray-800 text-white text-center py-1.5 text-[10px] uppercase tracking-widest font-bold border-t border-gray-700">
-        Local Database Secured • v5.2.7-1PAGE-FIX</div>
+        Local Database Secured • v5.2.9-EXCEL-TABLES</div>
 
 
     <!-- GitHub Sync Module -->
-    <script src="js/github-sync.js?v=5.2.7"></script>
+    <script src="js/github-sync.js?v=5.2.9"></script>
     <!-- Cloud Sync Integration -->
-    <script src="js/cloud-sync-integration.js?v=5.2.7"></script>
+    <script src="js/cloud-sync-integration.js?v=5.2.9"></script>
     <!-- Main JavaScript Module -->
     <!-- Activity Logger -->
     <script src="js/logger.js"></script>
-    <script src="js/ams-core.js?v=5.2.7"></script>
-    <script src="js/app.js?v=5.2.7"></script>
+    <script src="js/ams-core.js?v=5.2.9"></script>
+    <script src="js/app.js?v=5.2.9"></script>
 </body>
 
 </html>  

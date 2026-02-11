@@ -60,3 +60,40 @@
         page-break-after: auto;
     }
 }
+
+/* Excel-like Table Styling */
+.excel-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.excel-table th,
+.excel-table td {
+    border: 1px solid black !important;
+    padding: 6px !important;
+}
+
+.excel-table th {
+    background-color: #f3f4f6;
+    /* Light gray header */
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    /* text-xs */
+    text-align: center;
+}
+
+.excel-table td {
+    font-size: 0.875rem;
+    /* text-sm */
+    vertical-align: middle;
+}
+
+@media print {
+    .excel-table th {
+        background-color: #e5e7eb !important;
+        /* Slightly darker for print contrast */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
