@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:40:44.761Z",
+  "lastUpdated": "2026-02-12T09:41:07.798Z",
   "version": "4.8",
   "students": [
     {
@@ -3844,9 +3844,28 @@
       "username": "ziyadb",
       "password": "7699",
       "isAdmin": false
+    },
+    {
+      "id": "1439076c-d1d7-4c02-b694-a773a00c92f1",
+      "name": "test1",
+      "phone": "0000001235",
+      "position": "Technical Faculty",
+      "colorCode": "blue",
+      "username": "test1",
+      "password": "1235",
+      "isAdmin": false
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770889244756,
+      "timestamp": "2026-02-12T09:40:44.756Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Delete Staff",
+      "details": "Deleted staff: Test Admin (ID: fe7b6f05-9195-4e6d-a500-bbd23be907a0)",
+      "type": "warning"
+    },
     {
       "id": 1770889234822,
       "timestamp": "2026-02-12T09:40:34.822Z",
