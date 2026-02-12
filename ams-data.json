@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:54:10.083Z",
+  "lastUpdated": "2026-02-12T09:58:21.754Z",
   "version": "4.8",
   "students": [
     {
@@ -3847,8 +3847,7 @@
       "colorCode": "blue",
       "username": "test1",
       "password": "1235",
-      "isAdmin": false,
-      "allocatedBatches": []
+      "isAdmin": false
     },
     {
       "id": "e4bd0125-54c1-46e0-bba4-ff174e219a01",
@@ -3863,67 +3862,31 @@
   ],
   "activityLogs": [
     {
-      "id": 1770890049205,
-      "timestamp": "2026-02-12T09:54:09.205Z",
-      "user": "ZIYAD BASHEER",
+      "id": 1770890300556,
+      "timestamp": "2026-02-12T09:58:20.556Z",
+      "user": "Test Admin",
       "role": "admin",
-      "action": "Generate Sheet",
-      "details": "Generated sheet of type: attendance-index for batch: AME 41",
+      "action": "Bulk Input",
+      "details": "Opened bulk student input modal",
       "type": "info"
     },
     {
-      "id": 1770889915195,
-      "timestamp": "2026-02-12T09:51:55.195Z",
-      "user": "ZIYAD BASHEER",
+      "id": 1770889886725,
+      "timestamp": "2026-02-12T09:51:26.725Z",
+      "user": "Test Admin",
       "role": "admin",
-      "action": "Login",
-      "details": "User ZIYAD BASHEER logged in successfully",
+      "action": "Add Staff",
+      "details": "Added staff: ZIYAD BASHEER (Workshop Incharge, Admin: true)",
       "type": "success"
     },
     {
-      "id": 1770889915194,
-      "timestamp": "2026-02-12T09:51:55.194Z",
+      "id": 1770889870221,
+      "timestamp": "2026-02-12T09:51:10.221Z",
       "user": "Test Admin",
       "role": "admin",
-      "action": "Sync",
-      "details": "Staff data updated from cloud",
-      "type": "info"
-    },
-    {
-      "id": 1770889863164,
-      "timestamp": "2026-02-12T09:51:03.164Z",
-      "user": "Test Admin",
-      "role": "admin",
-      "action": "Login Failed",
-      "details": "Failed login attempt for username: ziyad",
+      "action": "Delete Staff",
+      "details": "Deleted staff: ZIYAD BASHEER (ID: 00c7c081-674e-49af-b344-32b4a6f9fc55)",
       "type": "warning"
-    },
-    {
-      "id": 1770889863164,
-      "timestamp": "2026-02-12T09:51:03.164Z",
-      "user": "Test Admin",
-      "role": "admin",
-      "action": "Sync",
-      "details": "Staff data updated from cloud",
-      "type": "info"
-    },
-    {
-      "id": 1770889847089,
-      "timestamp": "2026-02-12T09:50:47.089Z",
-      "user": "Test Admin",
-      "role": "admin",
-      "action": "Login Failed",
-      "details": "Failed login attempt for username: ziyad",
-      "type": "warning"
-    },
-    {
-      "id": 1770889847088,
-      "timestamp": "2026-02-12T09:50:47.088Z",
-      "user": "Test Admin",
-      "role": "admin",
-      "action": "Sync",
-      "details": "Staff data updated from cloud",
-      "type": "info"
     },
     {
       "id": 1770889284002,
