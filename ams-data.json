@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:58:46.275Z",
+  "lastUpdated": "2026-02-12T09:59:00.132Z",
   "version": "4.8",
   "students": [
     {
@@ -4002,6 +4002,33 @@
       "type": "info"
     },
     {
+      "id": 1770890049205,
+      "timestamp": "2026-02-12T09:54:09.205Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 41",
+      "type": "info"
+    },
+    {
+      "id": 1770889915195,
+      "timestamp": "2026-02-12T09:51:55.195Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770889915194,
+      "timestamp": "2026-02-12T09:51:55.194Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
       "id": 1770889886725,
       "timestamp": "2026-02-12T09:51:26.725Z",
       "user": "Test Admin",
@@ -4018,6 +4045,33 @@
       "action": "Delete Staff",
       "details": "Deleted staff: ZIYAD BASHEER (ID: 00c7c081-674e-49af-b344-32b4a6f9fc55)",
       "type": "warning"
+    },
+    {
+      "id": 1770889863164,
+      "timestamp": "2026-02-12T09:51:03.164Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770889847089,
+      "timestamp": "2026-02-12T09:50:47.089Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: ziyad",
+      "type": "warning"
+    },
+    {
+      "id": 1770889847088,
+      "timestamp": "2026-02-12T09:50:47.088Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
     },
     {
       "id": 1770889284002,
