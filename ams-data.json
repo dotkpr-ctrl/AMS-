@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:43:04.765Z",
+  "lastUpdated": "2026-02-12T09:43:51.262Z",
   "version": "4.8",
   "students": [
     {
@@ -3862,12 +3862,12 @@
   ],
   "activityLogs": [
     {
-      "id": 1770889384226,
-      "timestamp": "2026-02-12T09:43:04.226Z",
-      "user": "test",
-      "role": "technical_faculty",
-      "action": "Sync",
-      "details": "Staff data updated from cloud",
+      "id": 1770889284002,
+      "timestamp": "2026-02-12T09:41:24.002Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Update Batch Incharge",
+      "details": "Batch AME 31 incharge updated to test1",
       "type": "info"
     },
     {
@@ -5102,15 +5102,6 @@
       "action": "Sync",
       "details": "Staff data updated from cloud",
       "type": "info"
-    },
-    {
-      "id": 1770354502900,
-      "timestamp": "2026-02-06T05:08:22.900Z",
-      "user": "test",
-      "role": "technical_faculty",
-      "action": "Login",
-      "details": "User test logged in successfully",
-      "type": "success"
     },
     {
       "id": 1770354502899,
