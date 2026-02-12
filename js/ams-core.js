@@ -3274,19 +3274,41 @@ window.renderBatchAllocation = function () {
 };
 
 window.toggleBatchAllocation = function (staffId, batchId) {
+    console.log('Toggle batch allocation:', staffId, batchId);
     const staff = staffMembers.find(s => s.id === staffId);
-    if (!staff) return;
-
-    if (!staff.allocatedBatches) staff.allocatedBatches = [];
-
-    if (staff.allocatedBatches.includes(batchId)) {
-        staff.allocatedBatches = staff.allocatedBatches.filter(b => b !== batchId);
-    } else {
-        staff.allocatedBatches.push(batchId);
+    if (!staff) {
+        console.error('Staff not found:', staffId);
+        return;
     }
 
+    if (!staff.allocatedBatches) {
+        staff.allocatedBatches = [];
+        console.log('Initialized allocatedBatches array for:', staff.name);
+    }
+
+    const index = staff.allocatedBatches.indexOf(batchId);
+    if (index > -1) {
+        staff.allocatedBatches.splice(index, 1);
+        console.log('Removed batch:', batchId, 'from', staff.name);
+    } else {
+        staff.allocatedBatches.push(batchId);
+        console.log('Added batch:', batchId, 'to', staff.name);
+    }
+
+    console.log('Current allocations for', staff.name + ':', staff.allocatedBatches);
+
+    // Save immediately
     saveData();
-    renderBatchAllocation(); // Re-render to update UI if needed (though checkboxes strictly don't need it, styles do)
+
+    // Force UI refresh
+    setTimeout(() => {
+        renderBatchAllocation();
+    }, 50);
+
+    // Log activity
+    if (window.logActivity) {
+        window.logActivity('batch_allocation', `${staff.name}: ${index > -1 ? 'removed' : 'added'} batch ${batchId}`);
+    }
 };
 
 
