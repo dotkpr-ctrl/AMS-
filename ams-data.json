@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T10:05:38.840Z",
+  "lastUpdated": "2026-02-12T10:06:07.940Z",
   "version": "4.8",
   "students": [
     {
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770890767908,
+      "timestamp": "2026-02-12T10:06:07.908Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 30",
+      "type": "info"
+    },
     {
       "id": 1770890738274,
       "timestamp": "2026-02-12T10:05:38.274Z",
