@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:51:03.491Z",
+  "lastUpdated": "2026-02-12T09:51:10.767Z",
   "version": "4.8",
   "students": [
     {
@@ -3840,16 +3840,6 @@
   },
   "staffMembers": [
     {
-      "id": "00c7c081-674e-49af-b344-32b4a6f9fc55",
-      "name": "ZIYAD BASHEER",
-      "phone": "9400537699",
-      "position": "Workshop Incharge",
-      "colorCode": "green",
-      "username": "ziyadb",
-      "password": "7699",
-      "isAdmin": false
-    },
-    {
       "id": "1439076c-d1d7-4c02-b694-a773a00c92f1",
       "name": "test1",
       "phone": "0000001235",
@@ -3861,33 +3851,6 @@
     }
   ],
   "activityLogs": [
-    {
-      "id": 1770889863164,
-      "timestamp": "2026-02-12T09:51:03.164Z",
-      "user": "Test Admin",
-      "role": "admin",
-      "action": "Sync",
-      "details": "Staff data updated from cloud",
-      "type": "info"
-    },
-    {
-      "id": 1770889847089,
-      "timestamp": "2026-02-12T09:50:47.089Z",
-      "user": "Test Admin",
-      "role": "admin",
-      "action": "Login Failed",
-      "details": "Failed login attempt for username: ziyad",
-      "type": "warning"
-    },
-    {
-      "id": 1770889847088,
-      "timestamp": "2026-02-12T09:50:47.088Z",
-      "user": "Test Admin",
-      "role": "admin",
-      "action": "Sync",
-      "details": "Staff data updated from cloud",
-      "type": "info"
-    },
     {
       "id": 1770889284002,
       "timestamp": "2026-02-12T09:41:24.002Z",
