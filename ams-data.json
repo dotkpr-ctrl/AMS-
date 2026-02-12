@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:51:26.740Z",
+  "lastUpdated": "2026-02-12T09:51:55.922Z",
   "version": "4.8",
   "students": [
     {
@@ -3862,13 +3862,49 @@
   ],
   "activityLogs": [
     {
-      "id": 1770889870221,
-      "timestamp": "2026-02-12T09:51:10.221Z",
+      "id": 1770889915194,
+      "timestamp": "2026-02-12T09:51:55.194Z",
       "user": "Test Admin",
       "role": "admin",
-      "action": "Delete Staff",
-      "details": "Deleted staff: ZIYAD BASHEER (ID: 00c7c081-674e-49af-b344-32b4a6f9fc55)",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770889863164,
+      "timestamp": "2026-02-12T09:51:03.164Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: ziyad",
       "type": "warning"
+    },
+    {
+      "id": 1770889863164,
+      "timestamp": "2026-02-12T09:51:03.164Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770889847089,
+      "timestamp": "2026-02-12T09:50:47.089Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: ziyad",
+      "type": "warning"
+    },
+    {
+      "id": 1770889847088,
+      "timestamp": "2026-02-12T09:50:47.088Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
     },
     {
       "id": 1770889284002,
