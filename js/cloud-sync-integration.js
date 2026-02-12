@@ -180,6 +180,63 @@ window.downloadFromCloud = async () => {
     }
 };
 
+// Create offline backup - Download complete data as JSON file
+window.createOfflineBackup = () => {
+    try {
+        // Get all data from the system
+        let dataToBackup = {};
+        if (window.getAppData) {
+            dataToBackup = window.getAppData();
+        } else {
+            showMessage('Error', 'Unable to access system data', 'error');
+            return;
+        }
+
+        // Create backup object with metadata
+        const backupData = {
+            lastUpdated: new Date().toISOString(),
+            version: "5.3.0",
+            students: dataToBackup.students || [],
+            assessmentMetadata: dataToBackup.assessmentMetadata || {},
+            attendanceData: dataToBackup.attendanceData || {},
+            batchMetadata: dataToBackup.batchMetadata || {},
+            staffMembers: dataToBackup.staffMembers || [],
+            activityLogs: dataToBackup.activityLogs || []
+        };
+
+        // Convert to JSON string
+        const jsonString = JSON.stringify(backupData, null, 2);
+
+        // Create blob and download link
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        // Create download link with timestamp in filename
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+        const filename = `AMS_Backup_${timestamp}.json`;
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = filename;
+        downloadLink.click();
+
+        // Cleanup
+        setTimeout(() => URL.revokeObjectURL(url), 100);
+
+        // Show success message
+        showMessage('Backup Created', `${backupData.students.length} students backed up to ${filename}`, 'success');
+
+        // Log activity
+        if (window.logActivity) {
+            window.logActivity('backup', `Created offline backup: ${filename}`);
+        }
+    } catch (error) {
+        showMessage('Backup Failed', error.message, 'error');
+        console.error('Offline backup error:', error);
+    }
+};
+
+
 // Automatic background sync
 let isSyncing = false;
 window.autoSyncToCloud = async () => {
