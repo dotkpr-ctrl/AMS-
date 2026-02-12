@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:51:10.767Z",
+  "lastUpdated": "2026-02-12T09:51:26.740Z",
   "version": "4.8",
   "students": [
     {
@@ -3848,9 +3848,28 @@
       "username": "test1",
       "password": "1235",
       "isAdmin": false
+    },
+    {
+      "id": "e4bd0125-54c1-46e0-bba4-ff174e219a01",
+      "name": "ZIYAD BASHEER",
+      "phone": "9400537699",
+      "position": "Workshop Incharge",
+      "colorCode": "green",
+      "username": "ziyadb",
+      "password": "7699",
+      "isAdmin": true
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770889870221,
+      "timestamp": "2026-02-12T09:51:10.221Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Delete Staff",
+      "details": "Deleted staff: ZIYAD BASHEER (ID: 00c7c081-674e-49af-b344-32b4a6f9fc55)",
+      "type": "warning"
+    },
     {
       "id": 1770889284002,
       "timestamp": "2026-02-12T09:41:24.002Z",
