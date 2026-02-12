@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:40:35.540Z",
+  "lastUpdated": "2026-02-12T09:40:44.761Z",
   "version": "4.8",
   "students": [
     {
@@ -3836,17 +3836,6 @@
   "batchMetadata": {},
   "staffMembers": [
     {
-      "id": "fe7b6f05-9195-4e6d-a500-bbd23be907a0",
-      "name": "Test Admin",
-      "phone": "1234567890",
-      "position": "MD",
-      "colorCode": "red",
-      "username": "testa",
-      "password": "7890",
-      "isAdmin": true,
-      "allocatedBatches": []
-    },
-    {
       "id": "00c7c081-674e-49af-b344-32b4a6f9fc55",
       "name": "ZIYAD BASHEER",
       "phone": "9400537699",
@@ -3858,6 +3847,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770889234822,
+      "timestamp": "2026-02-12T09:40:34.822Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Add Staff",
+      "details": "Added staff: ZIYAD BASHEER (Workshop Incharge, Admin: false)",
+      "type": "success"
+    },
     {
       "id": 1770889174122,
       "timestamp": "2026-02-12T09:39:34.122Z",
