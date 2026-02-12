@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T09:39:27.500Z",
+  "lastUpdated": "2026-02-12T09:39:34.134Z",
   "version": "4.8",
   "students": [
     {
@@ -3697,6 +3697,94 @@
       "name": "GOVIND RAJ",
       "admissionNo": "OTC/41/25/TA",
       "batchId": "AME 44",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "73d21a05-13e7-4c7e-9f8d-7bb9c42a2a02",
+      "name": "NITHIN S",
+      "admissionNo": "AM/402/25/AA6",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "22623b43-d861-4f73-831f-9230610ab00c",
+      "name": "ATHUL KRISHNA",
+      "admissionNo": "AM/409/25/AAP",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "45e83d36-5cd0-4bb5-a076-76373cae4b71",
+      "name": "ADHIL MUHAMMED",
+      "admissionNo": "AM/398/25/KL6",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "a4271e68-1bab-44e5-b599-046347c99bf9",
+      "name": "ATHUL S",
+      "admissionNo": "AM/405/25/PYP",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "11db9767-83ea-4951-85db-2f9101842bbc",
+      "name": "ANUDEV A",
+      "admissionNo": "AM/410/25/TY4",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "545f47c9-d3c4-4928-a4e3-e5ec7a9dd5cf",
+      "name": "BLESAN SAJI",
+      "admissionNo": "AM/411/25/TY2",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "8926d661-4c36-4e8b-b7c3-2d163e709cf0",
+      "name": "ADITHYAN K R",
+      "admissionNo": "AM/413/25/TC33",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "a4f476e9-a909-4142-bb40-387a21b9b4f1",
+      "name": "JUVAN JOSEPH",
+      "admissionNo": "AM/412/25/KRC",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "ee398850-6370-4ea1-b777-576cd343bb9d",
+      "name": "GOVIND R",
+      "admissionNo": "AM/407/25/ITC4",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "84acff1b-08fe-4d73-be6e-0392f2586652",
+      "name": "ALEN MATHEW",
+      "admissionNo": "AM/401/25/KRC",
+      "batchId": "AME 45",
+      "marks": {},
+      "subBatch": "None"
+    },
+    {
+      "id": "f93c1590-a094-4af2-bd00-a12fb0d7798d",
+      "name": "SALIH S",
+      "admissionNo": "AM/02/26/TC33",
+      "batchId": "AME 45",
       "marks": {},
       "subBatch": "None"
     }
