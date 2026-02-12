@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T10:04:12.881Z",
+  "lastUpdated": "2026-02-12T10:04:32.889Z",
   "version": "4.8",
   "students": [
     {
@@ -3983,6 +3983,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770890672858,
+      "timestamp": "2026-02-12T10:04:32.858Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark-sheet for batch: AME 30",
+      "type": "info"
+    },
+    {
+      "id": 1770890652866,
+      "timestamp": "2026-02-12T10:04:12.866Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1770890652865,
       "timestamp": "2026-02-12T10:04:12.865Z",
