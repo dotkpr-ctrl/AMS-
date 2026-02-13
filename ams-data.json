@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T18:27:45.586Z",
+  "lastUpdated": "2026-02-13T06:29:29.731Z",
   "version": "4.8",
   "students": [
     {
@@ -4011,6 +4011,123 @@
       "type": "info"
     },
     {
+      "id": 1770891289964,
+      "timestamp": "2026-02-12T10:14:49.964Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "System Backup",
+      "details": "Created offline backup file",
+      "type": "success"
+    },
+    {
+      "id": 1770890767908,
+      "timestamp": "2026-02-12T10:06:07.908Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 30",
+      "type": "info"
+    },
+    {
+      "id": 1770890738274,
+      "timestamp": "2026-02-12T10:05:38.274Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark-sheet for batch: AME 30",
+      "type": "info"
+    },
+    {
+      "id": 1770890672858,
+      "timestamp": "2026-02-12T10:04:32.858Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark-sheet for batch: AME 30",
+      "type": "info"
+    },
+    {
+      "id": 1770890652866,
+      "timestamp": "2026-02-12T10:04:12.866Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
+    {
+      "id": 1770890652865,
+      "timestamp": "2026-02-12T10:04:12.865Z",
+      "user": "ZIYAD BASHEER",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770890362346,
+      "timestamp": "2026-02-12T09:59:22.346Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770890352244,
+      "timestamp": "2026-02-12T09:59:12.244Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: ziyad",
+      "type": "warning"
+    },
+    {
+      "id": 1770890352243,
+      "timestamp": "2026-02-12T09:59:12.243Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770890307316,
+      "timestamp": "2026-02-12T09:58:27.316Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Bulk Import",
+      "details": "Imported 15 students into batch AME 30",
+      "type": "success"
+    },
+    {
+      "id": 1770890300556,
+      "timestamp": "2026-02-12T09:58:20.556Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Bulk Input",
+      "details": "Opened bulk student input modal",
+      "type": "info"
+    },
+    {
+      "id": 1770889886725,
+      "timestamp": "2026-02-12T09:51:26.725Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Add Staff",
+      "details": "Added staff: ZIYAD BASHEER (Workshop Incharge, Admin: true)",
+      "type": "success"
+    },
+    {
+      "id": 1770889870221,
+      "timestamp": "2026-02-12T09:51:10.221Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Delete Staff",
+      "details": "Deleted staff: ZIYAD BASHEER (ID: 00c7c081-674e-49af-b344-32b4a6f9fc55)",
+      "type": "warning"
+    },
+    {
       "id": 1770889384227,
       "timestamp": "2026-02-12T09:43:04.227Z",
       "user": "test1",
@@ -4026,6 +4143,15 @@
       "role": "technical_faculty",
       "action": "Sync",
       "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1770889284002,
+      "timestamp": "2026-02-12T09:41:24.002Z",
+      "user": "Test Admin",
+      "role": "admin",
+      "action": "Update Batch Incharge",
+      "details": "Batch AME 31 incharge updated to test1",
       "type": "info"
     },
     {
