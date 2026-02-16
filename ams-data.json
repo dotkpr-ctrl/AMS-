@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:14:29.050Z",
+  "lastUpdated": "2026-02-16T07:14:38.346Z",
   "version": "4.8",
   "students": [
     {
@@ -3969,6 +3969,11 @@
         "3a64f28c-3dd4-408f-88b4-b445a1c7aeed": "absent",
         "be3591f3-2a31-46c6-a6e5-b064d6fc8f65": "absent"
       }
+    },
+    "AME 38": {
+      "2026-02-16": {
+        "sessionType": "Workshop"
+      }
     }
   },
   "batchMetadata": {
@@ -4001,6 +4006,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226068997,
+      "timestamp": "2026-02-16T07:14:28.997Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1771226068995,
       "timestamp": "2026-02-16T07:14:28.995Z",
