@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:12:05.017Z",
+  "lastUpdated": "2026-02-16T07:12:09.680Z",
   "version": "4.8",
   "students": [
     {
@@ -2245,7 +2245,7 @@
       "admissionNo": "AM/303/25/TC28",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "e6f28277-6f74-4f4f-a9bf-50b909918901",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225925003,
+      "timestamp": "2026-02-16T07:12:05.003Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student SAFIN SANTHOSH (AM/302/25/TC33) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225921613,
       "timestamp": "2026-02-16T07:12:01.613Z",
