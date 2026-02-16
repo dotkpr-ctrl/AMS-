@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:15:43.559Z",
+  "lastUpdated": "2026-02-16T07:15:52.825Z",
   "version": "4.8",
   "students": [
     {
@@ -1885,7 +1885,7 @@
       "admissionNo": "AM/249/25/TY8",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "b7e261fc-91ce-4827-9188-57345087e20a",
@@ -4006,6 +4006,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226143545,
+      "timestamp": "2026-02-16T07:15:43.545Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ATHUL K S (AM/248/25/TY5) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771226140683,
       "timestamp": "2026-02-16T07:15:40.683Z",
