@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:46.056Z",
+  "lastUpdated": "2026-02-16T07:11:50.921Z",
   "version": "4.8",
   "students": [
     {
@@ -2197,7 +2197,7 @@
       "admissionNo": "AM/296/25/CA",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "100156ad-e3b4-4f65-9aa2-3694e42ac102",
@@ -2205,7 +2205,7 @@
       "admissionNo": "AM/298/25/ERC",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "cdea6bb8-c1bb-4069-93ad-3e41941b7c4d",
@@ -3983,6 +3983,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225908661,
+      "timestamp": "2026-02-16T07:11:48.661Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student MUHAMMED AJAS S (AM/296/25/CA) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1771225906034,
+      "timestamp": "2026-02-16T07:11:46.034Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ALWIN TOM JOSEPH (AM/295/25/AAP) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225899856,
       "timestamp": "2026-02-16T07:11:39.856Z",
