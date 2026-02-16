@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:50.921Z",
+  "lastUpdated": "2026-02-16T07:11:58.165Z",
   "version": "4.8",
   "students": [
     {
@@ -2213,7 +2213,7 @@
       "admissionNo": "AM/299/25/ITC3",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "d0484d2d-452d-4bd6-910c-07c6c85c8246",
@@ -2221,7 +2221,7 @@
       "admissionNo": "AM/300/25/KUC",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "3c67822e-1a1c-476d-9ca7-e0bdab6f0b77",
@@ -3983,6 +3983,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225913679,
+      "timestamp": "2026-02-16T07:11:53.679Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student GEORGE JOSEPH (AM/299/25/ITC3) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1771225910905,
+      "timestamp": "2026-02-16T07:11:50.905Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student BLESSON MARIYAN (AM/298/25/ERC) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771225908661,
       "timestamp": "2026-02-16T07:11:48.661Z",
