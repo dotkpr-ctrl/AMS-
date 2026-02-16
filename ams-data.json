@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:12:01.628Z",
+  "lastUpdated": "2026-02-16T07:12:05.017Z",
   "version": "4.8",
   "students": [
     {
@@ -2237,7 +2237,7 @@
       "admissionNo": "AM/302/25/TC33",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "476cad24-9b59-4c4d-88dc-8647a9b31a2d",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225921613,
+      "timestamp": "2026-02-16T07:12:01.613Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student MOHAMMED SHAHAM (AM/301/25/CA) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771225918152,
       "timestamp": "2026-02-16T07:11:58.152Z",
