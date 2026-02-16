@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:16:18.053Z",
+  "lastUpdated": "2026-02-16T07:16:24.300Z",
   "version": "4.8",
   "students": [
     {
@@ -4006,6 +4006,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226178043,
+      "timestamp": "2026-02-16T07:16:18.043Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student DANIEL IGNATIOUS (AM/259/25/TC34) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771226176709,
       "timestamp": "2026-02-16T07:16:16.709Z",
