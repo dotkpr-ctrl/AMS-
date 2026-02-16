@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-13T06:29:37.063Z",
+  "lastUpdated": "2026-02-16T07:10:16.185Z",
   "version": "4.8",
   "students": [
     {
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1770964177035,
+      "timestamp": "2026-02-13T06:29:37.035Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1770964177034,
       "timestamp": "2026-02-13T06:29:37.034Z",
