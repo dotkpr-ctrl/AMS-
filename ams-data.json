@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:15:40.696Z",
+  "lastUpdated": "2026-02-16T07:15:43.559Z",
   "version": "4.8",
   "students": [
     {
@@ -1877,7 +1877,7 @@
       "admissionNo": "AM/248/25/TY5",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "dd2b6978-728e-4481-b4a6-694d298b2ba7",
@@ -4006,6 +4006,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226140683,
+      "timestamp": "2026-02-16T07:15:40.683Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student SIVALAL K S (AM/247/25/MTC) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771226138810,
       "timestamp": "2026-02-16T07:15:38.810Z",
