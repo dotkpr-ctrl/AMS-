@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:16:15.153Z",
+  "lastUpdated": "2026-02-16T07:16:18.053Z",
   "version": "4.8",
   "students": [
     {
@@ -1941,7 +1941,7 @@
       "admissionNo": "AM/258/25/AKC",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "44ba3c06-7d69-4237-930e-bb6b5ccfc738",
@@ -1949,7 +1949,7 @@
       "admissionNo": "AM/259/25/TC34",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "13636377-8a10-454f-87ce-1958cb872ecd",
@@ -4006,6 +4006,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226176709,
+      "timestamp": "2026-02-16T07:16:16.709Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student GODSON P M (AM/258/25/AKC) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1771226175140,
+      "timestamp": "2026-02-16T07:16:15.140Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student AKHIL DEV (AM/257/25/KRP) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771226173360,
       "timestamp": "2026-02-16T07:16:13.360Z",
