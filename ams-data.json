@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:10:20.413Z",
+  "lastUpdated": "2026-02-16T07:10:57.269Z",
   "version": "4.8",
   "students": [
     {
@@ -2117,7 +2117,7 @@
       "admissionNo": "AM//381/25/TY6",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "72fd90e4-3820-4776-93a7-91a34d8f95f5",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225820322,
+      "timestamp": "2026-02-16T07:10:20.322Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1771225820320,
       "timestamp": "2026-02-16T07:10:20.320Z",
