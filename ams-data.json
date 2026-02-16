@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:39.866Z",
+  "lastUpdated": "2026-02-16T07:11:46.056Z",
   "version": "4.8",
   "students": [
     {
@@ -2189,7 +2189,7 @@
       "admissionNo": "AM/295/25/AAP",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "1928df05-070e-40da-bafe-9927798aa88d",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225899856,
+      "timestamp": "2026-02-16T07:11:39.856Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ASWANTH M P (AM/294/25/TC27) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225879973,
       "timestamp": "2026-02-16T07:11:19.973Z",
