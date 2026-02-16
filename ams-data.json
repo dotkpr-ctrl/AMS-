@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:58.165Z",
+  "lastUpdated": "2026-02-16T07:12:01.628Z",
   "version": "4.8",
   "students": [
     {
@@ -2229,7 +2229,7 @@
       "admissionNo": "AM/301/25/CA",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "35df9ceb-8de4-47a0-a2e6-00ddf6757fb6",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225918152,
+      "timestamp": "2026-02-16T07:11:58.152Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ADHARSH B (AM/300/25/KUC) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771225913679,
       "timestamp": "2026-02-16T07:11:53.679Z",
