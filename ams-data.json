@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:10.090Z",
+  "lastUpdated": "2026-02-16T07:11:17.304Z",
   "version": "4.8",
   "students": [
     {
@@ -2165,7 +2165,7 @@
       "admissionNo": "AM/289/25/KY",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "51d5aa6e-59a4-4ad4-bc9f-0a98a48c1f04",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225870081,
+      "timestamp": "2026-02-16T07:11:10.081Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student IKRAMULLA K MAHIN (AM/287/25/TY3) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225867522,
       "timestamp": "2026-02-16T07:11:07.522Z",
