@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:16:01.133Z",
+  "lastUpdated": "2026-02-16T07:16:11.374Z",
   "version": "4.8",
   "students": [
     {
@@ -1909,7 +1909,7 @@
       "admissionNo": "AM/252/25/ITC2",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "f2c204c6-b869-491d-bb67-45eacd58be06",
@@ -1917,7 +1917,7 @@
       "admissionNo": "AM/253/25/KY",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "91a684e8-2384-4143-bde2-f46041fe63b2",
@@ -4006,6 +4006,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226163188,
+      "timestamp": "2026-02-16T07:16:03.188Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student AMEEN ASSAN P C (AM/252/25/ITC2) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1771226161100,
+      "timestamp": "2026-02-16T07:16:01.100Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student MUHAMMED JINAN P (AM/251/25/ARP) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771226156783,
       "timestamp": "2026-02-16T07:15:56.783Z",
