@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:12:21.882Z",
+  "lastUpdated": "2026-02-16T07:12:24.754Z",
   "version": "4.8",
   "students": [
     {
@@ -2277,7 +2277,7 @@
       "admissionNo": "AM/36/25/ERP",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "be3591f3-2a31-46c6-a6e5-b064d6fc8f65",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225941866,
+      "timestamp": "2026-02-16T07:12:21.866Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student SOORAJ SIDHARTH (AM/308/25/PYC) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771225939427,
       "timestamp": "2026-02-16T07:12:19.427Z",
