@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:17.304Z",
+  "lastUpdated": "2026-02-16T07:11:39.866Z",
   "version": "4.8",
   "students": [
     {
@@ -2173,7 +2173,7 @@
       "admissionNo": "AM/292/25/PYP",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "5c8f051d-2323-4485-96fa-3f29977fb4de",
@@ -2181,7 +2181,7 @@
       "admissionNo": "AM/294/25/TC27",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "ef948681-1f79-45c6-a5f0-2b4ac56fe178",
@@ -3983,6 +3983,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225879973,
+      "timestamp": "2026-02-16T07:11:19.973Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ABHINAV RAJU (AM/292/25/PYP) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1771225876776,
+      "timestamp": "2026-02-16T07:11:16.776Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ALEN B ALEX (AM/289/25/KY) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225870081,
       "timestamp": "2026-02-16T07:11:10.081Z",
