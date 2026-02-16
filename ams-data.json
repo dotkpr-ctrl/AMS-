@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:15:04.655Z",
+  "lastUpdated": "2026-02-16T07:15:10.933Z",
   "version": "4.8",
   "students": [
     {
@@ -1813,7 +1813,7 @@
       "admissionNo": "AM/234/25/TY8",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "ded2ff2d-76bf-418c-8cf6-8929552b678c",
@@ -4006,6 +4006,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226104641,
+      "timestamp": "2026-02-16T07:15:04.641Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student HIMESH S (AM/181/25/AAP) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771226103147,
       "timestamp": "2026-02-16T07:15:03.147Z",
