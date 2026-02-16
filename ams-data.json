@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:02.233Z",
+  "lastUpdated": "2026-02-16T07:11:07.533Z",
   "version": "4.8",
   "students": [
     {
@@ -2141,7 +2141,7 @@
       "admissionNo": "AM/280/25/TC24",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "9248701b-c872-47d7-b5c3-4e52a328c921",
@@ -2149,7 +2149,7 @@
       "admissionNo": "AM/283/25/TA",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "6b2c33d9-b894-4ca9-a4e9-cf1c01608219",
@@ -3983,6 +3983,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225864862,
+      "timestamp": "2026-02-16T07:11:04.862Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student SHIJIN POUL (AM/280/25/TC24) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1771225862221,
+      "timestamp": "2026-02-16T07:11:02.221Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student JOEL B GEORGE (AM/279/25/ITC4) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225859225,
       "timestamp": "2026-02-16T07:10:59.225Z",
