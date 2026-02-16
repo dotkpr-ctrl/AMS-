@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:15:00.314Z",
+  "lastUpdated": "2026-02-16T07:15:04.655Z",
   "version": "4.8",
   "students": [
     {
@@ -1805,7 +1805,7 @@
       "admissionNo": "AM/181/25/AAP",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "c3ab625e-13a6-4823-9c54-f5c6e8c8fd07",
@@ -4006,6 +4006,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226103147,
+      "timestamp": "2026-02-16T07:15:03.147Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student HIMESH S (AM/181/25/AAP) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1771226100294,
+      "timestamp": "2026-02-16T07:15:00.294Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student AHMAD HASHIM T (AM/149/25/MTC) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771226068997,
       "timestamp": "2026-02-16T07:14:28.997Z",
