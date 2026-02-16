@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:11:07.533Z",
+  "lastUpdated": "2026-02-16T07:11:10.090Z",
   "version": "4.8",
   "students": [
     {
@@ -2157,7 +2157,7 @@
       "admissionNo": "AM/287/25/TY3",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "id": "53677c0c-ef6e-4f4c-8f57-e896b51ec8ed",
@@ -3983,6 +3983,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225867522,
+      "timestamp": "2026-02-16T07:11:07.522Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ABISHEK (AM/283/25/TA) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771225864862,
       "timestamp": "2026-02-16T07:11:04.862Z",
