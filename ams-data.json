@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:15:32.109Z",
+  "lastUpdated": "2026-02-16T07:15:36.393Z",
   "version": "4.8",
   "students": [
     {
@@ -1861,7 +1861,7 @@
       "admissionNo": "AM/246/25/ITC3",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "93d5363d-2555-4deb-9c94-9885c54f7658",
@@ -4006,6 +4006,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226132090,
+      "timestamp": "2026-02-16T07:15:32.090Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ZIYON JOSEPH (AM/245/25/TY) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771226127194,
       "timestamp": "2026-02-16T07:15:27.194Z",
