@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:12:09.680Z",
+  "lastUpdated": "2026-02-16T07:12:18.021Z",
   "version": "4.8",
   "students": [
     {
@@ -2253,7 +2253,7 @@
       "admissionNo": "AM/306/25/TC2",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "2430c664-7ccc-4dba-bb1f-6beb53b31238",
@@ -2261,7 +2261,7 @@
       "admissionNo": "AM/307/25/TC28",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "0d268fec-d66c-465e-a63d-463090b3adc9",
@@ -3983,6 +3983,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225932030,
+      "timestamp": "2026-02-16T07:12:12.030Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student JERIN C J (AM/306/25/TC2) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1771225929664,
+      "timestamp": "2026-02-16T07:12:09.664Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student BIBIN BIJI (AM/303/25/TC28) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225925003,
       "timestamp": "2026-02-16T07:12:05.003Z",
