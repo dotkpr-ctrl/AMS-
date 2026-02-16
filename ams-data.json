@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:12:24.754Z",
+  "lastUpdated": "2026-02-16T07:12:32.740Z",
   "version": "4.8",
   "students": [
     {
@@ -2285,7 +2285,7 @@
       "admissionNo": "AM/382/25/KUC",
       "batchId": "AME 40",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "B"
     },
     {
       "name": "ARSHAD BAVA",
@@ -3983,6 +3983,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771225947233,
+      "timestamp": "2026-02-16T07:12:27.233Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ASHIN SIMON (AM/382/25/KUC) sub-batch updated to B",
+      "type": "info"
+    },
+    {
+      "id": 1771225944736,
+      "timestamp": "2026-02-16T07:12:24.736Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student VISHNU V.I (AM/36/25/ERP) sub-batch updated to B",
+      "type": "info"
+    },
     {
       "id": 1771225941866,
       "timestamp": "2026-02-16T07:12:21.866Z",
