@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:15:10.933Z",
+  "lastUpdated": "2026-02-16T07:15:18.662Z",
   "version": "4.8",
   "students": [
     {
@@ -1821,7 +1821,7 @@
       "admissionNo": "AM/238/25/TC34",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "3ef954de-d7c2-4f05-a0fa-3982db2b2bbf",
@@ -1829,7 +1829,7 @@
       "admissionNo": "AM/240/25/TY4",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "27bee1fd-38c5-4ee9-8d39-5ac57de40fce",
@@ -4006,6 +4006,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226114029,
+      "timestamp": "2026-02-16T07:15:14.029Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ROSHAN AMEER (AM/238/25/TC34) sub-batch updated to A",
+      "type": "info"
+    },
+    {
+      "id": 1771226110920,
+      "timestamp": "2026-02-16T07:15:10.920Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ATHUL KRISHNA S (AM/234/25/TY8) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771226104641,
       "timestamp": "2026-02-16T07:15:04.641Z",
