@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T07:15:52.825Z",
+  "lastUpdated": "2026-02-16T07:15:56.793Z",
   "version": "4.8",
   "students": [
     {
@@ -1893,7 +1893,7 @@
       "admissionNo": "AM/250/25/TY8",
       "batchId": "AME 38",
       "marks": {},
-      "subBatch": "None"
+      "subBatch": "A"
     },
     {
       "id": "a332ee01-e23a-4444-8734-0e34789edd47",
@@ -4006,6 +4006,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1771226152811,
+      "timestamp": "2026-02-16T07:15:52.811Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Update Sub-Batch",
+      "details": "Student ALAN ABRAHAM (AM/249/25/TY8) sub-batch updated to A",
+      "type": "info"
+    },
     {
       "id": 1771226143545,
       "timestamp": "2026-02-16T07:15:43.545Z",
