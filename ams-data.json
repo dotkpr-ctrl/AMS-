@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-04T07:21:24.722Z",
+  "lastUpdated": "2026-03-04T07:22:00.426Z",
   "version": "4.8",
   "students": [
     {
@@ -4012,6 +4012,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1772608920375,
+      "timestamp": "2026-03-04T07:22:00.375Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: mark-sheet for batch: AME 37",
+      "type": "info"
+    },
     {
       "id": 1772608883415,
       "timestamp": "2026-03-04T07:21:23.415Z",
