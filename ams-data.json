@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-10T10:14:37.915Z",
+  "lastUpdated": "2026-03-10T10:14:52.419Z",
   "version": "4.8",
   "students": [
     {
@@ -4022,6 +4022,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1773137692407,
+      "timestamp": "2026-03-10T10:14:52.407Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1773137677540,
+      "timestamp": "2026-03-10T10:14:37.540Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: anant",
+      "type": "warning"
+    },
     {
       "id": 1773137677538,
       "timestamp": "2026-03-10T10:14:37.538Z",
