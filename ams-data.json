@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-10T10:12:43.861Z",
+  "lastUpdated": "2026-03-10T10:12:56.660Z",
   "version": "4.8",
   "students": [
     {
@@ -4012,6 +4012,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1773137576649,
+      "timestamp": "2026-03-10T10:12:56.649Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
     {
       "id": 1773114691357,
       "timestamp": "2026-03-10T03:51:31.357Z",
