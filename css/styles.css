@@ -23,11 +23,10 @@
 }
 
 /* Print Styles */
-/* Print Styles */
 @media print {
     @page {
-        size: A4;
-        margin: 5mm;
+        size: A4 portrait;
+        margin: 0; /* Use browser-defined margin, or set to 0 for full control */
     }
 
     .no-print {
@@ -50,14 +49,32 @@
         max-width: 100%;
     }
 
-    /* Force single page fit for tables if possible */
+    #printable-content {
+        padding: 10mm !important;
+        margin: 0 !important;
+        width: 100%;
+        max-height: 297mm; /* Full A4 height */
+        box-sizing: border-box;
+        overflow: hidden; /* Prevent multiple pages */
+        display: block !important;
+    }
+
+    /* Force single page fit for tables */
     table {
-        page-break-inside: auto;
+        page-break-inside: avoid;
+        width: 100% !important;
+        table-layout: auto;
     }
 
     tr {
         page-break-inside: avoid;
         page-break-after: auto;
+    }
+
+    /* Auto-scaling helper - JS will adjust this variable */
+    .auto-scale {
+        transform-origin: top center;
+        width: 100% !important;
     }
 }
 

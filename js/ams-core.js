@@ -329,6 +329,18 @@ function saveData() {
         }, {});
         localStorage.setItem('academic_management_allocations_v1', JSON.stringify(allocations));
 
+        // Trigger auto-sync to local server
+        try {
+            const port = window.location.port || 3000;
+            fetch(`http://${window.location.hostname}:${port}/api/data`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(window.getAppData())
+            }).catch(e => console.error('Background server sync failed:', e));
+        } catch (e) {
+            console.error('Server sync error', e);
+        }
+
         // Trigger auto-sync to cloud if available
         if (window.autoSyncToCloud) {
             window.autoSyncToCloud();
@@ -3414,8 +3426,31 @@ window.exportLogsToCSV = function () {
 
 // ==================== INITIALIZATION ====================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     console.log('AMS v5.3.0 Initialization started...');
+
+    // Fetch from Local Server First
+    try {
+        const port = window.location.port || 3000;
+        const res = await fetch(`http://${window.location.hostname}:${port}/api/data`);
+        if (res.ok) {
+            const serverData = await res.json();
+            // Put it into local variables without triggering an infinite save loop
+            if (serverData) {
+                if (serverData.students && serverData.students.length > 0) {
+                    // Quick pre-populate of localStorage so loadData picks it up
+                    localStorage.setItem('academic_management_students_v3', JSON.stringify(serverData.students));
+                    localStorage.setItem('academic_management_metadata_v3', JSON.stringify(serverData.assessmentMetadata || {}));
+                    localStorage.setItem('academic_management_attendance_v3', JSON.stringify(serverData.attendanceData || {}));
+                    localStorage.setItem('academic_management_batch_metadata_v3', JSON.stringify(serverData.batchMetadata || {}));
+                    localStorage.setItem('academic_management_staff_v1', JSON.stringify(serverData.staffMembers || []));
+                }
+            }
+            console.log('Successfully sync\'d data from local server');
+        }
+    } catch (e) {
+        console.warn('Could not connect to local server, using localStorage fallback', e);
+    }
 
     // 1. Initial Data Loading
     loadData();
@@ -3442,6 +3477,37 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshDataAndUI();
     console.log('AMS v5.3.0 Initialization complete.');
 });
+
+// Automatic Print Scaling to Fit A4
+window.onbeforeprint = () => {
+    const content = document.getElementById('printable-content');
+    const view = document.getElementById('sheetGeneration');
+    if (!content || !view || view.classList.contains('hidden')) return;
+
+    // Reset styles for measurement
+    content.style.transform = 'none';
+    content.style.width = '100%';
+
+    // Target height (A4 is ~1122px at 96dpi, 1050px is a safe printable area)
+    const targetHeight = 1050;
+    const actualHeight = content.scrollHeight;
+
+    if (actualHeight > targetHeight) {
+        const scale = targetHeight / actualHeight;
+        // Important: We also need to calculate the width to prevent horizontal shrinking
+        content.style.transform = `scale(${scale})`;
+        content.style.width = `${100 / scale}%`;
+        console.log(`AMS: Auto-adjusted print scale to ${Math.round(scale * 100)}% for A4 fit. (Height: ${actualHeight}px)`);
+    }
+};
+
+window.onafterprint = () => {
+    const content = document.getElementById('printable-content');
+    if (content) {
+        content.style.transform = 'none';
+        content.style.width = '100%';
+    }
+};
 
 // Final exports for global accessibility
 window.renderStaffList = renderStaffList;
