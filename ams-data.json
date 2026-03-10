@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-10T03:47:42.557Z",
+  "lastUpdated": "2026-03-10T03:48:56.901Z",
   "version": "4.8",
   "students": [
     {
@@ -4012,6 +4012,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1773114536341,
+      "timestamp": "2026-03-10T03:48:56.341Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 40",
+      "type": "info"
+    },
     {
       "id": 1773114461993,
       "timestamp": "2026-03-10T03:47:41.993Z",
