@@ -1,0 +1,77 @@
+{
+  "name": "retrograde-andromeda",
+  "version": "1.0.0",
+  "description": "[![GitHub Pages](https://img.shields.io/badge/demo-live-success)](https://dotkpr-ctrl.github.io/AMS-/)\r [![Version](https://img.shields.io/badge/version-5.2.0-blue)](https://github.com/dotkpr-ctrl/AMS-)\r [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)",
+  "main": "main.js",
+  "bin": "server.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotkpr-ctrl/AMS-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dotkpr-ctrl/AMS-/issues"
+  },
+  "homepage": "https://github.com/dotkpr-ctrl/AMS-#readme",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "ip": "^2.0.1"
+  },
+  "devDependencies": {
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1",
+    "electron-packager": "^17.1.2",
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "scripts": "js/**/*.js",
+    "assets": [
+      "assets/**/*",
+      "css/**/*",
+      "index.html",
+      "setup.html"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ]
+  },
+  "build": {
+    "appId": "com.ams.academicmanagementsystem",
+    "productName": "Academic Management System",
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AMS Server"
+    },
+    "msi": {
+      "oneClick": false,
+      "perMachine": true
+    },
+    "files": [
+      "**/*",
+      "!dist",
+      "!node_modules/electron",
+      "!node_modules/electron-builder",
+      "!node_modules/pkg"
+    ]
+  }
+}
