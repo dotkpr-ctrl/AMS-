@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-10T10:12:56.660Z",
+  "lastUpdated": "2026-03-10T10:13:06.569Z",
   "version": "4.8",
   "students": [
     {
@@ -4012,6 +4012,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1773137586505,
+      "timestamp": "2026-03-10T10:13:06.505Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1773137576652,
+      "timestamp": "2026-03-10T10:12:56.652Z",
+      "user": "Ziyad Basheer",
+      "role": "admin",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: ziyadb",
+      "type": "warning"
+    },
     {
       "id": 1773137576649,
       "timestamp": "2026-03-10T10:12:56.649Z",
