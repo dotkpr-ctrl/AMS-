@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-10T10:13:06.569Z",
+  "lastUpdated": "2026-03-10T10:13:56.434Z",
   "version": "4.8",
   "students": [
     {
@@ -4009,9 +4009,28 @@
       "password": "1235",
       "isAdmin": false,
       "allocatedBatches": []
+    },
+    {
+      "id": "a55af8e0-788d-40cf-975c-15ce89f75c31",
+      "name": "Anantha Krishnan",
+      "phone": "8138092515",
+      "position": "Technical Faculty",
+      "colorCode": "blue",
+      "username": "ananthak",
+      "password": "2515",
+      "isAdmin": false
     }
   ],
   "activityLogs": [
+    {
+      "id": 1773137586508,
+      "timestamp": "2026-03-10T10:13:06.508Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1773137586505,
       "timestamp": "2026-03-10T10:13:06.505Z",
