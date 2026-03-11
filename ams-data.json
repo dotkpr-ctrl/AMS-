@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-11T12:06:14.885Z",
+  "lastUpdated": "2026-03-11T12:06:34.614Z",
   "version": "4.8",
   "students": [
     {
@@ -4022,6 +4022,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1773230794595,
+      "timestamp": "2026-03-11T12:06:34.595Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
     {
       "id": 1773139128165,
       "timestamp": "2026-03-10T10:38:48.165Z",
