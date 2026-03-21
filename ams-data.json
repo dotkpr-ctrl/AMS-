@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-21T06:07:26.175Z",
+  "lastUpdated": "2026-03-21T06:07:38.447Z",
   "version": "4.8",
   "students": [
     {
@@ -4023,6 +4023,33 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1774073258112,
+      "timestamp": "2026-03-21T06:07:38.112Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1774073247763,
+      "timestamp": "2026-03-21T06:07:27.763Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Login Failed",
+      "details": "Failed login attempt (Offline) for username: ziyadb",
+      "type": "warning"
+    },
+    {
+      "id": 1774073245730,
+      "timestamp": "2026-03-21T06:07:25.730Z",
+      "user": "System",
+      "role": "Unknown",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: ziyadb",
+      "type": "warning"
+    },
     {
       "id": 1774073245729,
       "timestamp": "2026-03-21T06:07:25.729Z",
