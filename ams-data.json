@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-21T06:21:24.248Z",
+  "lastUpdated": "2026-03-21T06:21:56.339Z",
   "version": "4.8",
   "students": [
     {
@@ -4012,6 +4012,33 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1774074116336,
+      "timestamp": "2026-03-21T06:21:56.336Z",
+      "user": "System Developer",
+      "role": "developer",
+      "action": "Sync",
+      "details": "Staff data updated from cloud",
+      "type": "info"
+    },
+    {
+      "id": 1774074085577,
+      "timestamp": "2026-03-21T06:21:25.577Z",
+      "user": "System Developer",
+      "role": "developer",
+      "action": "Login Failed",
+      "details": "Failed login attempt (Offline) for username: dev_admin",
+      "type": "warning"
+    },
+    {
+      "id": 1774074084244,
+      "timestamp": "2026-03-21T06:21:24.244Z",
+      "user": "System Developer",
+      "role": "developer",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: dev_admin",
+      "type": "warning"
+    },
     {
       "id": 1774074084243,
       "timestamp": "2026-03-21T06:21:24.243Z",
