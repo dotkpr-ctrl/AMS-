@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-21T06:07:38.447Z",
+  "lastUpdated": "2026-03-21T06:09:30.605Z",
   "version": "4.8",
   "students": [
     {
@@ -4000,17 +4000,6 @@
       "allocatedBatches": []
     },
     {
-      "id": "1439076c-d1d7-4c02-b694-a773a00c92f1",
-      "name": "test1",
-      "phone": "0000001235",
-      "position": "Technical Faculty",
-      "colorCode": "blue",
-      "username": "test1",
-      "password": "1235",
-      "isAdmin": false,
-      "allocatedBatches": []
-    },
-    {
       "id": "a55af8e0-788d-40cf-975c-15ce89f75c31",
       "name": "Anantha Krishnan",
       "phone": "8138092515",
@@ -4023,6 +4012,15 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1774073258113,
+      "timestamp": "2026-03-21T06:07:38.113Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1774073258112,
       "timestamp": "2026-03-21T06:07:38.112Z",
