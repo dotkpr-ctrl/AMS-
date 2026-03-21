@@ -341,8 +341,11 @@ function saveData() {
             console.error('Server sync error', e);
         }
 
-        // Trigger auto-sync to cloud if available
-        if (window.autoSyncToCloud) {
+        // Trigger debounced auto-sync to cloud (prevents API spam on rapid saves)
+        if (window.triggerDebouncedSync) {
+            window.triggerDebouncedSync();
+        } else if (window.autoSyncToCloud) {
+            // Fallback if debouncer isn't loaded yet
             window.autoSyncToCloud();
         }
     } catch (error) {

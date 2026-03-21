@@ -2,6 +2,13 @@
 // Initialize GitHub Sync instance
 let githubSync = null;
 
+// ─── Auto-Sync Scheduler State ─────────────────────────────────────────────
+let _autoSyncIntervalId   = null;   // setInterval handle for periodic sync
+let _lastDataHash         = null;   // Simple change-detection hash to skip unchanged syncs
+let _syncDebounceTimer    = null;   // Debounce handle for save-triggered sync
+const AUTO_SYNC_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+const SYNC_DEBOUNCE_MS      = 3000;           // 3 seconds debounce after a save
+
 // Initialize sync on page load
 function initializeCloudSync() {
     githubSync = new GitHubDataSync();
@@ -67,7 +74,95 @@ function initializeCloudSync() {
     }
 
     updateSyncUI();
+
+    // Start scheduled periodic sync
+    startPeriodicSync();
+
+    // Sync when user returns to this tab
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && githubSync && githubSync.isConfigured()) {
+            console.log('[AutoSync] Tab visible — triggering sync check');
+            window.autoSyncToCloud();
+        }
+    });
+
+    // Best-effort sync before the page closes
+    window.addEventListener('beforeunload', () => {
+        if (githubSync && githubSync.isConfigured() && window.getAppData) {
+            const data = window.getAppData();
+            const blob = JSON.stringify(data);
+            // Use sendBeacon if available to fire-and-forget
+            // Fallback: just queue as pending so next load will push
+            localStorage.setItem('pending_upload', 'true');
+        }
+    });
 }
+
+// ─── Periodic Sync ─────────────────────────────────────────────────────────
+function startPeriodicSync() {
+    if (_autoSyncIntervalId) clearInterval(_autoSyncIntervalId);
+
+    _autoSyncIntervalId = setInterval(async () => {
+        if (!githubSync || !githubSync.isConfigured()) return;
+        if (!navigator.onLine) {
+            console.log('[AutoSync] Periodic tick skipped — offline');
+            return;
+        }
+        if (githubSync.syncInProgress) {
+            console.log('[AutoSync] Periodic tick skipped — sync in progress');
+            return;
+        }
+
+        // Only upload if data actually changed since last sync
+        const currentHash = _getDataHash();
+        if (currentHash && currentHash === _lastDataHash) {
+            console.log('[AutoSync] Periodic tick — no change detected, skipping upload');
+            _updateLastSyncedBadge();
+            return;
+        }
+
+        console.log('[AutoSync] Periodic tick — syncing...');
+        await window.autoSyncToCloud();
+        _lastDataHash = currentHash;
+    }, AUTO_SYNC_INTERVAL_MS);
+
+    console.log(`[AutoSync] Periodic sync started (every ${AUTO_SYNC_INTERVAL_MS / 60000} min)`);
+}
+
+// ─── Debounced Sync (called by saveData via autoSyncToCloud) ───────────────
+// Wraps the raw scheduler to debounce rapid saves
+window.triggerDebouncedSync = () => {
+    clearTimeout(_syncDebounceTimer);
+    _syncDebounceTimer = setTimeout(() => {
+        window.autoSyncToCloud();
+    }, SYNC_DEBOUNCE_MS);
+};
+
+// ─── Data Change Detection ─────────────────────────────────────────────────
+function _getDataHash() {
+    try {
+        if (!window.getAppData) return null;
+        const data = window.getAppData();
+        // Fast hash: stringify length + a few key counts
+        const s = `${(data.students||[]).length}|${(data.assessmentMetadata||{}).length}|${JSON.stringify(data.batchMetadata||{}).length}|${JSON.stringify(data.attendanceData||{}).length}`;
+        return s;
+    } catch { return null; }
+}
+
+// ─── Live "Last synced" badge tooltip ─────────────────────────────────────
+function _updateLastSyncedBadge() {
+    if (!githubSync) return;
+    const lastSync = githubSync.lastSync;
+    const badge = document.getElementById('menuSyncStatus');
+    if (!badge || !lastSync) return;
+
+    const diff = Math.round((Date.now() - new Date(lastSync).getTime()) / 60000);
+    const label = diff < 1 ? 'just now' : diff === 1 ? '1 min ago' : `${diff} min ago`;
+    badge.title = `Last synced: ${label}`;
+}
+
+// Refresh the badge tooltip every 30 seconds
+setInterval(_updateLastSyncedBadge, 30000);
 
 // Update UI based on sync status
 function updateSyncUI() {
@@ -317,14 +412,20 @@ window.autoSyncToCloud = async () => {
 document.addEventListener('DOMContentLoaded', () => {
     initializeCloudSync();
 
-    // Add manual retry to status badge
+    // Add manual retry to status badge — clicking it always triggers a sync attempt
     const badge = document.getElementById('menuSyncStatus');
     if (badge) {
+        badge.style.cursor = 'pointer';
+        badge.title = 'Click to sync now';
         badge.onclick = () => {
-            if (badge.textContent.includes('Pending') || badge.textContent.includes('Error') || badge.textContent.includes('Unsynced')) {
-                window.autoSyncToCloud();
-            }
+            window.autoSyncToCloud();
         };
     }
+
+    // Capture initial data hash after first load settles
+    setTimeout(() => {
+        _lastDataHash = _getDataHash();
+        console.log('[AutoSync] Initial data hash captured');
+    }, 4000);
 });
 
