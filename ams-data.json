@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-21T06:25:32.394Z",
+  "lastUpdated": "2026-03-21T06:25:48.273Z",
   "version": "4.8",
   "students": [
     {
@@ -4012,6 +4012,24 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": 1774074334449,
+      "timestamp": "2026-03-21T06:25:34.449Z",
+      "user": "System Developer",
+      "role": "developer",
+      "action": "Login Failed",
+      "details": "Failed login attempt (Offline) for username: dev_admin",
+      "type": "warning"
+    },
+    {
+      "id": 1774074332390,
+      "timestamp": "2026-03-21T06:25:32.390Z",
+      "user": "System Developer",
+      "role": "developer",
+      "action": "Login Failed",
+      "details": "Failed login attempt for username: dev_admin",
+      "type": "warning"
+    },
     {
       "id": 1774074332389,
       "timestamp": "2026-03-21T06:25:32.389Z",
