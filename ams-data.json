@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-21T05:41:39.167Z",
+  "lastUpdated": "2026-03-21T05:42:34.195Z",
   "version": "4.8",
   "students": [
     {
@@ -4018,10 +4018,29 @@
       "colorCode": "blue",
       "username": "ananthak",
       "password": "2515",
-      "isAdmin": false
+      "isAdmin": false,
+      "allocatedBatches": []
     }
   ],
   "activityLogs": [
+    {
+      "id": 1774071753775,
+      "timestamp": "2026-03-21T05:42:33.775Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Generate Sheet",
+      "details": "Generated sheet of type: attendance-index for batch: AME 44",
+      "type": "info"
+    },
+    {
+      "id": 1774071699143,
+      "timestamp": "2026-03-21T05:41:39.143Z",
+      "user": "ZIYAD BASHEER",
+      "role": "incharge",
+      "action": "Login",
+      "details": "User ZIYAD BASHEER logged in successfully",
+      "type": "success"
+    },
     {
       "id": 1774071699142,
       "timestamp": "2026-03-21T05:41:39.142Z",
